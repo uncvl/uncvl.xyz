@@ -1,14 +1,20 @@
-// Cloudflare Worker that serves the built site (static assets) on uncvl.xyz.
-// Deployed by CI with `wrangler deploy` (see .forgejo/workflows/deploy.yml).
-// _site/_headers and _site/_redirects are honoured by Workers static assets.
+// Cloudflare Worker for uncvl.xyz. Deployed by CI with `wrangler deploy` (.forgejo/workflows/deploy.yml).
+//
+// - The built site (_site) is served as static assets. Asset requests never run the Worker code,
+//   so pages stay free and unlimited. _site/_headers and _site/_redirects are honoured.
+// - Only /api/* runs worker/index.js: the CMS media endpoint (uploads to R2, Codeberg login).
 {
   "name": "uncvl",
+  "main": "worker/index.js",
   "compatibility_date": "2026-10-01",
   "assets": {
     "directory": "./_site",
+    "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "html_handling": "auto-trailing-slash"
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/api/*"]
   },
+  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "uncvl-media" }],
   "routes": [{ "pattern": "uncvl.xyz", "custom_domain": true }],
   "observability": { "enabled": true }
 }

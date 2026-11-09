@@ -28,11 +28,33 @@ publish_mode: editorial_workflow
 
 site_url: https://uncvl.xyz
 display_url: https://uncvl.xyz
-logo_url: /favicon.svg
+logo:
+  src: /favicon.svg
 
-# Images live next to their Markdown file (page bundles).
-media_folder: ""
-public_folder: ""
+# Images and videos go straight to Cloudflare R2 (bucket uncvl-media, served at media.uncvl.xyz)
+# through the site's own endpoint (/api/media, worker/index.js). It checks your Codeberg login,
+# so there is no key to enter. Files are shrunk to WebP in the browser before uploading.
+media_libraries:
+  default: false            # nothing is committed to git
+  aws_s3:
+    label: Uncivilization media (R2)
+    endpoint: https://uncvl.xyz/api/media/s3
+    bucket: uncvl-media
+    region: auto
+    access_key_id: codeberg-login   # not a secret; the endpoint authenticates your Codeberg login
+    public_url: https://media.uncvl.xyz
+    prefix: uploads/
+  all:
+    max_file_size: 52428800         # 50 MB (videos)
+    slugify_filename: true
+    filename_template: "{{filename}}-{{uuid_short}}"
+    transformations:
+      raster_image:
+        format: webp
+        quality: 85
+        width: 2400
+        height: 2400
+
 
 slug:
   encoding: ascii
@@ -46,8 +68,6 @@ collections:
     label_singular: Event
     folder: src/events
     path: "{{year}}-{{month}}-{{day}}-{{slug}}/index"
-    media_folder: ""
-    public_folder: ""
     create: true
     extension: md
     format: frontmatter
@@ -134,8 +154,6 @@ collections:
     label_singular: Release
     folder: src/releases
     path: "{{year}}-{{month}}-{{day}}-{{slug}}/index"
-    media_folder: ""
-    public_folder: ""
     create: true
     summary: "{{catalog}} · {{title}} ({{status}})"
     fields:
@@ -200,7 +218,7 @@ collections:
         fields:
           - { name: name, label: Name, widget: string, hint: "Bandcamp, SoundCloud, Instagram…" }
           - { name: url, label: URL, widget: string, hint: 'SoundCloud links get a player automatically' }
-          - { name: bandcamp_id, label: Bandcamp id (optional, for a player), widget: string, required: false }
+          - { name: bandcamp_id, label: 'Bandcamp id (optional: for a player)', widget: string, required: false }
       - { name: photo, label: Photo, widget: image, required: false }
       - { name: bio_en, label: Bio (EN), widget: markdown, required: false }
       - { name: bio_tr, label: Biyografi (TR), widget: markdown, required: false }
@@ -211,8 +229,6 @@ collections:
     label_singular: Post
     folder: src/posts
     path: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    media_folder: /src/posts/img
-    public_folder: /posts/img
     create: true
     summary: "{{date | date('YYYY-MM-DD')}} · {{title}}"
     fields:

@@ -44,6 +44,7 @@ Requires Node 20+.
 
 Images and videos are served from the public bucket `uncvl-media` at `https://media.uncvl.xyz`, resized on request by Cloudflare (`/cdn-cgi/image/…`). Originals and private material go to the private bucket `uncvl-archive`.
 
+- **CMS uploads** go straight to R2 under `uploads/` through the site's own endpoint `/api/media` (`worker/index.js`). It accepts editors whose Codeberg account can push to this repo, so there are no keys to share. Only `/api/*` runs Worker code; pages are served as static assets.
 - `src/_data/media.json` lists what is on R2 (width, height, content version). Images listed there are loaded from R2. Images that aren't listed (e.g. fresh CMS uploads) still work from git through the local image pipeline.
 - Upload with the maintainer key in your environment (never commit keys):
 
@@ -60,4 +61,6 @@ Then commit `src/_data/media.json` (and the removed local files).
 
 ## Deploy
 
-`.forgejo/workflows/deploy.yml` builds, checks and deploys to Cloudflare Pages (needs `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets). A commented Codeberg Pages step is included as an alternative.
+`.forgejo/workflows/deploy.yml` builds, checks and runs `wrangler deploy` (Worker `uncvl`, config in `wrangler.jsonc`). It needs the secrets `CLOUDFLARE_API_TOKEN` (template "Edit Cloudflare Workers", limited to this account and the uncvl.xyz zone) and `CLOUDFLARE_ACCOUNT_ID`. Wrangler output is filtered so e-mail addresses never reach the public CI log.
+
+Local test of the Worker: `npm run build && npx wrangler dev --local` (put `CODEBERG_API=…` in `.dev.vars` to point the login check at a mock).

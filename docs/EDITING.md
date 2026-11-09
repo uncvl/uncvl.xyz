@@ -17,7 +17,7 @@
 - Write each language in its own field (`text_en`, `text_tr`). If one is empty, the page shows the other language with a "needs translation" note.
 - `*word*` highlights a word, and a blank line starts a new paragraph.
 - Upload the **largest** version of an image. The site makes the small versions itself.
-- Images uploaded in the editor are stored in git at first. A maintainer moves them to Cloudflare R2 (`npm run r2:media -- --prune`, see README). Until then they still show up normally.
+- Images and videos you upload in the editor go straight to our media storage (Cloudflare R2). There is no key to enter: your Codeberg login is checked. They are shrunk to WebP automatically.
 - `codename` is the computer-science name of the night (e.g. *break protocol*, *zero day exploit*).
 
 ## TR
@@ -37,4 +37,4 @@
 - Her dili kendi alanına yaz (`text_en`, `text_tr`). Biri boşsa sayfa diğerini "çeviri gerekiyor" notuyla gösterir.
 - `*kelime*` vurgular, boş satır yeni paragraf başlatır.
 - Görselin **en büyük** halini yükle. Küçük boyutları site kendisi üretir.
-- Editörden yüklenen görseller önce git'e kaydedilir. Bir yönetici bunları sonra Cloudflare R2'ye taşır. O zamana kadar sitede normal görünürler.
+- Editörden yüklediğin görseller ve videolar doğrudan medya depomuza (Cloudflare R2) gider. Anahtar girmen gerekmez, Codeberg girişin kontrol edilir. Görseller otomatik olarak WebP'ye küçültülür.

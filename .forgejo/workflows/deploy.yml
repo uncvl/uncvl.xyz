@@ -1,8 +1,8 @@
 # Build + check + deploy uncvl.xyz on Codeberg (Forgejo Actions).
 #
 # Required repository secrets (Settings → Actions → Secrets):
-#   CLOUDFLARE_API_TOKEN   – account token with "Workers Scripts: Edit", plus for the uncvl.xyz zone
-#                            "Workers Routes: Edit" and "Zone: Read" (custom domain in wrangler.jsonc)
+#   CLOUDFLARE_API_TOKEN   – token from the "Edit Cloudflare Workers" template (Workers Scripts, Workers Routes,
+#                            Workers R2 Storage), limited to this account and the uncvl.xyz zone
 #   CLOUDFLARE_ACCOUNT_ID
 # Codeberg Actions must be enabled for the repo (Settings → Units → Actions).
 #

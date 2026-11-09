@@ -13,3 +13,7 @@ uncivil-test-site/
 *.mp4
 *.mov
 *.webm
+
+# local wrangler dev
+.dev.vars
+.wrangler/
