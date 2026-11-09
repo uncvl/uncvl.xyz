@@ -6,13 +6,13 @@ date: 2024-09-27
 venue:
   name: Dinozor Bar
   city: İzmir
-poster: krayat-poster-izm.jpg
+poster: https://media.uncvl.xyz/events/2024-09-27-punk-krayat-ruff-crux-moko-hush/krayat-poster-izm.jpg
 poster_alt: uncivilization punk concert poster - krayat, ruff crux, moko, hush
 gallery:
-  - src: ruffcrux-collage.jpg
+  - src: https://media.uncvl.xyz/events/2024-09-27-punk-krayat-ruff-crux-moko-hush/ruffcrux-collage.jpg
     alt: ruff crux, moko and hush at dinozor
     wide: true
-  - src: krayat-collage.jpg
+  - src: https://media.uncvl.xyz/events/2024-09-27-punk-krayat-ruff-crux-moko-hush/krayat-collage.jpg
     alt: krayat live in istanbul and izmir
     wide: true
 text_en: |

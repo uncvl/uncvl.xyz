@@ -9,7 +9,7 @@ venue:
   name: Dinozor Bar
   city: İzmir
 price: 150₺
-poster: signature-strike_zszs-horspiel-randominput.jpg
+poster: https://media.uncvl.xyz/events/2024-10-17-thursday-breaks-signature-strike/signature-strike_zszs-horspiel-randominput.jpg
 poster_alt: uncivilization thursday breaks 5 signature strike poster - zs zs, hörspiel, random input
 text_en: |
   Next event we're sieged by habitants of Viena, ZSZS and HÖRSPIEL. With her live noise set that is blended  with IDM and flashcore ZSZS will make the sonic oppenning. Expect harshnoise. After her we have HÖRSPIEL with live breakcore set. Closure is from RANDOM INPUT. A breakcored hardcore dj set.

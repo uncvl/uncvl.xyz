@@ -9,7 +9,7 @@ venue:
   name: Dinozor Bar
   city: İzmir
 price: 150₺
-poster: proxy-firewall_mondual-randominput-balgum.jpg
+poster: https://media.uncvl.xyz/events/2024-10-10-thursday-breaks-proxy-firewall/proxy-firewall_mondual-randominput-balgum.jpg
 poster_alt: uncivilization thursday breaks 4 proxy firewall poster - mondual, random input, balgum
 text_en: |
   As both halves of the electronic music duo, Mondual, will meet in İzmir in the upcoming days, we took the opportunity and put an additional date to our calendar of Thursday Breaks event series that normally happen every two weeks. With their unique sound world and performances, Mondual has taken part in many different venues and festivals in Turkey and abroad. Random Input will open the night preparing the stage for Mondual with a chill breakcore set and after Mondual, Balgum will continue the night with his drum'n bass (neurofunk) set. Also we'll have an ART MARKET settled at the back yard.

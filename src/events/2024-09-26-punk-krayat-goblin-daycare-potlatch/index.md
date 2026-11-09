@@ -6,13 +6,13 @@ date: 2024-09-26
 venue:
   name: KadıköySahne
   city: İstanbul
-poster: krayat-poster-ist.jpg
+poster: https://media.uncvl.xyz/events/2024-09-26-punk-krayat-goblin-daycare-potlatch/krayat-poster-ist.jpg
 poster_alt: uncivilization punk concert poster - krayat, goblin daycare, potlatch
 gallery:
-  - src: potlatch-goblin-collage.jpg
+  - src: https://media.uncvl.xyz/events/2024-09-26-punk-krayat-goblin-daycare-potlatch/potlatch-goblin-collage.jpg
     alt: potlatch and goblin daycare at kadıköy sahne
     wide: true
-  - src: krayat-collage.jpg
+  - src: https://media.uncvl.xyz/events/2024-09-26-punk-krayat-goblin-daycare-potlatch/krayat-collage.jpg
     alt: krayat live in istanbul and izmir
     wide: true
 text_en: |

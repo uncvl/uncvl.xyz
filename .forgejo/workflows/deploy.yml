@@ -1,13 +1,13 @@
 # Build + check + deploy uncvl.xyz on Codeberg (Forgejo Actions).
 #
 # Required repository secrets (Settings → Actions → Secrets):
-#   CLOUDFLARE_API_TOKEN   – token scoped to "Cloudflare Pages: Edit" on this account only
+#   CLOUDFLARE_API_TOKEN   – account token with "Workers Scripts: Edit", plus for the uncvl.xyz zone
+#                            "Workers Routes: Edit" and "Zone: Read" (custom domain in wrangler.jsonc)
 #   CLOUDFLARE_ACCOUNT_ID
 # Codeberg Actions must be enabled for the repo (Settings → Units → Actions).
 #
-# Deploys: push to main → production (uncvl.xyz once the custom domain is attached in Cloudflare).
-#          pull request from this repo → preview URL (<branch>.uncvl.pages.dev).
-#          pull requests from forks build and check only; they never see the secrets.
+# Deploys: push to main / daily schedule → production Worker "uncvl" on uncvl.xyz (wrangler.jsonc).
+#          pull requests only build and check.
 name: deploy
 
 on:
@@ -24,7 +24,6 @@ concurrency:
 
 env:
   WRANGLER: wrangler@4.151.3
-  PAGES_PROJECT: uncvl
 
 jobs:
   build:
@@ -54,16 +53,18 @@ jobs:
       - name: Check output (links, alt text, CSP-safe markup)
         run: npm run check
 
-      - name: Deploy to Cloudflare Pages
-        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+      - name: Deploy to Cloudflare (Worker with static assets)
+        if: ${{ github.event_name != 'pull_request' }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          BRANCH: ${{ github.head_ref || github.ref_name }}
+          WRANGLER_SEND_METRICS: "false"
+        shell: bash
+        # The repo (and so this log) is public: wrangler prints the Cloudflare account name, which can
+        # contain an e-mail address. Redact anything e-mail-like; pipefail keeps wrangler's exit code.
         run: |
-          # First run: create the Pages project (production branch = main). Ignored if it already exists.
-          npx --yes "$WRANGLER" pages project create "$PAGES_PROJECT" --production-branch=main 2>/dev/null || true
-          npx --yes "$WRANGLER" pages deploy _site --project-name="$PAGES_PROJECT" --branch="$BRANCH" --commit-dirty=true
+          set -o pipefail
+          npx --yes "$WRANGLER" deploy 2>&1 | sed -E 's/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/[redacted]/g'
 
       # Alternative host: Codeberg git-pages (uncomment and remove the Cloudflare step).
       # See https://docs.codeberg.org/codeberg-pages/forgejo-actions/

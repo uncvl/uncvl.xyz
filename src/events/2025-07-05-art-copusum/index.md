@@ -8,11 +8,11 @@ stage: "19:00"
 venue:
   name: Che (Alsancak)
   city: İzmir
-poster: copusum_poster.jpg
+poster: https://media.uncvl.xyz/events/2025-07-05-art-copusum/copusum_poster.jpg
 poster_alt: uncivilization çöpüşüm poster - art and barter market, clown show, live painting and music
 gallery:
-  - { src: copusum_line-up.jpg, alt: çöpüşüm music and shows line-up }
-  - { src: copusum_pazar.jpg, alt: çöpüşüm art and barter market }
+  - { src: https://media.uncvl.xyz/events/2025-07-05-art-copusum/copusum_line-up.jpg, alt: çöpüşüm music and shows line-up }
+  - { src: https://media.uncvl.xyz/events/2025-07-05-art-copusum/copusum_pazar.jpg, alt: çöpüşüm art and barter market }
 text_en: |
   This is an open call for the art and barter market to be set up on Saturday.
 

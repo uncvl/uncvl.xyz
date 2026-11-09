@@ -7,23 +7,23 @@ date: 2023-12-16
 venue:
   name: Karargah, Darağaç
   city: İzmir
-poster: uncivilization-rejenere-vertical.jpg
+poster: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/uncivilization-rejenere-vertical.jpg
 poster_alt: uncivilization art event rejenere poster
-cover: uncivilization-art-rejenere-poster_800.jpg
+cover: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/uncivilization-art-rejenere-poster_800.jpg
 gallery:
-  - src: rejenere-after_1200.jpg
+  - src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/rejenere-after_1200.jpg
     alt: izmir underground crowd at darağaç in uncivilization music and exhibition event rejenere
     wide: true
-  - { src: music-participants-cover-music.jpg, alt: rejenere music and visuals }
-  - { src: music-randominput.jpg, alt: Random Input card }
-  - { src: music-balgum.jpg, alt: Balgum card }
-  - { src: music-500001k.jpg, alt: 500001K card }
-  - { src: music-h0p3.jpg, alt: H0P3 card }
-  - { src: music-ox.jpg, alt: Ox card }
-  - { src: music-kagebunshin.jpg, alt: Kage Bunshin card }
-  - { src: exhibition-lvna.jpg, alt: LVNA exhibition card }
-  - { src: exhibition-bocek.jpg, alt: Böcek exhibition card }
-  - { src: exhibition-dcntrlzd.jpg, alt: Dcntrlzd exhibition card }
+  - { src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-participants-cover-music.jpg, alt: rejenere music and visuals }
+  - { src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-randominput.jpg, alt: Random Input card }
+  - { src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-balgum.jpg, alt: Balgum card }
+  - { src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-500001k.jpg, alt: 500001K card }
+  - { src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-h0p3.jpg, alt: H0P3 card }
+  - { src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-ox.jpg, alt: Ox card }
+  - { src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-kagebunshin.jpg, alt: Kage Bunshin card }
+  - { src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/exhibition-lvna.jpg, alt: LVNA exhibition card }
+  - { src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/exhibition-bocek.jpg, alt: Böcek exhibition card }
+  - { src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/exhibition-dcntrlzd.jpg, alt: Dcntrlzd exhibition card }
 exhibitors: [LVNA, Böcek, Bixbite, Musbucc, Dcntrlzd, Abyssal Area, Hypn]
 schedule:
   - time: "17:00"

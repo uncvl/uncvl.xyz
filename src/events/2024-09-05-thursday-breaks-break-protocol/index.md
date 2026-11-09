@@ -10,9 +10,9 @@ venue:
   name: Dinozor Bar
   city: İzmir
 price: 150TL
-poster: break-protocol_koi-failure_randominput_oqlius.jpg
+poster: https://media.uncvl.xyz/events/2024-09-05-thursday-breaks-break-protocol/break-protocol_koi-failure_randominput_oqlius.jpg
 poster_alt: uncivilization thursday breaks event break protocol poster
-cover: uncivilization-thursday-breaks-break-protocol_poster_square_480.png
+cover: https://media.uncvl.xyz/events/2024-09-05-thursday-breaks-break-protocol/uncivilization-thursday-breaks-break-protocol_poster_square_480.png
 summary_en: KOI FAILURE, an electronic music duo based in İstanbul visited İzmir for the first of the new event series organized by Uncivilization. Since one of the members was going to depart soon this was the last chance to dance to their highly energetic live set. OQLIUS warmed up the floor with dubstep before and RANDOM INPUT played his breakcore set after their performance.
 text_en: |
   KOI FAILURE, an electronic music duo based in İstanbul visited İzmir for the first of the new event series organized by Uncivilization. Since one of the members was going to depart soon this was the last chance to dance to their highly energetic live set. OQLIUS warmed up the floor with *dubstep* before and RANDOM INPUT played his *breakcore* set after their performance.

@@ -11,14 +11,14 @@ venue:
   name: Blind
   city: İstanbul
 price: 70TL
-poster: uncivilization-bass-night-drumazan-poster-vertical.jpg
+poster: https://media.uncvl.xyz/events/2022-05-03-bass-night-drumazan-speshaal/uncivilization-bass-night-drumazan-poster-vertical.jpg
 poster_alt: uncivilization bass event drumazan speshaal poster
-cover: uncivilization-bass-night-drumazan-poster.jpg
+cover: https://media.uncvl.xyz/events/2022-05-03-bass-night-drumazan-speshaal/uncivilization-bass-night-drumazan-poster.jpg
 gallery:
-  - { src: artist-jung.jpg, alt: Jung artist card }
-  - { src: artist-tech-tabanjah.jpg, alt: Tech Tabanjah artist card }
-  - { src: artist-miss-baas.jpg, alt: Miss Baas artist card }
-  - { src: artist-random-input.jpg, alt: Random Input artist card }
+  - { src: https://media.uncvl.xyz/events/2022-05-03-bass-night-drumazan-speshaal/artist-jung.jpg, alt: Jung artist card }
+  - { src: https://media.uncvl.xyz/events/2022-05-03-bass-night-drumazan-speshaal/artist-tech-tabanjah.jpg, alt: Tech Tabanjah artist card }
+  - { src: https://media.uncvl.xyz/events/2022-05-03-bass-night-drumazan-speshaal/artist-miss-baas.jpg, alt: Miss Baas artist card }
+  - { src: https://media.uncvl.xyz/events/2022-05-03-bass-night-drumazan-speshaal/artist-random-input.jpg, alt: Random Input artist card }
 video:
   youtube_playlist: PLP0hX4t0xUNPnlr_3SeZHyZKiXMloUxwf
 summary_en: "The second event of Uncivilization’s bass series will take place at Blind: DRUMAZAN SPESHAAL - JUNG meets DA FROGG. The night will start with UK Garage and breakbeat, continue with Rave and Drum’n Bass. Visuals by Random Input. We are waiting for all the bass heads!"

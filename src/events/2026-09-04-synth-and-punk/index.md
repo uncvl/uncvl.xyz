@@ -8,12 +8,12 @@ date: 2026-09-04
 venue:
   name: Nomads 36
   city: İzmir
-poster: synth-and-punk_poster.jpg
+poster: https://media.uncvl.xyz/events/2026-09-04-synth-and-punk/synth-and-punk_poster.jpg
 poster_alt: uncivilization synth sessions and punk concert poster - hörspiel, übena, vco2, balgum, loremipsum, ur0123456789
-promo: synth-and-punk_promo.mp4   # video lives on R2 (media.uncvl.xyz); shown once uploaded
+promo: https://media.uncvl.xyz/events/2026-09-04-synth-and-punk/synth-and-punk_promo.mp4   # video lives on R2 (media.uncvl.xyz); shown once uploaded
 poster_credit: Random Input
 gallery:
-  - { src: synth-and-punk_ox.jpg, alt: Ox card for synth sessions and punk concert }
+  - { src: https://media.uncvl.xyz/events/2026-09-04-synth-and-punk/synth-and-punk_ox.jpg, alt: Ox card for synth sessions and punk concert }
 text_en: |
   On Friday, September 4th, we are holding an experimental event at Nomads36. We will try to push some boundaries in this event, where live electronic music projects and punk concerts will be staged.
 

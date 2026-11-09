@@ -7,7 +7,7 @@ date: 2022-11-17
 venue:
   name: Dinozor Bar
   city: İzmir
-poster: uncivilization-decypher-decyphered-civilization_poster.jpg
+poster: https://media.uncvl.xyz/events/2022-11-17-decyphered-civilization/uncivilization-decypher-decyphered-civilization_poster.jpg
 poster_credit: Alefcazu, Random Input
 stage: "20:30 - 01:00"
 poster_alt: decyphered civilization

@@ -10,10 +10,10 @@ venue:
   name: Audiodar, Darağaç
   city: İzmir
 price: 200 TL
-poster: uncvl-bass_gkc-dafrogg_poster.jpg
+poster: https://media.uncvl.xyz/events/2025-11-01-bass-gkc-da-frogg/uncvl-bass_gkc-dafrogg_poster.jpg
 poster_alt: uncivilization bass gkc and da frogg poster
 gallery:
-  - src: gkc-dafrogg-collage.jpg
+  - src: https://media.uncvl.xyz/events/2025-11-01-bass-gkc-da-frogg/gkc-dafrogg-collage.jpg
     alt: gkc and da frogg at audiodar, darağaç
     wide: true
 text_en: |

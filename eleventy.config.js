@@ -148,38 +148,47 @@ export default function (eleventyConfig) {
   loadMedia();
   eleventyConfig.on("eleventy.before", loadMedia);
   eleventyConfig.addWatchTarget("src/_data/media.json");
-  const mediaKey = (src) => String(src || "").replace(/^\/+/, "");
+  // Image fields may hold a full R2 URL (https://media.uncvl.xyz/<key>, what the CMS shows and stores)
+  // or a site path (/events/<bundle>/poster.jpg, a file still in git). Both map to the same key.
+  const isRemote = (src) => String(src || "").startsWith(MEDIA_BASE + "/");
+  const mediaKey = (src) => {
+    const s = String(src || "");
+    return (isRemote(s) ? s.slice(MEDIA_BASE.length + 1) : s).split(/[?#]/)[0].replace(/^\/+/, "");
+  };
+  // Manifest entry, or (for files uploaded straight to R2 by the CMS, not yet in the manifest) a stub
+  // without dimensions: still resized by Cloudflare, just without width/height attributes.
+  const mediaInfo = (src) => MEDIA[mediaKey(src)] || (isRemote(src) ? { v: "0" } : null);
   const cdn = (key, m, width, extra = "") =>
     `${MEDIA_BASE}/cdn-cgi/image/width=${Math.min(width, m.w || width)},quality=80,format=auto,fit=scale-down${extra}/${key}?v=${m.v}`;
   const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
-  // {% image src, alt, sizes, eager %} — src is a site path like /events/<bundle>/poster.jpg
+  // {% image src, alt, sizes, eager %}
   eleventyConfig.addShortcode("image", (src, alt = "", sizes = "100vw", eager = false) => {
     const key = mediaKey(src);
-    const m = MEDIA[key];
+    const m = mediaInfo(src);
     const loading = eager ? `loading="eager" fetchpriority="high"` : `loading="lazy"`;
-    if (m && m.w) {
-      const widths = [...new Set(MEDIA_WIDTHS.map((w) => Math.min(w, m.w)))];
+    if (m) {
+      const widths = [...new Set(MEDIA_WIDTHS.map((w) => (m.w ? Math.min(w, m.w) : w)))];
       const srcset = widths.map((w) => `${cdn(key, m, w)} ${w}w`).join(", ");
-      return `<img src="${cdn(key, m, 800)}" srcset="${srcset}" sizes="${esc(sizes)}" width="${m.w}" height="${m.h}" alt="${esc(alt)}" ${loading} decoding="async" eleventy:ignore>`;
+      const dims = m.w ? ` width="${m.w}" height="${m.h}"` : "";
+      return `<img src="${cdn(key, m, 800)}" srcset="${srcset}" sizes="${esc(sizes)}"${dims} alt="${esc(alt)}" ${loading} decoding="async" eleventy:ignore>`;
     }
     return `<img src="${esc(src)}" alt="${esc(alt)}" sizes="${esc(sizes)}" ${loading}>`; // local → eleventy-img transform
   });
-  // Full-size file (poster/gallery click-through): original on R2 if uploaded, else the local master
+  // Full-size file (poster/gallery click-through)
   eleventyConfig.addFilter("mediaFull", (src) => {
-    const key = mediaKey(src);
-    return MEDIA[key] ? `${MEDIA_BASE}/${key}?v=${MEDIA[key].v}` : src;
+    const m = mediaInfo(src);
+    return m ? `${MEDIA_BASE}/${mediaKey(src)}?v=${m.v}` : src;
   });
   // Social card image: 1200px JPEG from R2 (crawlers don't negotiate AVIF), or the local path
   eleventyConfig.addFilter("mediaOg", (src) => {
-    const key = mediaKey(src);
-    const m = MEDIA[key];
-    return m && m.w ? cdn(key, m, 1200).replace("format=auto", "format=jpeg") : src;
+    const m = mediaInfo(src);
+    return m ? cdn(mediaKey(src), m, 1200).replace("format=auto", "format=jpeg") : src;
   });
   // Video (e.g. promo clips) — only rendered when the file is on R2
   eleventyConfig.addFilter("mediaVideo", (src) => {
-    const key = mediaKey(src);
-    return MEDIA[key] ? `${MEDIA_BASE}/${key}?v=${MEDIA[key].v}` : null;
+    const m = mediaInfo(src);
+    return m ? `${MEDIA_BASE}/${mediaKey(src)}?v=${m.v}` : null;
   });
 
   // Playable embeds for SoundCloud / Bandcamp links (rendered as click-to-load players).

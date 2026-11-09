@@ -3,5 +3,5 @@ name: Balgum
 links: []
 bio_en: Balgum is a project of Engin in which he explores underground electronic music genres ranging from techno, drum and bass, hardcore, tekno, breakcore. He finds peace in the clarity that comes after confusion with broken beats, noise and distortion.
 bio_tr: Balgum, Engin'in techno, drum and bass, hardcore, tekno, breakcore gibi underground elektronik müzik türlerini araştırdığı projesidir. Aksak vuruşlar, gürültü ve distorsiyonun verdiği kafa karışıklığından sonra gelen netlikte huzur buluyor.
-photo: img/balgum.jpg
+photo: https://media.uncvl.xyz/artists/img/balgum.jpg
 ---

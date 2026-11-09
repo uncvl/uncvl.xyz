@@ -1,0 +1,14 @@
+// Cloudflare Worker that serves the built site (static assets) on uncvl.xyz.
+// Deployed by CI with `wrangler deploy` (see .forgejo/workflows/deploy.yml).
+// _site/_headers and _site/_redirects are honoured by Workers static assets.
+{
+  "name": "uncvl",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./_site",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  },
+  "routes": [{ "pattern": "uncvl.xyz", "custom_domain": true }],
+  "observability": { "enabled": true }
+}

@@ -11,11 +11,11 @@ venue:
   name: Blind
   city: İstanbul
 price: 70TL
-poster: uncivilization-bass-night-ignishaan-poster-vertical.jpg
+poster: https://media.uncvl.xyz/events/2022-04-02-bass-night-ignishaan/uncivilization-bass-night-ignishaan-poster-vertical.jpg
 poster_alt: uncivilization bass night event ignishaan poster
-cover: uncivilization-bass-night-ignishaan-poster.jpg
+cover: https://media.uncvl.xyz/events/2022-04-02-bass-night-ignishaan/uncivilization-bass-night-ignishaan-poster.jpg
 gallery:
-  - src: crowd-collage-at-blind-in-uncivilization-bass-night-event-ignishaan_2400.jpg
+  - src: https://media.uncvl.xyz/events/2022-04-02-bass-night-ignishaan/crowd-collage-at-blind-in-uncivilization-bass-night-event-ignishaan_2400.jpg
     alt: pixie crowd at blind in uncivilization bass night event ignishaan
     wide: true
 video:

@@ -9,7 +9,7 @@ stage: "15:00 - 22:00"
 venue:
   name: Wave Art Society (1484 sk. No 6, Alsancak)
   city: İzmir
-poster: rehab1_mental-orientation_poster.jpg
+poster: https://media.uncvl.xyz/events/2024-11-30-art-rehab-1-mental-orientation/rehab1_mental-orientation_poster.jpg
 poster_alt: uncivilization rehab 1 mental orientation art market and dj sets poster
 poster_credit: Bedirhan Sezen
 text_tr: |
