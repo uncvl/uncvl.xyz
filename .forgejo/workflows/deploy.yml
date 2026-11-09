@@ -28,8 +28,8 @@ env:
 
 jobs:
   build:
-    # images come from R2 (media.uncvl.xyz) and are resized by Cloudflare, so the build is light
-    runs-on: codeberg-small
+    # codeberg-medium (4 CPU, 10 min): shorter queue and headroom for images not yet moved to R2
+    runs-on: codeberg-medium
     container:
       image: node:22-bookworm
     steps:
