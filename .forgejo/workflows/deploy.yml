@@ -2,7 +2,7 @@
 #
 # Required repository secrets (Settings → Actions → Secrets):
 #   CLOUDFLARE_API_TOKEN   – Account API token, one policy: scope "Specified Workers" → uncvl,
-#                            permission "Workers Scripts: Edit". Nothing else.
+#                            role "Individual Workers: Editor". Nothing else (no R2, no zone policies).
 #                            No zone or R2 permissions are needed: the custom domain is managed in the
 #                            dashboard (not in wrangler.jsonc) and --x-provision=false skips R2 lookups.
 #   CLOUDFLARE_ACCOUNT_ID
