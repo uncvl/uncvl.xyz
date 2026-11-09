@@ -28,7 +28,8 @@ env:
 
 jobs:
   build:
-    runs-on: codeberg-small
+    # medium (4 CPU, 10 min) while images are processed at build time; back to codeberg-small once they come from R2
+    runs-on: codeberg-medium
     container:
       image: node:22-bookworm
     steps:

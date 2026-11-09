@@ -9,9 +9,9 @@ venue:
   name: Woodstock
   city: Kadıköy, İstanbul
 price: 60TL
-poster: uncivilization-punk-concert_zibidiler_tampon_bunu-sen-istedin-woodstock-poster_1280.jpg
+poster: uncvlpunk1_zibidiler_tampon_bunu-sen-istedin-woodstock.jpg
 poster_alt: uncivilization punk concert poster zibidiler tampon bunu sen istedin
-cover: uncivilization-punk-concert_zibidiler_tampon_bunu-sen-istedin-woodstock-poster_square_480.jpg
+cover: uncvlpunk1_zibidiler_tampon_bunu-sen-istedin-woodstock_square.jpg
 poster_credit: Tuğçe Türksoy
 video:
   youtube_playlist: PLP0hX4t0xUNPiVX1qvm14pCc-Kk-KJv_b

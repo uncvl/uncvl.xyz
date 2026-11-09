@@ -7,12 +7,17 @@ bodyClass: page-artist signal
 {%- set released = collections.releases | releasesWithArtist(slug) -%}
 <article class="artist">
   <header class="hero hero--slim">
-    <div class="wrap">
-      <p class="kline">peer · {{ played.length }} {% t "events", "etkinlik" %}{% if released.length %} · {{ released.length }} {% t "releases", "yayın" %}{% endif %}</p>
-      <p class="glitch" aria-hidden="true">{{ name | codename }}</p>
-      <h1 class="hero__title">{{ name }}</h1>
-      {%- if aka and aka.length %}<p class="hero__by">a.k.a. {{ aka | join(", ") }}</p>{% endif %}
-      {%- if links and links.length %}<p class="actions">{% for l in links %}<a class="btn" href="{{ l.url }}" rel="noopener noreferrer">{{ l.name }} ↗</a>{% endfor %}</p>{% endif %}
+    <div class="wrap{% if photo %} hero__grid hero__grid--artist{% endif %}">
+      {%- if photo %}
+      <figure class="hero__poster hero__poster--square"><img src="{{ photo | bundle(page.inputPath) }}" alt="{{ name }}" loading="eager" fetchpriority="high" sizes="(min-width: 40rem) 16rem, 100vw"></figure>
+      {%- endif %}
+      <div>
+        <p class="kline">peer · {{ played.length }} {% t "events", "etkinlik" %}{% if released.length %} · {{ released.length }} {% t "releases", "yayın" %}{% endif %}</p>
+        <p class="glitch" aria-hidden="true">{{ name | codename | wbr | safe }}</p>
+        <h1 class="hero__title">{{ name }}</h1>
+        {%- if aka and aka.length %}<p class="hero__by">a.k.a. {{ aka | join(", ") }}</p>{% endif %}
+        {%- if links and links.length %}<p class="actions">{% for l in links %}<a class="btn" href="{{ l.url }}" rel="noopener noreferrer">{{ l.name }} ↗</a>{% endfor %}</p>{% endif %}
+      </div>
     </div>
   </header>
   <div class="wrap event__body">
@@ -22,6 +27,7 @@ bodyClass: page-artist signal
       {{ ui.bitext(bio_en, bio_tr) }}
     </section>
     {%- endif %}
+    {{ ui.players({ listen: listen, links: links, bandcamp_id: bandcamp_id, title: title, name: name } | players) }}
     {%- if released.length %}
     <section aria-labelledby="rel">
       {{ ui.sect("RELEASES", "YAYINLAR", "", "rel") }}

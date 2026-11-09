@@ -204,7 +204,7 @@ html:not([data-lang]) .site-nav .l-tr { display: none; }
 .hero__poster { container-type: inline-size; }
 .hero__title { font-size: var(--step-2); margin: 0.2rem 0 1rem; }
 .hero__by { color: var(--text-hi); margin-top: -0.6rem; }
-.glitch { font-family: var(--font-px); font-size: var(--step-3); line-height: 0.9; color: var(--acid); margin: 0.2rem 0 0.4rem; word-break: break-word;
+.glitch { font-family: var(--font-px); font-size: var(--step-3); line-height: 0.9; color: var(--acid); margin: 0.2rem 0 0.4rem; overflow-wrap: anywhere;
   text-shadow: 2px 0 var(--rgb-a), -2px 0 var(--rgb-b); }
 .signal--release .glitch { color: var(--yellow); }
 @media (prefers-contrast: more) { .glitch { text-shadow: none; } }
@@ -262,7 +262,9 @@ a.peer__name:hover { color: var(--green-hi); }
 .video__facade:hover { text-decoration: none; border-color: var(--acid); }
 .video iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; display: block; }
 
-.gallery { display: grid; gap: 1rem; }
+.gallery { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr)); }
+.gallery__wide { grid-column: 1 / -1; }
+.gallery a:hover { border-color: var(--acid); }
 .gallery a { display: block; border: 1px solid var(--line); }
 
 .pager { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line); align-items: start; }
@@ -294,3 +296,31 @@ a.peer__name:hover { color: var(--green-hi); }
   .site-header, .site-footer, .video, .pager, .lang-switch { display: none; }
   body, html { background: #fff; color: #000; }
 }
+
+/* ---------- SoundCloud / Bandcamp players (click-to-load) ---------- */
+.players { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.8rem; }
+.player__facade { display: flex; align-items: center; gap: 0.9rem; padding: 0.7rem 0.9rem; border: 1px dashed var(--line-2); background: var(--bg-2); color: var(--text-hi); min-height: 4.5rem; }
+.player__facade:hover { text-decoration: none; border-color: var(--acid); border-style: solid; }
+.player__play { display: grid; place-items: center; flex: none; width: 2.6rem; height: 2.6rem; border: 1px solid var(--acid); color: var(--acid); }
+.player__facade:hover .player__play { background: var(--acid); color: #111; }
+.player__body { display: flex; flex-direction: column; min-width: 0; }
+.player__label { font-weight: 700; overflow-wrap: anywhere; }
+.player__src { color: var(--text-dim); font-size: var(--step--1); }
+.player--bandcamp .player__play { border-color: var(--yellow); color: var(--yellow); }
+.player--bandcamp .player__facade:hover { border-color: var(--yellow); }
+.player--bandcamp .player__facade:hover .player__play { background: var(--yellow); }
+.embed-frame { display: block; width: 100%; border: 0; background: var(--bg-2); }
+.listen + section .sect, .listen .sect { margin-top: 2.6rem; }
+
+/* ---------- art market / exhibition names ---------- */
+.names { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.names li { border: 1px solid var(--line-2); padding: 0.2rem 0.6rem; color: var(--text-hi); }
+.names a { color: var(--text-hi); }
+.player--bandcamp .embed-frame { max-width: 700px; } /* Bandcamp's large player is 700px max */
+.hero__grid--artist { grid-template-columns: clamp(9rem, 26%, 16rem) minmax(0, 1fr); align-items: center; }
+@media (max-width: 40rem) { .hero__grid--artist { grid-template-columns: 1fr; } .hero__grid--artist .hero__poster { max-width: 14rem; } }
+
+/* code-styled event texts (e.g. zero-day exploit) */
+.prose pre { background: var(--bg-2); border: 1px solid var(--line); padding: 1rem; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--acid); font: inherit; font-size: var(--step--1); line-height: 1.5; }
+.prose ul { padding-left: 1.2rem; }
+.elsewhere { margin-top: 0.8rem; font-size: var(--step--1); }

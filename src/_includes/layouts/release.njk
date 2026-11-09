@@ -21,7 +21,7 @@ eleventyComputed:
       </figure>
       <div class="hero__meta">
         <p class="kline">rel {{ catalog or ("0x" + (idx + 1)) }} · {% t site.releaseTypes[type].en, site.releaseTypes[type].tr %}{% if genres %} · {{ ui.genres(genres) }}{% endif %}</p>
-        {%- if codename %}<p class="glitch" aria-hidden="true">{{ codename | codename }}</p>{% endif %}
+        {%- if codename %}<p class="glitch" aria-hidden="true">{{ codename | codename | wbr | safe }}</p>{% endif %}
         <h1 class="hero__title">{{ title }}</h1>
         {%- if artist_line %}<p class="hero__by">{% t "by", "" %} {{ artist_line }}</p>{% endif %}
         <dl class="facts">
@@ -39,11 +39,15 @@ eleventyComputed:
           {%- if links.soundcloud %}<a class="btn" href="{{ links.soundcloud }}" rel="noopener noreferrer">soundcloud ↗</a>{% endif %}
           {%- if status == "open-call" %}<a class="btn" href="/compilation/">{% t "read the call", "çağrıyı oku" %}</a>{% endif %}
         </p>
+        {%- if elsewhere and elsewhere.length %}
+        <p class="elsewhere"><span class="k">{% t "also on", "ayrıca" %}</span> {% for e in elsewhere %}<a href="{{ e.url }}" rel="noopener noreferrer">{{ e.name }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+        {%- endif %}
       </div>
     </div>
   </header>
 
   <div class="wrap event__body">
+    {{ ui.players({ listen: listen, links: links, bandcamp_id: bandcamp_id, title: title, name: name } | players) }}
     {%- if tracklist and tracklist.length %}
     <section aria-labelledby="tracklist">
       {{ ui.sect("TRACKLIST", "PARÇALAR", "", "tracklist") }}

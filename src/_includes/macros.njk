@@ -54,6 +54,28 @@
 </li>
 {%- endmacro -%}
 
+{#- SoundCloud / Bandcamp players. `list` comes from the `players` filter. Nothing loads from those sites until a click. -#}
+{%- macro players(list) -%}
+{%- if list and list.length -%}
+<section class="listen" aria-labelledby="listen">
+  {{ sect("LISTEN", "DİNLE", "", "listen") }}
+  <ul class="players">
+    {%- for p in list %}
+    <li class="player player--{{ p.type }}">
+      <a class="embed-facade player__facade" href="{{ p.url }}" data-embed="{{ p.embed }}" data-height="{{ p.height }}" data-title="{{ p.label }}" rel="noopener noreferrer">
+        <span class="player__play" aria-hidden="true">▶</span>
+        <span class="player__body">
+          <span class="player__label">{{ p.label }}</span>
+          <span class="player__src">{{ p.type }} · {% t "click to load the player", "oynatıcıyı yüklemek için tıkla" %}</span>
+        </span>
+      </a>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif -%}
+{%- endmacro -%}
+
 {%- macro videoFacade(video, cover, inputPath, title) -%}
 {%- if video -%}
 {%- if video.youtube -%}
@@ -64,7 +86,7 @@
 {%- set embed = "https://www.youtube-nocookie.com/embed/videoseries?list=" + video.youtube_playlist + "&autoplay=1" -%}
 {%- endif -%}
 <div class="video">
-  <a class="video__facade" href="{{ watch }}" data-embed="{{ embed }}" data-title="{{ title }}" rel="noopener noreferrer">
+  <a class="embed-facade video__facade" href="{{ watch }}" data-embed="{{ embed }}" data-title="{{ title }}" rel="noopener noreferrer">
     {%- if cover %}<img src="{{ cover | bundle(inputPath) }}" alt="" sizes="(min-width: 60rem) 46rem, 100vw">{% endif %}
     <span class="video__play"><span aria-hidden="true">▶</span> {% t "load video", "videoyu yükle" %}</span>
     <span class="video__note">{% t "youtube-nocookie loads only after you click", "youtube yalnızca tıkladığında yüklenir" %}</span>

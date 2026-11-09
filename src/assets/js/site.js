@@ -25,15 +25,17 @@
 
   // ---- click-to-load video (youtube-nocookie only after an explicit click) ----
   document.addEventListener("click", function (ev) {
-    var a = ev.target.closest(".video__facade[data-embed]");
+    // .embed-facade covers YouTube videos and SoundCloud / Bandcamp players
+    var a = ev.target.closest(".embed-facade[data-embed]");
     if (!a) return;
     ev.preventDefault();
     var f = document.createElement("iframe");
     f.src = a.dataset.embed;
-    f.title = a.dataset.title || "video";
+    f.title = a.dataset.title || "player";
     f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
     f.referrerPolicy = "strict-origin-when-cross-origin";
-    f.loading = "lazy";
+    if (a.dataset.height) f.height = a.dataset.height; // attribute, not inline style (CSP)
+    f.className = "embed-frame";
     a.replaceWith(f);
   });
 })();

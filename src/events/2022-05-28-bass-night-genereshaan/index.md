@@ -11,12 +11,20 @@ venue:
   name: Blind
   city: İstanbul
 price: 60TL
-poster: uncivilization-bass-night-genereshaan-poster_vertical_900.jpg
+poster: uncvl-genereshaan_poster_vertical.jpg
+poster_credit: Random Input, Haishiten, Sagremor
 poster_alt: uncivilization bass night event genereshaan poster
-cover: uncivilization-bass-night-genereshaan-poster_1200.jpg
+cover: uncvl-genereshaan_poster.jpg
 gallery:
   - src: crowd-collage-at-blind-in-uncivilization-bass-night-event-genereshaan_2400.jpg
     alt: pixie crowd at blind in uncivilization bass night event genereshaan
+    wide: true
+  - { src: artist-lunar-funktion.jpg, alt: Lunar Funktion artist card }
+  - { src: artist-consul.jpg, alt: Consul artist card }
+  - { src: artist-fosil.jpg, alt: Fosil artist card }
+  - { src: artist-tech-tabanjah.jpg, alt: Tech Tabanjah artist card }
+  - { src: artist-random-input.jpg, alt: Random Input artist card }
+  - { src: artist-mc-3pillie-farabi-gramafonia.jpg, alt: MC 3Pillie and Farabi Gramafonia artist card }
 video:
   youtube: vKdJ9bksnaA
 summary_en: "The third event of Uncivilization’s “bass night” series: GENERESHAAN!!! The event will take place at Blind and host four DJs from different genereshaans: Lunar Function, Consul, Fosil and Da Frogg will set the place on fire with their Jungle Drum’n bass sets. Visuals by Random Input of course. We are waiting for all the bass heads!"

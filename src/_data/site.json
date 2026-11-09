@@ -10,28 +10,87 @@
     "info": "info@uncvl.xyz"
   },
   "socials": [
-    { "name": "Bandcamp", "url": "https://uncivilization.bandcamp.com/" },
-    { "name": "Soundcloud", "url": "https://soundcloud.com/uncvl" },
-    { "name": "Youtube", "url": "https://www.youtube.com/channel/UCPhMC6_4XWPYSPt6NBLAfAw" },
-    { "name": "Twitter", "url": "https://twitter.com/uncivilizationr" },
-    { "name": "Instagram", "url": "https://www.instagram.com/uncivilizationrecords/" }
+    {
+      "name": "Bandcamp",
+      "url": "https://uncivilization.bandcamp.com/"
+    },
+    {
+      "name": "Soundcloud",
+      "url": "https://soundcloud.com/uncvl"
+    },
+    {
+      "name": "Youtube",
+      "url": "https://www.youtube.com/channel/UCPhMC6_4XWPYSPt6NBLAfAw"
+    },
+    {
+      "name": "Twitter",
+      "url": "https://twitter.com/uncivilizationr"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/uncivilizationrecords/"
+    }
   ],
   "nav": [
-    { "url": "/events/", "en": "events", "tr": "etkinlikler" },
-    { "url": "/releases/", "en": "releases", "tr": "yayınlar" },
-    { "url": "/posts/", "en": "posts", "tr": "yazılar" },
-    { "url": "/about/", "en": "about", "tr": "hakkında" }
+    {
+      "url": "/events/",
+      "en": "events",
+      "tr": "etkinlikler"
+    },
+    {
+      "url": "/releases/",
+      "en": "releases",
+      "tr": "yayınlar"
+    },
+    {
+      "url": "/posts/",
+      "en": "posts",
+      "tr": "yazılar"
+    },
+    {
+      "url": "/about/",
+      "en": "about",
+      "tr": "hakkında"
+    }
   ],
   "categories": {
-    "art": { "en": "Art", "tr": "Sanat" },
-    "break": { "en": "Break", "tr": "Break" },
-    "bass": { "en": "Bass", "tr": "Bass" },
-    "punk": { "en": "Punk", "tr": "Punk" }
+    "art": {
+      "en": "Art",
+      "tr": "Sanat"
+    },
+    "break": {
+      "en": "Break",
+      "tr": "Break"
+    },
+    "bass": {
+      "en": "Bass",
+      "tr": "Bass"
+    },
+    "punk": {
+      "en": "Punk",
+      "tr": "Punk"
+    },
+    "synth": {
+      "en": "Synth",
+      "tr": "Synth"
+    }
   },
   "releaseTypes": {
-    "single": { "en": "single", "tr": "tekli" },
-    "ep": { "en": "EP", "tr": "EP" },
-    "album": { "en": "album", "tr": "albüm" },
-    "compilation": { "en": "compilation", "tr": "toplama" }
+    "single": {
+      "en": "single",
+      "tr": "tekli"
+    },
+    "ep": {
+      "en": "EP",
+      "tr": "EP"
+    },
+    "album": {
+      "en": "album",
+      "tr": "albüm"
+    },
+    "compilation": {
+      "en": "compilation",
+      "tr": "toplama"
+    }
   }
 }

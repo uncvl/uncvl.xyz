@@ -58,7 +58,7 @@ collections:
     fields:
       - { name: title, label: Title, widget: string, hint: "e.g. Thursday Breaks #3" }
       - { name: codename, label: Codename, widget: string, required: false, hint: "CS-flavoured handle shown as the glitch title, e.g. zero day exploit" }
-      - { name: category, label: Category, widget: select, options: [bass, break, punk, art] }
+      - { name: category, label: Category, widget: select, options: [bass, break, punk, art, synth] }
       - { name: series, label: Series, widget: string, required: false, hint: "e.g. Thursday Breaks, Bass Night" }
       - { name: genres, label: Genres, widget: list, required: false, hint: "shown as bass ⤬ breaks ⤬ core" }
       - { name: date, label: Date, widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
@@ -92,6 +92,7 @@ collections:
           - { name: note_tr, label: Not (TR), widget: string, required: false }
           - { name: bio_en, label: Bio for this event (EN), widget: markdown, required: false, hint: "Leave empty to show nothing here; the artist page keeps the main bio." }
           - { name: bio_tr, label: Bu etkinlik için biyografi (TR), widget: markdown, required: false }
+      - { name: exhibitors, label: Art market / exhibition, widget: list, required: false, hint: 'names of exhibiting artists' }
       - name: schedule
         label: Schedule / Akış
         widget: list
@@ -114,6 +115,15 @@ collections:
         fields:
           - { name: src, label: Image, widget: image }
           - { name: alt, label: Description, widget: string }
+      - name: listen
+        label: Listen (SoundCloud / Bandcamp players)
+        widget: list
+        required: false
+        hint: 'SoundCloud links play directly. Bandcamp links need the album/track id (Bandcamp → Share/Embed → the number after album= or track=).'
+        fields:
+          - { name: url, label: Link, widget: string }
+          - { name: title, label: Title, widget: string, required: false }
+          - { name: bandcamp_id, label: Bandcamp id (only for Bandcamp), widget: string, required: false }
       - { name: summary_en, label: Short summary for social media (EN), widget: text, required: false }
       - { name: summary_tr, label: Kısa özet (TR), widget: text, required: false }
       - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
@@ -157,6 +167,14 @@ collections:
         fields:
           - { name: bandcamp, label: Bandcamp, widget: string, required: false }
           - { name: soundcloud, label: SoundCloud, widget: string, required: false }
+      - name: elsewhere
+        label: Also available on
+        widget: list
+        required: false
+        fields:
+          - { name: name, label: Name, widget: string, hint: 'Mirlo, Nina Protocol, itch.io…' }
+          - { name: url, label: URL, widget: string }
+      - { name: bandcamp_id, label: Bandcamp album id, widget: string, required: false, hint: 'Makes the Bandcamp player playable. Bandcamp → Share/Embed → the number after album=' }
       - { name: text_en, label: About (EN), widget: markdown, required: false }
       - { name: text_tr, label: Hakkında (TR), widget: markdown, required: false }
       - { name: credits, label: Credits, widget: markdown, required: false }
@@ -181,7 +199,9 @@ collections:
         required: false
         fields:
           - { name: name, label: Name, widget: string, hint: "Bandcamp, SoundCloud, Instagram…" }
-          - { name: url, label: URL, widget: string }
+          - { name: url, label: URL, widget: string, hint: 'SoundCloud links get a player automatically' }
+          - { name: bandcamp_id, label: Bandcamp id (optional, for a player), widget: string, required: false }
+      - { name: photo, label: Photo, widget: image, required: false }
       - { name: bio_en, label: Bio (EN), widget: markdown, required: false }
       - { name: bio_tr, label: Biyografi (TR), widget: markdown, required: false }
 
@@ -202,6 +222,15 @@ collections:
       - { name: cover, label: Cover image, widget: image, required: false }
       - { name: text_en, label: Text (EN), widget: markdown, required: false }
       - { name: text_tr, label: Metin (TR), widget: markdown, required: false }
+      - name: listen
+        label: Listen (SoundCloud / Bandcamp players)
+        widget: list
+        required: false
+        hint: 'SoundCloud links play directly. Bandcamp links need the album/track id (Bandcamp → Share/Embed → the number after album= or track=).'
+        fields:
+          - { name: url, label: Link, widget: string }
+          - { name: title, label: Title, widget: string, required: false }
+          - { name: bandcamp_id, label: Bandcamp id (only for Bandcamp), widget: string, required: false }
       - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
 
   # ---------------------------------------------------------- SITE-WIDE TEXT

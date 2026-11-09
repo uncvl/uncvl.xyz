@@ -25,7 +25,7 @@ eleventyComputed:
       </figure>
       <div class="hero__meta">
         <p class="kline">evt {{ seq | hex }} · {{ category }}{% if series %} · {{ series | lower }}{% endif %}{% if genres %} · {{ ui.genres(genres) }}{% endif %}{% if upcoming %} · <span class="ok">{% t "upcoming", "yaklaşan" %}</span>{% endif %}</p>
-        {%- if codename %}<p class="glitch" aria-hidden="true">{{ codename | codename }}</p>{% endif %}
+        {%- if codename %}<p class="glitch" aria-hidden="true">{{ codename | codename | wbr | safe }}</p>{% endif %}
         <h1 class="hero__title">{{ title }}</h1>
         <dl class="facts">
           <dt>{% t "date", "tarih" %}</dt>
@@ -49,9 +49,20 @@ eleventyComputed:
         {%- set artistPage = collections.artists | findBySlug(l.artist) if l.artist else null %}
         <li class="peer">
           {%- if l.time %}<span class="peer__time">{{ l.time }}</span>{% endif %}
-          {%- if artistPage %}<a class="peer__name" href="{{ artistPage.url }}">{{ l.name }}</a>{% else %}<span class="peer__name">{{ l.name }}</span>{% endif %}
+          {%- if artistPage %}<a class="peer__name" lang="zxx" href="{{ artistPage.url }}">{{ l.name }}</a>{% else %}<span class="peer__name" lang="zxx">{{ l.name }}</span>{% endif %}
           {%- if l.note_en %}<span class="peer__note"><span class="l-en" lang="en">{{ l.note_en }}</span><span class="l-tr" lang="tr">{{ l.note_tr or l.note_en }}</span></span>{% endif %}
         </li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endif %}
+
+    {%- if exhibitors and exhibitors.length %}
+    <section aria-labelledby="exhibitors">
+      {{ ui.sect("ART MARKET / EXHIBITION", "SANAT PAZARI / SERGİ", "", "exhibitors") }}
+      <ul class="names">
+        {%- for n in exhibitors %}{% set ap = collections.artists | findBySlug(n | slugify) %}
+        <li>{% if ap %}<a href="{{ ap.url }}">{{ n }}</a>{% else %}{{ n }}{% endif %}</li>
         {%- endfor %}
       </ul>
     </section>
@@ -75,6 +86,7 @@ eleventyComputed:
     </section>
     {%- endif %}
 
+    {{ ui.players({ listen: listen, links: links, bandcamp_id: bandcamp_id, title: title, name: name } | players) }}
     {%- if tickets_en or tickets_tr %}
     <section class="tickets" aria-labelledby="tickets">
       {{ ui.sect("TICKETS", "BİLET", "", "tickets") }}
@@ -102,7 +114,7 @@ eleventyComputed:
       {{ ui.sect("GALLERY", "GALERİ", "", "gallery") }}
       <div class="gallery">
         {%- for g in gallery %}
-        <a href="{{ g.src | bundle(page.inputPath) }}"><img src="{{ g.src | bundle(page.inputPath) }}" alt="{{ g.alt }}" sizes="(min-width: 60rem) 56rem, 100vw"></a>
+        <a href="{{ g.src | bundle(page.inputPath) }}"{% if g.wide %} class="gallery__wide"{% endif %}><img src="{{ g.src | bundle(page.inputPath) }}" alt="{{ g.alt }}" sizes="{{ '(min-width: 60rem) 56rem, 100vw' if g.wide else '(min-width: 60rem) 18rem, 50vw' }}"></a>
         {%- endfor %}
       </div>
     </section>

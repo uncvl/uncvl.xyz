@@ -11,12 +11,13 @@ venue:
   name: Blind
   city: İstanbul
 price: 70TL
-poster: uncivilization-bass-night-ignishaan-poster-vertical_900.jpg
+poster: uncivilization-bass-night-ignishaan-poster-vertical.jpg
 poster_alt: uncivilization bass night event ignishaan poster
-cover: uncivilization-bass-night-ignishaan-poster_1600.jpg
+cover: uncivilization-bass-night-ignishaan-poster.jpg
 gallery:
   - src: crowd-collage-at-blind-in-uncivilization-bass-night-event-ignishaan_2400.jpg
     alt: pixie crowd at blind in uncivilization bass night event ignishaan
+    wide: true
 video:
   youtube_playlist: PLP0hX4t0xUNOH_ITl5mZG2emL0YPdlcKt
 summary_en: The first event of Uncivilization’s “bass night” series took place at Blind with Dyln, Dubstract and Da Frogg. Guest MC 3Pillie also joined the event. The night started with dub and continued with breakbeat, jungle and B2B sessions. Visuals done by Random Input.

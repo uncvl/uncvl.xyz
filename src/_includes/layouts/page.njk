@@ -12,4 +12,5 @@ bodyClass: page-text
   {%- if cover %}<figure class="text-page__cover"><img src="{{ cover | bundle(page.inputPath) }}" alt="" loading="eager" sizes="(min-width: 50rem) 46rem, 100vw"></figure>{% endif %}
   {%- if text_en or text_tr %}{{ ui.bitext(text_en, text_tr) }}{% endif %}
   {%- if content | trim %}<div class="prose">{{ content | safe }}</div>{% endif %}
+  {{ ui.players({ listen: listen, links: links, bandcamp_id: bandcamp_id, title: title, name: name } | players) }}
 </article>

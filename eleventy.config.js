@@ -40,6 +40,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/events/**/*.{jpg,jpeg,png,webp}");
   eleventyConfig.addPassthroughCopy("src/releases/**/*.{jpg,jpeg,png,webp}");
   eleventyConfig.addPassthroughCopy("src/posts/**/*.{jpg,jpeg,png,webp}");
+  eleventyConfig.addPassthroughCopy("src/artists/**/*.{jpg,jpeg,png,webp}");
   eleventyConfig.addWatchTarget("src/assets/");
 
   // ---- responsive images: every <img> pointing at a local raster becomes <picture> avif/webp/jpeg ----
@@ -47,7 +48,7 @@ export default function (eleventyConfig) {
     extensions: "html",
     formats: ["avif", "webp", "jpeg"],
     // capped at 1440: full-size masters are linked separately (poster/gallery click-through)
-    widths: [320, 480, 720, 960, 1440],
+    widths: [400, 800, 1400],
     urlPath: "/img/",
     outputDir: "_site/img/",
     failOnError: true,
@@ -62,9 +63,9 @@ export default function (eleventyConfig) {
 
   // ---- collections ----
   const byDateAsc = (a, b) => toDate(a.data.date) - toDate(b.data.date);
+  const published = (items) => items.filter((i) => !i.data.draft); // draft: true hides an entry everywhere
   eleventyConfig.addCollection("events", (api) =>
-    api
-      .getFilteredByGlob("src/events/*/index.md")
+    published(api.getFilteredByGlob("src/events/*/index.md"))
       .sort(byDateAsc)
       .map((item, i) => {
         item.data.seq = i + 1;
@@ -72,17 +73,15 @@ export default function (eleventyConfig) {
       })
   );
   eleventyConfig.addCollection("upcomingEvents", (api) =>
-    api.getFilteredByGlob("src/events/*/index.md").filter((e) => toDate(e.data.date) >= startOfToday()).sort(byDateAsc)
+    published(api.getFilteredByGlob("src/events/*/index.md")).filter((e) => toDate(e.data.date) >= startOfToday()).sort(byDateAsc)
   );
   eleventyConfig.addCollection("pastEvents", (api) =>
-    api
-      .getFilteredByGlob("src/events/*/index.md")
+    published(api.getFilteredByGlob("src/events/*/index.md"))
       .filter((e) => toDate(e.data.date) < startOfToday())
       .sort((a, b) => byDateAsc(b, a))
   );
   eleventyConfig.addCollection("releases", (api) =>
-    api
-      .getFilteredByGlob("src/releases/*/index.md")
+    published(api.getFilteredByGlob("src/releases/*/index.md"))
       .sort((a, b) => {
         // released first (newest first), then upcoming/open-call/planned in catalog order
         const ra = a.data.status === "released", rb = b.data.status === "released";
@@ -124,6 +123,40 @@ export default function (eleventyConfig) {
     const dir = path.posix.dirname(inputPath.replace(/\\/g, "/").replace(/^\.\//, "").replace(/^src\//, ""));
     return "/" + path.posix.join(dir, file);
   });
+  // Playable embeds for SoundCloud / Bandcamp links (rendered as click-to-load players).
+  // Sources: `listen: [{url, title?, bandcamp_id?}]`, release `links: {bandcamp, soundcloud}` + `bandcamp_id`,
+  // artist `links: [{name, url, bandcamp_id?}]`.
+  eleventyConfig.addFilter("players", (data) => {
+    const items = [];
+    for (const l of data.listen || []) items.push(l);
+    if (data.links && !Array.isArray(data.links)) {
+      if (data.links.bandcamp) items.push({ url: data.links.bandcamp, bandcamp_id: data.bandcamp_id, title: data.title });
+      if (data.links.soundcloud) items.push({ url: data.links.soundcloud, title: data.title });
+    } else for (const l of data.links || []) items.push({ ...l, title: l.title || data.name });
+    const seen = new Set();
+    return items.map(toPlayer).filter((p) => p && !seen.has(p.url) && seen.add(p.url));
+  });
+  function toPlayer(item) {
+    let u;
+    try { u = new URL(item.url); } catch { return null; }
+    const path = u.pathname.split("/").filter(Boolean);
+    const label = item.title || u.hostname.replace(/^www\./, "") + u.pathname.replace(/\/$/, "");
+    if (/(^|\.)soundcloud\.com$/.test(u.hostname) && path.length) {
+      const isTrack = path.length === 2 && !["sets", "tracks", "albums", "likes", "reposts", "popular-tracks"].includes(path[1]);
+      const embed = "https://w.soundcloud.com/player/?" + new URLSearchParams({
+        url: u.href, color: "#ffcc00", auto_play: "true", hide_related: "true", show_comments: "false",
+        show_user: "true", show_reposts: "false", show_teaser: "false", visual: "false",
+      });
+      return { type: "soundcloud", url: u.href, label, embed, height: isTrack ? 166 : 320 };
+    }
+    if (/(^|\.)bandcamp\.com$/.test(u.hostname) && item.bandcamp_id) {
+      const kind = item.bandcamp_type || (path[0] === "track" ? "track" : "album");
+      const embed = `https://bandcamp.com/EmbeddedPlayer/${kind}=${item.bandcamp_id}/size=large/bgcol=151515/linkcol=ffcc00/artwork=small/tracklist=false/transparent=true/`;
+      return { type: "bandcamp", url: u.href, label, embed, height: 120 };
+    }
+    return null; // other links stay plain links
+  }
+
   // { index, prev, next } of the current page inside a sorted collection
   eleventyConfig.addFilter("neighbors", (items, url) => {
     const list = items || [];
@@ -172,8 +205,8 @@ export default function (eleventyConfig) {
   });
   eleventyConfig.addCollection("feedItems", (api) =>
     [
-      ...api.getFilteredByGlob("src/events/*/index.md"),
-      ...api.getFilteredByGlob("src/releases/*/index.md").filter((r) => r.data.status === "released"),
+      ...published(api.getFilteredByGlob("src/events/*/index.md")),
+      ...published(api.getFilteredByGlob("src/releases/*/index.md")).filter((r) => r.data.status === "released"),
       ...api.getFilteredByGlob("src/posts/**/*.md").filter((p) => !p.data.draft),
     ].sort((a, b) => toDate(b.data.date) - toDate(a.data.date))
   );
