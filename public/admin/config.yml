@@ -1,0 +1,238 @@
+# Sveltia CMS configuration — editing UI at https://uncvl.xyz/admin/
+# Docs: https://sveltiacms.app/en/docs
+#
+# Login: "Sign in with Codeberg" (OAuth PKCE, no auth server needed).
+# One-time setup: create an OAuth2 application on Codeberg
+#   (Settings → Applications → OAuth2 applications, "Confidential client" UNCHECKED)
+#   Redirect URI: https://uncvl.xyz/admin/   (+ http://localhost:8080/admin/ for local testing)
+# and paste its Client ID into `app_id` below.
+# Without an app_id, editors can still sign in with a Codeberg personal access token.
+
+backend:
+  name: forgejo
+  repo: Uncivilization/uncvl.xyz
+  api_root: https://codeberg.org/api/v1
+  base_url: https://codeberg.org
+  branch: main
+  app_id: "3502c07f-04f0-41bc-afb4-86018e68415f"   # Codeberg OAuth2 app "uncvl.xyz admin panel" (public client, PKCE)
+  commit_messages:
+    create: "content: add {{collection}} “{{slug}}”"
+    update: "content: update {{collection}} “{{slug}}”"
+    delete: "content: delete {{collection}} “{{slug}}”"
+    uploadMedia: "media: upload “{{path}}”"
+    deleteMedia: "media: delete “{{path}}”"
+
+# Changes go to a review branch + pull request first; publishing merges them.
+# Remove this line to commit straight to main.
+publish_mode: editorial_workflow
+
+site_url: https://uncvl.xyz
+display_url: https://uncvl.xyz
+logo_url: /favicon.svg
+
+# Images live next to their Markdown file (page bundles).
+media_folder: ""
+public_folder: ""
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  # ------------------------------------------------------------------ EVENTS
+  - name: events
+    label: Events / Etkinlikler
+    label_singular: Event
+    folder: src/events
+    path: "{{year}}-{{month}}-{{day}}-{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    create: true
+    extension: md
+    format: frontmatter
+    summary: "{{date | date('YYYY-MM-DD')}} · {{title}}"
+    sortable_fields: [date, title]
+    view_groups:
+      - { label: Category, field: category }
+    fields:
+      - { name: title, label: Title, widget: string, hint: "e.g. Thursday Breaks #3" }
+      - { name: codename, label: Codename, widget: string, required: false, hint: "CS-flavoured handle shown as the glitch title, e.g. zero day exploit" }
+      - { name: category, label: Category, widget: select, options: [bass, break, punk, art] }
+      - { name: series, label: Series, widget: string, required: false, hint: "e.g. Thursday Breaks, Bass Night" }
+      - { name: genres, label: Genres, widget: list, required: false, hint: "shown as bass ⤬ breaks ⤬ core" }
+      - { name: date, label: Date, widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
+      - { name: doors, label: Doors open, widget: string, required: false, hint: "21:00" }
+      - { name: stage, label: Stage time, widget: string, required: false, hint: "22:00 or 20:45 - 01:15" }
+      - name: venue
+        label: Venue
+        widget: object
+        fields:
+          - { name: name, label: Name, widget: string }
+          - { name: city, label: City, widget: string, default: İzmir }
+      - { name: price, label: Price, widget: string, required: false, hint: "150TL" }
+      - { name: poster, label: Poster, widget: image, required: false }
+      - { name: poster_alt, label: Poster description (alt text), widget: string, required: false }
+      - { name: cover, label: Square cover (optional), widget: image, required: false, hint: "Used in grids. Falls back to the poster." }
+      - { name: poster_credit, label: Poster by, widget: string, required: false }
+      - { name: text_en, label: Event text (EN), widget: markdown, required: false }
+      - { name: text_tr, label: Etkinlik metni (TR), widget: markdown, required: false }
+      - { name: tickets_en, label: Tickets (EN), widget: markdown, required: false }
+      - { name: tickets_tr, label: Bilet (TR), widget: markdown, required: false }
+      - name: lineup
+        label: Lineup / Kadro
+        widget: list
+        required: false
+        summary: "{{fields.time}} {{fields.name}}"
+        fields:
+          - { name: name, label: Name (as on the poster), widget: string }
+          - { name: artist, label: Artist page, widget: relation, collection: artists, value_field: "{{slug}}", search_fields: [name, aka], display_fields: [name], required: false }
+          - { name: time, label: Time, widget: string, required: false }
+          - { name: note_en, label: Note (EN), widget: string, required: false, hint: "dj set · dnb, jungle" }
+          - { name: note_tr, label: Not (TR), widget: string, required: false }
+          - { name: bio_en, label: Bio for this event (EN), widget: markdown, required: false, hint: "Leave empty to show nothing here; the artist page keeps the main bio." }
+          - { name: bio_tr, label: Bu etkinlik için biyografi (TR), widget: markdown, required: false }
+      - name: schedule
+        label: Schedule / Akış
+        widget: list
+        required: false
+        fields:
+          - { name: time, label: Time, widget: string }
+          - { name: en, label: EN, widget: string }
+          - { name: tr, label: TR, widget: string, required: false }
+      - name: video
+        label: Video
+        widget: object
+        required: false
+        fields:
+          - { name: youtube, label: YouTube video id, widget: string, required: false, hint: "the part after watch?v=" }
+          - { name: youtube_playlist, label: YouTube playlist id, widget: string, required: false }
+      - name: gallery
+        label: Gallery
+        widget: list
+        required: false
+        fields:
+          - { name: src, label: Image, widget: image }
+          - { name: alt, label: Description, widget: string }
+      - { name: summary_en, label: Short summary for social media (EN), widget: text, required: false }
+      - { name: summary_tr, label: Kısa özet (TR), widget: text, required: false }
+      - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
+
+  # ---------------------------------------------------------------- RELEASES
+  - name: releases
+    label: Releases / Yayınlar
+    label_singular: Release
+    folder: src/releases
+    path: "{{year}}-{{month}}-{{day}}-{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    create: true
+    summary: "{{catalog}} · {{title}} ({{status}})"
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: codename, label: Codename, widget: string, required: false }
+      - { name: catalog, label: Catalog number, widget: string, required: false, hint: "UNCVL002" }
+      - { name: type, label: Type, widget: select, options: [single, ep, album, compilation] }
+      - { name: status, label: Status, widget: select, options: [released, upcoming, open-call, planned], default: upcoming }
+      - { name: date, label: Release date, widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD", required: false }
+      - { name: format, label: Format, widget: string, required: false, default: Digital Album }
+      - { name: artist_line, label: Artist line, widget: string, hint: "as written on Bandcamp" }
+      - { name: artists, label: Artists, widget: relation, collection: artists, value_field: "{{slug}}", search_fields: [name, aka], display_fields: [name], multiple: true, required: false }
+      - { name: genres, label: Genres, widget: list, required: false }
+      - { name: cover, label: Cover art, widget: image, required: false }
+      - name: tracklist
+        label: Tracklist
+        widget: list
+        required: false
+        summary: "{{fields.title}} {{fields.duration}}"
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: artist, label: Artist, widget: string, required: false }
+          - { name: duration, label: Duration, widget: string, required: false, hint: "04:08" }
+          - { name: url, label: Track link, widget: string, required: false }
+      - name: links
+        label: Links
+        widget: object
+        required: false
+        fields:
+          - { name: bandcamp, label: Bandcamp, widget: string, required: false }
+          - { name: soundcloud, label: SoundCloud, widget: string, required: false }
+      - { name: text_en, label: About (EN), widget: markdown, required: false }
+      - { name: text_tr, label: Hakkında (TR), widget: markdown, required: false }
+      - { name: credits, label: Credits, widget: markdown, required: false }
+      - { name: order, label: Order (unreleased only), widget: number, required: false }
+      - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
+
+  # ----------------------------------------------------------------- ARTISTS
+  - name: artists
+    label: Artists / Sanatçılar
+    label_singular: Artist
+    folder: src/artists
+    create: true
+    identifier_field: name
+    slug: "{{name}}"
+    summary: "{{name}}"
+    fields:
+      - { name: name, label: Name, widget: string }
+      - { name: aka, label: Also known as, widget: list, required: false }
+      - name: links
+        label: Links
+        widget: list
+        required: false
+        fields:
+          - { name: name, label: Name, widget: string, hint: "Bandcamp, SoundCloud, Instagram…" }
+          - { name: url, label: URL, widget: string }
+      - { name: bio_en, label: Bio (EN), widget: markdown, required: false }
+      - { name: bio_tr, label: Biyografi (TR), widget: markdown, required: false }
+
+  # ------------------------------------------------------------------- POSTS
+  - name: posts
+    label: Posts / Yazılar
+    label_singular: Post
+    folder: src/posts
+    path: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    media_folder: /src/posts/img
+    public_folder: /posts/img
+    create: true
+    summary: "{{date | date('YYYY-MM-DD')}} · {{title}}"
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: date, label: Date, widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
+      - { name: kind, label: Kind, widget: select, options: [post, news, open-call, release], default: post }
+      - { name: cover, label: Cover image, widget: image, required: false }
+      - { name: text_en, label: Text (EN), widget: markdown, required: false }
+      - { name: text_tr, label: Metin (TR), widget: markdown, required: false }
+      - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
+
+  # ---------------------------------------------------------- SITE-WIDE TEXT
+  - name: settings
+    label: Site texts / Site metinleri
+    files:
+      - name: home
+        label: Home page texts
+        file: src/_data/home.json
+        format: json
+        fields:
+          - { name: intro_en, label: Intro (EN), widget: markdown }
+          - { name: intro_tr, label: Giriş (TR), widget: markdown }
+          - name: notes
+            label: Notes
+            widget: list
+            fields:
+              - { name: text, label: Text, widget: markdown }
+              - { name: more, label: Small print, widget: markdown, required: false }
+          - name: call
+            label: Compilation call box
+            widget: object
+            fields:
+              - { name: head, label: Heading, widget: text }
+              - { name: body, label: Body, widget: markdown }
+              - { name: link, label: Link text, widget: string }
+      - name: about
+        label: About page
+        file: src/pages/about.md
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: text_en, label: Text (EN), widget: markdown }
+          - { name: text_tr, label: Metin (TR), widget: markdown }
+          - { name: body, label: Genre list and notes, widget: markdown }

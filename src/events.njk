@@ -1,0 +1,40 @@
+---
+layout: base.njk
+title: Events
+bodyClass: page-list
+permalink: /events/
+description: Uncivilization events in İzmir and İstanbul — bass nights, breaks, punk concerts and art events.
+---
+{%- import "macros.njk" as ui with context -%}
+<div class="wrap">
+  <header class="list-head">
+    <p class="kline">$ ls ./events --all · {{ collections.events.length }} {% t "entries", "kayıt" %}</p>
+    <h1 class="list-head__title">{% t "Events", "Etkinlikler" %}</h1>
+    <p class="chips">{% for key, c in site.categories %}<a class="chip" href="#{{ key }}">{% t c.en, c.tr %}</a>{% endfor %}</p>
+  </header>
+
+  {%- if collections.upcomingEvents.length %}
+  <section aria-labelledby="upcoming">
+    {{ ui.sect("UPCOMING EVENTS", "YAKLAŞAN ETKİNLİKLER", "", "upcoming") }}
+    <ul class="tiles">{% for e in collections.upcomingEvents %}{{ ui.tile(e) }}{% endfor %}</ul>
+  </section>
+  {%- endif %}
+
+  {%- for key, c in site.categories %}
+  {%- set items = collections.pastEvents | byCategory(key) %}
+  {%- if items.length %}
+  <section aria-labelledby="{{ key }}">
+    {{ ui.sect("EVENTS (" + (c.en | upper) + ")", "ETKİNLİKLER (" + (c.tr | upper) + ")", "", key) }}
+    <ul class="tiles">{% for e in items %}{{ ui.tile(e) }}{% endfor %}</ul>
+  </section>
+  {%- endif %}
+  {%- endfor %}
+
+  <section aria-labelledby="log">
+    {{ ui.sect("LOG", "KAYIT", "", "log") }}
+    {%- for year, items in collections.events | reverse | groupByYear %}
+    <h3 class="log__year">{{ year }}</h3>
+    <ol class="log">{% for e in items %}{{ ui.logrow(e) }}{% endfor %}</ol>
+    {%- endfor %}
+  </section>
+</div>

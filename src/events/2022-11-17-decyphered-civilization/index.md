@@ -1,0 +1,31 @@
+---
+title: Decyphered Civilization
+codename: decyphered civilization
+category: break
+series: Decypher × Uncivilization
+date: 2022-11-17
+venue:
+  name: Dinozor Bar
+  city: İzmir
+poster: uncivilization-decypher-decyphered-civilization_poster_1200.jpg
+poster_alt: decyphered civilization
+summary_en: Decyphered Civilization is a joint event of Decypher and Uncivilization. Oqlius, Gouachi and Random Input took stage and played their DJ sets at Dinozor Bar in İzmir.
+text_en: |
+  This event is a collaboration between Decypher and Uncivilization. Oqlius, Gouachi and Random Input took stage and played their DJ sets.
+text_tr: |
+  Bu etkinlik Decypher ve Uncivilization işbirliği ile yapıldı. Oqlius, Gouachi ve Random Input sahne alarak DJ setlerini çaldılar.
+lineup:
+  - artist: oqlius
+    name: Oqlius
+    note_en: DJ Set
+  - artist: gouachi
+    name: Gouachi
+    note_en: DJ Set
+  - artist: random-input
+    name: Random Input
+    note_en: DJ Set
+  - artist: codex
+    name: Codex
+    note_en: Visuals
+    note_tr: Görsel
+---

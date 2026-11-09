@@ -1,0 +1,95 @@
+---
+layout: base.njk
+bodyClass: page-release signal signal--release
+ogType: music.album
+eleventyComputed:
+  ogImageUrl: "{{ cover | bundle(page.inputPath) if cover else '' }}"
+---
+{%- import "macros.njk" as ui with context -%}
+{%- set idx = (collections.releases | neighbors(page.url)).index -%}
+<article class="release">
+  <header class="hero">
+    <div class="wrap hero__grid hero__grid--square">
+      <figure class="hero__poster hero__poster--square">
+        {%- if cover %}
+        <a href="{{ cover | bundle(page.inputPath) }}" aria-label="full size cover">
+          <img src="{{ cover | bundle(page.inputPath) }}" alt="{{ title }} cover art" loading="eager" fetchpriority="high" sizes="(min-width: 60rem) 22rem, (min-width: 40rem) 40vw, 100vw">
+        </a>
+        {%- else %}
+        <span class="gen-cover{% if status != 'released' %} gen-cover--pending{% endif %}" aria-hidden="true">{{ (codename or title) | codename | wbr | safe }}</span>
+        {%- endif %}
+      </figure>
+      <div class="hero__meta">
+        <p class="kline">rel {{ catalog or ("0x" + (idx + 1)) }} · {% t site.releaseTypes[type].en, site.releaseTypes[type].tr %}{% if genres %} · {{ ui.genres(genres) }}{% endif %}</p>
+        {%- if codename %}<p class="glitch" aria-hidden="true">{{ codename | codename }}</p>{% endif %}
+        <h1 class="hero__title">{{ title }}</h1>
+        {%- if artist_line %}<p class="hero__by">{% t "by", "" %} {{ artist_line }}</p>{% endif %}
+        <dl class="facts">
+          <dt>label</dt><dd>Uncivilization Records</dd>
+          {%- if catalog %}<dt>{% t "catalog", "katalog" %}</dt><dd>{{ catalog }}</dd>{% endif %}
+          {%- if status == "released" %}
+          <dt>{% t "released", "yayın" %}</dt><dd><time datetime="{{ date | date('iso') }}">{{ date | date }}</time></dd>
+          {%- else %}
+          <dt>status</dt><dd class="ok">{% if status == "open-call" %}{% t "open call", "açık çağrı" %}{% else %}{{ status }}{% endif %}</dd>
+          {%- endif %}
+          {%- if format %}<dt>format</dt><dd>{{ format }}</dd>{% endif %}
+        </dl>
+        <p class="actions">
+          {%- if links.bandcamp %}<a class="btn" href="{{ links.bandcamp }}" rel="noopener noreferrer">bandcamp ↗</a>{% endif %}
+          {%- if links.soundcloud %}<a class="btn" href="{{ links.soundcloud }}" rel="noopener noreferrer">soundcloud ↗</a>{% endif %}
+          {%- if status == "open-call" %}<a class="btn" href="/compilation/">{% t "read the call", "çağrıyı oku" %}</a>{% endif %}
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap event__body">
+    {%- if tracklist and tracklist.length %}
+    <section aria-labelledby="tracklist">
+      {{ ui.sect("TRACKLIST", "PARÇALAR", "", "tracklist") }}
+      <ol class="tracks">
+        {%- for t in tracklist %}
+        <li><span class="tracks__n">{{ loop.index | pad(2) }}</span>
+          {%- if t.url %}<a href="{{ t.url }}" rel="noopener noreferrer">{{ t.title }}</a>{% else %}<span>{{ t.title }}</span>{% endif %}
+          <span class="tracks__d">{{ t.artist }}{% if t.artist and t.duration %} · {% endif %}{{ t.duration }}</span></li>
+        {%- endfor %}
+      </ol>
+    </section>
+    {%- endif %}
+
+    {%- if text_en or text_tr %}
+    <section aria-labelledby="about">
+      {{ ui.sect("ABOUT", "HAKKINDA", "", "about") }}
+      {{ ui.bitext(text_en, text_tr) }}
+    </section>
+    {%- endif %}
+
+    {%- if credits %}
+    <section aria-labelledby="credits">
+      {{ ui.sect("CREDITS", "KÜNYE", "", "credits") }}
+      <div class="prose prose--mono">{{ credits | md | safe }}</div>
+    </section>
+    {%- endif %}
+
+    {%- if artists and artists.length %}
+    <section aria-labelledby="artists">
+      {{ ui.sect("ARTISTS", "SANATÇILAR", "", "artists") }}
+      <ul class="peers">
+        {%- for a in artists %}{% set ap = collections.artists | findBySlug(a) %}
+        <li class="peer">{% if ap %}<a class="peer__name" href="{{ ap.url }}">{{ ap.data.name }}</a>{% else %}<span class="peer__name">{{ a }}</span>{% endif %}</li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endif %}
+
+    <nav class="pager" aria-label="Releases"><span></span><a class="pager__all" href="/releases/">{% t "all releases", "tüm yayınlar" %}</a><span></span></nav>
+  </div>
+</article>
+{%- if status == "released" %}
+{%- set ld = {
+  "@context": "https://schema.org", "@type": "MusicAlbum", "name": title, "byArtist": { "@type": "MusicGroup", "name": artist_line },
+  "datePublished": date | date('iso'), "recordLabel": { "@type": "Organization", "name": "Uncivilization Records" },
+  "catalogNumber": catalog, "url": page.url | absoluteUrl(site.url), "numTracks": tracklist.length
+} -%}
+<script type="application/ld+json">{{ ld | json | safe }}</script>
+{%- endif %}

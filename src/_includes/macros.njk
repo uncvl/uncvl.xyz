@@ -1,0 +1,74 @@
+{#- Reusable view helpers. Import with: {% import "macros.njk" as ui %} -#}
+
+{%- macro sect(en, tr, extra="", id="") -%}
+<h2 class="sect"{% if id %} id="{{ id }}"{% endif %}><span aria-hidden="true">[:</span>{% t en, tr %}<span aria-hidden="true">:]</span>{% if extra %} <small>{{ extra | safe }}</small>{% endif %}</h2>
+{%- endmacro -%}
+
+{#- Bilingual prose block. If one language is missing, the other is shown in both modes with a notice. -#}
+{%- macro bitext(en, tr, cls="prose") -%}
+{%- if en and tr -%}
+<div class="{{ cls }} l-en" lang="en">{{ en | md | safe }}</div>
+<div class="{{ cls }} l-tr" lang="tr">{{ tr | md | safe }}</div>
+{%- elif tr -%}
+<p class="notice l-en">This page needs translation from <em>Turkish to English</em>.</p>
+<div class="{{ cls }}" lang="tr">{{ tr | md | safe }}</div>
+{%- elif en -%}
+<p class="notice l-tr">Bu sayfanın <em>İngilizceden Türkçeye</em> çevrilmesi gerekiyor.</p>
+<div class="{{ cls }}" lang="en">{{ en | md | safe }}</div>
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro genres(list) -%}
+{%- if list and list.length -%}<span class="genres">{% for g in list %}{{ g }}{% if not loop.last %} <span class="x" aria-hidden="true">⤬</span><span class="sr-only">,</span> {% endif %}{% endfor %}</span>{%- endif -%}
+{%- endmacro -%}
+
+{#- Square tile for grids (events/releases). `item` is a collection item. -#}
+{%- macro tile(item, kind="event") -%}
+{%- set d = item.data -%}
+{%- set img = d.cover or d.poster -%}
+<li class="tile tile--{{ kind }}{% if d.status and d.status != 'released' %} tile--pending{% endif %}">
+  <a href="{{ item.url }}">
+    <span class="tile__img">
+      {%- if img %}
+      <img src="{{ img | bundle(item.inputPath) }}" alt="" sizes="(min-width: 60rem) 14rem, 45vw">
+      {%- else %}
+      <span class="gen-cover" aria-hidden="true">{{ (d.codename or d.title) | codename | wbr | safe }}</span>
+      {%- endif %}
+    </span>
+    <span class="tile__title">{{ d.title }}</span>
+    <span class="tile__meta">
+      {%- if kind == "event" %}{{ d.date | date }} · {{ d.venue.city }}
+      {%- else %}{% if d.catalog %}{{ d.catalog }} · {% endif %}{% t site.releaseTypes[d.type].en, site.releaseTypes[d.type].tr %}{% if d.status == "open-call" %} · <span class="ok">{% t "open call", "açık çağrı" %}</span>{% elif d.status != "released" %} · {{ d.status }}{% endif %}{% endif -%}
+    </span>
+  </a>
+</li>
+{%- endmacro -%}
+
+{#- One line of the event log: 0x07 · 05.09.24 · Title // codename · category -#}
+{%- macro logrow(e) -%}
+<li class="log__row">
+  <span class="log__id">{{ e.data.seq | hex }}</span>
+  <time datetime="{{ e.data.date | date('iso') }}">{{ e.data.date | date('short') }}</time>
+  <a href="{{ e.url }}">{{ e.data.title }}{% if e.data.codename %} <span class="log__code">// {{ e.data.codename | codename | lower }}</span>{% endif %}</a>
+  <span class="log__tag">{{ e.data.category }}</span>
+</li>
+{%- endmacro -%}
+
+{%- macro videoFacade(video, cover, inputPath, title) -%}
+{%- if video -%}
+{%- if video.youtube -%}
+{%- set watch = "https://www.youtube.com/watch?v=" + video.youtube -%}
+{%- set embed = "https://www.youtube-nocookie.com/embed/" + video.youtube + "?autoplay=1" -%}
+{%- else -%}
+{%- set watch = "https://www.youtube.com/playlist?list=" + video.youtube_playlist -%}
+{%- set embed = "https://www.youtube-nocookie.com/embed/videoseries?list=" + video.youtube_playlist + "&autoplay=1" -%}
+{%- endif -%}
+<div class="video">
+  <a class="video__facade" href="{{ watch }}" data-embed="{{ embed }}" data-title="{{ title }}" rel="noopener noreferrer">
+    {%- if cover %}<img src="{{ cover | bundle(inputPath) }}" alt="" sizes="(min-width: 60rem) 46rem, 100vw">{% endif %}
+    <span class="video__play"><span aria-hidden="true">▶</span> {% t "load video", "videoyu yükle" %}</span>
+    <span class="video__note">{% t "youtube-nocookie loads only after you click", "youtube yalnızca tıkladığında yüklenir" %}</span>
+  </a>
+</div>
+{%- endif -%}
+{%- endmacro -%}

@@ -1,0 +1,130 @@
+---
+layout: base.njk
+bodyClass: page-event signal
+ogType: article
+eleventyComputed:
+  ogImageUrl: "{{ (cover or poster) | bundle(page.inputPath) if (cover or poster) else '' }}"
+---
+{%- import "macros.njk" as ui with context -%}
+{%- set all = collections.events -%}
+{%- set nb = all | neighbors(page.url) -%}
+{%- set idx = nb.index -%}{%- set seq = idx + 1 -%}{%- set prev = nb.prev -%}{%- set next = nb.next -%}
+{%- set upcoming = collections.upcomingEvents | findBySlug(slug) -%}
+
+<article class="event" itemscope>
+  <header class="hero">
+    <div class="wrap hero__grid">
+      <figure class="hero__poster">
+        {%- if poster %}
+        <a href="{{ poster | bundle(page.inputPath) }}" aria-label="full size poster">
+          <img src="{{ poster | bundle(page.inputPath) }}" alt="{{ poster_alt or title }}" loading="eager" fetchpriority="high" sizes="(min-width: 60rem) 22rem, (min-width: 40rem) 40vw, 100vw">
+        </a>
+        {%- else %}
+        <span class="gen-cover gen-cover--tall" aria-hidden="true">{{ (codename or title) | codename | wbr | safe }}</span>
+        {%- endif %}
+      </figure>
+      <div class="hero__meta">
+        <p class="kline">evt {{ seq | hex }} · {{ category }}{% if series %} · {{ series | lower }}{% endif %}{% if genres %} · {{ ui.genres(genres) }}{% endif %}{% if upcoming %} · <span class="ok">{% t "upcoming", "yaklaşan" %}</span>{% endif %}</p>
+        {%- if codename %}<p class="glitch" aria-hidden="true">{{ codename | codename }}</p>{% endif %}
+        <h1 class="hero__title">{{ title }}</h1>
+        <dl class="facts">
+          <dt>{% t "date", "tarih" %}</dt>
+          <dd><time datetime="{{ date | date('iso') }}"><span class="l-en" lang="en">{{ date | date('long-en') }}</span><span class="l-tr" lang="tr">{{ date | date('long-tr') }}</span></time></dd>
+          <dt>{% t "venue", "mekan" %}</dt><dd>{{ venue.name }}, {{ venue.city }}</dd>
+          {%- if doors %}<dt>{% t "doors", "kapı" %}</dt><dd>{{ doors }}</dd>{% endif %}
+          {%- if stage %}<dt>{% t "stage", "sahne" %}</dt><dd>{{ stage }}</dd>{% endif %}
+          {%- if price %}<dt>{% t "ticket", "bilet" %}</dt><dd class="ok">{{ price }}</dd>{% endif %}
+          {%- if poster_credit %}<dt>poster</dt><dd>{{ poster_credit }}</dd>{% endif %}
+        </dl>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap event__body">
+    {%- if lineup and lineup.length %}
+    <section aria-labelledby="lineup">
+      {{ ui.sect("LINEUP", "KADRO", ("peers connected: " + lineup.length), "lineup") }}
+      <ul class="peers">
+        {%- for l in lineup %}
+        {%- set artistPage = collections.artists | findBySlug(l.artist) if l.artist else null %}
+        <li class="peer">
+          {%- if l.time %}<span class="peer__time">{{ l.time }}</span>{% endif %}
+          {%- if artistPage %}<a class="peer__name" href="{{ artistPage.url }}">{{ l.name }}</a>{% else %}<span class="peer__name">{{ l.name }}</span>{% endif %}
+          {%- if l.note_en %}<span class="peer__note"><span class="l-en" lang="en">{{ l.note_en }}</span><span class="l-tr" lang="tr">{{ l.note_tr or l.note_en }}</span></span>{% endif %}
+        </li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endif %}
+
+    {%- if schedule and schedule.length %}
+    <section aria-labelledby="schedule">
+      {{ ui.sect("SCHEDULE", "AKIŞ", "", "schedule") }}
+      <ol class="schedule">
+        {%- for s in schedule %}
+        <li><time>{{ s.time }}</time> <span class="l-en" lang="en">{{ s.en }}</span><span class="l-tr" lang="tr">{{ s.tr or s.en }}</span></li>
+        {%- endfor %}
+      </ol>
+    </section>
+    {%- endif %}
+
+    {%- if text_en or text_tr %}
+    <section aria-labelledby="info">
+      {{ ui.sect("EVENT INFO", "ETKİNLİK METNİ", "", "info") }}
+      {{ ui.bitext(text_en, text_tr) }}
+    </section>
+    {%- endif %}
+
+    {%- if tickets_en or tickets_tr %}
+    <section class="tickets" aria-labelledby="tickets">
+      {{ ui.sect("TICKETS", "BİLET", "", "tickets") }}
+      {{ ui.bitext(tickets_en, tickets_tr) }}
+    </section>
+    {%- endif %}
+
+    {%- set bios = [] %}{% for l in lineup %}{% if l.bio_en or l.bio_tr %}{% if bios.push(l) %}{% endif %}{% endif %}{% endfor %}
+    {%- if bios.length %}
+    <section aria-labelledby="bios">
+      {{ ui.sect("DJ AND VJ INFO", "DJ VE VJ BİLGİLERİ", "", "bios") }}
+      {%- for l in bios %}
+      <div class="bio">
+        <h3 class="bio__name">{{ l.name | upper }}</h3>
+        {{ ui.bitext(l.bio_en, l.bio_tr) }}
+      </div>
+      {%- endfor %}
+    </section>
+    {%- endif %}
+
+    {{ ui.videoFacade(video, cover or poster, page.inputPath, title) }}
+
+    {%- if gallery and gallery.length %}
+    <section aria-labelledby="gallery">
+      {{ ui.sect("GALLERY", "GALERİ", "", "gallery") }}
+      <div class="gallery">
+        {%- for g in gallery %}
+        <a href="{{ g.src | bundle(page.inputPath) }}"><img src="{{ g.src | bundle(page.inputPath) }}" alt="{{ g.alt }}" sizes="(min-width: 60rem) 56rem, 100vw"></a>
+        {%- endfor %}
+      </div>
+    </section>
+    {%- endif %}
+
+    <nav class="pager" aria-label="Events">
+      {%- if prev %}<a rel="prev" href="{{ prev.url }}"><span class="k">&lt; prev {{ (idx) | hex }}</span>{{ prev.data.title }}</a>{% else %}<span></span>{% endif %}
+      <a href="/events/" class="pager__all">{% t "all events", "tüm etkinlikler" %}</a>
+      {%- if next %}<a rel="next" href="{{ next.url }}"><span class="k">next {{ (idx + 2) | hex }} &gt;</span>{{ next.data.title }}</a>{% else %}<span></span>{% endif %}
+    </nav>
+  </div>
+</article>
+
+{#- schema.org MusicEvent -#}
+{%- set ld = {
+  "@context": "https://schema.org",
+  "@type": "MusicEvent",
+  "name": title,
+  "startDate": (date | date('iso')) + (("T" + (stage if (stage and stage.length == 5) else "21:00") + ":00+03:00")),
+  "eventStatus": "https://schema.org/EventScheduled",
+  "location": { "@type": "Place", "name": venue.name, "address": venue.city },
+  "organizer": { "@type": "Organization", "name": "Uncivilization", "url": site.url },
+  "url": page.url | absoluteUrl(site.url)
+} -%}
+<script type="application/ld+json">{{ ld | json | safe }}</script>

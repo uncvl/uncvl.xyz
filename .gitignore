@@ -1,0 +1,11 @@
+node_modules/
+_site/
+.cache/
+.brand/
+src/_includes/brand/
+# raw material lives outside the repo (or in the private R2 archive bucket)
+reference_sources/
+uncivil-test-site/
+
+# local tooling
+.claude/

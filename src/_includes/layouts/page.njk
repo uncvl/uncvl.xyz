@@ -1,0 +1,15 @@
+---
+layout: base.njk
+bodyClass: page-text
+---
+{%- import "macros.njk" as ui with context -%}
+<article class="wrap text-page">
+  <header class="text-page__head">
+    {%- if kline %}<p class="kline">{{ kline }}</p>{% endif %}
+    <h1 class="text-page__title">{{ title }}</h1>
+    {%- if date and showDate %}<p class="k"><time datetime="{{ date | date('iso') }}">{{ date | date }}</time></p>{% endif %}
+  </header>
+  {%- if cover %}<figure class="text-page__cover"><img src="{{ cover | bundle(page.inputPath) }}" alt="" loading="eager" sizes="(min-width: 50rem) 46rem, 100vw"></figure>{% endif %}
+  {%- if text_en or text_tr %}{{ ui.bitext(text_en, text_tr) }}{% endif %}
+  {%- if content | trim %}<div class="prose">{{ content | safe }}</div>{% endif %}
+</article>
