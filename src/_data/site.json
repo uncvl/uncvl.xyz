@@ -1,0 +1,37 @@
+{
+  "name": "Uncivilization",
+  "shortName": "UNCVL",
+  "url": "https://uncvl.xyz",
+  "language": "en",
+  "author": "Random Input",
+  "description": "Uncivilization is an entity based at Göbeklitepe, an archeological site that dates back to 10000 BC. The entity disregards national borders and sets its boundries according to distance from the Göbeklitepe site and focuses on electronic music genres such as drum'n bass, dubstep, darkstep, IDM, breakcore, hardcore, industrial, chiptune, glitch, dark ambient and punk.",
+  "email": {
+    "crew": "crew@uncvl.xyz",
+    "info": "info@uncvl.xyz"
+  },
+  "socials": [
+    { "name": "Bandcamp", "url": "https://uncivilization.bandcamp.com/" },
+    { "name": "Soundcloud", "url": "https://soundcloud.com/uncvl" },
+    { "name": "Youtube", "url": "https://www.youtube.com/channel/UCPhMC6_4XWPYSPt6NBLAfAw" },
+    { "name": "Twitter", "url": "https://twitter.com/uncivilizationr" },
+    { "name": "Instagram", "url": "https://www.instagram.com/uncivilizationrecords/" }
+  ],
+  "nav": [
+    { "url": "/events/", "en": "events", "tr": "etkinlikler" },
+    { "url": "/releases/", "en": "releases", "tr": "yayınlar" },
+    { "url": "/posts/", "en": "posts", "tr": "yazılar" },
+    { "url": "/about/", "en": "about", "tr": "hakkında" }
+  ],
+  "categories": {
+    "art": { "en": "Art", "tr": "Sanat" },
+    "break": { "en": "Break", "tr": "Break" },
+    "bass": { "en": "Bass", "tr": "Bass" },
+    "punk": { "en": "Punk", "tr": "Punk" }
+  },
+  "releaseTypes": {
+    "single": { "en": "single", "tr": "tekli" },
+    "ep": { "en": "EP", "tr": "EP" },
+    "album": { "en": "album", "tr": "albüm" },
+    "compilation": { "en": "compilation", "tr": "toplama" }
+  }
+}

@@ -1,0 +1,38 @@
+---
+layout: base.njk
+bodyClass: page-artist signal
+---
+{%- import "macros.njk" as ui with context -%}
+{%- set played = collections.events | eventsWithArtist(slug) | reverse -%}
+{%- set released = collections.releases | releasesWithArtist(slug) -%}
+<article class="artist">
+  <header class="hero hero--slim">
+    <div class="wrap">
+      <p class="kline">peer · {{ played.length }} {% t "events", "etkinlik" %}{% if released.length %} · {{ released.length }} {% t "releases", "yayın" %}{% endif %}</p>
+      <p class="glitch" aria-hidden="true">{{ name | codename }}</p>
+      <h1 class="hero__title">{{ name }}</h1>
+      {%- if aka and aka.length %}<p class="hero__by">a.k.a. {{ aka | join(", ") }}</p>{% endif %}
+      {%- if links and links.length %}<p class="actions">{% for l in links %}<a class="btn" href="{{ l.url }}" rel="noopener noreferrer">{{ l.name }} ↗</a>{% endfor %}</p>{% endif %}
+    </div>
+  </header>
+  <div class="wrap event__body">
+    {%- if bio_en or bio_tr %}
+    <section aria-labelledby="bio">
+      {{ ui.sect("BIO", "BİYOGRAFİ", "", "bio") }}
+      {{ ui.bitext(bio_en, bio_tr) }}
+    </section>
+    {%- endif %}
+    {%- if released.length %}
+    <section aria-labelledby="rel">
+      {{ ui.sect("RELEASES", "YAYINLAR", "", "rel") }}
+      <ul class="tiles">{% for r in released %}{{ ui.tile(r, "release") }}{% endfor %}</ul>
+    </section>
+    {%- endif %}
+    {%- if played.length %}
+    <section aria-labelledby="ev">
+      {{ ui.sect("EVENTS", "ETKİNLİKLER", "", "ev") }}
+      <ol class="log">{% for e in played %}{{ ui.logrow(e) }}{% endfor %}</ol>
+    </section>
+    {%- endif %}
+  </div>
+</article>

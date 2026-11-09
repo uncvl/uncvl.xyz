@@ -1,0 +1,29 @@
+{
+  "name": "uncvl.xyz",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static website for Uncivilization (uncvl.xyz)",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "brand": "node scripts/brand.mjs",
+    "build": "npm run brand && eleventy",
+    "serve": "npm run brand && eleventy --serve --port=8080",
+    "clean": "node -e \"fs.rmSync('_site',{recursive:true,force:true})\"",
+    "check": "node scripts/check.mjs",
+    "strip-metadata": "node scripts/strip-metadata.mjs"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.8",
+    "@11ty/eleventy-img": "7.1.1",
+    "@11ty/eleventy-plugin-rss": "2.0.4",
+    "@fontsource/inconsolata": "5.3.0",
+    "@fontsource/vt323": "5.3.0",
+    "@sveltia/cms": "0.262.1",
+    "markdown-it": "15.0.3",
+    "svgo": "4.1.0"
+  }
+}

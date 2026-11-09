@@ -1,0 +1,23 @@
+---
+layout: base.njk
+title: Posts
+bodyClass: page-list
+permalink: /posts/
+description: News, open calls and announcements from Uncivilization.
+---
+{%- import "macros.njk" as ui with context -%}
+<div class="wrap">
+  <header class="list-head">
+    <p class="kline">$ tail -f ./posts</p>
+    <h1 class="list-head__title">{% t "Posts", "Yazılar" %}</h1>
+  </header>
+  {%- if collections.posts.length %}
+  <ol class="log">
+    {%- for p in collections.posts %}
+    <li class="log__row"><span class="log__id">{{ (collections.posts.length - loop.index0) | hex }}</span><time datetime="{{ p.data.date | date('iso') }}">{{ p.data.date | date('short') }}</time><a href="{{ p.url }}">{{ p.data.title }}</a><span class="log__tag">{{ p.data.kind or "post" }}</span></li>
+    {%- endfor %}
+  </ol>
+  {%- else %}
+  <p class="empty"><span class="k">&gt; tail -f ./posts</span> <span class="l-en" lang="en">waiting for the first post…</span><span class="l-tr" lang="tr">ilk yazı bekleniyor…</span><span class="cursor" aria-hidden="true">_</span></p>
+  {%- endif %}
+</div>

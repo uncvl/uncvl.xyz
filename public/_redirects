@@ -1,0 +1,11 @@
+# Old hand-written site (uncvl.com) → new URLs. 301 = permanent.
+/index.html                                                          /                                                   301
+/compilation.html                                                    /compilation/                                       301
+/ticket.html                                                         /events/bass-night-genereshaan/#tickets             301
+/uncivilization-bass-night-ignishaan-blind.html                      /events/bass-night-ignishaan/                       301
+/uncivilization-bass-night-drumazan-speshaal-blind.html              /events/bass-night-drumazan-speshaal/               301
+/uncivilization-bass-night-genereshaan-blind.html                    /events/bass-night-genereshaan/                     301
+/uncivilization-punk-concert_zibidiler-tampos-bunu-sen-istedin_woodstock.html  /events/punk-zibidiler-tampon-bunu-sen-istedin/  301
+/uncivilization-decypher-decyphered-civilization-dinozor.html        /events/decyphered-civilization/                    301
+/uncivilization-art-rejenere-daragac.html                            /events/art-rejenere/                               301
+/uncivilization-thursday-breaks-break-protocol-dinozor.html          /events/thursday-breaks-break-protocol/             301

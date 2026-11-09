@@ -1,0 +1,25 @@
+---
+layout: base.njk
+title: Releases
+bodyClass: page-list
+permalink: /releases/
+description: Releases on Uncivilization Records — drum'n bass, breakcore, punk and more.
+---
+{%- import "macros.njk" as ui with context -%}
+<div class="wrap">
+  <header class="list-head">
+    <p class="kline">$ ls ./releases · Uncivilization Records</p>
+    <h1 class="list-head__title">{% t "Releases", "Yayınlar" %}</h1>
+    <p class="chips">{% for key, t in site.releaseTypes %}{% if collections.releases | byType(key) | length %}<a class="chip" href="#{{ key }}">{% t t.en, t.tr %}</a>{% endif %}{% endfor %}</p>
+  </header>
+  {%- for key, t in site.releaseTypes %}
+  {%- set items = collections.releases | byType(key) %}
+  {%- if items.length %}
+  <section aria-labelledby="{{ key }}">
+    {{ ui.sect(t.en | upper, t.tr | upper, "", key) }}
+    <ul class="tiles">{% for r in items %}{{ ui.tile(r, "release") }}{% endfor %}</ul>
+  </section>
+  {%- endif %}
+  {%- endfor %}
+  <p class="prose">if you are a music producer and you are into bass, breakcore and/or punk, consider sending us your tunes. Send your work to <a href="mailto:{{ site.email.crew }}">{{ site.email.crew }}</a></p>
+</div>

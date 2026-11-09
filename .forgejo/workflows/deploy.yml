@@ -1,0 +1,75 @@
+# Build + check + deploy uncvl.xyz on Codeberg (Forgejo Actions).
+#
+# Required repository secrets (Settings → Actions → Secrets):
+#   CLOUDFLARE_API_TOKEN   – token scoped to "Cloudflare Pages: Edit" on this account only
+#   CLOUDFLARE_ACCOUNT_ID
+# Codeberg Actions must be enabled for the repo (Settings → Units → Actions).
+#
+# Deploys: push to main → production (uncvl.xyz once the custom domain is attached in Cloudflare).
+#          pull request from this repo → preview URL (<branch>.uncvl.pages.dev).
+#          pull requests from forks build and check only; they never see the secrets.
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 3 * * *"   # daily rebuild so "upcoming" rolls over into "past" without a commit
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  WRANGLER: wrangler@4.151.3
+  PAGES_PROJECT: uncvl
+
+jobs:
+  build:
+    runs-on: codeberg-small
+    container:
+      image: node:22-bookworm
+    steps:
+      - uses: https://code.forgejo.org/actions/checkout@v4
+
+      - name: Cache image output
+        uses: https://code.forgejo.org/actions/cache@v4
+        with:
+          path: .cache
+          key: eleventy-img-${{ hashFiles('src/**/*.jpg', 'src/**/*.png') }}
+          restore-keys: eleventy-img-
+
+      - name: Install (exact versions from package-lock.json)
+        run: npm ci
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+
+      - name: Build
+        run: npm run build
+
+      - name: Check output (links, alt text, CSP-safe markup)
+        run: npm run check
+
+      - name: Deploy to Cloudflare Pages
+        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          # First run: create the Pages project (production branch = main). Ignored if it already exists.
+          npx --yes "$WRANGLER" pages project create "$PAGES_PROJECT" --production-branch=main 2>/dev/null || true
+          npx --yes "$WRANGLER" pages deploy _site --project-name="$PAGES_PROJECT" --branch="$BRANCH" --commit-dirty=true
+
+      # Alternative host: Codeberg git-pages (uncomment and remove the Cloudflare step).
+      # See https://docs.codeberg.org/codeberg-pages/forgejo-actions/
+      # - name: Deploy to Codeberg Pages
+      #   if: ${{ github.ref == 'refs/heads/main' }}
+      #   uses: https://codeberg.org/git-pages/action@v2
+      #   with:
+      #     site: https://uncvl.xyz/
+      #     token: ${{ github.token }}
+      #     source: _site/
