@@ -5,7 +5,8 @@
 // Editors never have to paste a key.
 (function () {
   var PLACEHOLDER = "codebergLoginIsTheKeyNoSecretIsStoredHere0000"; // matches Sveltia's key format check
-  var REFRESH_MS = 6 * 60 * 60 * 1000; // re-confirm the session every 6 h (cookie lives 12 h)
+  var REFRESH_MS = 6 * 60 * 60 * 1000; // re-confirm a working session every 6 h (cookie lives 12 h)
+  var RETRY_MS = 30 * 1000; // after a failure (e.g. Codeberg rate-limiting), try again this often
 
   function read(key) {
     try { return JSON.parse(localStorage.getItem(key) || "null"); } catch (e) { return null; }
@@ -21,32 +22,35 @@
     }
   } catch (e) {}
 
-  // 2. Whenever the signed-in Codeberg token is new (or the session is getting old), register it.
-  var lastToken = null;
-  var lastSync = 0;
+  // 2. Keep a media session for whoever is signed in.
+  var state = { token: null, ok: false, at: 0, busy: false };
   function sync() {
     var user = read("sveltia-cms.user");
     var token = user && user.token;
     if (!token) {
-      if (lastToken) fetch("/api/media/session", { method: "DELETE", credentials: "same-origin" });
-      lastToken = null;
+      if (state.token) fetch("/api/media/session", { method: "DELETE", credentials: "same-origin" });
+      state = { token: null, ok: false, at: 0, busy: false };
       return;
     }
-    if (token === lastToken && Date.now() - lastSync < REFRESH_MS) return;
-    lastToken = token;
-    lastSync = Date.now();
-    fetch("/api/media/session", {
-      method: "POST",
-      credentials: "same-origin",
-      headers: { Authorization: "token " + token },
-    })
+    if (state.busy) return;
+    var age = Date.now() - state.at;
+    var due = token !== state.token || (state.ok ? age > REFRESH_MS : age > RETRY_MS);
+    if (!due) return;
+    state = { token: token, ok: false, at: Date.now(), busy: true };
+    fetch("/api/media/session", { method: "POST", credentials: "same-origin", headers: { Authorization: "token " + token } })
       .then(function (r) {
-        if (!r.ok) console.warn("[uncvl] media uploads unavailable: this Codeberg account can't write to the repository");
+        return r.json().catch(function () { return {}; }).then(function (body) {
+          state.ok = r.ok;
+          if (r.ok) console.info("[uncvl] media uploads ready (" + body.user + ")");
+          else if (r.status === 503) console.warn("[uncvl] media uploads: Codeberg API unavailable (HTTP " + body.codeberg_status + "), retrying in 30 s");
+          else console.warn("[uncvl] media uploads unavailable: this Codeberg account can't write to the repository");
+        });
       })
-      .catch(function () { lastToken = null; });
+      .catch(function () { state.ok = false; })
+      .then(function () { state.busy = false; });
   }
 
   sync();
-  setInterval(sync, 5000); // picks up sign-in, sign-out and Sveltia's token refreshes
+  setInterval(sync, 5000); // cheap local check; network only when a (re)try is due
   window.addEventListener("storage", sync);
 })();

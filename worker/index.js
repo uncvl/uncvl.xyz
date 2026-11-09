@@ -59,8 +59,11 @@ async function handleMedia(request, env, ctx, url) {
 
   // ---- S3 subset ----
   const token = readCookie(request.headers.get("cookie"), COOKIE);
-  const who = token ? await checkAccess(token, ctx, apiBase) : null;
-  if (!who) return s3Error(403, "AccessDenied", "Sign in to the CMS with a Codeberg account that can write to " + REPO);
+  if (!token) return s3Error(403, "AccessDenied", "No CMS session yet: reload the CMS after signing in with Codeberg");
+  const access = await checkAccess(token, ctx, apiBase);
+  if (access.unavailable) return s3Error(503, "SlowDown", `Codeberg API unavailable (HTTP ${access.status}), try again in a moment`);
+  const who = access.login;
+  if (!who) return s3Error(403, "AccessDenied", "This Codeberg account can't write to " + REPO);
 
   const rest = url.pathname.slice("/api/media/s3/".length);
   const slash = rest.indexOf("/");
@@ -92,12 +95,18 @@ async function createSession(request, ctx, apiBase) {
   const auth = request.headers.get("authorization") || "";
   const token = auth.replace(/^(token|bearer)\s+/i, "").trim();
   if (!token || token.length > 512) return json({ ok: false, error: "missing token" }, 400);
-  const who = await checkAccess(token, ctx, apiBase);
-  if (!who) return json({ ok: false, error: "no write access to " + REPO }, 403, { "set-cookie": cookie("", 0) });
-  return json({ ok: true, user: who }, 200, { "set-cookie": cookie(token, COOKIE_MAX_AGE) });
+  const access = await checkAccess(token, ctx, apiBase);
+  if (access.unavailable) {
+    // Codeberg didn't give a real answer (rate limit, outage): that's not a "no", so keep any existing session.
+    return json({ ok: false, error: "codeberg_unavailable", codeberg_status: access.status }, 503, { "retry-after": "30" });
+  }
+  if (!access.login) return json({ ok: false, error: "no write access to " + REPO, codeberg_status: access.status }, 403, { "set-cookie": cookie("", 0) });
+  return json({ ok: true, user: access.login }, 200, { "set-cookie": cookie(token, COOKIE_MAX_AGE) });
 }
 
-// Returns the Codeberg login if the token can push to REPO, else null. Cached per token hash.
+// Asks Codeberg whether the token can push to REPO. Returns { login } (allowed), { login: null } (definitely
+// not), or { unavailable: true, status } when Codeberg gave no real answer (429 rate limit, 5xx, network error).
+// Only real answers are cached (per token hash), so a Codeberg hiccup never locks anyone out.
 async function checkAccess(token, ctx, apiBase) {
   const hash = await sha256hex(token);
   const cache = typeof caches !== "undefined" ? caches.default : null;
@@ -106,16 +115,28 @@ async function checkAccess(token, ctx, apiBase) {
     const hit = await cache.match(cacheKey);
     if (hit) {
       const v = await hit.json();
-      return v.login || null;
+      return { login: v.login || null, status: "cached" };
     }
   }
   const headers = { authorization: `token ${token}`, accept: "application/json", "user-agent": "uncvl.xyz-media" };
+  const definite = (status) => [200, 401, 403, 404].includes(status);
   let login = null;
-  const repoRes = await fetch(`${apiBase}/repos/${REPO}`, { headers });
+  let repoRes;
+  try {
+    repoRes = await fetch(`${apiBase}/repos/${REPO}`, { headers });
+  } catch (err) {
+    console.warn("codeberg access check failed:", String(err));
+    return { unavailable: true, status: 0 };
+  }
+  if (!definite(repoRes.status)) {
+    console.warn(`codeberg answered ${repoRes.status} to the access check`);
+    return { unavailable: true, status: repoRes.status };
+  }
   if (repoRes.ok) {
     const repo = await repoRes.json();
     if (repo && repo.permissions && (repo.permissions.push || repo.permissions.admin)) {
       const userRes = await fetch(`${apiBase}/user`, { headers });
+      if (!definite(userRes.status)) return { unavailable: true, status: userRes.status };
       if (userRes.ok) login = (await userRes.json()).login || "unknown";
     }
   }
@@ -125,7 +146,7 @@ async function checkAccess(token, ctx, apiBase) {
     });
     ctx.waitUntil(cache.put(cacheKey, res));
   }
-  return login;
+  return { login, status: repoRes.status };
 }
 
 function cookie(value, maxAge) {

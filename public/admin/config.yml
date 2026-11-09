@@ -36,6 +36,7 @@ logo:
 # so there is no key to enter. Files are shrunk to WebP in the browser before uploading.
 media_libraries:
   default: false            # nothing is committed to git
+  stock_assets: false       # no Unsplash/Pexels/Pixabay/Picsum; our R2 library is the only (and default) one
   aws_s3:
     label: Uncivilization media (R2)
     endpoint: https://uncvl.xyz/api/media/s3
