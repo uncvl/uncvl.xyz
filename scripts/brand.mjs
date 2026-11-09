@@ -81,13 +81,14 @@ async function main() {
     await sharp(icon(size, pad)).png({ compressionLevel: 9 }).toFile(`${OUT}/${file}`);
   }
 
-  // Default social card 1200x630
+  // Default social card 1200x630. Everything sits inside the centre 630x630 square, because WhatsApp
+  // (and other chat apps) show link previews as a square thumbnail cropped from the middle.
   const og = Buffer.from(
     `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
       <rect width="100%" height="100%" fill="${BG}"/>
-      ${nested(mark, 90, 115, 330, 400, FG)}
-      ${nested(logos.logotype, 480, 270, 640, 60, FG)}
-      <rect x="480" y="370" width="640" height="4" fill="#FFCC00"/>
+      ${nested(mark, 450, 70, 300, 368, FG)}
+      ${nested(logos.logotype, 330, 470, 540, 51, FG)}
+      <rect x="430" y="551" width="340" height="4" fill="#FFCC00"/>
     </svg>`
   );
   await sharp(og).png({ compressionLevel: 9 }).toFile(`${OUT}/og-default.png`);

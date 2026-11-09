@@ -127,12 +127,14 @@ export default function (eleventyConfig) {
   });
   // ---- cache-busting: /assets/... URLs carry a content hash, so browsers never run stale CSS/JS ----
   eleventyConfig.addFilter("asset", (url) => {
-    try {
-      const hash = createHash("md5").update(readFileSync(path.join("src", url))).digest("hex").slice(0, 10);
-      return `${url}?v=${hash}`;
-    } catch {
-      return url;
+    // site files can come from src/, public/ or the generated brand assets (.brand/)
+    for (const dir of ["src", "public", ".brand"]) {
+      try {
+        const hash = createHash("md5").update(readFileSync(path.join(dir, url))).digest("hex").slice(0, 10);
+        return `${url}?v=${hash}`;
+      } catch {}
     }
+    return url;
   });
 
   // ---- media on R2 (media.uncvl.xyz) ----
