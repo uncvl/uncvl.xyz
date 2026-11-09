@@ -34,7 +34,7 @@ permalink: /
       {%- for e in up %}
       <li class="upcoming__item">
         <a class="upcoming__poster" href="{{ e.url }}" tabindex="-1" aria-hidden="true">
-          {%- if e.data.poster %}<img src="{{ e.data.poster | bundle(e.inputPath) }}" alt="" sizes="(min-width: 40rem) 12rem, 35vw">{% else %}<span class="gen-cover gen-cover--tall">{{ (e.data.codename or e.data.title) | codename | wbr | safe }}</span>{% endif %}
+          {%- if e.data.poster %}{% image e.data.poster | bundle(e.inputPath), "", "(min-width: 40rem) 12rem, 35vw" %}{% else %}<span class="gen-cover gen-cover--tall">{{ (e.data.codename or e.data.title) | codename | wbr | safe }}</span>{% endif %}
         </a>
         <div>
           <p class="kline">{{ ui.genres(e.data.genres) }}{% if e.data.codename %} · <span class="ok">codename: {{ e.data.codename | codename | lower }}</span>{% endif %}</p>

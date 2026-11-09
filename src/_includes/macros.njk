@@ -30,7 +30,7 @@
   <a href="{{ item.url }}">
     <span class="tile__img">
       {%- if img %}
-      <img src="{{ img | bundle(item.inputPath) }}" alt="" sizes="(min-width: 60rem) 14rem, 45vw">
+      {% image img | bundle(item.inputPath), "", "(min-width: 60rem) 14rem, 45vw" %}
       {%- else %}
       <span class="gen-cover" aria-hidden="true">{{ (d.codename or d.title) | codename | wbr | safe }}</span>
       {%- endif %}
@@ -87,7 +87,7 @@
 {%- endif -%}
 <div class="video">
   <a class="embed-facade video__facade" href="{{ watch }}" data-embed="{{ embed }}" data-title="{{ title }}" rel="noopener noreferrer">
-    {%- if cover %}<img src="{{ cover | bundle(inputPath) }}" alt="" sizes="(min-width: 60rem) 46rem, 100vw">{% endif %}
+    {%- if cover %}{% image cover | bundle(inputPath), "", "(min-width: 60rem) 46rem, 100vw" %}{% endif %}
     <span class="video__play"><span aria-hidden="true">▶</span> {% t "load video", "videoyu yükle" %}</span>
     <span class="video__note">{% t "youtube-nocookie loads only after you click", "youtube yalnızca tıkladığında yüklenir" %}</span>
   </a>

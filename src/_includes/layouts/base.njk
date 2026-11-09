@@ -6,7 +6,8 @@
   {%- set pageTitle = (title + " · " + site.name) if title else (site.name + " · uncvl") %}
   {%- set pageDesc = (description or summary_en or summary_tr or (text_en | stripHtml) or (text_tr | stripHtml) or site.description) | stripHtml | truncate(300) %}
   {%- set canonical = page.url | absoluteUrl(site.url) %}
-  {%- set ogImage = (ogImageUrl or "/og-default.png") | absoluteUrl(site.url) %}
+  {%- set ogSrc = cover or poster or photo %}
+  {%- set ogImage = ((ogSrc | bundle(page.inputPath) | mediaOg) if (ogSrc and page.inputPath) else "/og-default.png") | absoluteUrl(site.url) %}
   <title>{{ pageTitle }}</title>
   <meta name="description" content="{{ pageDesc }}">
   <meta name="author" content="{{ site.author }}">

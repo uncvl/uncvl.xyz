@@ -9,3 +9,7 @@ uncivil-test-site/
 
 # local tooling
 .claude/
+# large media lives on R2, not in git
+*.mp4
+*.mov
+*.webm

@@ -2,8 +2,6 @@
 layout: base.njk
 bodyClass: page-event signal
 ogType: article
-eleventyComputed:
-  ogImageUrl: "{{ (cover or poster) | bundle(page.inputPath) if (cover or poster) else '' }}"
 ---
 {%- import "macros.njk" as ui with context -%}
 {%- set all = collections.events -%}
@@ -16,8 +14,8 @@ eleventyComputed:
     <div class="wrap hero__grid">
       <figure class="hero__poster">
         {%- if poster %}
-        <a href="{{ poster | bundle(page.inputPath) }}" aria-label="full size poster">
-          <img src="{{ poster | bundle(page.inputPath) }}" alt="{{ poster_alt or title }}" loading="eager" fetchpriority="high" sizes="(min-width: 60rem) 22rem, (min-width: 40rem) 40vw, 100vw">
+        <a href="{{ poster | bundle(page.inputPath) | mediaFull }}" aria-label="full size poster">
+          {% image poster | bundle(page.inputPath), poster_alt or title, "(min-width: 60rem) 22rem, (min-width: 40rem) 40vw, 100vw", true %}
         </a>
         {%- else %}
         <span class="gen-cover gen-cover--tall" aria-hidden="true">{{ (codename or title) | codename | wbr | safe }}</span>
@@ -86,6 +84,13 @@ eleventyComputed:
     </section>
     {%- endif %}
 
+    {%- set promoUrl = (promo | bundle(page.inputPath) | mediaVideo) if promo else null %}
+    {%- if promoUrl %}
+    <section aria-labelledby="promo">
+      {{ ui.sect("PROMO", "TANITIM", "", "promo") }}
+      <video class="promo" controls preload="none" playsinline src="{{ promoUrl }}"{% if poster %} poster="{{ poster | bundle(page.inputPath) | mediaOg }}"{% endif %}></video>
+    </section>
+    {%- endif %}
     {{ ui.players({ listen: listen, links: links, bandcamp_id: bandcamp_id, title: title, name: name } | players) }}
     {%- if tickets_en or tickets_tr %}
     <section class="tickets" aria-labelledby="tickets">
@@ -114,7 +119,7 @@ eleventyComputed:
       {{ ui.sect("GALLERY", "GALERİ", "", "gallery") }}
       <div class="gallery">
         {%- for g in gallery %}
-        <a href="{{ g.src | bundle(page.inputPath) }}"{% if g.wide %} class="gallery__wide"{% endif %}><img src="{{ g.src | bundle(page.inputPath) }}" alt="{{ g.alt }}" sizes="{{ '(min-width: 60rem) 56rem, 100vw' if g.wide else '(min-width: 60rem) 18rem, 50vw' }}"></a>
+        <a href="{{ g.src | bundle(page.inputPath) | mediaFull }}"{% if g.wide %} class="gallery__wide"{% endif %}>{% image g.src | bundle(page.inputPath), g.alt, ("(min-width: 60rem) 56rem, 100vw" if g.wide else "(min-width: 60rem) 18rem, 50vw") %}</a>
         {%- endfor %}
       </div>
     </section>

@@ -2,8 +2,6 @@
 layout: base.njk
 bodyClass: page-release signal signal--release
 ogType: music.album
-eleventyComputed:
-  ogImageUrl: "{{ cover | bundle(page.inputPath) if cover else '' }}"
 ---
 {%- import "macros.njk" as ui with context -%}
 {%- set idx = (collections.releases | neighbors(page.url)).index -%}
@@ -12,8 +10,8 @@ eleventyComputed:
     <div class="wrap hero__grid hero__grid--square">
       <figure class="hero__poster hero__poster--square">
         {%- if cover %}
-        <a href="{{ cover | bundle(page.inputPath) }}" aria-label="full size cover">
-          <img src="{{ cover | bundle(page.inputPath) }}" alt="{{ title }} cover art" loading="eager" fetchpriority="high" sizes="(min-width: 60rem) 22rem, (min-width: 40rem) 40vw, 100vw">
+        <a href="{{ cover | bundle(page.inputPath) | mediaFull }}" aria-label="full size cover">
+          {% image cover | bundle(page.inputPath), title + " cover art", "(min-width: 60rem) 22rem, (min-width: 40rem) 40vw, 100vw", true %}
         </a>
         {%- else %}
         <span class="gen-cover{% if status != 'released' %} gen-cover--pending{% endif %}" aria-hidden="true">{{ (codename or title) | codename | wbr | safe }}</span>

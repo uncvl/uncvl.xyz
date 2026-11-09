@@ -9,6 +9,7 @@ venue:
   city: İzmir
 poster: infuze-archongrid_poster.jpg
 poster_alt: uncivilization punk night poster - federico fellini, histeri, urban divine, after with dj body pistol, rasenv1rus, random input
+promo: infuze-archongrid_promo.mp4   # video lives on R2 (media.uncvl.xyz); shown once uploaded
 lineup:
   - name: Federico Fellini
   - name: Histeri

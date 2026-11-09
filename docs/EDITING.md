@@ -17,6 +17,7 @@
 - Write each language in its own field (`text_en`, `text_tr`). If one is empty, the page shows the other language with a "needs translation" note.
 - `*word*` highlights a word, and a blank line starts a new paragraph.
 - Upload the **largest** version of an image. The site makes the small versions itself.
+- Images uploaded in the editor are stored in git at first. A maintainer moves them to Cloudflare R2 (`npm run r2:media -- --prune`, see README). Until then they still show up normally.
 - `codename` is the computer-science name of the night (e.g. *break protocol*, *zero day exploit*).
 
 ## TR
@@ -36,3 +37,4 @@
 - Her dili kendi alanına yaz (`text_en`, `text_tr`). Biri boşsa sayfa diğerini "çeviri gerekiyor" notuyla gösterir.
 - `*kelime*` vurgular, boş satır yeni paragraf başlatır.
 - Görselin **en büyük** halini yükle. Küçük boyutları site kendisi üretir.
+- Editörden yüklenen görseller önce git'e kaydedilir. Bir yönetici bunları sonra Cloudflare R2'ye taşır. O zamana kadar sitede normal görünürler.

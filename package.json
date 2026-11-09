@@ -14,7 +14,10 @@
     "serve": "npm run brand && eleventy --serve --port=8080",
     "clean": "node -e \"fs.rmSync('_site',{recursive:true,force:true})\"",
     "check": "node scripts/check.mjs",
-    "strip-metadata": "node scripts/strip-metadata.mjs"
+    "strip-metadata": "node scripts/strip-metadata.mjs",
+    "r2:media": "node scripts/r2-upload.mjs media",
+    "r2:archive": "node scripts/r2-upload.mjs archive",
+    "r2:file": "node scripts/r2-upload.mjs file"
   },
   "devDependencies": {
     "@11ty/eleventy": "3.1.8",

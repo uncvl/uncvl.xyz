@@ -35,10 +35,28 @@ Requires Node 20+.
 
 ## How it works
 
-- **Images:** every local `<img>` becomes `<picture>` with AVIF/WebP/JPEG in several widths (`@11ty/eleventy-img`). Upload the largest original. Full-size files stay linked.
+- **Images:** served from R2 (see below) and resized by Cloudflare: AVIF/WebP chosen per browser, 400/800/1400 px. Images not yet on R2 fall back to the local `@11ty/eleventy-img` pipeline.
 - **Languages:** EN and TR live in the same file (`text_en` / `text_tr`). A tiny script shows one at a time and remembers the choice. Without JavaScript both are shown.
 - **Upcoming/past:** computed from `date` at build time. CI rebuilds daily.
 - **Privacy/security:** no third-party requests on page load (fonts are self-hosted, and YouTube loads only after a click via youtube-nocookie). A strict CSP is in `public/_headers`.
+
+## Media on Cloudflare R2
+
+Images and videos are served from the public bucket `uncvl-media` at `https://media.uncvl.xyz`, resized on request by Cloudflare (`/cdn-cgi/image/…`). Originals and private material go to the private bucket `uncvl-archive`.
+
+- `src/_data/media.json` lists what is on R2 (width, height, content version). Images listed there are loaded from R2. Images that aren't listed (e.g. fresh CMS uploads) still work from git through the local image pipeline.
+- Upload with the maintainer key in your environment (never commit keys):
+
+```sh
+# PowerShell: $env:R2_ACCOUNT_ID="…"; $env:R2_ACCESS_KEY_ID="…"; $env:R2_SECRET_ACCESS_KEY="…"
+npm run r2:media -- --dry-run          # preview
+npm run r2:media                       # upload src images → uncvl-media, update media.json
+npm run r2:media -- --prune            # …and delete the local copies that are verified on R2
+npm run r2:file -- <file.mp4> events/<bundle>/<file.mp4>   # single file (e.g. promo video)
+npm run r2:archive -- ../reference_sources reference_sources   # originals → uncvl-archive (private)
+```
+
+Then commit `src/_data/media.json` (and the removed local files).
 
 ## Deploy
 

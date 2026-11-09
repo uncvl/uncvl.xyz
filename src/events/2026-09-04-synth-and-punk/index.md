@@ -10,6 +10,7 @@ venue:
   city: İzmir
 poster: synth-and-punk_poster.jpg
 poster_alt: uncivilization synth sessions and punk concert poster - hörspiel, übena, vco2, balgum, loremipsum, ur0123456789
+promo: synth-and-punk_promo.mp4   # video lives on R2 (media.uncvl.xyz); shown once uploaded
 poster_credit: Random Input
 gallery:
   - { src: synth-and-punk_ox.jpg, alt: Ox card for synth sessions and punk concert }

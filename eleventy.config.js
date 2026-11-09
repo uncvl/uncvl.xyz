@@ -1,4 +1,5 @@
 import path from "node:path";
+import { readFileSync } from "node:fs";
 import markdownIt from "markdown-it";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
@@ -123,6 +124,53 @@ export default function (eleventyConfig) {
     const dir = path.posix.dirname(inputPath.replace(/\\/g, "/").replace(/^\.\//, "").replace(/^src\//, ""));
     return "/" + path.posix.join(dir, file);
   });
+  // ---- media on R2 (media.uncvl.xyz) ----
+  // src/_data/media.json (written by scripts/r2-upload.mjs) lists files that live in the R2 bucket.
+  // Those are served from R2 and resized by Cloudflare (/cdn-cgi/image); anything not listed
+  // falls back to the local file + build-time eleventy-img pipeline (e.g. fresh CMS uploads).
+  const MEDIA_BASE = "https://media.uncvl.xyz";
+  const MEDIA_WIDTHS = [400, 800, 1400];
+  let MEDIA = {};
+  const loadMedia = () => {
+    try { MEDIA = JSON.parse(readFileSync("src/_data/media.json", "utf8")); } catch { MEDIA = {}; }
+  };
+  loadMedia();
+  eleventyConfig.on("eleventy.before", loadMedia);
+  eleventyConfig.addWatchTarget("src/_data/media.json");
+  const mediaKey = (src) => String(src || "").replace(/^\/+/, "");
+  const cdn = (key, m, width, extra = "") =>
+    `${MEDIA_BASE}/cdn-cgi/image/width=${Math.min(width, m.w || width)},quality=80,format=auto,fit=scale-down${extra}/${key}?v=${m.v}`;
+  const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+
+  // {% image src, alt, sizes, eager %} — src is a site path like /events/<bundle>/poster.jpg
+  eleventyConfig.addShortcode("image", (src, alt = "", sizes = "100vw", eager = false) => {
+    const key = mediaKey(src);
+    const m = MEDIA[key];
+    const loading = eager ? `loading="eager" fetchpriority="high"` : `loading="lazy"`;
+    if (m && m.w) {
+      const widths = [...new Set(MEDIA_WIDTHS.map((w) => Math.min(w, m.w)))];
+      const srcset = widths.map((w) => `${cdn(key, m, w)} ${w}w`).join(", ");
+      return `<img src="${cdn(key, m, 800)}" srcset="${srcset}" sizes="${esc(sizes)}" width="${m.w}" height="${m.h}" alt="${esc(alt)}" ${loading} decoding="async" eleventy:ignore>`;
+    }
+    return `<img src="${esc(src)}" alt="${esc(alt)}" sizes="${esc(sizes)}" ${loading}>`; // local → eleventy-img transform
+  });
+  // Full-size file (poster/gallery click-through): original on R2 if uploaded, else the local master
+  eleventyConfig.addFilter("mediaFull", (src) => {
+    const key = mediaKey(src);
+    return MEDIA[key] ? `${MEDIA_BASE}/${key}?v=${MEDIA[key].v}` : src;
+  });
+  // Social card image: 1200px JPEG from R2 (crawlers don't negotiate AVIF), or the local path
+  eleventyConfig.addFilter("mediaOg", (src) => {
+    const key = mediaKey(src);
+    const m = MEDIA[key];
+    return m && m.w ? cdn(key, m, 1200).replace("format=auto", "format=jpeg") : src;
+  });
+  // Video (e.g. promo clips) — only rendered when the file is on R2
+  eleventyConfig.addFilter("mediaVideo", (src) => {
+    const key = mediaKey(src);
+    return MEDIA[key] ? `${MEDIA_BASE}/${key}?v=${MEDIA[key].v}` : null;
+  });
+
   // Playable embeds for SoundCloud / Bandcamp links (rendered as click-to-load players).
   // Sources: `listen: [{url, title?, bandcamp_id?}]`, release `links: {bandcamp, soundcloud}` + `bandcamp_id`,
   // artist `links: [{name, url, bandcamp_id?}]`.
