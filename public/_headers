@@ -1,6 +1,8 @@
 # Security + caching headers (Cloudflare Pages / Netlify-style; verify support on Codeberg git-pages)
+# static.cloudflareinsights.com / cloudflareinsights.com: Cloudflare Web Analytics (cookieless) beacon.
+# Cloudflare's bot-detection inline snippet stays blocked on purpose (it would need unsafe-inline).
 /*
-  Content-Security-Policy: default-src 'self'; img-src 'self' data: https://media.uncvl.xyz; media-src 'self' https://media.uncvl.xyz; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; frame-src https://www.youtube-nocookie.com https://bandcamp.com https://w.soundcloud.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https://media.uncvl.xyz; media-src 'self' https://media.uncvl.xyz; font-src 'self'; style-src 'self'; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; frame-src https://www.youtube-nocookie.com https://bandcamp.com https://w.soundcloud.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
