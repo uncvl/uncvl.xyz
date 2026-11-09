@@ -20,5 +20,11 @@
   // No *.workers.dev address and no preview URLs: the site is only reachable on uncvl.xyz.
   "workers_dev": false,
   "preview_urls": false,
-  "observability": { "enabled": true }
+  // Logs only cover /api/* (page views never run Worker code). worker/index.js logs one line per
+  // upload/copy/delete with the Codeberg user. Invocation logs stay off: requests to /api/media carry the
+  // editor's Codeberg token (Authorization header / cookie), which must not end up in log storage.
+  "observability": {
+    "logs": { "enabled": true, "invocation_logs": false },
+    "traces": { "enabled": false }
+  }
 }
