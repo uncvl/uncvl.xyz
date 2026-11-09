@@ -23,4 +23,5 @@
 /assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
 /assets/*
-  Cache-Control: public, max-age=86400
+  # URLs carry ?v=<content hash>, so they can be cached for a long time
+  Cache-Control: public, max-age=31536000, immutable

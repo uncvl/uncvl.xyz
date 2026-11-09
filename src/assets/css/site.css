@@ -324,4 +324,5 @@ a.peer__name:hover { color: var(--green-hi); }
 .prose pre { background: var(--bg-2); border: 1px solid var(--line); padding: 1rem; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--acid); font: inherit; font-size: var(--step--1); line-height: 1.5; }
 .prose ul { padding-left: 1.2rem; }
 .elsewhere { margin-top: 0.8rem; font-size: var(--step--1); }
-.promo { display: block; width: 100%; max-height: 80vh; background: var(--bg-2); border: 1px solid var(--line); }
+/* promo clips are often portrait: keep them within the screen height, centred */
+.promo { display: block; margin: 0 auto; width: auto; height: auto; max-width: min(100%, 40rem); max-height: 60vh; background: var(--bg-2); border: 1px solid var(--line); }

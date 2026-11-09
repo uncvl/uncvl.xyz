@@ -1,5 +1,6 @@
 import path from "node:path";
 import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import markdownIt from "markdown-it";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
@@ -124,6 +125,16 @@ export default function (eleventyConfig) {
     const dir = path.posix.dirname(inputPath.replace(/\\/g, "/").replace(/^\.\//, "").replace(/^src\//, ""));
     return "/" + path.posix.join(dir, file);
   });
+  // ---- cache-busting: /assets/... URLs carry a content hash, so browsers never run stale CSS/JS ----
+  eleventyConfig.addFilter("asset", (url) => {
+    try {
+      const hash = createHash("md5").update(readFileSync(path.join("src", url))).digest("hex").slice(0, 10);
+      return `${url}?v=${hash}`;
+    } catch {
+      return url;
+    }
+  });
+
   // ---- media on R2 (media.uncvl.xyz) ----
   // src/_data/media.json (written by scripts/r2-upload.mjs) lists files that live in the R2 bucket.
   // Those are served from R2 and resized by Cloudflare (/cdn-cgi/image); anything not listed
