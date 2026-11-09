@@ -1,7 +1,8 @@
 # Build + check + deploy uncvl.xyz on Codeberg (Forgejo Actions).
 #
 # Required repository secrets (Settings → Actions → Secrets):
-#   CLOUDFLARE_API_TOKEN   – Account API token with ONLY "Account › Workers Scripts › Edit" on this account.
+#   CLOUDFLARE_API_TOKEN   – Account API token, one policy: scope "Specified Workers" → uncvl,
+#                            permission "Workers Scripts: Edit". Nothing else.
 #                            No zone or R2 permissions are needed: the custom domain is managed in the
 #                            dashboard (not in wrangler.jsonc) and --x-provision=false skips R2 lookups.
 #   CLOUDFLARE_ACCOUNT_ID

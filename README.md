@@ -61,6 +61,6 @@ Then commit `src/_data/media.json` (and the removed local files).
 
 ## Deploy
 
-`.forgejo/workflows/deploy.yml` builds, checks and runs `wrangler deploy` (Worker `uncvl`, config in `wrangler.jsonc`). It needs the secrets `CLOUDFLARE_API_TOKEN` (template "Edit Cloudflare Workers", limited to this account and the uncvl.xyz zone) and `CLOUDFLARE_ACCOUNT_ID`. Wrangler output is filtered so e-mail addresses never reach the public CI log.
+`.forgejo/workflows/deploy.yml` builds, checks and runs `wrangler deploy` (Worker `uncvl`, config in `wrangler.jsonc`). It needs the secrets `CLOUDFLARE_API_TOKEN` (one policy: scope "Specified Workers" → `uncvl`, permission "Workers Scripts: Edit"; no zone or R2 permissions, since the custom domain is managed in the dashboard and deploys run with `--x-provision=false`) and `CLOUDFLARE_ACCOUNT_ID`. Wrangler output is filtered so e-mail addresses never reach the public CI log.
 
 Local test of the Worker: `npm run build && npx wrangler dev --local` (put `CODEBERG_API=…` in `.dev.vars` to point the login check at a mock).
