@@ -1,8 +1,9 @@
 # Build + check + deploy uncvl.xyz on Codeberg (Forgejo Actions).
 #
 # Required repository secrets (Settings → Actions → Secrets):
-#   CLOUDFLARE_API_TOKEN   – token from the "Edit Cloudflare Workers" template (Workers Scripts, Workers Routes,
-#                            Workers R2 Storage), limited to this account and the uncvl.xyz zone
+#   CLOUDFLARE_API_TOKEN   – Account API token with ONLY "Account › Workers Scripts › Edit" on this account.
+#                            No zone or R2 permissions are needed: the custom domain is managed in the
+#                            dashboard (not in wrangler.jsonc) and --x-provision=false skips R2 lookups.
 #   CLOUDFLARE_ACCOUNT_ID
 # Codeberg Actions must be enabled for the repo (Settings → Units → Actions).
 #
@@ -64,7 +65,7 @@ jobs:
         # contain an e-mail address. Redact anything e-mail-like; pipefail keeps wrangler's exit code.
         run: |
           set -o pipefail
-          npx --yes "$WRANGLER" deploy 2>&1 | sed -E 's/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/[redacted]/g'
+          npx --yes "$WRANGLER" deploy --x-provision=false 2>&1 | sed -E 's/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/[redacted]/g'
 
       # Alternative host: Codeberg git-pages (uncomment and remove the Cloudflare step).
       # See https://docs.codeberg.org/codeberg-pages/forgejo-actions/

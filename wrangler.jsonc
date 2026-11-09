@@ -15,6 +15,10 @@
     "run_worker_first": ["/api/*"]
   },
   "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "uncvl-media" }],
-  "routes": [{ "pattern": "uncvl.xyz", "custom_domain": true }],
+  // The custom domain uncvl.xyz is attached in the Cloudflare dashboard. It is deliberately NOT listed here:
+  // without "routes", wrangler never touches routes/domains, so the deploy token needs no zone permissions.
+  // No *.workers.dev address and no preview URLs: the site is only reachable on uncvl.xyz.
+  "workers_dev": false,
+  "preview_urls": false,
   "observability": { "enabled": true }
 }
