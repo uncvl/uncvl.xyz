@@ -94,7 +94,9 @@ async function handleMedia(request, env, ctx, url) {
 async function createSession(request, ctx, apiBase) {
   const auth = request.headers.get("authorization") || "";
   const token = auth.replace(/^(token|bearer)\s+/i, "").trim();
-  if (!token || token.length > 512) return json({ ok: false, error: "missing token" }, 400);
+  // Codeberg OAuth access tokens are JWTs (~700 chars); 4 KB still fits in a cookie.
+  if (!token) return json({ ok: false, error: "missing token" }, 400);
+  if (token.length > 4000 || !/^[\x21-\x7e]+$/.test(token)) return json({ ok: false, error: "malformed token" }, 400);
   const access = await checkAccess(token, ctx, apiBase);
   if (access.unavailable) {
     // Codeberg didn't give a real answer (rate limit, outage): that's not a "no", so keep any existing session.

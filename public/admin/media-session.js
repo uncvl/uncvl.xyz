@@ -43,7 +43,8 @@
           state.ok = r.ok;
           if (r.ok) console.info("[uncvl] media uploads ready (" + body.user + ")");
           else if (r.status === 503) console.warn("[uncvl] media uploads: Codeberg API unavailable (HTTP " + body.codeberg_status + "), retrying in 30 s");
-          else console.warn("[uncvl] media uploads unavailable: this Codeberg account can't write to the repository");
+          else if (r.status === 403) console.warn("[uncvl] media uploads unavailable: this Codeberg account can't write to the repository");
+          else console.warn("[uncvl] media uploads: session failed (HTTP " + r.status + ": " + (body.error || "unknown") + "), retrying in 30 s");
         });
       })
       .catch(function () { state.ok = false; })
