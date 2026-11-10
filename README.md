@@ -1,3 +1,5 @@
+[![Uncivilization](docs/logo-banner.svg)](https://uncvl.xyz)
+
 # uncvl.xyz
 
 This is the home of **[uncvl.xyz](https://uncvl.xyz)**, the website of **Uncivilization**. Everything on the site lives here: our events, our label releases, artist pages and news.
@@ -87,7 +89,7 @@ npm run strip-metadata   # remove EXIF/XMP/GPS from images in src/ (lossless); r
 | `src/_data/media.json` | manifest of images on R2 (width, height, content version) |
 | `src/_includes/` | layouts, macros |
 | `src/assets/` | CSS, JS (language switch, click-to-load players), self-hosted fonts |
-| `brand/` | vector logo masters. `scripts/brand.mjs` builds the inline SVGs, favicons and social card from them |
+| `brand/` | vector logo masters. `scripts/brand.mjs` builds the inline SVGs, favicons, social card and this README's banner (`docs/logo-banner.svg`) from them |
 | `public/` | copied as-is: `_headers` (CSP, HSTS), `_redirects` (old `.html` URLs), `admin/` (CMS) |
 | `worker/index.js` | the only server code: the `/api/media` upload endpoint for the CMS |
 | `templates/` | copy-paste starters for events and releases |

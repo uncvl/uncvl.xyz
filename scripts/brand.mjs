@@ -93,6 +93,19 @@ async function main() {
   );
   await sharp(og).png({ compressionLevel: 9 }).toFile(`${OUT}/og-default.png`);
 
+  // README banner (committed, shown at the top of the repo page). Own dark background, so it reads
+  // the same in Codeberg's light and dark themes.
+  await mkdir("docs", { recursive: true });
+  await writeFile(
+    "docs/logo-banner.svg",
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="1200" height="360">` +
+      `<rect width="1200" height="360" fill="${BG}"/>` +
+      nested(mark, 130, 70, 180, 220, FG) +
+      nested(logos.logotype, 360, 146, 710, 67, FG) +
+      `<rect x="360" y="246" width="160" height="4" fill="#FFCC00"/>` +
+      `</svg>\n`
+  );
+
   console.log(`[brand] ${Object.keys(logos).length} inline SVGs, favicon, ${icons.length} icons, og image`);
 }
 
