@@ -1,19 +1,19 @@
 {
-  "intro_en": "We organize events, release albums, print zines, design games. And while we do these, we build a world.",
-  "intro_tr": "Etkinlikler düzenliyoruz, albümler çıkarıyoruz, fanzinler basıyoruz, oyunlar tasarlıyoruz. Ve bunları yaparken bir dünya inşa ediyoruz.",
+  "intro_en": "Uncivilization is a conceptual and organizational entity.",
+  "intro_tr": "Uncivilization, kavramsal ve organizasyonel bir oluşumdur.",
   "notes": [
     {
-      "text": "We're organizing <span class=\"hl-green\">EVENTS</span> in **TURKEY**.\nWe currently do events in **İZMİR** and **İSTANBUL**.\nWe are interested in making events in other places as well.",
-      "more": "if you have a space to offer for our events\nwe would like to hear about it."
+      "text": "We're organizing <span class=\"hl-green\">EVENTS</span> in **İZMİR** and **İSTANBUL**.\nWe are interested in making events in other places as well.",
+      "more": "if you have a space to offer for our events we would like to hear about it."
     },
     {
-      "text": "Uncivilization <span class=\"hl-green\">LABEL</span> is on fair music platforms.\nVisit us on [mirlo](https://mirlo.space/uncivilization/), [fairplayer](https://fairplayer.band/player/artist/uncivilization@mirlo.space), [bandwagon](https://bandwagon.fm/@uncivilization), [acidnation](https://www.acidnation.com/label/uncivilization), [audius](https://audius.co/uncivilization), [artcore](https://www.artcore.com/uncivilization), [distrosub](https://www.distrosub.com/label/uncivilization), [itch.io](https://unciv.itch.io/), [bandcamp](https://uncivilization.bandcamp.com/album/no-boundaries-jungle-remixes) and [soundcloud](https://soundcloud.com/uncvl/sets/no-boundaries-jungle-remixes).",
+      "text": "Uncivilization <span class=\"hl-green\">LABEL</span> is on fair music platforms.\n[mirlo](https://mirlo.space/uncivilization/), [fairplayer](https://fairplayer.band/player/artist/uncivilization@mirlo.space), [bandwagon](https://bandwagon.fm/@uncivilization), [acidnation](https://www.acidnation.com/label/uncivilization), [audius](https://audius.co/uncivilization), [artcore](https://www.artcore.com/uncivilization), [distrosub](https://www.distrosub.com/label/uncivilization), [itch.io](https://unciv.itch.io/), [bandcamp](https://uncivilization.bandcamp.com/album/no-boundaries-jungle-remixes) and [soundcloud](https://soundcloud.com/uncvl/sets/no-boundaries-jungle-remixes).",
       "more": "if you are a music producer and you are into bass, breakcore, hardcore or punk, consider sending us your tunes."
     }
   ],
   "call": {
-    "head": "⾕\nU N C I V I L I Z A T I O N\ncollaboration request for\n3 - C O M P I L A T I O N S\nC I V I L - - - - X - Y - Z",
-    "body": "3 compilation is planned to be released.\nEach compilation is designed to be a set of audio, artwork, illustration, visual, text, print, webpage and other material.\n\nSo...\n\nThis call is intended to a large group of people from different backgrounds.\n\nA collection of songs from audio producers.\nA collection of visual material from collabrating artists.\nA collection of common knewledge and future speculation.\n\n... songs, pictures, text ...\n\nAll of them will be exhibited in and distrubuted through physical places and internet.",
+    "head": "UNCIVILIZATION calls music producers, artists and story tellers to be a part of EXTINCTION compilation album series.",
+    "body": "We're collecting material for the first chapter of Extinction Series: EXTINCTION X. The compilation is planned to be a set of audio, artwork, illustration, visuals and text.",
     "link": "Detailed information is here."
   }
 }
