@@ -44,6 +44,34 @@ text_en: |-
   Technology part, meanwhile, focuses on infrastructure and tools and provide support for other departments.
 
   > Researchers and producers cooperate and work together in the crucial part of the project what we call ‘World Building’. Together they create the ‘World of Uncivilization’. This fictional world is the main product of the overall project. Fueled by research, a collectively created fictional world that inspires and catalyzes production.
+
+  ### Departments
+
+  Uncivilization's functions are divided into three departments: .<br>Events, Records and World
+
+  #### Events
+
+  Uncivil Events manages the offline gatherings, artist bookings, venue reservations and site explorations. 
+
+  - Music focused events 
+  - Exhibition focused events
+  - Market focused events
+  - Lecture focused events
+  - Communication focused events
+
+  #### Records 
+
+  Uncivil Records is for the releases of the media created within the project. There are three main components of this department: Label, Prints and Web.
+
+  Label's focus is music. It is the component that releases singles, albums, compilations and music videos. 
+
+  Prints as the title suggests is mostly about printed material. In addition to zines and books, it aims to produce and distribute 3D prints. It also aims to provide material for the website.
+
+  Web is the component responsible for our website, web services, social media and music platforms.
+
+  #### World
+
+  Uncivil World manages the conceptual aspect. It aims to be the ground for collaborative creative processes. It is where we build and maintain the fictional world of Uncivilization.
 text_tr: |-
   Uncivilization, kavramsal ve örgütsel bir oluşumdur.
 
@@ -88,14 +116,40 @@ text_tr: |-
   Teknoloji bölümü ise altyapı ve araçlara odaklanarak diğer bölümlere destek sağlar.
 
   > Araştırma ve Üretim bölümleri, projenin ‘Dünya Oluşturma’ olarak adlandırdığımız önemli kısmında işbirliği içinde birlikte çalışırlar. Birlikte ‘Uncivilization Dünyası’nı yaratırlar. Bu kurgusal dünya, projenin genel kapsamındaki ana üründür. Araştırmalarla beslenen, kolektif olarak yaratılmış bu kurgusal dünya, sanatçılara ilham sağlar ve sanatsal üretimi tetikler.
+
+  Uncivilization’ın işlevleri üç bölüme ayrılmıştır: \<br>Etkinlik, Yayınlar ve Dünya
+
+  Etkinlik
+
+  Uncivil Etkinlik, offline buluşmaları, sanatçı davetlerini, mekan rezervasyonlarını ve mekan keşiflerini yürütür. 
+
+  - Müzik odaklı etkinlikler 
+  - Sergi odaklı etkinlikler
+  - Pazar odaklı etkinlikler
+  - Bilgi odaklı etkinlikler
+  - İletişim odaklı etkinlikler
+
+  Yayınlar
+
+  Uncivil Yayın, proje kapsamında üretilen içeriklerin yayınlanmasından sorumludur. Bu bölümün üç ana bileşeni vardır: Label, Prints ve Web.
+
+  Label’ın odak noktası müziktir. Tekliler, albümler, derlemeler ve müzik videolarını yayınlayan bileşendir. 
+
+  Prints, adından da anlaşılacağı gibi, çoğunlukla basılı materyallerle ilgilidir. Zinler ve kitaplar'ın yanısıra üç boyutlu baskılar üretmeyi ve dağıtmayı amaçlamaktadır. Ayrıca web sitesi için materyal sağlamayı da hedeflemektedir. 
+
+  Web bileşeni, web sitemiz, web hizmetlerimiz, sosyal medya ve müzik platformlarımızdan sorumludur.
+
+  Dünya
+
+  Uncivil Dünya, projenin kavramsal boyutunu yönetir. İşbirliğine dayalı yaratıcı süreçler için bir zemin oluşturmayı amaçlamaktadır. Burası, Uncivilization’ın kurgusal dünyasını inşa ettiğimiz ve sürdürdüğümüz yerdir.
 description: Uncivilization is a (trans)media project that initially started as event organization and now continue functioning also as a record label and a hub for creative research.
 kline: '[:INFORMATION:]'
 permalink: /about/
 ---
 
 <div class="note">
-<p>Currently, Uncivilization's functions are divided into three departments: .<br>Events, Records and World.</p>
-<p class="note__more">More info about departments will be provided soon.</p>
+<p>Uncivil Label is interested in a wide range of music genres. These genres are selected after extensive research to provide a framework for the specification of the sound of Uncivilization.</p>
+<p class="note__more">Visit the Sound page for detailed information about music genres of Uncivilization.</p>
 </div>
 
-<p class="genre-list"><span class="k">Complete list of Uncivilization Label's music genres:</span> Abstract Hip Hop, Acoustic Punk, Ambient, Ambient Noise Wall, Anarcho-Punk, Atmospheric Black Metal, Black Ambient, Black Metal, Black Noise, Blackened Crust, Blackgaze, Breakbeat, Breakbeat Hardcore, Breakcore, Breakstep, Chill Breakcore, Chipbreak, Chiptune, Cloud Rap, Crack Rock Steady, Crossbreed, Crust Punk, Cyber Metal, Cybergrind, D-Beat, Dark Ambient, Dark Psytrance, Darkcore, Darkstep, Death Industrial, Deconstructed Club, Deep Breakcore, Digicore, Digital Hardcore, Doom Metal, Doomcore, Dreampunk, Drift Phonk, Drill, Drone, Drone Metal, Drum & Bass, Drumfunk, Dub, Dubstep, Dubstyle, Eccojams, Emo Rap, Emoviolence, Experimental Bass, Experimental Hip Hop, Extratone, Flashcore, Future Garage, Glitch, Glitch Hop, Glitchbreak, Glitchcore, Gorenoise, Grindcore, Hardcore, Hardcore Breaks, Hardcore Hip Hop, Hardcore Punk, Hardstep, Hardvapour, Harsh Noise, Harsh Noise wall, Hi-Tech, Hip Hop, Hyperpop, IDM, Industrial, Industrial Hardcore, Industrial Hip Hop, Industrial Metal, Jungle, Lo-Fi Hip Hop, Mathcore, Memphis Rap, Metalcore, Mincecore, Neocrust, Neurofunk, Neurohop, Nintendocore, Noise, Noise Pop, Plugg, Post-Internet, Power Electronics, Power Noise, Powerviolence, Psycore, Psystyle, Punk Rock, Rage, Rare Phonk, Rawstyle, Screamo, Shoegaze, Sigilkore, Ska Punk, Skacore, Skullstep, Sludge Metal, Speedcore, Splittercore, Spoken Word, Synth Punk, Synthwave, Techstep, Terrorcore, Trap, Trap Metal, Tread, Trip hop, UK Garage, Vapornoise, Vaporwave, Wave, Witch House, Wonky</p>
+<p class="genre-list"><span class="k">Incomplete list of Uncivilization Label's music genres:</span> Abstract Hip Hop, Acoustic Punk, Ambient, Ambient Noise Wall, Anarcho-Punk, Atmospheric Black Metal, Black Ambient, Black Metal, Black Noise, Blackened Crust, Blackgaze, Breakbeat, Breakbeat Hardcore, Breakcore, Breakstep, Chill Breakcore, Chipbreak, Chiptune, Cloud Rap, Crack Rock Steady, Crossbreed, Crust Punk, Cyber Metal, Cybergrind, D-Beat, Dark Ambient, Dark Psytrance, Darkcore, Darkstep, Death Industrial, Deconstructed Club, Deep Breakcore, Digicore, Digital Hardcore, Doom Metal, Doomcore, Dreampunk, Drift Phonk, Drill, Drone, Drone Metal, Drum & Bass, Drumfunk, Dub, Dubstep, Dubstyle, Eccojams, Emo Rap, Emoviolence, Experimental Bass, Experimental Hip Hop, Extratone, Flashcore, Future Garage, Glitch, Glitch Hop, Glitchbreak, Glitchcore, Gorenoise, Grindcore, Hardcore, Hardcore Breaks, Hardcore Hip Hop, Hardcore Punk, Hardstep, Hardvapour, Harsh Noise, Harsh Noise wall, Hi-Tech, Hip Hop, Hyperpop, IDM, Industrial, Industrial Hardcore, Industrial Hip Hop, Industrial Metal, Jungle, Lo-Fi Hip Hop, Mathcore, Memphis Rap, Metalcore, Mincecore, Neocrust, Neurofunk, Neurohop, Nintendocore, Noise, Noise Pop, Plugg, Post-Internet, Power Electronics, Power Noise, Powerviolence, Psycore, Psystyle, Punk Rock, Rage, Rare Phonk, Rawstyle, Screamo, Shoegaze, Sigilkore, Ska Punk, Skacore, Skullstep, Sludge Metal, Speedcore, Splittercore, Spoken Word, Synth Punk, Synthwave, Techstep, Terrorcore, Trap, Trap Metal, Tread, Trip hop, UK Garage, Vapornoise, Vaporwave, Wave, Witch House, Wonky</p>
