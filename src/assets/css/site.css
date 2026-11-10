@@ -53,7 +53,7 @@
 
 /* ---------- base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { background: var(--bg); color-scheme: dark; -webkit-text-size-adjust: 100%; overflow-y: scroll; scrollbar-color: #3a3a3a var(--bg); } /* always reserve the scrollbar: no sideways jump between short and long pages; dark track blends in */
+html { background: var(--bg); color-scheme: dark; -webkit-text-size-adjust: 100%; overflow-y: scroll; scrollbar-color: #3a3a3a var(--bg); scroll-padding-top: 4.75rem; } /* always reserve the scrollbar: no sideways jump between short and long pages; dark track blends in. scroll-padding: #anchor jumps land below the sticky header (57px) with a little air */
 body { margin: 0; font-family: var(--font); font-size: var(--step-0); line-height: 1.6; color: var(--text); background: var(--bg); }
 img, svg { display: block; max-width: 100%; height: auto; }
 picture { display: contents; }
@@ -105,6 +105,7 @@ html:not([data-lang]) .site-nav .l-tr { display: none; }
   .site-header__inner { gap: 0.4rem 0.8rem; }
   .site-nav { order: 3; width: 100%; }
   .site-nav ul { justify-content: space-between; }
+  html { scroll-padding-top: 6.25rem; } /* header wraps to two rows here (80px) */
 }
 
 /* ---------- section heading [:LIKE THIS:] ---------- */
