@@ -29,19 +29,12 @@ env:
 
 jobs:
   build:
-    # codeberg-medium (4 CPU, 10 min): shorter queue and headroom for images not yet moved to R2
+    # codeberg-medium (4 CPU, 10 min): shorter queue than the default runner
     runs-on: codeberg-medium
     container:
       image: node:22-bookworm
     steps:
       - uses: https://code.forgejo.org/actions/checkout@v4
-
-      - name: Cache image output
-        uses: https://code.forgejo.org/actions/cache@v4
-        with:
-          path: .cache
-          key: eleventy-img-${{ hashFiles('src/**/*.jpg', 'src/**/*.png') }}
-          restore-keys: eleventy-img-
 
       - name: Install (exact versions from package-lock.json)
         run: npm ci
