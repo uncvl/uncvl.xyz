@@ -41,13 +41,13 @@ text_en: |-
 
   Production part of the project is about interpretation of the knowledge gathered from research. It involves Creative Processes, Creations, Collections, Collaborations. We promote formation of Creative Crews that work together.
 
-  Technology part, meanwhile, focuses on infrastructure and tools and provide support for other departments.
+  Technology part, meanwhile, focuses on infrastructure and tools and provides support for Action, Research and Production parts of the project.
 
   > Researchers and producers cooperate and work together in the crucial part of the project what we call ‘World Building’. Together they create the ‘World of Uncivilization’. This fictional world is the main product of the overall project. Fueled by research, a collectively created fictional world that inspires and catalyzes production.
 
   ### Departments
 
-  Uncivilization's functions are divided into three departments: .<br>Events, Records and World
+  Uncivilization's functions are divided into three departments: Events, Records and World
 
   #### Events
 
@@ -113,13 +113,15 @@ text_tr: |-
 
   Üretim bölümü, araştırmadan elde edilen bilginin yorumlanmasıyla ilgilidir. Yaratıcı Süreçler, Yaratımlar, Koleksiyonlar ve İşbirliklerini içerir. Birlikte çalışabilen farklı Yaratıcı Ekiplerin kurulmasını hedefliyoruz.
 
-  Teknoloji bölümü ise altyapı ve araçlara odaklanarak diğer bölümlere destek sağlar.
+  Teknoloji bölümü ise altyapı ve araçlara odaklanarak projenin Eylem, Araştırma ve Üretim kısımlarına destek sağlar.
 
   > Araştırma ve Üretim bölümleri, projenin ‘Dünya Oluşturma’ olarak adlandırdığımız önemli kısmında işbirliği içinde birlikte çalışırlar. Birlikte ‘Uncivilization Dünyası’nı yaratırlar. Bu kurgusal dünya, projenin genel kapsamındaki ana üründür. Araştırmalarla beslenen, kolektif olarak yaratılmış bu kurgusal dünya, sanatçılara ilham sağlar ve sanatsal üretimi tetikler.
 
-  Uncivilization’ın işlevleri üç bölüme ayrılmıştır: \<br>Etkinlik, Yayınlar ve Dünya
+  ### Bölümler
 
-  Etkinlik
+  Uncivilization’ın işlevleri üç bölüme ayrılmıştır: Etkinlik, Yayınlar ve Dünya
+
+  #### Etkinlik
 
   Uncivil Etkinlik, offline buluşmaları, sanatçı davetlerini, mekan rezervasyonlarını ve mekan keşiflerini yürütür. 
 
@@ -129,7 +131,7 @@ text_tr: |-
   - Bilgi odaklı etkinlikler
   - İletişim odaklı etkinlikler
 
-  Yayınlar
+  #### Yayınlar
 
   Uncivil Yayın, proje kapsamında üretilen içeriklerin yayınlanmasından sorumludur. Bu bölümün üç ana bileşeni vardır: Label, Prints ve Web.
 
@@ -139,13 +141,15 @@ text_tr: |-
 
   Web bileşeni, web sitemiz, web hizmetlerimiz, sosyal medya ve müzik platformlarımızdan sorumludur.
 
-  Dünya
+  #### Dünya
 
   Uncivil Dünya, projenin kavramsal boyutunu yönetir. İşbirliğine dayalı yaratıcı süreçler için bir zemin oluşturmayı amaçlamaktadır. Burası, Uncivilization’ın kurgusal dünyasını inşa ettiğimiz ve sürdürdüğümüz yerdir.
 description: Uncivilization is a (trans)media project that initially started as event organization and now continue functioning also as a record label and a hub for creative research.
 kline: '[:INFORMATION:]'
 permalink: /about/
 ---
+
+### Sound
 
 <div class="note">
 <p>Uncivil Label is interested in a wide range of music genres. These genres are selected after extensive research to provide a framework for the specification of the sound of Uncivilization.</p>
