@@ -348,7 +348,10 @@ function frame() {
   lastY = scrollY;
   // smoothed speed (px per 60 Hz frame): scroll events and frames don't line up, so one frame
   // can get two events (looks twice as fast) and the next none; smoothing evens that out
-  speed = speed * 0.6 + (dy / steps) * 0.4;
+  // on touch screens the averaging is shorter, so a short sharp flick counts at close to its real
+  // speed (the higher touch threshold keeps slow finger scrolling calm)
+  const keep = touch.matches ? 0.45 : 0.6;
+  speed = speed * keep + (dy / steps) * (1 - keep);
   const limit = touch.matches ? p.touchThreshold : p.threshold;
   // push only in frames where the page really moved (and in that direction): the smoothed speed
   // lingers for a few frames after the scroll stops, which would keep the letters going
@@ -463,7 +466,9 @@ function settle() {
 let evY = scrollY, evT = performance.now();
 function onScroll() {
   const now = performance.now();
-  if (!raf && !moving) { lastY = evY; lastT = Math.max(evT, now - 100); speed = 0; }
+  // (a flick starting from rest on a phone happened within about a frame: assume that, rather than
+  // spreading its first movement over up to 100 ms, which made short flicks look slow)
+  if (!raf && !moving) { lastY = evY; lastT = Math.max(evT, now - (touch.matches ? 20 : 100)); speed = 0; }
   evY = scrollY; evT = now;
   if (!raf) raf = requestAnimationFrame(frame);
 }
