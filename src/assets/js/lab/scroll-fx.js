@@ -1,19 +1,21 @@
 // LAB (local experiment, branch lab/scroll-momentum): letters that lag behind fast scrolling.
 //
 // How it works
-//  - Pretext lays out each text block into lines (no DOM measuring per frame), so we know where
-//    every letter sits. One fixed canvas redraws the visible letters while the page scrolls fast.
+//  - Each text block is split into styled runs (one per text node: its own font, colour, letter
+//    spacing, text-shadow) and laid out with Pretext's rich-inline layout, so we know every
+//    letter's line and its x inside the line without asking the DOM per frame.
+//  - Every run is then pinned to where the browser really drew it (one Range rect per run), so the
+//    canvas letters sit exactly on top of the real ones: no jump when the effect starts or stops.
 //  - Each letter is a small spring. When the page jumps by dy, the letter is left behind by dy and
-//    springs back. Letters in the middle of a line have a softer spring, so they arrive later
-//    than the ones at the edges.
+//    springs back. Letters in the middle of a line have a softer spring, so they arrive later.
 //  - While letters are moving, the real text is made transparent (still there for selection and
 //    screen readers); once everything has settled, the canvas clears and the real text is back.
-import { prepareWithSegments, layoutWithLines } from "/assets/js/vendor/pretext/layout.js";
+import { prepareRichInline, walkRichInlineLineRanges, materializeRichInlineLineRange } from "/assets/js/vendor/pretext/rich-inline.js";
 
 const TARGETS = [
   "main h1", "main h2", "main h3", "main .glitch", "main .kline", "main .prose p", "main .prose li",
   "main .tile__title", "main .log__row a", "main .peer__name", "main .facts dd", "main .facts dt",
-  "main .notes p", "main .sorted-genres a", "main .names a", "main .call__head",
+  "main .note__text", "main .sorted-genres a", "main .names a", "main .call__head",
 ].join(", ");
 
 // Effect presets. k = spring stiffness (edges → middle), d = damping, max = largest offset (px),
@@ -43,15 +45,21 @@ canvas.className = "fx-canvas";
 canvas.setAttribute("aria-hidden", "true");
 document.body.appendChild(canvas);
 const ctx = canvas.getContext("2d");
-let dpr = 1;
+let dpr = 1, viewW = 0, viewH = 0;
+// The canvas covers the visible area without the scrollbar. Its drawing size must equal its shown
+// size exactly, or the letters get squeezed and drift away from the real text.
 function sizeCanvas() {
   dpr = Math.min(window.devicePixelRatio || 1, 2);
-  canvas.width = Math.round(innerWidth * dpr);
-  canvas.height = Math.round(innerHeight * dpr);
+  viewW = document.documentElement.clientWidth;
+  viewH = document.documentElement.clientHeight;
+  canvas.style.width = viewW + "px";
+  canvas.style.height = viewH + "px";
+  canvas.width = Math.round(viewW * dpr);
+  canvas.height = Math.round(viewH * dpr);
 }
 
-// ---------- layout of every text block (only on load / resize / language switch) ----------
-let blocks = [];
+// ---------- measuring helpers ----------
+const px = (v) => parseFloat(v) || 0;
 const widthCache = new Map();
 function charWidth(font, ch) {
   const key = font + "\u0000" + ch;
@@ -59,56 +67,137 @@ function charWidth(font, ch) {
   if (w === undefined) { ctx.font = font; w = ctx.measureText(ch).width; widthCache.set(key, w); }
   return w;
 }
-const px = (v) => parseFloat(v) || 0;
-
-function measureBlocks() {
-  const els = [...document.querySelectorAll(TARGETS)].filter((el) => !el.closest(".fx-ui") && el.offsetParent);
-  // read everything first (one layout pass), then build
-  const reads = els.map((el) => {
-    const cs = getComputedStyle(el);
-    return { el, cs, rect: el.getBoundingClientRect(), text: el.innerText };
+const ascentCache = new Map();
+function ascent(font) {
+  let a = ascentCache.get(font);
+  if (a === undefined) { ctx.font = font; const m = ctx.measureText("Hg"); a = m.fontBoundingBoxAscent ?? m.actualBoundingBoxAscent; ascentCache.set(font, a); }
+  return a;
+}
+// "rgb(255, 61, 127) 2px 0px 0px, rgb(51, 224, 255) -2px 0px 0px" → [{color, x, y}]
+function parseShadows(s) {
+  if (!s || s === "none") return [];
+  return s.split(/,(?![^(]*\))/).map((part) => {
+    const color = (part.match(/(rgba?\([^)]*\)|#[0-9a-f]{3,8}|[a-z]+)/i) || ["transparent"])[0];
+    const nums = (part.replace(color, "").match(/-?[\d.]+px/g) || []).map(px);
+    return { color, x: nums[0] || 0, y: nums[1] || 0 };
   });
+}
+// box of one character in the page (document coordinates)
+function charBox(node, i) {
+  const r = document.createRange();
+  r.setStart(node, i);
+  r.setEnd(node, Math.min(i + 1, node.length));
+  const rect = r.getClientRects()[0] || r.getBoundingClientRect();
+  return { left: rect.left + scrollX, top: rect.top + scrollY, h: rect.height };
+}
+
+// Visible text of an element as styled runs, split into paragraphs at <br>.
+function runsOf(el) {
+  const paras = [[]];
+  const styleOf = new Map();
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT, {
+    acceptNode(n) {
+      if (n.nodeType === 1) {
+        if (n.tagName === "BR") return NodeFilter.FILTER_ACCEPT;
+        const cs = getComputedStyle(n);
+        return cs.display === "none" || cs.visibility === "hidden" ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_SKIP;
+      }
+      return n.data.length ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    },
+  });
+  for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+    if (n.nodeType === 1) { paras.push([]); continue; }
+    const parent = n.parentElement;
+    let st = styleOf.get(parent);
+    if (!st) {
+      const cs = getComputedStyle(parent);
+      st = {
+        font: `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`,
+        color: cs.color,
+        letterSpacing: cs.letterSpacing === "normal" ? 0 : px(cs.letterSpacing),
+        shadows: parseShadows(cs.textShadow),
+        transform: cs.textTransform,
+      };
+      styleOf.set(parent, st);
+    }
+    let text = n.data;
+    if (st.transform === "uppercase") text = text.toUpperCase();
+    else if (st.transform === "lowercase") text = text.toLowerCase();
+    paras[paras.length - 1].push({ node: n, text, st });
+  }
+  return paras.filter((p) => p.some((r) => r.text.trim()));
+}
+
+// source index in a run for each character of a fragment (collapsed whitespace = one space)
+function sourceIndices(text, from, fragText) {
+  const out = [];
+  let s = from;
+  for (const ch of fragText) {
+    if (/\s/.test(ch)) { out.push(s); while (s < text.length && /\s/.test(text[s])) s++; }
+    else { while (s < text.length && /\s/.test(text[s])) s++; out.push(s); s += ch.length; }
+  }
+  return out;
+}
+
+// ---------- layout of every text block (only on load / resize / language switch) ----------
+let blocks = [];
+function measureBlocks() {
+  const all = [...document.querySelectorAll(TARGETS)];
+  const els = all.filter((el) => el.offsetParent && !all.some((o) => o !== el && o.contains(el)));
   blocks = [];
-  for (const { el, cs, rect, text } of reads) {
-    if (!text || !text.trim() || rect.width < 4) continue;
-    const size = px(cs.fontSize);
-    const font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
-    const lineHeight = cs.lineHeight === "normal" ? size * 1.2 : px(cs.lineHeight);
-    const letterSpacing = cs.letterSpacing === "normal" ? 0 : px(cs.letterSpacing);
-    const left = rect.left + scrollX + px(cs.borderLeftWidth) + px(cs.paddingLeft);
-    const top = rect.top + scrollY + px(cs.borderTopWidth) + px(cs.paddingTop);
+  for (const el of els) {
+    const cs = getComputedStyle(el);
+    const rect = el.getBoundingClientRect();
     const width = rect.width - px(cs.borderLeftWidth) - px(cs.borderRightWidth) - px(cs.paddingLeft) - px(cs.paddingRight);
-    ctx.font = font;
-    const m = ctx.measureText("Hg");
-    const asc = m.fontBoundingBoxAscent ?? size * 0.8, desc = m.fontBoundingBoxDescent ?? size * 0.2;
-    const baseline = (lineHeight - (asc + desc)) / 2 + asc; // where CSS puts the baseline in a line box
+    if (width < 4) continue;
     const chars = [];
-    let y = 0;
-    // innerText keeps <br> as "\n": lay out each hard line on its own
-    for (const hard of text.split("\n")) {
-      if (!hard.trim()) { y += lineHeight; continue; }
-      let lines;
-      try { lines = layoutWithLines(prepareWithSegments(hard, font, letterSpacing ? { letterSpacing } : undefined), Math.max(1, width + 0.5), lineHeight).lines; }
-      catch (e) { lines = [{ text: hard, width }]; }
+    for (const runs of runsOf(el)) {
+      let prepared;
+      try { prepared = prepareRichInline(runs.map((r) => ({ text: r.text, font: r.st.font, letterSpacing: r.st.letterSpacing || undefined }))); }
+      catch (e) { continue; }
+      const lines = [];
+      walkRichInlineLineRanges(prepared, Math.max(1, width + 0.5), (range) => lines.push(materializeRichInlineLineRange(prepared, range)));
       for (const line of lines) {
-        const lw = line.width;
-        // every line gets its own random character: where its "middle" is, how sharp the dip is,
-        // how stiff and how far it lags, and how many frames late it starts
+        // every line gets its own small random character (see the spring below)
         const L = { peak: Math.random(), sharp: Math.random(), k: Math.random(), gain: Math.random(), delay: Math.random() };
-        const dx = cs.textAlign === "center" ? (width - lw) / 2 : cs.textAlign === "right" || cs.textAlign === "end" ? width - lw : 0;
-        let x = 0;
-        for (const ch of line.text) {
-          const w = charWidth(font, ch) + letterSpacing;
-          if (ch.trim()) {
-            const mid = lw > 0 ? (x + w / 2) / lw : 0.5; // 0 = start of the line, 1 = end
-            chars.push({ ch, x: dx + x, y: y + baseline, m: mid, L, n: Math.random(), r: Math.random(), off: 0, vel: 0, trail: [] });
-          }
-          x += w;
+        const lineChars = [];
+        for (const frag of line.fragments) {
+          const run = runs[frag.itemIndex];
+          if (!run || !frag.text) continue;
+          const src = sourceIndices(run.text, frag.sourceStart, frag.text);
+          const glyphs = [...frag.text];
+          // pin the fragment to where the browser drew it; if the browser wrapped it differently
+          // (first and last letter on different rows), pin every letter instead
+          const first = charBox(run.node, src[0]);
+          const last = charBox(run.node, src[glyphs.length - 1]);
+          const perLetter = Math.abs(first.top - last.top) > 1;
+          // advances from Pretext-style measuring, stretched so the first and last letter land
+          // exactly where the browser put them (no drift along long lines)
+          const adv = [0];
+          glyphs.forEach((ch) => adv.push(adv[adv.length - 1] + charWidth(run.st.font, ch) + run.st.letterSpacing));
+          const n = glyphs.length - 1;
+          const scale = !perLetter && n > 0 && adv[n] > 0 ? (last.left - first.left) / adv[n] : 1;
+          glyphs.forEach((ch, i) => {
+            const box = perLetter ? charBox(run.node, src[i]) : null;
+            const gx = box ? box.left : first.left + adv[i] * scale;
+            const top = box ? box.top : first.top;
+            if (ch.trim()) lineChars.push({ ch, x: gx, y: top + ascent(run.st.font), st: run.st });
+          });
         }
-        y += lineHeight;
+        if (!lineChars.length) continue;
+        const x0 = Math.min(...lineChars.map((c) => c.x));
+        const x1 = Math.max(...lineChars.map((c) => c.x + charWidth(c.st.font, c.ch)));
+        const lw = Math.max(1, x1 - x0);
+        for (const c of lineChars) {
+          c.m = (c.x + charWidth(c.st.font, c.ch) / 2 - x0) / lw; // 0 = start of the line, 1 = end
+          c.L = L; c.n = Math.random(); c.r = Math.random(); c.off = 0; c.vel = 0; c.trail = [];
+          chars.push(c);
+        }
       }
     }
-    if (chars.length) blocks.push({ el, font, color: cs.color, left, top, height: Math.max(y, rect.height), chars });
+    if (!chars.length) continue;
+    const top = Math.min(...chars.map((c) => c.y)) - 60, bottom = Math.max(...chars.map((c) => c.y)) + 20;
+    blocks.push({ el, top, height: bottom - top, chars });
     el.classList.add("fx-t");
   }
 }
@@ -160,22 +249,23 @@ function frame() {
 
 function draw(p) {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  ctx.clearRect(0, 0, innerWidth, innerHeight);
+  ctx.clearRect(0, 0, viewW, viewH);
   ctx.textBaseline = "alphabetic";
-  const viewTop = scrollY - 200, viewBottom = scrollY + innerHeight + 200;
+  const viewTop = scrollY - 200, viewBottom = scrollY + viewH + 200;
+  let font = "";
   for (const b of blocks) {
     if (b.top + b.height < viewTop || b.top > viewBottom) continue;
-    ctx.font = b.font;
-    const ox = b.left - scrollX, oy = b.top - scrollY;
     for (const c of b.chars) {
-      let off = c.off, x = ox + c.x;
+      const st = c.st;
+      if (st.font !== font) { ctx.font = font = st.font; }
+      let off = c.off, x = c.x - scrollX;
       if (p.step) off = Math.round(off / p.step) * p.step;
       if (p.jitter && Math.abs(c.off) > 6) x += (Math.random() - 0.5) * Math.abs(c.off) * p.jitter;
       if (p.wave) off += Math.sin(time * 0.25 + c.x * 0.045) * Math.abs(c.off) * p.wave;
-      const y = oy + c.y + off;
+      const y = c.y - scrollY + off;
       if (p.trail && c.trail.length) {
-        ctx.fillStyle = b.color;
-        c.trail.forEach((t, i) => { ctx.globalAlpha = 0.07 + (i / c.trail.length) * 0.18; ctx.fillText(c.ch, x, oy + c.y + t); });
+        ctx.fillStyle = st.color;
+        c.trail.forEach((t, i) => { ctx.globalAlpha = 0.07 + (i / c.trail.length) * 0.18; ctx.fillText(c.ch, x, c.y - scrollY + t); });
         ctx.globalAlpha = 1;
       }
       if (p.rgb && Math.abs(off) > 2) {
@@ -185,10 +275,14 @@ function draw(p) {
         ctx.fillStyle = accent.b; ctx.fillText(c.ch, x + s, y);
         ctx.globalAlpha = 1;
       }
-      ctx.fillStyle = b.color;
-      if (p.tilt && Math.abs(off) > 1) {
-        ctx.save(); ctx.translate(x, y); ctx.rotate(off * p.tilt); ctx.fillText(c.ch, 0, 0); ctx.restore();
-      } else ctx.fillText(c.ch, x, y);
+      const tilt = p.tilt && Math.abs(off) > 1;
+      if (tilt) { ctx.save(); ctx.translate(x, y); ctx.rotate(off * p.tilt); }
+      const gx = tilt ? 0 : x, gy = tilt ? 0 : y;
+      // the element's own text-shadow (e.g. the RGB-split codename titles), then the letter
+      for (const sh of st.shadows) { ctx.fillStyle = sh.color; ctx.fillText(c.ch, gx + sh.x, gy + sh.y); }
+      ctx.fillStyle = st.color;
+      ctx.fillText(c.ch, gx, gy);
+      if (tilt) ctx.restore();
     }
   }
 }
@@ -207,7 +301,11 @@ function kick() { if (!raf) raf = requestAnimationFrame(frame); }
 let measureTimer = 0;
 function remeasure() {
   clearTimeout(measureTimer);
-  measureTimer = setTimeout(() => { settle(); sizeCanvas(); measureBlocks(); lastY = scrollY; }, 120);
+  measureTimer = setTimeout(() => {
+    if (moving) return remeasure(); // never measure while the real text is hidden
+    widthCache.clear(); ascentCache.clear(); // fonts may have finished loading since
+    sizeCanvas(); measureBlocks(); lastY = scrollY;
+  }, 150);
 }
 addEventListener("scroll", kick, { passive: true });
 addEventListener("resize", remeasure);
@@ -242,3 +340,32 @@ ui.addEventListener("input", (e) => {
   if (k) store.set(k, e.target.value);
 });
 paintUi();
+
+// debug: document.dispatchEvent(new CustomEvent("fx-debug", { detail: "still" | "clear" })) draws the
+// canvas letters at rest over the hidden real text (or clears them), to compare the two
+document.addEventListener("fx-debug", (e) => {
+  if (e.detail === "still") {
+    cancelAnimationFrame(raf); raf = 0; settle(); lastY = scrollY;
+    document.documentElement.classList.add("fx-moving");
+    draw({}); // all letters at rest, no effect styling
+  }
+  else if (e.detail && e.detail.report) {
+    // compare stored letter positions with fresh DOM boxes for the first block matching a selector
+    const b = blocks.find((x) => x.el.matches(e.detail.report));
+    const out = [];
+    if (b) {
+      const tw = document.createTreeWalker(b.el, NodeFilter.SHOW_TEXT);
+      let node = tw.nextNode(); while (node && !node.data.trim()) node = tw.nextNode();
+      const i0 = node.data.search(/S/);
+      for (let i = 0; i < 4; i++) {
+        const box = charBox(node, i0 + i);
+        const c = b.chars[i];
+        ctx.font = c.st.font;
+        out.push({ ch: c.ch, stored: +(c.x).toFixed(2), dom: +box.left.toFixed(2), font: c.st.font.slice(0, 40), lb: +ctx.measureText(c.ch).actualBoundingBoxLeft.toFixed(2) });
+      }
+    }
+    document.documentElement.dataset.fxReport = JSON.stringify(out);
+  }
+  else settle();
+  document.documentElement.dataset.fxLetters = blocks.reduce((n, b) => n + b.chars.length, 0);
+});
