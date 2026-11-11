@@ -3,7 +3,9 @@ title: "Bass Night: Ignishaan"
 codename: ignishaan
 category: bass
 series: Bass Night
-genres: [dub, breakbeat, jungle]
+activities: []
+flavor: []
+music_genres: ["Dub","Breakbeat","Jungle"]
 date: 2022-04-02
 doors: "21:00"
 stage: "22:00"
@@ -18,8 +20,6 @@ gallery:
   - src: https://media.uncvl.xyz/events/2022-04-02-bass-night-ignishaan/crowd-collage-at-blind-in-uncivilization-bass-night-event-ignishaan_2400.jpg
     alt: pixie crowd at blind in uncivilization bass night event ignishaan
     wide: true
-video:
-  youtube_playlist: PLP0hX4t0xUNOH_ITl5mZG2emL0YPdlcKt
 summary_en: The first event of Uncivilization’s “bass night” series took place at Blind with Dyln, Dubstract and Da Frogg. Guest MC 3Pillie also joined the event. The night started with dub and continued with breakbeat, jungle and B2B sessions. Visuals done by Random Input.
 text_en: |
   The first event of Uncivilization’s “bass night” series will take place at Blind with Dyln, Dubstract and Da Frogg. The night will start with dub and continue with drum'n bass, techstep breakbeat, jungle and B2B sessions. Visuals by Random Input. We are waiting for all the bass heads!

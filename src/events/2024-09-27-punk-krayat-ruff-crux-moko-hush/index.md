@@ -1,7 +1,9 @@
 ---
 title: "Krayat | Ruff Crux | Moko | Hush"
 category: punk
-genres: [punk, hardcore]
+activities: []
+flavor: ["punk"]
+music_genres: ["Hardcore Punk"]
 date: 2024-09-27
 venue:
   name: Dinozor Bar

@@ -14,10 +14,13 @@ permalink: /
       <p class="k">$ whoami</p>
       {{ ui.bitext(home.intro_en, home.intro_tr, "prose prose--lead") }}
       <ul class="notes">
+        {#- notes: short, so a missing translation silently falls back to the other language -#}
         {%- for n in home.notes %}
+        {%- set tEn = n.text_en or n.text_tr %}{% set tTr = n.text_tr or n.text_en %}
+        {%- set mEn = n.more_en or n.more_tr %}{% set mTr = n.more_tr or n.more_en %}
         <li class="note">
-          <div class="note__text">{{ n.text | md | safe }}</div>
-          <div class="note__more">{{ n.more | md | safe }}</div>
+          <div class="note__text"><div class="l-en" lang="en">{{ tEn | md | safe }}</div><div class="l-tr" lang="tr">{{ tTr | md | safe }}</div></div>
+          {%- if mEn %}<div class="note__more"><div class="l-en" lang="en">{{ mEn | md | safe }}</div><div class="l-tr" lang="tr">{{ mTr | md | safe }}</div></div>{% endif %}
         </li>
         {%- endfor %}
       </ul>
@@ -37,7 +40,7 @@ permalink: /
           {%- if e.data.poster %}{% image e.data.poster | bundle(e.inputPath), "", "(min-width: 40rem) 12rem, 35vw" %}{% else %}<span class="gen-cover gen-cover--tall">{{ (e.data.codename or e.data.title) | codename | wbr | safe }}</span>{% endif %}
         </a>
         <div>
-          <p class="kline">{{ ui.genres(e.data.genres) }}{% if e.data.codename %} · <span class="ok">codename: {{ e.data.codename | codename | lower }}</span>{% endif %}</p>
+          <p class="kline">{{ ui.genres(e.data.flavor if (e.data.flavor and e.data.flavor.length) else e.data.music_genres) }}{% if e.data.codename %} · <span class="ok">codename: {{ e.data.codename | codename | lower }}</span>{% endif %}</p>
           <h3 class="upcoming__title"><a href="{{ e.url }}">{{ e.data.title }}</a></h3>
           <p>{{ e.data.date | date }} · {{ e.data.venue.name }}, {{ e.data.venue.city }}</p>
           {%- if e.data.lineup %}<p class="lineup-strip">{% for l in e.data.lineup %}{{ l.name | upper }}{% if not loop.last %} / {% endif %}{% endfor %}</p>{% endif %}
@@ -58,12 +61,25 @@ permalink: /
     </ul>
   </section>
 
-  <section class="call" aria-labelledby="call">
-    <h2 id="call" class="call__head">{{ home.call.head | mdInline | safe }}</h2>
-    <hr>
-    <div class="prose">{{ home.call.body | md | safe }}</div>
-    <p><a href="/compilation/">{{ home.call.link }}</a></p>
+  {%- if collections.openCalls.length %}
+  <section aria-labelledby="calls">
+    {{ ui.sect("CALLS", "ÇAĞRILAR", '<a href="/calls/">all calls</a>', "calls") }}
+    {%- for c in collections.openCalls %}
+    {%- set d = c.data %}
+    {%- set hEn = d.box_head_en or d.box_head_tr or d.title_en %}{% set hTr = d.box_head_tr or hEn %}
+    {%- set bEn = d.box_body_en or d.box_body_tr %}{% set bTr = d.box_body_tr or bEn %}
+    <div class="call">
+      <p class="call__head"><span class="l-en" lang="en">{{ hEn | mdInline | safe }}</span><span class="l-tr" lang="tr">{{ hTr | mdInline | safe }}</span></p>
+      {%- if bEn %}
+      <hr>
+      <div class="prose l-en" lang="en">{{ bEn | md | safe }}</div>
+      <div class="prose l-tr" lang="tr">{{ bTr | md | safe }}</div>
+      {%- endif %}
+      <p><a href="{{ c.url }}">{% t "Detailed information is here.", "Detaylı bilgi burada." %}</a></p>
+    </div>
+    {%- endfor %}
   </section>
+  {%- endif %}
 
   {%- if collections.posts.length %}
   <section aria-labelledby="posts">
@@ -77,7 +93,8 @@ permalink: /
   {%- endif %}
 
   <section aria-labelledby="past">
-    {{ ui.sect("PAST EVENTS", "GEÇMİŞ ETKİNLİKLER", '<a href="/events/#art">art</a> · <a href="/events/#break">break</a> · <a href="/events/#bass">bass</a> · <a href="/events/#punk">punk</a>', "past") }}
+    {%- set chips = [] %}{% for key, c in site.categories %}{% if chips.push('<a href="/events/#' + key + '">' + key + '</a>') %}{% endif %}{% endfor %}
+    {{ ui.sect("PAST EVENTS", "GEÇMİŞ ETKİNLİKLER", chips | join(" · "), "past") }}
     <ol class="log">
       {%- for e in collections.pastEvents %}{{ ui.logrow(e) }}{% endfor %}
     </ol>

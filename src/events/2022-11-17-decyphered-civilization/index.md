@@ -2,6 +2,9 @@
 title: Decyphered Civilization
 codename: decyphered civilization
 category: break
+activities: []
+flavor: []
+music_genres: []
 series: Decypher × Uncivilization
 date: 2022-11-17
 venue:

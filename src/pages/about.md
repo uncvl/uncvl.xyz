@@ -1,5 +1,5 @@
 ---
-title: UNCIVILIZATION - What is it? How does it function?
+title_en: UNCIVILIZATION - What is it? How does it function?
 text_en: |-
   Uncivilization is a conceptual and organizational entity.
 
@@ -147,6 +147,7 @@ text_tr: |-
 description: Uncivilization is a (trans)media project that initially started as event organization and now continue functioning also as a record label and a hub for creative research.
 kline: '[:INFORMATION:]'
 permalink: /about/
+genre_list_label: "Incomplete list of Uncivilization Label's music genres:"
 ---
 
 ### Sound
@@ -155,5 +156,3 @@ permalink: /about/
 <p>Uncivil Label is interested in a wide range of music genres. These genres are selected after extensive research to provide a framework for the specification of the sound of Uncivilization.</p>
 <p class="note__more">Visit the Sound page for detailed information about music genres of Uncivilization.</p>
 </div>
-
-<p class="genre-list"><span class="k">Incomplete list of Uncivilization Label's music genres:</span> Abstract Hip Hop, Acoustic Punk, Ambient, Ambient Noise Wall, Anarcho-Punk, Atmospheric Black Metal, Black Ambient, Black Metal, Black Noise, Blackened Crust, Blackgaze, Breakbeat, Breakbeat Hardcore, Breakcore, Breakstep, Chill Breakcore, Chipbreak, Chiptune, Cloud Rap, Crack Rock Steady, Crossbreed, Crust Punk, Cyber Metal, Cybergrind, D-Beat, Dark Ambient, Dark Psytrance, Darkcore, Darkstep, Death Industrial, Deconstructed Club, Deep Breakcore, Digicore, Digital Hardcore, Doom Metal, Doomcore, Dreampunk, Drift Phonk, Drill, Drone, Drone Metal, Drum & Bass, Drumfunk, Dub, Dubstep, Dubstyle, Eccojams, Emo Rap, Emoviolence, Experimental Bass, Experimental Hip Hop, Extratone, Flashcore, Future Garage, Glitch, Glitch Hop, Glitchbreak, Glitchcore, Gorenoise, Grindcore, Hardcore, Hardcore Breaks, Hardcore Hip Hop, Hardcore Punk, Hardstep, Hardvapour, Harsh Noise, Harsh Noise wall, Hi-Tech, Hip Hop, Hyperpop, IDM, Industrial, Industrial Hardcore, Industrial Hip Hop, Industrial Metal, Jungle, Lo-Fi Hip Hop, Mathcore, Memphis Rap, Metalcore, Mincecore, Neocrust, Neurofunk, Neurohop, Nintendocore, Noise, Noise Pop, Plugg, Post-Internet, Power Electronics, Power Noise, Powerviolence, Psycore, Psystyle, Punk Rock, Rage, Rare Phonk, Rawstyle, Screamo, Shoegaze, Sigilkore, Ska Punk, Skacore, Skullstep, Sludge Metal, Speedcore, Splittercore, Spoken Word, Synth Punk, Synthwave, Techstep, Terrorcore, Trap, Trap Metal, Tread, Trip hop, UK Garage, Vapornoise, Vaporwave, Wave, Witch House, Wonky</p>

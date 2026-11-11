@@ -1,0 +1,23 @@
+---
+layout: base.njk
+title: Calls
+bodyClass: page-list
+permalink: /calls/
+description: Open calls from Uncivilization for music producers, artists and story tellers.
+---
+{%- import "macros.njk" as ui with context -%}
+<div class="wrap">
+  <header class="list-head">
+    <p class="kline">$ cat ./calls</p>
+    <h1 class="list-head__title">{% t "Calls", "Çağrılar" %}</h1>
+  </header>
+  {%- if collections.calls.length %}
+  <ol class="log">
+    {%- for c in collections.calls %}
+    <li class="log__row"><span class="log__id">{{ (collections.calls.length - loop.index0) | hex }}</span><span>{% if c.data.status == "closed" %}{% t "closed", "kapandı" %}{% else %}<span class="ok">{% t "open", "açık" %}</span>{% endif %}</span><a href="{{ c.url }}">{% t c.data.title_en or c.data.title, c.data.title_tr or c.data.title_en or c.data.title %}</a><span class="log__tag">{% t "call", "çağrı" %}</span></li>
+    {%- endfor %}
+  </ol>
+  {%- else %}
+  <p class="empty"><span class="k">&gt; cat ./calls</span> <span class="l-en" lang="en">no open calls right now.</span><span class="l-tr" lang="tr">şu an açık çağrı yok.</span><span class="cursor" aria-hidden="true">_</span></p>
+  {%- endif %}
+</div>

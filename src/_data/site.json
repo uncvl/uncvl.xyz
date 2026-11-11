@@ -48,11 +48,20 @@
       "tr": "yazılar"
     },
     {
+      "url": "/calls/",
+      "en": "calls",
+      "tr": "çağrılar"
+    },
+    {
       "url": "/about/",
       "en": "about",
       "tr": "hakkında"
     }
   ],
+  "peertube": {
+    "host": "v.basspistol.org",
+    "channel": "https://v.basspistol.org/c/uncivilization_channel/videos"
+  },
   "categories": {
     "art": {
       "en": "Art",

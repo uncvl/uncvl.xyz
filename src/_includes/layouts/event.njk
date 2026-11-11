@@ -20,9 +20,10 @@ ogType: article
         {%- else %}
         <span class="gen-cover gen-cover--tall" aria-hidden="true">{{ (codename or title) | codename | wbr | safe }}</span>
         {%- endif %}
+        {%- if poster_credit %}<figcaption class="hero__credit">{{ poster_credit | md | safe }}</figcaption>{% endif %}
       </figure>
       <div class="hero__meta">
-        <p class="kline">evt {{ seq | hex }} · {{ category }}{% if series %} · {{ series | lower }}{% endif %}{% if genres %} · {{ ui.genres(genres) }}{% endif %}{% if upcoming %} · <span class="ok">{% t "upcoming", "yaklaşan" %}</span>{% endif %}</p>
+        <p class="kline">evt {{ seq | hex }} · {{ category }}{% if series %} · {{ series | lower }}{% endif %}{% if flavor and flavor.length %} · {{ ui.genres(flavor) }}{% endif %}{% if upcoming %} · <span class="ok">{% t "upcoming", "yaklaşan" %}</span>{% endif %}</p>
         {%- if codename %}<p class="glitch" aria-hidden="true">{{ codename | codename | wbr | safe }}</p>{% endif %}
         <h1 class="hero__title">{{ title }}</h1>
         <dl class="facts">
@@ -32,7 +33,8 @@ ogType: article
           {%- if doors %}<dt>{% t "doors", "kapı" %}</dt><dd>{{ doors }}</dd>{% endif %}
           {%- if stage %}<dt>{% t "stage", "sahne" %}</dt><dd>{{ stage }}</dd>{% endif %}
           {%- if price %}<dt>{% t "ticket", "bilet" %}</dt><dd class="ok">{{ price }}</dd>{% endif %}
-          {%- if poster_credit %}<dt>poster</dt><dd>{{ poster_credit }}</dd>{% endif %}
+          {%- if activities and activities.length %}<dt>{% t "activity", "etkinlik" %}</dt><dd>{% for a in activities %}{% t a, a | vocabTr(vocab.activities) %}{% if not loop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
+          {%- if music_genres and music_genres.length %}<dt>{% t "genres", "türler" %}</dt><dd>{{ music_genres | join(", ") }}</dd>{% endif %}
         </dl>
       </div>
     </div>
@@ -46,9 +48,9 @@ ogType: article
         {%- for l in lineup %}
         {%- set artistPage = collections.artists | findBySlug(l.artist) if l.artist else null %}
         <li class="peer">
-          {%- if l.time %}<span class="peer__time">{{ l.time }}</span>{% endif %}
           {%- if artistPage %}<a class="peer__name" lang="zxx" href="{{ artistPage.url }}">{{ l.name }}</a>{% else %}<span class="peer__name" lang="zxx">{{ l.name }}</span>{% endif %}
-          {%- if l.note_en %}<span class="peer__note"><span class="l-en" lang="en">{{ l.note_en }}</span><span class="l-tr" lang="tr">{{ l.note_tr or l.note_en }}</span></span>{% endif %}
+          {%- if l.duration or l.act_type %}<span class="peer__meta">{{ l.duration }}{% if l.duration and l.act_type %} · {% endif %}{% if l.act_type %}{% t l.act_type, l.act_type | vocabTr(vocab.act_types) %}{% endif %}</span>{% endif %}
+          {%- if l.note_en or l.note_tr %}<span class="peer__note"><span class="l-en" lang="en">{{ l.note_en or l.note_tr }}</span><span class="l-tr" lang="tr">{{ l.note_tr or l.note_en }}</span></span>{% endif %}
         </li>
         {%- endfor %}
       </ul>
@@ -91,6 +93,7 @@ ogType: article
       <video class="promo" controls preload="none" playsinline src="{{ promoUrl }}"{% if poster %} poster="{{ poster | bundle(page.inputPath) | mediaOg }}"{% endif %}></video>
     </section>
     {%- endif %}
+    {{ ui.players({ listen: recordings } | players, "SOUND RECORDINGS", "SES KAYITLARI", "recordings") }}
     {{ ui.players({ listen: listen, links: links, bandcamp_id: bandcamp_id, title: title, name: name } | players) }}
     {%- if tickets_en or tickets_tr %}
     <section class="tickets" aria-labelledby="tickets">
@@ -112,7 +115,7 @@ ogType: article
     </section>
     {%- endif %}
 
-    {{ ui.videoFacade(video, cover or poster, page.inputPath, title) }}
+    {{ ui.videos(videos, cover or poster, page.inputPath, title) }}
 
     {%- if gallery and gallery.length %}
     <section aria-labelledby="gallery">

@@ -3,7 +3,9 @@ title: "Bass Night: Genereshaan"
 codename: genereshaan
 category: bass
 series: Bass Night
-genres: [jungle, drum'n bass]
+activities: []
+flavor: []
+music_genres: ["Jungle","Drum & Bass"]
 date: 2022-05-28
 doors: "21:00"
 stage: "22:00"
@@ -25,8 +27,6 @@ gallery:
   - { src: https://media.uncvl.xyz/events/2022-05-28-bass-night-genereshaan/artist-tech-tabanjah.jpg, alt: Tech Tabanjah artist card }
   - { src: https://media.uncvl.xyz/events/2022-05-28-bass-night-genereshaan/artist-random-input.jpg, alt: Random Input artist card }
   - { src: https://media.uncvl.xyz/events/2022-05-28-bass-night-genereshaan/artist-mc-3pillie-farabi-gramafonia.jpg, alt: MC 3Pillie and Farabi Gramafonia artist card }
-video:
-  youtube: vKdJ9bksnaA
 summary_en: "The third event of Uncivilization’s “bass night” series: GENERESHAAN!!! The event will take place at Blind and host four DJs from different genereshaans: Lunar Function, Consul, Fosil and Da Frogg will set the place on fire with their Jungle Drum’n bass sets. Visuals by Random Input of course. We are waiting for all the bass heads!"
 text_en: |
   The third event of Uncivilization’s “bass night” series: GENERESHAAN!!! The event took place at Blind and host four DJs from different generations. Random Input started the night with his experimental bass and chiptune set and Lunar Function, Consul, Fosil and Da Frogg set the place on fire with their *jungle* and *drum’n bass* sets and the fire was extinguished by force. Random Input did the visuals.

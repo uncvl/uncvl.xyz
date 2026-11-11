@@ -3,7 +3,9 @@ title: "Synth Sessions #1"
 codename: synth session
 category: synth
 series: Synth Sessions
-genres: [live electronic, drone, idm, industrial, breakcore, hardcore techno]
+activities: ["live set"]
+flavor: []
+music_genres: ["Drone","IDM","Industrial","Breakcore","Hardcore Techno"]
 date: 2025-06-15
 stage: "20:00"
 venue:

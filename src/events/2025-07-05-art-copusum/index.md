@@ -2,7 +2,9 @@
 title: Çöpüşüm
 codename: copusum
 category: art
-genres: [art market, barter market, clown show, live painting, music]
+activities: ["art market","barter market","performance","live painting"]
+flavor: ["music"]
+music_genres: []
 date: 2025-07-05
 stage: "19:00"
 venue:

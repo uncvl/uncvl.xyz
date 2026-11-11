@@ -2,7 +2,9 @@
 title: "Art: Rejenere"
 codename: rejenere
 category: art
-genres: [breakcore, drum'n bass, live set, mental tekno]
+activities: ["live set"]
+flavor: []
+music_genres: ["Breakcore","Drum & Bass","Mental Tekno"]
 date: 2023-12-16
 venue:
   name: Karargah, Darağaç

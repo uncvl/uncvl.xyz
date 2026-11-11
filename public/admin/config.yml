@@ -75,13 +75,15 @@ collections:
     summary: "{{date | date('YYYY-MM-DD')}} · {{title}}"
     sortable_fields: [date, title]
     view_groups:
-      - { label: Category, field: category }
+      - { label: Event type, field: category }
     fields:
       - { name: title, label: Title, widget: string, hint: "e.g. Thursday Breaks #3" }
       - { name: codename, label: Codename, widget: string, required: false, hint: "CS-flavoured handle shown as the glitch title, e.g. zero day exploit" }
-      - { name: category, label: Category, widget: select, options: [bass, break, punk, art, synth] }
+      - { name: category, label: Event type / Etkinlik türü, widget: select, options: [bass, break, punk, art, synth], hint: "groups the event on the events page (art, break, bass, punk, synth)" }
       - { name: series, label: Series, widget: string, required: false, hint: "e.g. Thursday Breaks, Bass Night" }
-      - { name: genres, label: Genres, widget: list, required: false, hint: "shown as bass ⤬ breaks ⤬ core" }
+      - { name: activities, label: Activity / Etkinlik, widget: relation, collection: settings, file: vocab, value_field: "activities.*.en", search_fields: ["activities.*.en", "activities.*.tr"], display_fields: ["activities.*.en"], multiple: true, required: false, hint: "dj set, live set, concert, art market… Add new ones under Site texts → Lists." }
+      - { name: flavor, label: Event flavor, widget: list, required: false, hint: "short words, shown as bass ⤬ breaks ⤬ core (e.g. bass, breaks, core, punk)" }
+      - { name: music_genres, label: Music genres / Müzik türleri, widget: relation, collection: settings, file: vocab, value_field: "music_genres.*", search_fields: ["music_genres.*"], display_fields: ["music_genres.*"], multiple: true, required: false, hint: "Pick from the genre list. Add new ones under Site texts → Lists." }
       - { name: date, label: Date, widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
       - { name: doors, label: Doors open, widget: string, required: false, hint: "21:00" }
       - { name: stage, label: Stage time, widget: string, required: false, hint: "22:00 or 20:45 - 01:15" }
@@ -95,7 +97,7 @@ collections:
       - { name: poster, label: Poster, widget: image, required: false }
       - { name: poster_alt, label: Poster description (alt text), widget: string, required: false }
       - { name: cover, label: Square cover (optional), widget: image, required: false, hint: "Used in grids. Falls back to the poster." }
-      - { name: poster_credit, label: Poster by, widget: string, required: false }
+      - { name: poster_credit, label: Credit / Emeği geçenler, widget: text, required: false, hint: "shown under the poster, e.g. Artwork: …, Poster design: …" }
       - { name: text_en, label: Event text (EN), widget: markdown, required: false }
       - { name: text_tr, label: Etkinlik metni (TR), widget: markdown, required: false }
       - { name: tickets_en, label: Tickets (EN), widget: markdown, required: false }
@@ -104,12 +106,13 @@ collections:
         label: Lineup / Kadro
         widget: list
         required: false
-        summary: "{{fields.time}} {{fields.name}}"
+        summary: "{{fields.name}} · {{fields.act_type}}"
         fields:
           - { name: name, label: Name (as on the poster), widget: string }
           - { name: artist, label: Artist page, widget: relation, collection: artists, value_field: "{{slug}}", search_fields: [name, aka], display_fields: [name], required: false }
-          - { name: time, label: Time, widget: string, required: false }
-          - { name: note_en, label: Note (EN), widget: string, required: false, hint: "dj set · dnb, jungle" }
+          - { name: duration, label: Duration / Süre, widget: string, required: false, hint: "e.g. 75 min. Start times go in the Schedule below." }
+          - { name: act_type, label: Act type / Performans türü, widget: relation, collection: settings, file: vocab, value_field: "act_types.*.en", search_fields: ["act_types.*.en", "act_types.*.tr"], display_fields: ["act_types.*.en"], required: false }
+          - { name: note_en, label: Note (EN), widget: string, required: false, hint: "anything extra, e.g. main act · dnb, jungle" }
           - { name: note_tr, label: Not (TR), widget: string, required: false }
           - { name: bio_en, label: Bio for this event (EN), widget: markdown, required: false, hint: "Leave empty to show nothing here; the artist page keeps the main bio." }
           - { name: bio_tr, label: Bu etkinlik için biyografi (TR), widget: markdown, required: false }
@@ -122,13 +125,15 @@ collections:
           - { name: time, label: Time, widget: string }
           - { name: en, label: EN, widget: string }
           - { name: tr, label: TR, widget: string, required: false }
-      - name: video
-        label: Video
-        widget: object
+      - name: videos
+        label: Videos (PeerTube)
+        widget: list
         required: false
+        hint: "Paste the link of a video on our PeerTube channel (v.basspistol.org), e.g. https://v.basspistol.org/w/tSAy9STuRyrbDaHX8J7mAF"
+        summary: "{{fields.title}}"
         fields:
-          - { name: youtube, label: YouTube video id, widget: string, required: false, hint: "the part after watch?v=" }
-          - { name: youtube_playlist, label: YouTube playlist id, widget: string, required: false }
+          - { name: url, label: PeerTube link, widget: string }
+          - { name: title, label: Title, widget: string, required: false }
       - name: gallery
         label: Gallery
         widget: list
@@ -136,11 +141,20 @@ collections:
         fields:
           - { name: src, label: Image, widget: image }
           - { name: alt, label: Description, widget: string }
-      - name: listen
-        label: Listen (SoundCloud / Bandcamp players)
+      - name: recordings
+        label: Sound recordings / Ses kayıtları
         widget: list
         required: false
-        hint: 'SoundCloud links play directly. Bandcamp links need the album/track id (Bandcamp → Share/Embed → the number after album= or track=).'
+        hint: "Recordings of this event: a SoundCloud playlist or track link. Shown under SOUND RECORDINGS."
+        summary: "{{fields.title}}"
+        fields:
+          - { name: url, label: SoundCloud link, widget: string }
+          - { name: title, label: Title, widget: string, required: false }
+      - name: listen
+        label: Listen (artist players)
+        widget: list
+        required: false
+        hint: 'Players for the artists, e.g. their SoundCloud. SoundCloud links play directly. Bandcamp links need the album/track id (Bandcamp → Share/Embed → the number after album= or track=).'
         fields:
           - { name: url, label: Link, widget: string }
           - { name: title, label: Title, widget: string, required: false }
@@ -250,35 +264,95 @@ collections:
           - { name: bandcamp_id, label: Bandcamp id (only for Bandcamp), widget: string, required: false }
       - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
 
+  # ------------------------------------------------------------------- CALLS
+  - name: calls
+    label: Calls / Çağrılar
+    label_singular: Call
+    folder: src/calls
+    create: true
+    identifier_field: title_en
+    slug: "{{title_en}}"
+    summary: "{{title_en}} ({{status}})"
+    fields:
+      - { name: title_en, label: Title (EN), widget: string }
+      - { name: title_tr, label: Başlık (TR), widget: string, required: false }
+      - { name: status, label: Status, widget: select, options: [open, closed], default: open, hint: "Open calls are shown in the CALLS box on the home page." }
+      - { name: date, label: Date, widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD", required: false }
+      - { name: kline, label: Small line above the title, widget: string, required: false, default: "[:CALL:]" }
+      - { name: description, label: "Short description (search engines and link previews)", widget: text, required: false }
+      - { name: box_head_en, label: Home box heading (EN), widget: text, required: false, hint: "The orange box on the home page" }
+      - { name: box_head_tr, label: Anasayfa kutusu başlığı (TR), widget: text, required: false }
+      - { name: box_body_en, label: Home box text (EN), widget: markdown, required: false }
+      - { name: box_body_tr, label: Anasayfa kutusu metni (TR), widget: markdown, required: false }
+      - { name: text_en, label: Full call (EN), widget: markdown, required: false, hint: "If empty, the Turkish text is shown with a 'needs translation' note." }
+      - { name: text_tr, label: Çağrının tamamı (TR), widget: markdown, required: false }
+      - name: chips
+        label: Jump links at the top
+        widget: list
+        required: false
+        hint: 'Links to headings in the text: "#" + the heading in lower case with dashes, e.g. ## Modlar / Mods → #modlar-mods'
+        summary: "{{fields.en}} → {{fields.href}}"
+        fields:
+          - { name: en, label: Label (EN), widget: string }
+          - { name: tr, label: Etiket (TR), widget: string, required: false }
+          - { name: href, label: Link, widget: string }
+      - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
+
   # ---------------------------------------------------------- SITE-WIDE TEXT
   - name: settings
     label: Site texts / Site metinleri
     files:
       - name: home
-        label: Home page texts
+        label: Home page texts / Anasayfa metinleri
         file: src/_data/home.json
         format: json
         fields:
           - { name: intro_en, label: Intro (EN), widget: markdown }
           - { name: intro_tr, label: Giriş (TR), widget: markdown }
           - name: notes
-            label: Notes
+            label: Notes / Notlar
             widget: list
+            summary: "{{fields.text_en}}"
+            hint: "If one language is empty, the other one is shown."
             fields:
-              - { name: text, label: Text, widget: markdown }
-              - { name: more, label: Small print, widget: markdown, required: false }
-          - name: call
-            label: Compilation call box
-            widget: object
-            fields:
-              - { name: head, label: Heading, widget: text }
-              - { name: body, label: Body, widget: markdown }
-              - { name: link, label: Link text, widget: string }
+              - { name: text_en, label: Text (EN), widget: markdown }
+              - { name: text_tr, label: Metin (TR), widget: markdown, required: false }
+              - { name: more_en, label: Small print (EN), widget: markdown, required: false }
+              - { name: more_tr, label: Küçük not (TR), widget: markdown, required: false }
       - name: about
-        label: About page
+        label: About page / Hakkında sayfası
         file: src/pages/about.md
         fields:
-          - { name: title, label: Title, widget: string }
+          - { name: title_en, label: Title (EN), widget: string }
+          - { name: title_tr, label: Başlık (TR), widget: string, required: false }
+          - { name: description, label: "Short description (search engines and link previews)", widget: text, required: false }
           - { name: text_en, label: Text (EN), widget: markdown }
           - { name: text_tr, label: Metin (TR), widget: markdown }
-          - { name: body, label: Genre list and notes, widget: markdown }
+          - { name: body, label: Notes above the genre list, widget: markdown, required: false, hint: "The genre list itself comes from Lists → Music genres." }
+          - { name: genre_list_label, label: Genre list intro, widget: string, required: false, hint: "Shown before the genre list. Empty = no genre list on the page." }
+      - name: vocab
+        label: Lists / Listeler
+        file: src/_data/vocab.json
+        format: json
+        fields:
+          - name: activities
+            label: Activities / Etkinlik türleri
+            widget: list
+            summary: "{{fields.en}} / {{fields.tr}}"
+            hint: "Choices for 'Activity' on events."
+            fields:
+              - { name: en, label: EN, widget: string }
+              - { name: tr, label: TR, widget: string, required: false }
+          - name: act_types
+            label: Act types / Performans türleri
+            widget: list
+            summary: "{{fields.en}} / {{fields.tr}}"
+            hint: "Choices for 'Act type' in event lineups."
+            fields:
+              - { name: en, label: EN, widget: string }
+              - { name: tr, label: TR, widget: string, required: false }
+          - name: music_genres
+            label: Music genres / Müzik türleri
+            widget: list
+            field: { name: genre, label: Genre, widget: string }
+            hint: "Choices for 'Music genres' on events. Also shown as the genre list on the About page."

@@ -3,7 +3,9 @@ title: "Thursday Breaks #3"
 codename: buffer overload
 category: break
 series: Thursday Breaks
-genres: [neurofunk, hardcore techno, sextrance]
+activities: []
+flavor: []
+music_genres: ["Neurofunk","Hardcore Techno","Sextrance"]
 date: 2024-10-03
 venue:
   name: Dinozor Bar

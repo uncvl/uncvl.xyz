@@ -3,7 +3,9 @@ title: "Synth Sessions & Punk Concert"
 codename: synth & punk
 category: synth
 series: Synth Sessions
-genres: [noise, idm, breakcore, punk]
+activities: []
+flavor: ["punk"]
+music_genres: ["Noise","IDM","Breakcore"]
 date: 2026-09-04
 venue:
   name: Nomads 36

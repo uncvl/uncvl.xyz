@@ -3,7 +3,9 @@ title: "Uncivilization Bass: GKC & Da Frogg"
 codename: gkc & da frogg
 category: bass
 series: Uncivilization Bass
-genres: [dub, rap, breakbeat, uk garage, drum & bass, jungle]
+activities: []
+flavor: []
+music_genres: ["Dub","Hip Hop","Breakbeat","UK Garage","Drum & Bass","Jungle"]
 date: 2025-11-01
 stage: "17:00 - 21:30"
 venue:

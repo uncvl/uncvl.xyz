@@ -1,7 +1,9 @@
 ---
 title: "Krayat | Goblin Daycare | Potlatch"
 category: punk
-genres: [punk, hardcore]
+activities: []
+flavor: ["punk"]
+music_genres: ["Hardcore Punk"]
 date: 2024-09-26
 venue:
   name: KadıköySahne

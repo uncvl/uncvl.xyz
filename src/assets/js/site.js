@@ -23,9 +23,9 @@
     });
   }
 
-  // ---- click-to-load video (youtube-nocookie only after an explicit click) ----
+  // ---- click-to-load embeds: nothing loads from PeerTube / SoundCloud / Bandcamp before a click ----
   document.addEventListener("click", function (ev) {
-    // .embed-facade covers YouTube videos and SoundCloud / Bandcamp players
+    // .embed-facade covers PeerTube videos and SoundCloud / Bandcamp players
     var a = ev.target.closest(".embed-facade[data-embed]");
     if (!a) return;
     ev.preventDefault();
@@ -35,6 +35,7 @@
     f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
     f.referrerPolicy = "strict-origin-when-cross-origin";
     if (a.dataset.height) f.height = a.dataset.height; // attribute, not inline style (CSP)
+    if (a.dataset.sandbox) f.setAttribute("sandbox", a.dataset.sandbox); // PeerTube: as in its own embed code
     f.className = "embed-frame";
     a.replaceWith(f);
   });

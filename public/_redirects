@@ -1,6 +1,8 @@
 # Old hand-written site (uncvl.com) → new URLs. 301 = permanent.
 /index.html                                                          /                                                   301
-/compilation.html                                                    /compilation/                                       301
+/compilation.html                                                    /calls/compilation/                                 301
+/compilation/                                                        /calls/compilation/                                 301
+/compilation                                                         /calls/compilation/                                 301
 /ticket.html                                                         /events/bass-night-genereshaan/#tickets             301
 /uncivilization-bass-night-ignishaan-blind.html                      /events/bass-night-ignishaan/                       301
 /uncivilization-bass-night-drumazan-speshaal-blind.html              /events/bass-night-drumazan-speshaal/               301

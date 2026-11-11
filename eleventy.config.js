@@ -17,6 +17,22 @@ md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
   return defaultLinkOpen(tokens, idx, options, env, self);
 };
 
+// Headings in Markdown get an id from their text (Turkish letters folded to ASCII), so they can be linked
+// to with #anchors, e.g. "## Müzik ve Konsept" → id="muzik-ve-konsept". Duplicates get -2, -3…
+const slugId = (s) =>
+  String(s).toLocaleLowerCase("tr").replace(/ı/g, "i").normalize("NFKD").replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+md.core.ruler.push("heading_ids", (state) => {
+  const seen = new Map();
+  state.tokens.forEach((tok, i) => {
+    if (tok.type !== "heading_open" || tok.attrGet("id")) return;
+    const base = slugId(state.tokens[i + 1]?.content || "") || "section";
+    const n = (seen.get(base) || 0) + 1;
+    seen.set(base, n);
+    tok.attrSet("id", n > 1 ? `${base}-${n}` : base);
+  });
+});
+
 const toDate = (d) => (d instanceof Date ? d : new Date(d));
 const startOfToday = () => {
   const now = new Date();
@@ -94,6 +110,15 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("artists", (api) =>
     api.getFilteredByGlob("src/artists/*.md").sort((a, b) => a.data.name.localeCompare(b.data.name, "tr"))
   );
+  // Calls (open calls for music, art, text…): open ones first, then by date, newest first
+  const callsSorted = (api) =>
+    published(api.getFilteredByGlob("src/calls/*.md")).sort((a, b) => {
+      const oa = a.data.status !== "closed", ob = b.data.status !== "closed";
+      if (oa !== ob) return oa ? -1 : 1;
+      return toDate(b.data.date || 0) - toDate(a.data.date || 0);
+    });
+  eleventyConfig.addCollection("calls", callsSorted);
+  eleventyConfig.addCollection("openCalls", (api) => callsSorted(api).filter((c) => c.data.status !== "closed"));
   eleventyConfig.addCollection("posts", (api) =>
     api.getFilteredByGlob("src/posts/**/*.md").filter((p) => !p.data.draft).sort((a, b) => byDateAsc(b, a))
   );
@@ -226,6 +251,28 @@ export default function (eleventyConfig) {
     }
     return null; // other links stay plain links
   }
+
+  // PeerTube videos: accepts a watch link (/w/<id>, /videos/watch/<id>) or an embed link (/videos/embed/<id>)
+  // from our instance only (it is the one allowed in the CSP frame-src). Anything else → null.
+  eleventyConfig.addFilter("peertube", (url, host) => {
+    let u;
+    try { u = new URL(String(url || "").trim()); } catch { return null; }
+    if (u.protocol !== "https:" || u.hostname !== host) return null;
+    const m = u.pathname.match(/^\/(?:w|videos\/watch|videos\/embed)\/([A-Za-z0-9-]{6,})\/?$/);
+    if (!m) return null;
+    const id = m[1];
+    return {
+      id,
+      watch: `https://${host}/w/${id}`,
+      embed: `https://${host}/videos/embed/${id}?autoplay=1&title=0&warningTitle=0&peertubeLink=0`,
+    };
+  });
+
+  // Turkish label of a vocabulary value (src/_data/vocab.json lists of {en, tr}); falls back to the value.
+  eleventyConfig.addFilter("vocabTr", (value, list) => {
+    const hit = (list || []).find((x) => x.en === value);
+    return (hit && hit.tr) || value;
+  });
 
   // { index, prev, next } of the current page inside a sorted collection
   eleventyConfig.addFilter("neighbors", (items, url) => {

@@ -35,7 +35,7 @@ ogType: music.album
         <p class="actions">
           {%- if links.bandcamp %}<a class="btn" href="{{ links.bandcamp }}" rel="noopener noreferrer">bandcamp ↗</a>{% endif %}
           {%- if links.soundcloud %}<a class="btn" href="{{ links.soundcloud }}" rel="noopener noreferrer">soundcloud ↗</a>{% endif %}
-          {%- if status == "open-call" %}<a class="btn" href="/compilation/">{% t "read the call", "çağrıyı oku" %}</a>{% endif %}
+          {%- if status == "open-call" %}<a class="btn" href="/calls/compilation/">{% t "read the call", "çağrıyı oku" %}</a>{% endif %}
         </p>
         {%- if elsewhere and elsewhere.length %}
         <p class="elsewhere"><span class="k">{% t "also on", "ayrıca" %}</span> {% for e in elsewhere %}<a href="{{ e.url }}" rel="noopener noreferrer">{{ e.name }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>

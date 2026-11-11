@@ -3,7 +3,9 @@ title: "Drumazan Speshaal: Jung meets Da Frogg"
 codename: drumazan speshaal
 category: bass
 series: Bass Night
-genres: [uk garage, breakbeat, rave, drum'n bass]
+activities: []
+flavor: []
+music_genres: ["UK Garage","Breakbeat","Rave","Drum & Bass"]
 date: 2022-05-03
 doors: "21:00"
 stage: "22:00"
@@ -19,8 +21,6 @@ gallery:
   - { src: https://media.uncvl.xyz/events/2022-05-03-bass-night-drumazan-speshaal/artist-tech-tabanjah.jpg, alt: Tech Tabanjah artist card }
   - { src: https://media.uncvl.xyz/events/2022-05-03-bass-night-drumazan-speshaal/artist-miss-baas.jpg, alt: Miss Baas artist card }
   - { src: https://media.uncvl.xyz/events/2022-05-03-bass-night-drumazan-speshaal/artist-random-input.jpg, alt: Random Input artist card }
-video:
-  youtube_playlist: PLP0hX4t0xUNPnlr_3SeZHyZKiXMloUxwf
 summary_en: "The second event of Uncivilization’s bass series will take place at Blind: DRUMAZAN SPESHAAL - JUNG meets DA FROGG. The night will start with UK Garage and breakbeat, continue with Rave and Drum’n Bass. Visuals by Random Input. We are waiting for all the bass heads!"
 text_en: |
   The second event of Uncivilization’s bass series will take place at Blind: DRUMAZAN SPESHAAL - JUNG meets DA FROGG. The night will start with UK Garage and breakbeat, continue with Rave and Drum’n Bass. Visuals by Random Input. We are waiting for all the bass heads!

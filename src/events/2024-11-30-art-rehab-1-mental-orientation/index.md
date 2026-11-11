@@ -3,7 +3,9 @@ title: "Rehab #1"
 codename: mental orientation
 category: art
 series: Rehab
-genres: [art market, dj sets]
+activities: ["art market","dj set"]
+flavor: []
+music_genres: []
 date: 2024-11-30
 stage: "15:00 - 22:00"
 venue:

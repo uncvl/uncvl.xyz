@@ -84,8 +84,9 @@ npm run strip-metadata   # remove EXIF/XMP/GPS from images in src/ (lossless); r
 | `src/releases/<yyyy-mm-dd-name>/index.md` | one release (label discography) |
 | `src/artists/<slug>.md` | artist bios, linked from events and releases |
 | `src/posts/` | news and announcements |
-| `src/pages/` | about, compilation call |
-| `src/_data/site.json`, `home.json` | socials, e-mails, navigation, home page texts |
+| `src/pages/` | about page |
+| `src/calls/` | open calls (e.g. the compilation call), shown in the CALLS box on the home page |
+| `src/_data/site.json`, `home.json`, `vocab.json` | socials, e-mails, navigation, home page texts; lists for activities, act types and music genres |
 | `src/_data/media.json` | manifest of images on R2 (width, height, content version) |
 | `src/_includes/` | layouts, macros |
 | `src/assets/` | CSS, JS (language switch, click-to-load players), self-hosted fonts |

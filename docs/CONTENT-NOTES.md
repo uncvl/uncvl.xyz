@@ -16,7 +16,7 @@ The old texts were moved **verbatim**. These are things we noticed but did **not
 
 ## Outdated content (kept, please review)
 - The compilation call says the website runs on **Drupal** on a Linux server at uncvl.com, with invites and user roles.
-- E-mail addresses were switched from `@uncvl.com` to `@uncvl.xyz` (`src/_data/site.json` and `/compilation/`). Make sure the mailboxes exist.
+- E-mail addresses were switched from `@uncvl.com` to `@uncvl.xyz` (`src/_data/site.json` and `/calls/compilation/`). Make sure the mailboxes exist.
 - Twitter link: `twitter.com/uncivilizationr`.
 
 ## Missing
@@ -32,6 +32,48 @@ The old texts were moved **verbatim**. These are things we noticed but did **not
 - **Synth & Punk**: there's an Ox card (`260904-synthandpunk_sc-ox.png`), but Ox isn't on the poster or in the text. Shown in the gallery only.
 - **Krayat TR text** sits in the İstanbul folder but describes the İzmir show (27.09). It's used on the İzmir event.
 - **Zero-Day Exploit**: the text says "14'03'2024", but the folder (250314) and the weekday (Friday) say 2025. 2025 is used.
-- **Promo videos** (Infuze × Archongrid, Synth & Punk): on R2 and shown on their event pages.
+- **Promo videos**: Infuze × Archongrid now uses its PeerTube video. Synth & Punk still plays its promo from R2 (not on PeerTube yet).
 - **Infuze × Archongrid**: "infuze archongrid" is used as the codename (from the folder name). The page title lists the bands.
 - Texts from Instagram captions were imported without hashtags and @handles where the handle stood in for a name.
+
+## Feedback round 1 (Nov 2026): please review
+
+### Genres split into Activity, Flavor and Music genres
+Each event's old "genres" were sorted by best guess. Change anything in the CMS (event → Activity / Event flavor / Music genres).
+Choices made: "dj sets" → *dj set*; "live" and "live electronic" → *live set*; "clown show" and "live gameplay" → *performance*; "after" was dropped; "rap" → *Hip Hop*; "hardcore" at punk concerts → *Hardcore Punk*. New genres added to the list: Hardcore Techno, Mental Tekno, Rave, Sextrance.
+
+| Event | Old genres | Activity | Flavor | Music genres |
+|---|---|---|---|---|
+| 2022-04-02-bass-night-ignishaan | dub, breakbeat, jungle | – | – | Dub, Breakbeat, Jungle |
+| 2022-05-03-bass-night-drumazan-speshaal | uk garage, breakbeat, rave, drum'n bass | – | – | UK Garage, Breakbeat, Rave, Drum & Bass |
+| 2022-05-14-punk-zibidiler-tampon-bunu-sen-istedin | punk | – | punk | – |
+| 2022-05-28-bass-night-genereshaan | jungle, drum'n bass | – | – | Jungle, Drum & Bass |
+| 2022-11-17-decyphered-civilization | – | – | – | – |
+| 2023-12-16-art-rejenere | breakcore, drum'n bass, live set, mental tekno | live set | – | Breakcore, Drum & Bass, Mental Tekno |
+| 2024-09-05-thursday-breaks-break-protocol | bass, breaks, core | – | bass, breaks, core | – |
+| 2024-09-19-thursday-breaks-attack-vector | bass, breaks, core | – | bass, breaks, core | – |
+| 2024-09-26-punk-krayat-goblin-daycare-potlatch | punk, hardcore | – | punk | Hardcore Punk |
+| 2024-09-27-punk-krayat-ruff-crux-moko-hush | punk, hardcore | – | punk | Hardcore Punk |
+| 2024-10-03-thursday-breaks-buffer-overload | neurofunk, hardcore techno, sextrance | – | – | Neurofunk, Hardcore Techno, Sextrance |
+| 2024-10-10-thursday-breaks-proxy-firewall | chill breakcore, live, neurofunk | live set | – | Chill Breakcore, Neurofunk |
+| 2024-10-17-thursday-breaks-signature-strike | noise, flashcore, idm, breakcore, hardcore | – | – | Noise, Flashcore, IDM, Breakcore, Hardcore |
+| 2024-11-30-art-rehab-1-mental-orientation | art market, dj sets | art market, dj set | – | – |
+| 2024-12-22-art-rehab-2-sanatorium-for-the-sane | art market, dj sets | art market, dj set | – | – |
+| 2025-01-12-art-rehab-3-psyche-cure | art market, exhibition, dj sets | art market, exhibition, dj set | – | – |
+| 2025-03-14-zero-day-exploit | bass, breaks, core | – | bass, breaks, core | – |
+| 2025-06-15-synth-session-1 | live electronic, drone, idm, industrial, breakcore, hardcore techno | live set | – | Drone, IDM, Industrial, Breakcore, Hardcore Techno |
+| 2025-07-05-art-copusum | art market, barter market, clown show, live painting, music | art market, barter market, performance, live painting | music | – |
+| 2025-11-01-bass-gkc-da-frogg | dub, rap, breakbeat, uk garage, drum & bass, jungle | – | – | Dub, Hip Hop, Breakbeat, UK Garage, Drum & Bass, Jungle |
+| 2026-04-24-decentralized-consensus | bass, breaks, core, punk | – | bass, breaks, core, punk | – |
+| 2026-05-08-punk-infuze-archongrid | punk, live gameplay, after | performance | punk | – |
+| 2026-09-04-synth-and-punk | noise, idm, breakcore, punk | – | punk | Noise, IDM, Breakcore |
+
+### Other changes to check
+- **YouTube videos removed** (as decided): Bass Night Ignishaan, Drumazan Speshaal and the Zibidiler/Tampon/Bunu Sen İstedin concert had YouTube playlists; Genereshaan had a YouTube video. Add their PeerTube links once they are uploaded (event → Videos).
+- **Zibidiler / Tampon / Bunu Sen İstedin**: the lineup had start times (21:15, 22:15, 23:30). They moved to the event's Schedule, since the lineup field is now Duration.
+- **Translations still needed** (an empty Turkish field falls back to English, or shows a "needs translation" note):
+  - Home notes (both), and the home box of the compilation call.
+  - Compilation call: the whole English version (the page shows the Turkish text with a note for now).
+  - About page: Turkish title.
+- **CIVIL or EXTINCTION?** The home box says EXTINCTION X; the call page and the three releases still say CIVIL X-Y-Z.
+- **About page**: the description used for search engines still has the old "(trans)media project" text. The note above the genre list mentions a "Sound page", which doesn't exist yet.

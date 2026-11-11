@@ -3,14 +3,18 @@ layout: base.njk
 bodyClass: page-text
 ---
 {%- import "macros.njk" as ui with context -%}
+{%- set tEn = title_en or title or title_tr -%}
+{%- set tTr = title_tr or tEn -%}
 <article class="wrap text-page">
   <header class="text-page__head">
     {%- if kline %}<p class="kline">{{ kline }}</p>{% endif %}
-    <h1 class="text-page__title">{{ title }}</h1>
+    <h1 class="text-page__title">{% t tEn, tTr %}</h1>
     {%- if date and showDate %}<p class="k"><time datetime="{{ date | date('iso') }}">{{ date | date }}</time></p>{% endif %}
+    {%- if chips and chips.length %}<p class="chips">{% for c in chips %}<a class="chip" href="{{ c.href }}">{% t c.en, c.tr or c.en %}</a>{% endfor %}</p>{% endif %}
   </header>
   {%- if cover %}<figure class="text-page__cover">{% image cover | bundle(page.inputPath), "", "(min-width: 50rem) 46rem, 100vw", true %}</figure>{% endif %}
-  {%- if text_en or text_tr %}{{ ui.bitext(text_en, text_tr) }}{% endif %}
+  {%- if text_en or text_tr %}{% if wrapClass %}<div class="{{ wrapClass }}">{% endif %}{{ ui.bitext(text_en, text_tr) }}{% if wrapClass %}</div>{% endif %}{% endif %}
   {%- if content | trim %}<div class="prose">{{ content | safe }}</div>{% endif %}
+  {%- if genre_list_label %}<p class="genre-list"><span class="k">{{ genre_list_label }}</span> {{ vocab.music_genres | join(", ") }}</p>{% endif %}
   {{ ui.players({ listen: listen, links: links, bandcamp_id: bandcamp_id, title: title, name: name } | players) }}
 </article>

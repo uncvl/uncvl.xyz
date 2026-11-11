@@ -3,7 +3,9 @@ title: "Thursday Breaks #2"
 codename: attack vector
 category: break
 series: Thursday Breaks
-genres: [bass, breaks, core]
+activities: []
+flavor: ["bass","breaks","core"]
+music_genres: []
 date: 2024-09-19
 venue:
   name: Dinozor Bar

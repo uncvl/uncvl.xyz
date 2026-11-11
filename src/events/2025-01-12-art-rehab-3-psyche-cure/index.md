@@ -3,7 +3,9 @@ title: "Rehab #3"
 codename: psyche cure
 category: art
 series: Rehab
-genres: [art market, exhibition, dj sets]
+activities: ["art market","exhibition","dj set"]
+flavor: []
+music_genres: []
 date: 2025-01-12
 stage: "15:00 - 23:00"
 venue:

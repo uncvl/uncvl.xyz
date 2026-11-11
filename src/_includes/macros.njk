@@ -55,10 +55,10 @@
 {%- endmacro -%}
 
 {#- SoundCloud / Bandcamp players. `list` comes from the `players` filter. Nothing loads from those sites until a click. -#}
-{%- macro players(list) -%}
+{%- macro players(list, en="LISTEN", tr="DİNLE", id="listen") -%}
 {%- if list and list.length -%}
-<section class="listen" aria-labelledby="listen">
-  {{ sect("LISTEN", "DİNLE", "", "listen") }}
+<section class="listen" aria-labelledby="{{ id }}">
+  {{ sect(en, tr, "", id) }}
   <ul class="players">
     {%- for p in list %}
     <li class="player player--{{ p.type }}">
@@ -76,21 +76,23 @@
 {%- endif -%}
 {%- endmacro -%}
 
-{%- macro videoFacade(video, cover, inputPath, title) -%}
-{%- if video -%}
-{%- if video.youtube -%}
-{%- set watch = "https://www.youtube.com/watch?v=" + video.youtube -%}
-{%- set embed = "https://www.youtube-nocookie.com/embed/" + video.youtube + "?autoplay=1" -%}
-{%- else -%}
-{%- set watch = "https://www.youtube.com/playlist?list=" + video.youtube_playlist -%}
-{%- set embed = "https://www.youtube-nocookie.com/embed/videoseries?list=" + video.youtube_playlist + "&autoplay=1" -%}
-{%- endif -%}
-<div class="video">
-  <a class="embed-facade video__facade" href="{{ watch }}" data-embed="{{ embed }}" data-title="{{ title }}" rel="noopener noreferrer">
-    {%- if cover %}{% image cover | bundle(inputPath), "", "(min-width: 60rem) 46rem, 100vw" %}{% endif %}
-    <span class="video__play"><span aria-hidden="true">▶</span> {% t "load video", "videoyu yükle" %}</span>
-    <span class="video__note">{% t "youtube-nocookie loads only after you click", "youtube yalnızca tıkladığında yüklenir" %}</span>
-  </a>
-</div>
+{#- PeerTube videos (`videos: [{url, title}]`), click-to-load: nothing loads from PeerTube until a click. -#}
+{%- macro videos(list, cover, inputPath, title) -%}
+{%- set vids = [] -%}
+{%- for v in list or [] %}{% set p = v.url | peertube(site.peertube.host) %}{% if p %}{% if vids.push({ p: p, title: v.title or title }) %}{% endif %}{% endif %}{% endfor -%}
+{%- if vids.length -%}
+<section aria-labelledby="videos">
+  {{ sect("VIDEO", "VİDEO", "", "videos") }}
+  {%- for v in vids %}
+  <figure class="video">
+    <a class="embed-facade video__facade" href="{{ v.p.watch }}" data-embed="{{ v.p.embed }}" data-title="{{ v.title }}" data-sandbox="allow-same-origin allow-scripts allow-popups allow-forms" rel="noopener noreferrer">
+      {%- if cover %}{% image cover | bundle(inputPath), "", "(min-width: 60rem) 46rem, 100vw" %}{% endif %}
+      <span class="video__play"><span aria-hidden="true">▶</span> {% t "load video", "videoyu yükle" %}</span>
+      <span class="video__note">{% t "peertube loads only after you click", "peertube yalnızca tıkladığında yüklenir" %}</span>
+    </a>
+    {%- if v.title %}<figcaption class="video__title">{{ v.title }}</figcaption>{% endif %}
+  </figure>
+  {%- endfor %}
+</section>
 {%- endif -%}
 {%- endmacro -%}

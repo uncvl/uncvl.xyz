@@ -52,6 +52,22 @@ for await (const file of walk(ROOT)) {
   }
 }
 
+// Event sources: videos must be links to our PeerTube instance (the only video host the CSP allows);
+// YouTube fields are no longer supported.
+const PEERTUBE = JSON.parse(await readFile("src/_data/site.json", "utf8")).peertube.host;
+for await (const file of walk("src/events")) {
+  if (!file.endsWith("index.md")) continue;
+  const fm = ((await readFile(file, "utf8")).match(/^---\r?\n([\s\S]*?)\r?\n---/) || [])[1] || "";
+  const rel = file.split(path.sep).join("/");
+  if (/^\s*youtube(_playlist)?:/m.test(fm)) errors.push(`${rel}: YouTube video field (use videos: with a PeerTube link)`);
+  const block = (fm.match(/^videos:\n((?:[ -][^\n]*\n?)*)/m) || [])[1] || "";
+  for (const m of block.matchAll(/url:\s*["']?([^"'\s]+)/g)) {
+    let ok = false;
+    try { const u = new URL(m[1]); ok = u.hostname === PEERTUBE && /^\/(w|videos\/watch|videos\/embed)\/[A-Za-z0-9-]{6,}\/?$/.test(u.pathname); } catch {}
+    if (!ok) errors.push(`${rel}: video link is not a ${PEERTUBE} video: ${m[1]}`);
+  }
+}
+
 if (errors.length) {
   console.error(errors.join("\n"));
   console.error(`\n[check] ${errors.length} problem(s) in ${pages} pages`);
