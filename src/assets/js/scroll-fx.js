@@ -29,7 +29,7 @@ const isInline = (d) => d === "inline" || d === "contents";
 // lag while scrolling, step = offsets snap to this many px, jitter = sideways shake, random = spread of the random lag.
 const MODES = {
   off: null,
-  glitch: { kEdge: 0.32, kMid: 0.085, kRand: 0.14, d: 0.34, kCalm: 0.22, calmAfter: 3, max: 65, threshold: 27, touchThreshold: 38, step: 4, jitter: 0.06, random: 0.85 },
+  glitch: { kEdge: 0.32, kMid: 0.085, kRand: 0.14, d: 0.34, kCalm: 0.22, calmAfter: 3, max: 65, threshold: 27, touchThreshold: 34, step: 4, jitter: 0.06, random: 0.85 },
 };
 
 const store = {
