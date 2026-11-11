@@ -29,7 +29,7 @@ const isInline = (d) => d === "inline" || d === "contents";
 // lag while scrolling, step = offsets snap to this many px, jitter = sideways shake, random = spread of the random lag.
 const MODES = {
   off: null,
-  glitch: { kEdge: 0.32, kMid: 0.085, kRand: 0.14, d: 0.34, kCalm: 0.22, calmAfter: 3, max: 130, threshold: 11, touchThreshold: 22, step: 4, jitter: 0.06, random: 0.85 },
+  glitch: { kEdge: 0.32, kMid: 0.085, kRand: 0.14, d: 0.34, kCalm: 0.22, calmAfter: 3, max: 65, threshold: 22, touchThreshold: 36, step: 4, jitter: 0.06, random: 0.85 },
 };
 
 const store = {
@@ -41,8 +41,8 @@ const reduced = matchMedia("(prefers-reduced-motion: reduce)");
 const saved = store.get("on", null);
 let on = saved === null ? !reduced.matches : saved === "1";
 const mode = "glitch";
-// both set at 20% of their old slider range: power 0.4-2.5, shatter 0-1
-const strength = 0.4 + 0.2 * (2.5 - 0.4);
+// power: 20% of the old slider range (0.4-2.5), halved so text stays readable; shatter: 20% of 0-1
+const strength = (0.4 + 0.2 * (2.5 - 0.4)) / 2; // half the movement: text stays readable
 const shatter = 0.2; // 0 = clean middle-lag (glitch), 1 = random per letter (shatter)
 const variation = 0.7; // small per-line differences in the middle-lag
 
