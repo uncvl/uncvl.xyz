@@ -63,17 +63,13 @@
     "channel": "https://v.basspistol.org/c/uncivilization_channel/videos"
   },
   "categories": {
-    "art": {
-      "en": "Art",
-      "tr": "Sanat"
-    },
-    "break": {
-      "en": "Break",
-      "tr": "Break"
-    },
     "bass": {
       "en": "Bass",
       "tr": "Bass"
+    },
+    "break": {
+      "en": "Breaks",
+      "tr": "Breaks"
     },
     "punk": {
       "en": "Punk",
@@ -82,6 +78,10 @@
     "synth": {
       "en": "Synth",
       "tr": "Synth"
+    },
+    "art": {
+      "en": "Art",
+      "tr": "Sanat"
     }
   },
   "releaseTypes": {

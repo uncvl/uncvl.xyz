@@ -3,7 +3,7 @@ title: "Bass Night: Ignishaan"
 codename: ignishaan
 category: bass
 series: Bass Night
-activities: []
+activities: ["Music"]
 flavor: []
 music_genres: ["Dub","Breakbeat","Jungle"]
 date: 2022-04-02

@@ -3,7 +3,7 @@ title: "Bass Night: Genereshaan"
 codename: genereshaan
 category: bass
 series: Bass Night
-activities: []
+activities: ["Music"]
 flavor: []
 music_genres: ["Jungle","Drum & Bass"]
 date: 2022-05-28

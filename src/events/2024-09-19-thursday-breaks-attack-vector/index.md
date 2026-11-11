@@ -3,7 +3,7 @@ title: "Thursday Breaks #2"
 codename: attack vector
 category: break
 series: Thursday Breaks
-activities: []
+activities: ["Music"]
 flavor: ["Bass","Break","Core"]
 music_genres: []
 date: 2024-09-19

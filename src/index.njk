@@ -93,7 +93,7 @@ permalink: /
   {%- endif %}
 
   <section aria-labelledby="past">
-    {%- set chips = [] %}{% for key, c in site.categories %}{% if chips.push('<a href="/events/#' + key + '">' + key + '</a>') %}{% endif %}{% endfor %}
+    {%- set chips = [] %}{% for key, c in site.categories %}{% if chips.push('<a href="/events/#' + key + '">' + (c.en | lower) + '</a>') %}{% endif %}{% endfor %}
     {{ ui.sect("PAST EVENTS", "GEÇMİŞ ETKİNLİKLER", chips | join(" · "), "past") }}
     <ol class="log">
       {%- for e in collections.pastEvents %}{{ ui.logrow(e) }}{% endfor %}

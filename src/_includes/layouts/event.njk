@@ -33,7 +33,7 @@ ogType: article
           {%- if doors %}<dt>{% t "doors", "kapı" %}</dt><dd>{{ doors }}</dd>{% endif %}
           {%- if stage %}<dt>{% t "stage", "sahne" %}</dt><dd>{{ stage }}</dd>{% endif %}
           {%- if price %}<dt>{% t "ticket", "bilet" %}</dt><dd class="ok">{{ price }}</dd>{% endif %}
-          {%- if activities and activities.length %}<dt>{% t "activity", "etkinlik" %}</dt><dd>{% for a in activities %}{% t a, a | vocabTr(vocab.activities) %}{% if not loop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
+          {%- if activities and activities.length %}<dt>{% t "content", "içerik" %}</dt><dd>{% for a in activities %}{% t a, a | vocabTr(vocab.activities) %}{% if not loop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
           {%- if music_genres and music_genres.length %}<dt>{% t "genres", "türler" %}</dt><dd>{{ ui.genreLinks(music_genres) }}</dd>{% endif %}
         </dl>
       </div>

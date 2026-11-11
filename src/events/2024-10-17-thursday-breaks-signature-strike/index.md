@@ -3,7 +3,7 @@ title: "Thursday Breaks #5"
 codename: signature strike
 category: break
 series: Thursday Breaks
-activities: []
+activities: ["Music"]
 flavor: []
 music_genres: ["Noise","Flashcore","IDM","Breakcore","Hardcore"]
 date: 2024-10-17

@@ -3,7 +3,7 @@ title: "Thursday Breaks #1"
 codename: break protocol
 category: break
 series: Thursday Breaks
-activities: []
+activities: ["Music"]
 flavor: ["Bass","Break","Core"]
 music_genres: []
 date: 2024-09-05

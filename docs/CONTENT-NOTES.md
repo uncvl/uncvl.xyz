@@ -288,3 +288,35 @@ Still empty: 500001K, Aziz Deliorman, Codex, GKC, Gouachi, ja11hhcc7216, Koi Fai
 - The "Genre types" text was added as sent. One spot looks garbled: "used interchangeablynot through with microgenre" (Niche genres). Fix it in the CMS: Site texts → Sound page → Genre types (EN).
 - The text about the Uncivilization sound is not written yet; the top of /sound/ stays empty until it is (Site texts → Sound page → About the Uncivilization sound).
 - There is no "Concept & Themes" page yet to link to the Sound page from.
+
+### Event dropdown lists (Event content, Event category, Act type)
+- **Event content** (the field was "Activity") and **Act type** now use the lists the team sent. The Turkish labels are suggestions, please check them in Site texts → Lists: Müzik, Performans Sanatı, Sergi, Sanat Pazarı, Takas Pazarı, Pazar, Atölye, Toplantı, Buluşma, Forum; DJ Seti, Canlı Set, Konser, Performans Sanatı, Canlı resim, Görsel, Sergi, Atölye, Sunum, Söyleşi.
+- **Event category**: Bass, Breaks, Punk, Synth, Art, in that order on the events page. The field keeps the label "Event type" from the first round of notes; say if it should be called "Event category" instead. Breaks is stored as "break", so old /events/#break links keep working.
+- No lineup had an act type yet, so nothing was moved there.
+- Existing event content was moved over (dj set and live set → Music, barter market → Swap Market, performance and live painting → Performance Art). Music events with nothing set got "Music":
+
+| Event | Before | Event content now |
+|---|---|---|
+| 2022-04-02-bass-night-ignishaan | – | Music (added: music event) |
+| 2022-05-03-bass-night-drumazan-speshaal | – | Music (added: music event) |
+| 2022-05-14-punk-zibidiler-tampon-bunu-sen-istedin | – | Music (added: music event) |
+| 2022-05-28-bass-night-genereshaan | – | Music (added: music event) |
+| 2022-11-17-decyphered-civilization | – | Music (added: music event) |
+| 2023-12-16-art-rejenere | live set | Music |
+| 2024-09-05-thursday-breaks-break-protocol | – | Music (added: music event) |
+| 2024-09-19-thursday-breaks-attack-vector | – | Music (added: music event) |
+| 2024-09-26-punk-krayat-goblin-daycare-potlatch | – | Music (added: music event) |
+| 2024-09-27-punk-krayat-ruff-crux-moko-hush | – | Music (added: music event) |
+| 2024-10-03-thursday-breaks-buffer-overload | – | Music (added: music event) |
+| 2024-10-10-thursday-breaks-proxy-firewall | live set | Music |
+| 2024-10-17-thursday-breaks-signature-strike | – | Music (added: music event) |
+| 2024-11-30-art-rehab-1-mental-orientation | art market, dj set | Art Market, Music |
+| 2024-12-22-art-rehab-2-sanatorium-for-the-sane | art market, dj set | Art Market, Music |
+| 2025-01-12-art-rehab-3-psyche-cure | art market, exhibition, dj set | Art Market, Exhibition, Music |
+| 2025-03-14-zero-day-exploit | – | Music (added: music event) |
+| 2025-06-15-synth-session-1 | live set | Music |
+| 2025-07-05-art-copusum | art market, barter market, performance, live painting | Art Market, Swap Market, Performance Art, Music (old tags had "music") |
+| 2025-11-01-bass-gkc-da-frogg | – | Music (added: music event) |
+| 2026-04-24-decentralized-consensus | – | Music (added: music event) |
+| 2026-05-08-punk-infuze-archongrid | performance | Music (added: concert), Performance Art |
+| 2026-09-04-synth-and-punk | – | Music (added: music event) |

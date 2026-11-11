@@ -3,7 +3,7 @@ title: "Thursday Breaks #3"
 codename: buffer overload
 category: break
 series: Thursday Breaks
-activities: []
+activities: ["Music"]
 flavor: []
 music_genres: ["Neurofunk","Hardcore Techno","Sextrance"]
 date: 2024-10-03

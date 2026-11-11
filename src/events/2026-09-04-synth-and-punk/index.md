@@ -3,7 +3,7 @@ title: "Synth Sessions & Punk Concert"
 codename: synth & punk
 category: synth
 series: Synth Sessions
-activities: []
+activities: ["Music"]
 flavor: ["Punk"]
 music_genres: ["Noise","IDM","Breakcore"]
 date: 2026-09-04

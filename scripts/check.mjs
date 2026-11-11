@@ -87,6 +87,16 @@ const flowList = (fm, key) => {
   const b = fm.match(new RegExp(`^${key}:\\s*\\n((?:\\s+-\\s+[^\\n]*\\n?)*)`, "m"));
   return b ? [...b[1].matchAll(/-\s+["']?(.+?)["']?\s*$/gm)].map((x) => x[1]) : [];
 };
+// Event content (activities) and lineup act types must come from the lists in src/_data/vocab.json.
+const VOCAB = JSON.parse(await readFile("src/_data/vocab.json", "utf8"));
+const inList = (list, v) => (list || []).some((x) => x.en === v);
+for await (const file of walk("src/events")) {
+  if (!file.endsWith("index.md")) continue;
+  const fm = ((await readFile(file, "utf8")).match(/^---\r?\n([\s\S]*?)\r?\n---/) || [])[1] || "";
+  const rel = file.split(path.sep).join("/");
+  for (const a of flowList(fm, "activities")) if (!inList(VOCAB.activities, a)) errors.push(`${rel}: event content "${a}" is not in Site texts → Lists`);
+  for (const m of fm.matchAll(/^\s+act_type:\s*["']?([^"'\n]*?)["']?\s*$/gm)) if (m[1] && !inList(VOCAB.act_types, m[1])) errors.push(`${rel}: act type "${m[1]}" is not in Site texts → Lists`);
+}
 for (const dir of ["src/events", "src/artists", "src/releases"]) {
   for await (const file of walk(dir)) {
     if (!file.endsWith(".md")) continue;

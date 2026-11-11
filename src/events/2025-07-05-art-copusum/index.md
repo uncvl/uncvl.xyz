@@ -2,7 +2,7 @@
 title: Çöpüşüm
 codename: copusum
 category: art
-activities: ["art market","barter market","performance","live painting"]
+activities: ["Art Market","Swap Market","Performance Art","Music"]
 flavor: []
 music_genres: []
 date: 2025-07-05

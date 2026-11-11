@@ -2,7 +2,7 @@
 title: Decyphered Civilization
 codename: decyphered civilization
 category: break
-activities: []
+activities: ["Music"]
 flavor: []
 music_genres: []
 series: Decypher × Uncivilization

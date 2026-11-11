@@ -3,7 +3,7 @@ title: "Drumazan Speshaal: Jung meets Da Frogg"
 codename: drumazan speshaal
 category: bass
 series: Bass Night
-activities: []
+activities: ["Music"]
 flavor: []
 music_genres: ["UK Garage","Breakbeat","Rave","Drum & Bass"]
 date: 2022-05-03

@@ -1,78 +1,86 @@
 {
   "activities": [
     {
-      "en": "dj set",
-      "tr": "dj seti"
+      "en": "Music",
+      "tr": "Müzik"
     },
     {
-      "en": "live set",
-      "tr": "canlı set"
+      "en": "Performance Art",
+      "tr": "Performans Sanatı"
     },
     {
-      "en": "concert",
-      "tr": "konser"
+      "en": "Exhibition",
+      "tr": "Sergi"
     },
     {
-      "en": "art market",
-      "tr": "sanat pazarı"
+      "en": "Art Market",
+      "tr": "Sanat Pazarı"
     },
     {
-      "en": "barter market",
-      "tr": "takas pazarı"
+      "en": "Swap Market",
+      "tr": "Takas Pazarı"
     },
     {
-      "en": "exhibition",
-      "tr": "sergi"
+      "en": "Market",
+      "tr": "Pazar"
     },
     {
-      "en": "lecture",
-      "tr": "söyleşi"
+      "en": "Workshop",
+      "tr": "Atölye"
     },
     {
-      "en": "workshop",
-      "tr": "atölye"
+      "en": "Meeting",
+      "tr": "Toplantı"
     },
     {
-      "en": "performance",
-      "tr": "performans"
+      "en": "Gathering",
+      "tr": "Buluşma"
     },
     {
-      "en": "live painting",
-      "tr": "canlı resim"
-    },
-    {
-      "en": "screening",
-      "tr": "gösterim"
+      "en": "Forum",
+      "tr": "Forum"
     }
   ],
   "act_types": [
     {
-      "en": "DJ set",
-      "tr": "DJ seti"
+      "en": "DJ Set",
+      "tr": "DJ Seti"
     },
     {
-      "en": "Live",
-      "tr": "Canlı"
+      "en": "Live Set",
+      "tr": "Canlı Set"
     },
     {
-      "en": "Performance",
-      "tr": "Performans"
+      "en": "Concert",
+      "tr": "Konser"
     },
     {
-      "en": "VJ",
-      "tr": "VJ"
+      "en": "Performance Art",
+      "tr": "Performans Sanatı"
+    },
+    {
+      "en": "Live painting",
+      "tr": "Canlı resim"
     },
     {
       "en": "Visuals",
       "tr": "Görsel"
     },
     {
-      "en": "MC",
-      "tr": "MC"
+      "en": "Exhibition",
+      "tr": "Sergi"
     },
     {
-      "en": "Talk",
-      "tr": "Konuşma"
+      "en": "Workshop",
+      "tr": "Atölye"
+    },
+    {
+      "en": "Presentation",
+      "tr": "Sunum"
+    },
+    {
+      "en": "Lecture",
+      "tr": "Söyleşi"
     }
   ]
 }

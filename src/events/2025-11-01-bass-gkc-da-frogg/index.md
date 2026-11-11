@@ -3,7 +3,7 @@ title: "Uncivilization Bass: GKC & Da Frogg"
 codename: gkc & da frogg
 category: bass
 series: Uncivilization Bass
-activities: []
+activities: ["Music"]
 flavor: []
 music_genres: ["Dub","Hip Hop","Breakbeat","UK Garage","Drum & Bass","Jungle"]
 date: 2025-11-01

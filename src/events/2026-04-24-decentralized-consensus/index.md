@@ -2,7 +2,7 @@
 title: Decentralized Consensus
 codename: decentralized consensus
 category: break
-activities: []
+activities: ["Music"]
 flavor: ["Bass","Break","Core","Punk"]
 music_genres: []
 date: 2026-04-24

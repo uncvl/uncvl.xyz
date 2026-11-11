@@ -1,7 +1,7 @@
 ---
 title: "Krayat | Goblin Daycare | Potlatch"
 category: punk
-activities: []
+activities: ["Music"]
 flavor: ["Punk"]
 music_genres: ["Hardcore Punk"]
 date: 2024-09-26
