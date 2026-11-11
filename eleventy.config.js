@@ -54,7 +54,7 @@ export default function (eleventyConfig) {
   const noMaps = { filter: ["**/*", "!**/*.map"] };
   eleventyConfig.addPassthroughCopy({ "node_modules/@sveltia/cms/dist/sveltia-cms.js": "admin/sveltia-cms.js" });
   eleventyConfig.addPassthroughCopy({ "node_modules/@sveltia/cms/dist/chunks": "admin/chunks" }, noMaps);
-  // LAB (branch lab/scroll-momentum): Pretext text layout, browser ES modules as published
+  // Pretext (text layout for the glitch scroll effect, src/assets/js/scroll-fx.js): browser ES modules as published
   eleventyConfig.addPassthroughCopy({ "node_modules/@chenglou/pretext/dist": "assets/js/vendor/pretext" }, { filter: ["**/*.js"] });
   // full-size masters stay downloadable next to their page bundle (linked from posters/gallery)
   eleventyConfig.addPassthroughCopy("src/events/**/*.{jpg,jpeg,png,webp}");

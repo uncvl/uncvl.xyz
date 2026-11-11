@@ -1,4 +1,5 @@
-// LAB (local experiment, branch lab/scroll-momentum): letters that lag behind fast scrolling.
+// Glitch scroll: letters that lag behind fast scrolling. On/off with the warning-sign button next to
+// the language switch (remembered per browser; off by default for people who ask for reduced motion).
 //
 // How it works
 //  - Each text block is split into styled runs (one per text node: its own font, colour, letter
@@ -186,35 +187,26 @@ function sourceIndices(text, from, fragText) {
 
 // ---------- layout of every text block (only on load / resize / language switch) ----------
 let blocks = [];
-const stats = { measureMs: 0, measures: 0, frames: 0, updateMs: 0, drawMs: 0, worstMs: 0, drawn: 0 };
 // Measuring every text block at once takes 50-80 ms (Pretext's first pass over the text, styles,
 // Range boxes). It's done in slices instead: find the blocks (cheap), then measure them a few at a
 // time while the browser is idle, the ones nearest the screen first. Blocks not measured yet just
 // keep their real text.
 const idle = window.requestIdleCallback || ((fn) => setTimeout(() => fn({ timeRemaining: () => 8 }), 16));
-let queue = [], pumping = false, sliceMs = 0, longestSlice = 0;
+let queue = [], pumping = false;
 function measureBlocks() {
-  const t0 = performance.now();
   blocks = [];
   queue = findBlocks();
   const mid = scrollY + viewH / 2;
   queue.sort((a, b) => Math.abs(a.top - mid) - Math.abs(b.top - mid));
   lastSig = layoutSig(); // remember the layout this measurement belongs to
-  sliceMs = performance.now() - t0; longestSlice = sliceMs;
-  stats.measures++;
   if (!pumping) { pumping = true; idle(pump); }
 }
 function pump(deadline) {
-  const t0 = performance.now();
   while (queue.length && deadline.timeRemaining() > 2) measureOne(queue.shift().el);
-  const dt = performance.now() - t0;
-  sliceMs += dt; longestSlice = Math.max(longestSlice, dt);
   if (queue.length) return idle(pump);
   pumping = false;
-  stats.measureMs = +sliceMs.toFixed(1); stats.longestSliceMs = +longestSlice.toFixed(1);
 }
 let fragSeq = 0;
-const label = (el) => el.tagName.toLowerCase() + (el.className && typeof el.className === "string" ? "." + el.className.split(" ").filter((c) => c !== "fx-t")[0] : "") + ": " + el.textContent.trim().slice(0, 40);
 function findBlocks() {
   clipCache.clear();
   const containers = new Set();
@@ -236,15 +228,12 @@ function findBlocks() {
   return out;
 }
 
-// Where letters go. "dom": every styled run is pinned to the browser's own boxes (Range rects),
-// exact. "pretext": one box per block from the DOM, everything inside placed by Pretext's layout
-// (lines, line height, alignment, advances) without asking the DOM. "auto" (default): "pretext"
-// for plain text blocks, "dom" for anything with layout Pretext can't see (padded inline bits,
-// flex/grid alignment, preformatted text, inline boxes).
-let PLACE = ["dom", "pretext", "auto"].includes(store.get("place", "auto")) ? store.get("place", "auto") : "auto";
-const autoStats = { pretext: 0, dom: 0 }; // how many blocks "auto" placed which way
+// Where letters go, decided per block ("auto"): plain text blocks are placed by Pretext alone (one
+// box from the DOM, lines/line height/alignment/advances from Pretext, within 1 px of the browser);
+// blocks with layout Pretext can't see (padded inline bits, flex/grid alignment, preformatted text,
+// inline boxes) pin every styled run to the browser's own boxes (Range rects) instead.
 function measureOne(el) {
-  const chars = layoutBlock(el, PLACE);
+  const chars = layoutBlock(el, "auto");
   if (!chars || !chars.length) return;
   const top = Math.min(...chars.map((c) => c.y)) - 60, bottom = Math.max(...chars.map((c) => c.y)) + 20;
   blocks.push({ el, top, height: bottom - top, chars });
@@ -270,7 +259,6 @@ function layoutBlock(el, place) {
     const plainBox = (cs.display === "block" || cs.display === "list-item") && cs.whiteSpace === "normal" &&
       cs.textAlign !== "justify" && !px(cs.textIndent);
     place = plainBox && paras.plain ? "pretext" : "dom";
-    autoStats[place]++;
   }
   for (const runs of paras) {
     let prepared;
@@ -344,7 +332,6 @@ const accent = { a: "#ff3d7f", b: "#33e0ff" };
 
 function frame() {
   raf = 0;
-  const tStart = performance.now();
   const p = MODES[mode];
   if (!on || !p) return settle();
   const dy = scrollY - lastY;
@@ -381,11 +368,7 @@ function frame() {
   }
   if (!energy && !injects.some(Boolean)) return settle();
   if (!moving) { moving = true; document.documentElement.classList.add("fx-moving"); }
-  const tDraw = performance.now();
   draw(p);
-  const tEnd = performance.now();
-  stats.frames++; stats.updateMs += tDraw - tStart; stats.drawMs += tEnd - tDraw;
-  stats.worstMs = Math.max(stats.worstMs, tEnd - tStart);
   raf = requestAnimationFrame(frame);
 }
 
@@ -414,7 +397,6 @@ function draw(p) {
       for (const sh of st.shadows) { ctx.fillStyle = sh.color; ctx.fillText(text, x + sh.x, y + sh.y); }
       ctx.fillStyle = st.color;
       ctx.fillText(text, x, y);
-      stats.drawn++;
     }
     if (st.underline) {
       ctx.fillStyle = st.color;
@@ -511,77 +493,3 @@ paintToggle();
 const langSwitch = document.querySelector(".site-header .lang-switch");
 if (langSwitch) langSwitch.after(toggle);
 else (document.querySelector(".site-header__inner") || document.body).appendChild(toggle);
-
-// debug: document.dispatchEvent(new CustomEvent("fx-debug", { detail: "still" | "clear" })) draws the
-// canvas letters at rest over the hidden real text (or clears them), to compare the two
-document.addEventListener("fx-debug", (e) => {
-  if (e.detail === "still") {
-    cancelAnimationFrame(raf); raf = 0; settle(); lastY = scrollY;
-    document.documentElement.classList.add("fx-moving");
-    draw({}); // all letters at rest
-  }
-  else if (e.detail && e.detail.report) {
-    // compare stored letter positions with fresh DOM boxes for the first block matching a selector
-    const b = blocks.find((x) => x.el.matches(e.detail.report));
-    const out = [];
-    if (b) {
-      const tw = document.createTreeWalker(b.el, NodeFilter.SHOW_TEXT);
-      let node = tw.nextNode(); while (node && !node.data.trim()) node = tw.nextNode();
-      const i0 = node.data.search(/S/);
-      for (let i = 0; i < 4; i++) {
-        const box = charBox(node, i0 + i);
-        const c = b.chars[i];
-        ctx.font = c.st.font;
-        out.push({ ch: c.ch, stored: +(c.x).toFixed(2), dom: +box.left.toFixed(2), font: c.st.font.slice(0, 40), lb: +ctx.measureText(c.ch).actualBoundingBoxLeft.toFixed(2) });
-      }
-    }
-    document.documentElement.dataset.fxReport = JSON.stringify(out);
-  }
-  else if (e.detail === "clear") settle();
-  document.documentElement.dataset.fxLetters = blocks.reduce((n, b) => n + b.chars.length, 0);
-  if (e.detail === "stats") {
-    const n = Math.max(1, stats.frames);
-    document.documentElement.dataset.fxStats = JSON.stringify({
-      letters: blocks.reduce((m, b) => m + b.chars.length, 0), blocks: blocks.length,
-      measureMs: stats.measureMs, longestSliceMs: stats.longestSliceMs, measures: stats.measures, frames: stats.frames,
-      updateMsAvg: +(stats.updateMs / n).toFixed(2), drawMsAvg: +(stats.drawMs / n).toFixed(2),
-      worstFrameMs: +stats.worstMs.toFixed(1), drawCallsPerFrame: Math.round(stats.drawn / n),
-    });
-  }
-  if (e.detail && e.detail.place) {
-    PLACE = e.detail.place; store.set("place", PLACE);
-    settle(); blocks = []; for (const q of findBlocks()) measureOne(q.el); // synchronous, for testing
-  }
-  if (e.detail === "compare" || (e.detail && e.detail.compare)) {
-    const other = (e.detail && e.detail.compare) || "auto";
-    const els = blocks.map((b) => b.el);
-    const time = (place) => { const t0 = performance.now(); const out = els.map((el) => layoutBlock(el, place)); return { ms: performance.now() - t0, out }; };
-    time("dom"); time(other); // warm both (caches, fonts)
-    autoStats.pretext = autoStats.dom = 0;
-    const D = time("dom"), P = time(other);
-    const errs = [], worst = [];
-    let mismatched = 0;
-    els.forEach((el, k) => {
-      const a = D.out[k] || [], b = P.out[k] || [];
-      if (a.length !== b.length) { mismatched++; worst.push({ where: label(el), err: "different line breaks / letter count" }); return; }
-      let blockMax = 0;
-      a.forEach((c, i) => {
-        if (!c.ch.trim()) return;
-        const d = Math.hypot(c.x - b[i].x, c.y - b[i].y);
-        errs.push(d); blockMax = Math.max(blockMax, d);
-      });
-      if (blockMax > 1) worst.push({ where: label(el), err: +blockMax.toFixed(1) });
-    });
-    errs.sort((x, y) => x - y);
-    const pct = (lim) => +(100 * errs.filter((d) => d <= lim).length / Math.max(1, errs.length)).toFixed(1);
-    document.documentElement.dataset.fxCompare = JSON.stringify({
-      blocks: els.length, letters: errs.length, blocksWithDifferentBreaks: mismatched,
-      within05px: pct(0.5), within1px: pct(1), within2px: pct(2),
-      medianPx: +(errs[Math.floor(errs.length / 2)] || 0).toFixed(2), p95Px: +(errs[Math.floor(errs.length * 0.95)] || 0).toFixed(2), maxPx: +(errs[errs.length - 1] || 0).toFixed(1),
-      mode: other, layoutMsDom: +D.ms.toFixed(1), layoutMsOther: +P.ms.toFixed(1),
-      autoBlocks: other === "auto" ? { ...autoStats } : undefined,
-      worst: worst.sort((x, y) => (typeof y.err === "number" ? y.err : 999) - (typeof x.err === "number" ? x.err : 999)).slice(0, 8),
-    });
-  }
-  if (e.detail === "reset-stats") Object.assign(stats, { frames: 0, updateMs: 0, drawMs: 0, worstMs: 0, drawn: 0 });
-});

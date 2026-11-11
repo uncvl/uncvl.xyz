@@ -1,4 +1,4 @@
-/* LAB (local experiment): scroll momentum letters, see /assets/js/lab/scroll-fx.js */
+/* Glitch scroll: letters lag behind fast scrolling, see /assets/js/scroll-fx.js */
 .fx-canvas { position: fixed; left: 0; top: 0; pointer-events: none; z-index: 5; } /* size set by the script (visible area, no scrollbar) */
 /* while letters are moving, the real text is invisible (still selectable / readable by screen readers) */
 .fx-moving .fx-t, .fx-moving .fx-t * { color: transparent !important; text-shadow: none !important; }

@@ -102,6 +102,7 @@ npm run strip-metadata   # remove EXIF/XMP/GPS from images in src/ (lossless); r
 - **Languages:** EN and TR live in the same file (`text_en` / `text_tr`). A small script shows one at a time and remembers the choice. Without JavaScript both are shown.
 - **Upcoming/past:** computed from `date` at build time. CI rebuilds daily (cron `17 3 * * *`).
 - **Privacy/security:** no third-party requests on page load. Fonts are self-hosted, and YouTube, Bandcamp and SoundCloud players load only after a click. A strict CSP is in `public/_headers`. `/admin/*` has its own CSP.
+- **Glitch scroll:** while you scroll fast, letters lag behind and catch up (the middle of each line last). `src/assets/js/scroll-fx.js` lays out the text with [Pretext](https://github.com/chenglou/pretext) and redraws it on one canvas; the real text is hidden only while letters move. The warning-sign button next to EN | TR turns it off (remembered; off by default with reduced motion).
 
 ### CMS uploads to R2
 
