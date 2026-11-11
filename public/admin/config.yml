@@ -380,8 +380,12 @@ collections:
         file: src/_data/sound.json
         format: json
         fields:
-          - { name: intro_en, label: Intro (EN), widget: markdown, required: false }
-          - { name: intro_tr, label: Giriş (TR), widget: markdown, required: false }
+          - { name: intro_en, label: About the Uncivilization sound (EN), widget: markdown, required: false, hint: "Shown at the top of /sound/. Empty = not shown." }
+          - { name: intro_tr, label: Uncivilization sesi hakkında (TR), widget: markdown, required: false }
+          - { name: types_en, label: Genre types (EN), widget: markdown, required: false, hint: "The GENRE TYPES section: supergenre, music genre, subgenre…" }
+          - { name: types_tr, label: Tür tipleri (TR), widget: markdown, required: false }
+          - { name: types_note_en, label: Genre types note (EN), widget: markdown, required: false, hint: "Shown in a box under the genre types." }
+          - { name: types_note_tr, label: Tür tipleri notu (TR), widget: markdown, required: false }
       - name: descriptors
         label: Descriptors / Tanımlayıcılar
         file: src/_data/descriptors.json

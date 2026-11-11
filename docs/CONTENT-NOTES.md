@@ -283,3 +283,8 @@ Only genres the artist's own bio or lineup note names were added. Event genres w
 | Bunu Sen İstedin | Acoustic Punk |
 
 Still empty: 500001K, Aziz Deliorman, Codex, GKC, Gouachi, ja11hhcc7216, Koi Failure, Loremipsum, Mondual, nxnblu, Tampon, Tetrax, VCO2, Zibidiler (Tampon and Zibidiler are described only as "punk", which is a supergenre).
+
+### Sound page (notes 2)
+- The "Genre types" text was added as sent. One spot looks garbled: "used interchangeablynot through with microgenre" (Niche genres). Fix it in the CMS: Site texts → Sound page → Genre types (EN).
+- The text about the Uncivilization sound is not written yet; the top of /sound/ stays empty until it is (Site texts → Sound page → About the Uncivilization sound).
+- There is no "Concept & Themes" page yet to link to the Sound page from.

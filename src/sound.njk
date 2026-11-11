@@ -6,15 +6,24 @@ permalink: /sound/
 description: The sound of Uncivilization — supergenres, music genres and the words we use to describe music.
 ---
 {%- import "macros.njk" as ui with context -%}
-{%- set untagged = collections.genres | genresOf() -%}
 <div class="wrap sound">
   <header class="list-head">
     <p class="kline">$ ls ./sound · {{ collections.supergenres.length }} {% t "supergenres", "üst tür" %} · {{ collections.genres.length }} {% t "genres", "tür" %}</p>
     <h1 class="list-head__title">{% t "Sound", "Ses" %}</h1>
-    <p class="chips"><a class="chip" href="#supergenres">{% t "Supergenres", "Üst türler" %}</a><a class="chip" href="#genres">{% t "Genres", "Türler" %}</a><a class="chip" href="#descriptors">{% t "Descriptors", "Tanımlayıcılar" %}</a></p>
+    <p class="chips">{% if sound.types_en or sound.types_tr %}<a class="chip" href="#genre-types">{% t "Genre types", "Tür tipleri" %}</a>{% endif %}<a class="chip" href="#supergenres">{% t "Supergenres", "Üst türler" %}</a><a class="chip" href="#genres">{% t "Genres", "Türler" %}</a><a class="chip" href="#descriptors">{% t "Descriptors", "Tanımlayıcılar" %}</a></p>
   </header>
 
+  {#- text about the Uncivilization sound: shown once it is written (Site texts → Sound page) -#}
   {%- if sound.intro_en or sound.intro_tr %}<div class="sound__intro">{{ ui.bitext(sound.intro_en, sound.intro_tr) }}</div>{% endif %}
+
+  {%- if sound.types_en or sound.types_tr %}
+  <section aria-labelledby="genre-types">
+    {{ ui.sect("GENRE TYPES", "TÜR TİPLERİ", "", "genre-types") }}
+    {{ ui.bitext(sound.types_en, sound.types_tr) }}
+    {%- set nEn = sound.types_note_en or sound.types_note_tr %}{% set nTr = sound.types_note_tr or sound.types_note_en %}
+    {%- if nEn %}<div class="note sound__note"><div class="l-en" lang="en">{{ nEn | md | safe }}</div><div class="l-tr" lang="tr">{{ nTr | md | safe }}</div></div>{% endif %}
+  </section>
+  {%- endif %}
 
   <section aria-labelledby="supergenres">
     {{ ui.sect("SUPERGENRES", "ÜST TÜRLER", "", "supergenres") }}
@@ -26,22 +35,13 @@ description: The sound of Uncivilization — supergenres, music genres and the w
   </section>
 
   <section aria-labelledby="genres">
-    {{ ui.sect("GENRES", "TÜRLER", "", "genres") }}
-    {%- for s in collections.supergenres %}
-    {%- set gs = collections.genres | genresOf(s.data.name) %}
-    {%- if gs.length %}
-    <div class="genre-group">
-      <h3 class="genre-group__head" id="g-{{ s.page.fileSlug }}"><a href="{{ s.url }}"><span class="code">{{ s.data.code }}</span> {{ s.data.name }}</a></h3>
-      <ul class="genre-list genre-list--links">{% for g in gs %}<li><a href="{{ g.url }}">{{ g.data.name }}</a></li>{% endfor %}</ul>
-    </div>
-    {%- endif %}
-    {%- endfor %}
-    {%- if untagged.length %}
-    <div class="genre-group">
-      <h3 class="genre-group__head" id="g-other"><span class="code">·</span> {% t "Other", "Diğer" %}</h3>
-      <ul class="genre-list genre-list--links">{% for g in untagged %}<li><a href="{{ g.url }}">{{ g.data.name }}</a></li>{% endfor %}</ul>
-    </div>
-    {%- endif %}
+    {{ ui.sect("GENRES", "TÜRLER", collections.genres.length, "genres") }}
+    {#- one list in the sorted order of the team (Sound: Genres → Position), with supergenre codes -#}
+    <ol class="sorted-genres">
+      {%- for g in collections.genres %}
+      <li><a href="{{ g.url }}">{{ g.data.name }}</a>{% if g.data.supergenres and g.data.supergenres.length %} <span class="sorted-genres__codes" title="{{ g.data.supergenres | join(', ') }}">{% for n in g.data.supergenres %}{% set sp = collections.supergenres | byName(n) %}{% if sp %}{{ sp.data.code }}{% endif %}{% endfor %}</span>{% endif %}</li>
+      {%- endfor %}
+    </ol>
   </section>
 
   <section aria-labelledby="descriptors">
