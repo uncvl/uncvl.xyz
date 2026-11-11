@@ -1,0 +1,9 @@
+---
+name: "Cybergrind"
+supergenres: ["Metal","Core","Industrial"]
+order: 78
+links: []
+description_en: |-
+  Cybergrind is a form of grindcore that, aside from the instruments used by ordinary grindcore band, uses synths, MIDI files, drum machines and sampling to create an even more discordant and rapid-fire extreme sound.
+description_tr: ""
+---

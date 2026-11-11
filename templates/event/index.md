@@ -6,8 +6,8 @@ codename: zero day exploit           # optional: shown big as ZERO_DAY_EXPLOIT
 category: break                      # event type: bass | break | punk | art | synth
 series: Thursday Breaks              # optional
 activities: [dj set, live set]       # from Site texts → Lists (dj set, live set, concert, art market…)
-flavor: [bass, breaks, core]         # shown as bass ⤬ breaks ⤬ core
-music_genres: [Breakcore, Jungle]    # from the genre list (Site texts → Lists)
+flavor: [Bass, Break, Core]          # supergenres (src/sound/supergenres), shown as bass ⤬ break ⤬ core
+music_genres: [Breakcore, Jungle]    # genre names from src/sound/genres (Sound → Genres in the CMS)
 date: 2026-12-04                     # YYYY-MM-DD: decides "upcoming" vs "past" automatically
 doors: "21:00"
 stage: "22:00"

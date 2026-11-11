@@ -2,7 +2,7 @@
 title: "Punk Concert: Zibidiler, Tampon, Bunu Sen İstedin"
 category: punk
 activities: []
-flavor: ["punk"]
+flavor: ["Punk"]
 music_genres: []
 date: 2022-05-14
 doors: "20:30"

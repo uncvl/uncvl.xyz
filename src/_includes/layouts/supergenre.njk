@@ -1,0 +1,34 @@
+---
+layout: base.njk
+---
+{%- import "macros.njk" as ui with context -%}
+{%- set gs = collections.genres | genresOf(name) -%}
+{%- set evs = collections.events | withFlavor(name) | reverse -%}
+<article class="wrap text-page sound">
+  <header class="text-page__head">
+    <p class="kline"><a href="/sound/">{% t "sound", "ses" %}</a> · {% t "supergenre", "üst tür" %} · {{ code }}</p>
+    <h1 class="text-page__title"><span class="code code--big" aria-hidden="true">{{ code }}</span> {{ name }}</h1>
+  </header>
+
+  {%- if description_en or description_tr %}{{ ui.bitext(description_en, description_tr) }}{% endif %}
+
+  {%- if gs.length %}
+  <section aria-labelledby="s-genres">
+    {{ ui.sect("GENRES", "TÜRLER", gs.length, "s-genres") }}
+    <ul class="names">{% for g in gs %}<li><a href="{{ g.url }}">{{ g.data.name }}</a></li>{% endfor %}</ul>
+  </section>
+  {%- endif %}
+
+  {%- if evs.length %}
+  <section aria-labelledby="s-events">
+    {{ ui.sect("EVENTS", "ETKİNLİKLER", evs.length, "s-events") }}
+    <ol class="log">{% for e in evs %}{{ ui.logrow(e) }}{% endfor %}</ol>
+  </section>
+  {%- endif %}
+
+  <nav class="pager" aria-label="Supergenres">
+    <span></span>
+    <a href="/sound/" class="pager__all">{% t "all supergenres", "tüm üst türler" %}</a>
+    <span></span>
+  </nav>
+</article>

@@ -1,0 +1,50 @@
+---
+layout: base.njk
+---
+{%- import "macros.njk" as ui with context -%}
+{%- set nb = collections.genres | neighbors(page.url) -%}
+{%- set evs = collections.events | withGenre(name) | reverse -%}
+{%- set arts = collections.artists | withGenre(name) -%}
+{%- set rels = collections.releases | withGenre(name) -%}
+<article class="wrap text-page sound">
+  <header class="text-page__head">
+    <p class="kline"><a href="/sound/">{% t "sound", "ses" %}</a> · {% t "genre", "tür" %} {{ (nb.index + 1) | hex }}</p>
+    <h1 class="text-page__title">{{ name }}</h1>
+    {%- if supergenres and supergenres.length %}
+    <p class="chips">{% for s in supergenres %}{% set sp = collections.supergenres | byName(s) %}{% if sp %}<a class="chip chip--super" href="{{ sp.url }}"><span class="code">{{ sp.data.code }}</span> {{ sp.data.name }}</a>{% endif %}{% endfor %}</p>
+    {%- endif %}
+  </header>
+
+  {%- if description_en or description_tr %}{{ ui.bitext(description_en, description_tr) }}{% endif %}
+
+  {%- if links and links.length %}
+  <p class="elsewhere"><span class="k">{% t "see also", "ayrıca bak" %}</span> {% for l in links %}<a href="{{ l.url }}" rel="noopener noreferrer">{{ l.name }} ↗</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+  {%- endif %}
+
+  {%- if evs.length %}
+  <section aria-labelledby="g-events">
+    {{ ui.sect("EVENTS", "ETKİNLİKLER", evs.length, "g-events") }}
+    <ol class="log">{% for e in evs %}{{ ui.logrow(e) }}{% endfor %}</ol>
+  </section>
+  {%- endif %}
+
+  {%- if arts.length %}
+  <section aria-labelledby="g-artists">
+    {{ ui.sect("ARTISTS", "SANATÇILAR", arts.length, "g-artists") }}
+    <ul class="names">{% for a in arts %}<li><a href="{{ a.url }}">{{ a.data.name }}</a></li>{% endfor %}</ul>
+  </section>
+  {%- endif %}
+
+  {%- if rels.length %}
+  <section aria-labelledby="g-releases">
+    {{ ui.sect("RELEASES", "YAYINLAR", rels.length, "g-releases") }}
+    <ul class="tiles">{% for r in rels %}{{ ui.tile(r, "release") }}{% endfor %}</ul>
+  </section>
+  {%- endif %}
+
+  <nav class="pager" aria-label="Genres">
+    {%- if nb.prev %}<a rel="prev" href="{{ nb.prev.url }}"><span class="k">&lt; prev</span>{{ nb.prev.data.name }}</a>{% else %}<span></span>{% endif %}
+    <a href="/sound/#genres" class="pager__all">{% t "all genres", "tüm türler" %}</a>
+    {%- if nb.next %}<a rel="next" href="{{ nb.next.url }}"><span class="k">next &gt;</span>{{ nb.next.data.name }}</a>{% else %}<span></span>{% endif %}
+  </nav>
+</article>

@@ -5,7 +5,8 @@ type: compilation
 status: open-call
 order: 3
 artist_line: Various Artists
-genres: [punk]
+flavor: ["Punk"]
+music_genres: []
 text_en: |
   Z) : PuNK
   MUSIC: both analog and digital

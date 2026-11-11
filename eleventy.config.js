@@ -119,6 +119,10 @@ export default function (eleventyConfig) {
     });
   eleventyConfig.addCollection("calls", callsSorted);
   eleventyConfig.addCollection("openCalls", (api) => callsSorted(api).filter((c) => c.data.status !== "closed"));
+  // Sound: music genres and supergenres (src/sound/), in the order the team sorted them
+  const byOrder = (a, b) => (a.data.order ?? 999) - (b.data.order ?? 999) || a.data.name.localeCompare(b.data.name);
+  eleventyConfig.addCollection("genres", (api) => published(api.getFilteredByGlob("src/sound/genres/*.md")).sort(byOrder));
+  eleventyConfig.addCollection("supergenres", (api) => published(api.getFilteredByGlob("src/sound/supergenres/*.md")).sort(byOrder));
   eleventyConfig.addCollection("posts", (api) =>
     api.getFilteredByGlob("src/posts/**/*.md").filter((p) => !p.data.draft).sort((a, b) => byDateAsc(b, a))
   );
@@ -267,6 +271,19 @@ export default function (eleventyConfig) {
       embed: `https://${host}/videos/embed/${id}?autoplay=1&title=0&warningTitle=0&peertubeLink=0`,
     };
   });
+
+  // ---- Sound: genre / supergenre lookups. Fields store names ("Drum & Bass", "Core"), matched case-insensitively.
+  const same = (a, b) => String(a || "").trim().toLowerCase() === String(b || "").trim().toLowerCase();
+  const has = (list, name) => (Array.isArray(list) ? list : []).some((x) => same(x, name));
+  // the genre/supergenre page for a name (or undefined)
+  eleventyConfig.addFilter("byName", (items, name) => (items || []).find((i) => same(i.data.name, name)));
+  // events / artists / releases tagged with a genre (music_genres) or a supergenre (flavor)
+  eleventyConfig.addFilter("withGenre", (items, name) => (items || []).filter((i) => has(i.data.music_genres, name)));
+  eleventyConfig.addFilter("withFlavor", (items, name) => (items || []).filter((i) => has(i.data.flavor, name)));
+  // genres belonging to a supergenre; with no name: genres without any supergenre
+  eleventyConfig.addFilter("genresOf", (genres, sup) =>
+    (genres || []).filter((g) => (sup ? has(g.data.supergenres, sup) : !(g.data.supergenres || []).length))
+  );
 
   // Turkish label of a vocabulary value (src/_data/vocab.json lists of {en, tr}); falls back to the value.
   eleventyConfig.addFilter("vocabTr", (value, list) => {

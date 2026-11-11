@@ -4,7 +4,7 @@ codename: synth & punk
 category: synth
 series: Synth Sessions
 activities: []
-flavor: ["punk"]
+flavor: ["Punk"]
 music_genres: ["Noise","IDM","Breakcore"]
 date: 2026-09-04
 venue:

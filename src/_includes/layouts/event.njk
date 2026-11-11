@@ -23,7 +23,7 @@ ogType: article
         {%- if poster_credit %}<figcaption class="hero__credit">{{ poster_credit | md | safe }}</figcaption>{% endif %}
       </figure>
       <div class="hero__meta">
-        <p class="kline">evt {{ seq | hex }} · {{ category }}{% if series %} · {{ series | lower }}{% endif %}{% if flavor and flavor.length %} · {{ ui.genres(flavor) }}{% endif %}{% if upcoming %} · <span class="ok">{% t "upcoming", "yaklaşan" %}</span>{% endif %}</p>
+        <p class="kline">evt {{ seq | hex }} · {{ category }}{% if series %} · {{ series | lower }}{% endif %}{% if flavor and flavor.length %} · {{ ui.flavor(flavor) }}{% endif %}{% if upcoming %} · <span class="ok">{% t "upcoming", "yaklaşan" %}</span>{% endif %}</p>
         {%- if codename %}<p class="glitch" aria-hidden="true">{{ codename | codename | wbr | safe }}</p>{% endif %}
         <h1 class="hero__title">{{ title }}</h1>
         <dl class="facts">
@@ -34,7 +34,7 @@ ogType: article
           {%- if stage %}<dt>{% t "stage", "sahne" %}</dt><dd>{{ stage }}</dd>{% endif %}
           {%- if price %}<dt>{% t "ticket", "bilet" %}</dt><dd class="ok">{{ price }}</dd>{% endif %}
           {%- if activities and activities.length %}<dt>{% t "activity", "etkinlik" %}</dt><dd>{% for a in activities %}{% t a, a | vocabTr(vocab.activities) %}{% if not loop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
-          {%- if music_genres and music_genres.length %}<dt>{% t "genres", "türler" %}</dt><dd>{{ music_genres | join(", ") }}</dd>{% endif %}
+          {%- if music_genres and music_genres.length %}<dt>{% t "genres", "türler" %}</dt><dd>{{ ui.genreLinks(music_genres) }}</dd>{% endif %}
         </dl>
       </div>
     </div>

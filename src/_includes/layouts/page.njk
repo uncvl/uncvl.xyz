@@ -15,6 +15,6 @@ bodyClass: page-text
   {%- if cover %}<figure class="text-page__cover">{% image cover | bundle(page.inputPath), "", "(min-width: 50rem) 46rem, 100vw", true %}</figure>{% endif %}
   {%- if text_en or text_tr %}{% if wrapClass %}<div class="{{ wrapClass }}">{% endif %}{{ ui.bitext(text_en, text_tr) }}{% if wrapClass %}</div>{% endif %}{% endif %}
   {%- if content | trim %}<div class="prose">{{ content | safe }}</div>{% endif %}
-  {%- if genre_list_label %}<p class="genre-list"><span class="k">{{ genre_list_label }}</span> {{ vocab.music_genres | join(", ") }}</p>{% endif %}
+  {%- if genre_list_label %}<p class="genre-list"><span class="k">{{ genre_list_label }}</span> {% for g in collections.genres %}<a href="{{ g.url }}">{{ g.data.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %} · <a href="/sound/">{% t "more on the Sound page", "Ses sayfasında daha fazlası" %} →</a></p>{% endif %}
   {{ ui.players({ listen: listen, links: links, bandcamp_id: bandcamp_id, title: title, name: name } | players) }}
 </article>

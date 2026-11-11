@@ -3,7 +3,7 @@ title: Çöpüşüm
 codename: copusum
 category: art
 activities: ["art market","barter market","performance","live painting"]
-flavor: ["music"]
+flavor: []
 music_genres: []
 date: 2025-07-05
 stage: "19:00"

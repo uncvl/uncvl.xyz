@@ -23,15 +23,22 @@
 ### Event fields
 - **Event type**: groups the event on the events page (art, break, bass, punk, synth).
 - **Activity**: what happens (dj set, live set, concert, art market, exhibition, lecture…). Pick from the list.
-- **Event flavor**: a few short words, shown as *bass ⤬ breaks ⤬ core* above the title.
-- **Music genres**: pick from the genre list (you can type to search).
+- **Event flavor**: pick supergenres (Bass, Break, Core, Punk…), shown as *bass ⤬ break ⤬ core* above the title.
+- **Music genres**: type a few letters and pick one or more genres. Each one links to its page on the Sound page.
 - **Credit**: shown under the poster, e.g. *Artwork: …, Poster design: …*.
 - **Lineup**: for each artist, **Duration** (e.g. *75 min*), **Act type** (DJ set, Live, Performance…) and an optional note. They show in the artist's box. Start times go in the **Schedule**.
 - **Videos**: paste the link of the video on our PeerTube channel (https://v.basspistol.org/c/uncivilization_channel/videos). YouTube is no longer used.
 - **Sound recordings**: a SoundCloud playlist or track recorded at the event. Shown under SOUND RECORDINGS.
 
 ### Lists
-**Site texts → Lists / Listeler** holds the choices for Activity, Act type and Music genres. Add a new one there and it becomes available in every event. The music genre list is also the genre list on the About page.
+**Site texts → Lists / Listeler** holds the choices for Activity and Act type. Add a new one there and it becomes available in every event.
+
+### Sound (genres)
+- **Sound: Genres** has one entry per music genre: name, supergenres, description (EN/TR) and "see also" links. Each genre gets a page under /sound/genres/ that lists the events, artists and releases tagged with it. A new genre added here can be picked on events, artists and releases right away.
+- **Sound: Supergenres** holds the umbrella terms (Bass, Break, Core…), with a letter code and a definition. Event and release **Flavor** picks from these.
+- **Artists** and **Releases** have a **Music genres** field too.
+- **Site texts → Sound page** has the intro of /sound/, and **Site texts → Descriptors** the word list shown at the bottom of it.
+- Renaming a genre: events keep the old name, so change it there too (the site check lists any genre name that doesn't exist).
 
 ### Calls
 **Calls / Çağrılar** holds open calls (like the compilation call). An open call shows as the orange box on the home page (fill in the *Home box* fields) and has its own page under /calls/. Set the status to **closed** when it's over: the box disappears from the home page and the page stays in the archive.
@@ -58,15 +65,22 @@
 ### Etkinlik alanları
 - **Event type / Etkinlik türü**: etkinliği etkinlikler sayfasında gruplar (art, break, bass, punk, synth).
 - **Activity / Etkinlik**: ne yapılıyor (dj set, live set, konser, sanat pazarı, sergi, söyleşi…). Listeden seç.
-- **Event flavor**: birkaç kısa kelime, başlığın üstünde *bass ⤬ breaks ⤬ core* şeklinde görünür.
-- **Music genres / Müzik türleri**: tür listesinden seç (yazarak arayabilirsin).
+- **Event flavor**: üst türlerden seç (Bass, Break, Core, Punk…), başlığın üstünde *bass ⤬ break ⤬ core* şeklinde görünür.
+- **Music genres / Müzik türleri**: birkaç harf yaz ve bir ya da daha fazla tür seç. Her tür, Ses sayfasındaki kendi sayfasına bağlanır.
 - **Credit / Emeği geçenler**: afişin altında görünür, örn. *Artwork: …, Poster design: …*.
 - **Lineup / Kadro**: her sanatçı için **Duration / Süre** (örn. *75 min*), **Act type / Performans türü** (DJ set, Live, Performance…) ve isteğe bağlı not. Sanatçı kutusunda görünür. Başlangıç saatleri **Schedule / Akış** kısmına yazılır.
 - **Videos**: PeerTube kanalımızdaki videonun linkini yapıştır (https://v.basspistol.org/c/uncivilization_channel/videos). YouTube artık kullanılmıyor.
 - **Sound recordings / Ses kayıtları**: etkinlikte kaydedilen SoundCloud listesi veya parçası. SES KAYITLARI başlığı altında görünür.
 
 ### Listeler
-**Site texts → Lists / Listeler**, Activity, Act type ve Music genres seçeneklerini tutar. Oraya yeni bir seçenek eklersen tüm etkinliklerde seçilebilir olur. Müzik türü listesi aynı zamanda Hakkında sayfasındaki tür listesidir.
+**Site texts → Lists / Listeler**, Activity ve Act type seçeneklerini tutar. Oraya yeni bir seçenek eklersen tüm etkinliklerde seçilebilir olur.
+
+### Ses (türler)
+- **Sound: Genres / Ses: Türler** her müzik türü için bir kayıt tutar: ad, üst türler, açıklama (EN/TR) ve "ayrıca bak" linkleri. Her türün /sound/genres/ altında, o türle etiketlenmiş etkinlikleri, sanatçıları ve yayınları listeleyen bir sayfası olur. Buraya eklenen yeni bir tür etkinliklerde, sanatçılarda ve yayınlarda hemen seçilebilir.
+- **Sound: Supergenres / Ses: Üst türler** çatı terimleri (Bass, Break, Core…) harf kodu ve tanımıyla tutar. Etkinlik ve yayınlardaki **Flavor** bunlardan seçilir.
+- **Artists** ve **Releases** kayıtlarında da **Music genres** alanı var.
+- **Site texts → Sound page** /sound/ sayfasının girişini, **Site texts → Descriptors** sayfanın altındaki kelime listesini tutar.
+- Bir türün adını değiştirirsen etkinliklerde eski ad kalır, oralarda da değiştir (site kontrolü olmayan tür adlarını listeler).
 
 ### Çağrılar
 **Calls / Çağrılar** açık çağrıları tutar (derleme çağrısı gibi). Açık bir çağrı anasayfada turuncu kutu olarak görünür (*Home box / Anasayfa kutusu* alanlarını doldur) ve /calls/ altında kendi sayfası olur. Bitince durumu **closed** yap: kutu anasayfadan kalkar, sayfa arşivde kalır.

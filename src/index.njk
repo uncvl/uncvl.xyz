@@ -40,7 +40,7 @@ permalink: /
           {%- if e.data.poster %}{% image e.data.poster | bundle(e.inputPath), "", "(min-width: 40rem) 12rem, 35vw" %}{% else %}<span class="gen-cover gen-cover--tall">{{ (e.data.codename or e.data.title) | codename | wbr | safe }}</span>{% endif %}
         </a>
         <div>
-          <p class="kline">{{ ui.genres(e.data.flavor if (e.data.flavor and e.data.flavor.length) else e.data.music_genres) }}{% if e.data.codename %} · <span class="ok">codename: {{ e.data.codename | codename | lower }}</span>{% endif %}</p>
+          <p class="kline">{% if e.data.flavor and e.data.flavor.length %}{{ ui.flavor(e.data.flavor) }}{% else %}{{ ui.genres(e.data.music_genres) }}{% endif %}{% if e.data.codename %} · <span class="ok">codename: {{ e.data.codename | codename | lower }}</span>{% endif %}</p>
           <h3 class="upcoming__title"><a href="{{ e.url }}">{{ e.data.title }}</a></h3>
           <p>{{ e.data.date | date }} · {{ e.data.venue.name }}, {{ e.data.venue.city }}</p>
           {%- if e.data.lineup %}<p class="lineup-strip">{% for l in e.data.lineup %}{{ l.name | upper }}{% if not loop.last %} / {% endif %}{% endfor %}</p>{% endif %}

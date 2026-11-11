@@ -5,7 +5,8 @@ type: compilation
 status: open-call
 order: 2
 artist_line: Various Artists
-genres: [breakcore, hardcore]
+flavor: []
+music_genres: ["Breakcore","Hardcore"]
 text_en: |
   Y) : COREs
   MUSIC: breakcore, hardcore etc.

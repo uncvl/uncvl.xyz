@@ -77,3 +77,178 @@ Choices made: "dj sets" → *dj set*; "live" and "live electronic" → *live set
   - About page: Turkish title.
 - **CIVIL or EXTINCTION?** The home box says EXTINCTION X; the call page and the three releases still say CIVIL X-Y-Z.
 - **About page**: the description used for search engines still has the old "(trans)media project" text. The note above the genre list mentions a "Sound page", which doesn't exist yet.
+
+## Sound section (Nov 2026): please review
+
+Imported from reference_sources (Music Genre, Supergenre, Music Descriptors). Change anything in the CMS under **Sound: Genres** / **Sound: Supergenres**.
+
+- **Names kept as decided:** Sigilkore (note was "Sigilcore"), Trap (note was "Trap Hip Hop"), Hi-Tech (separate from Hi-Tech Psytrance), Hardcore and Hardcore Techno (separate genres).
+- **Genres without a description:** Experimental Bass, Hi-Tech, Hardcore Techno, Mental Tekno, Rave. The "Wave" supergenre has no definition yet.
+- **"Footwork"** appears twice in the Sorted List; it is listed once, at its first position.
+- **Event flavor** now picks from the supergenres: bass → Bass, breaks → Break, core → Core, punk → Punk; "music" (Çöpüşüm) was dropped.
+- **Releases:**
+
+| Release | Old genres | Music genres | Flavor | Dropped |
+|---|---|---|---|---|
+| 2024-06-01-no-boundaries-jungle-remixes | jungle, drum & bass, remix | Jungle, Drum & Bass | – | remix |
+| civil-x | dnb, dark ambient | Drum & Bass, Dark Ambient | – | – |
+| civil-y | breakcore, hardcore | Breakcore, Hardcore | – | – |
+| civil-z | punk | – | Punk | – |
+
+### Supergenres per genre (best guess)
+| Genre | Supergenres |
+|---|---|
+| Not Defined | – |
+| Dub | Dub |
+| Dubstyle | Bass, Dub |
+| Dubstep | Bass, Dub |
+| Drumstep | Bass, Dub |
+| Drum & Bass | Bass, Break |
+| Neurofunk | Bass |
+| Techstep | Bass, Techno |
+| Crossbreed | Bass, Core |
+| Darkstep | Bass, Break |
+| Darkcore | Break, Core |
+| Breakstep | Bass, Break |
+| Hardstep | Bass |
+| Skullstep | Bass, Core |
+| Rawstyle | Core, Techno |
+| Psystyle | Psy, Bass |
+| Glitch Hop | Glitch, Hop |
+| Neurohop | Bass, Hop |
+| Drumfunk | Bass, Break |
+| Autonomic | Bass |
+| Microfunk | Bass |
+| Minimal Drum and Bass | Bass |
+| Atmospheric Drum and Bass | Bass, Ambient |
+| Footwork | Hop, Bass |
+| UK Garage | Garage |
+| Future Garage | Garage, Ambient |
+| Deconstructed Club | Glitch, Industrial |
+| Experimental Bass | Bass | no description
+| IDM | Glitch, Break |
+| Drill and Bass | Break, Glitch |
+| Breakbeat | Break |
+| Breakbeat Hardcore | Break, Core |
+| Rave | Break, Techno | no description
+| Hardcore Breaks | Break, Core |
+| Jungle | Bass, Break |
+| Footwork Jungle | Bass, Break |
+| Ragga Jungle | Bass, Break, Dub |
+| Raggacore | Break, Core |
+| Gabber | Core, Techno |
+| Hardstyle | Core, Techno |
+| Jumpstyle | Techno |
+| Trancestep | Bass, Psy |
+| Freeform Hardcore | Core |
+| Sextrance | Psy |
+| HexD | Hop, Glitch |
+| Dark Psytrance | Psy |
+| Hi-Tech Psytrance | Psy |
+| Hi-Tech | Psy | no description
+| Psycore | Psy, Core |
+| Breakcore | Break, Core |
+| Deep Breakcore | Break, Core, Ambient |
+| Chill Breakcore | Break, Ambient |
+| Dreambreak | Break, Ambient |
+| Glitchbreak | Break, Glitch |
+| Chipbreak | Break, Chip |
+| Flashcore | Core |
+| Speedcore | Core |
+| Splittercore | Core |
+| Extratone | Core, Noise |
+| Hardcore | Core, Techno |
+| Hardcore Techno | Core, Techno | no description
+| Mental Tekno | Techno, Core | no description
+| Doomcore | Core, Techno |
+| Terrorcore | Core |
+| Digital Hardcore | Core, Punk, Industrial |
+| Industrial Hardcore | Core, Industrial |
+| Industrial | Industrial |
+| Power Electronics | Industrial, Noise |
+| Death Industrial | Industrial, Ambient |
+| Industrial Metal | Industrial, Metal |
+| Cyber Metal | Metal, Industrial |
+| Metal | Metal |
+| Black Metal | Metal |
+| Atmospheric Black Metal | Metal, Ambient |
+| Doom Metal | Metal |
+| Sludge Metal | Metal, Punk |
+| Grindcore | Metal, Punk, Core |
+| Cybergrind | Metal, Core, Industrial |
+| Metalcore | Metal, Core, Punk |
+| Blackened Crust | Metal, Punk |
+| Crust Punk | Punk, Core |
+| Neocrust | Punk, Metal |
+| Mathcore | Metal, Core, Punk |
+| Mincecore | Punk, Core |
+| Nintendocore | Punk, Chip, Core |
+| Synth Punk | Punk, Synth |
+| Acoustic Punk | Punk |
+| Punk Rock | Punk |
+| Anarcho-Punk | Punk |
+| D-Beat | Punk, Core |
+| Hardcore Punk | Punk, Core |
+| Crack Rock Steady | Punk, Ska, Core |
+| Skacore | Ska, Punk, Core |
+| Ska Punk | Ska, Punk |
+| Screamo | Emo, Punk |
+| Emoviolence | Emo, Punk, Core |
+| Powerviolence | Punk, Core |
+| Noise Pop | Noise |
+| Shoegaze | Noise, Ambient |
+| Blackgaze | Metal, Noise |
+| Noise | Noise |
+| Black Noise | Noise |
+| Gorenoise | Noise, Metal |
+| Power Noise | Noise, Industrial |
+| Harsh Noise | Noise |
+| Harsh Noise Wall | Noise |
+| Ambient Noise Wall | Noise, Ambient |
+| Ambient | Ambient |
+| Dark Ambient | Ambient |
+| Black Ambient | Ambient, Metal |
+| Drone | Ambient |
+| Drone Metal | Ambient, Metal |
+| Vaporwave | Vapor |
+| Eccojams | Vapor |
+| Post-Internet | Vapor, Glitch |
+| Dreampunk | Vapor, Ambient |
+| Hardvapour | Vapor, Core |
+| Vapornoise | Vapor, Noise |
+| Synthwave | Synth |
+| Darksynth | Synth |
+| Cybersynth | Synth, Industrial |
+| Witch House | Wave, Ambient |
+| Wave | Wave |
+| Trip hop | Hop, Ambient |
+| Hip Hop | Hop |
+| Lo-Fi Hip Hop | Hop |
+| Spoken Word | Hop |
+| Abstract Hip Hop | Hop |
+| Experimental Hip Hop | Hop |
+| Industrial Hip Hop | Hop, Industrial |
+| Hardcore Hip Hop | Hop, Core |
+| Punk Rap | Hop, Punk |
+| Memphis Rap | Hop |
+| Cloud Rap | Hop, Ambient |
+| Rare Phonk | Hop |
+| Drift Phonk | Hop |
+| Wonky | Hop, Glitch |
+| Trap | Trap |
+| Plugg | Trap |
+| Drill | Trap |
+| Tread | Trap |
+| Rage | Trap |
+| Emo Rap | Trap, Emo |
+| Sigilkore | Trap, Glitch |
+| Trap Metal | Trap, Metal |
+| Digicore | Trap, Glitch |
+| Glitchcore | Glitch, Trap |
+| Nightcore | Glitch |
+| Hyperpop | Glitch |
+| Glitch | Glitch |
+| Chiptune | Chip |
+| Depressive Breakcore | Break, Core, Emo |
+| Neo-Grime | Bass, Garage |
+| Weightless | Bass, Ambient |

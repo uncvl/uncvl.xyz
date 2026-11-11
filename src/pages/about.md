@@ -154,5 +154,5 @@ genre_list_label: "Incomplete list of Uncivilization Label's music genres:"
 
 <div class="note">
 <p>Uncivil Label is interested in a wide range of music genres. These genres are selected after extensive research to provide a framework for the specification of the sound of Uncivilization.</p>
-<p class="note__more">Visit the Sound page for detailed information about music genres of Uncivilization.</p>
+<p class="note__more">Visit the <a href="/sound/">Sound page</a> for detailed information about music genres of Uncivilization.</p>
 </div>

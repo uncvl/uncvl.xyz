@@ -1,0 +1,62 @@
+---
+layout: base.njk
+title: Sound
+bodyClass: page-list page-sound
+permalink: /sound/
+description: The sound of Uncivilization — supergenres, music genres and the words we use to describe music.
+---
+{%- import "macros.njk" as ui with context -%}
+{%- set untagged = collections.genres | genresOf() -%}
+<div class="wrap sound">
+  <header class="list-head">
+    <p class="kline">$ ls ./sound · {{ collections.supergenres.length }} {% t "supergenres", "üst tür" %} · {{ collections.genres.length }} {% t "genres", "tür" %}</p>
+    <h1 class="list-head__title">{% t "Sound", "Ses" %}</h1>
+    <p class="chips"><a class="chip" href="#supergenres">{% t "Supergenres", "Üst türler" %}</a><a class="chip" href="#genres">{% t "Genres", "Türler" %}</a><a class="chip" href="#descriptors">{% t "Descriptors", "Tanımlayıcılar" %}</a></p>
+  </header>
+
+  {%- if sound.intro_en or sound.intro_tr %}<div class="sound__intro">{{ ui.bitext(sound.intro_en, sound.intro_tr) }}</div>{% endif %}
+
+  <section aria-labelledby="supergenres">
+    {{ ui.sect("SUPERGENRES", "ÜST TÜRLER", "", "supergenres") }}
+    <ul class="supers">
+      {%- for s in collections.supergenres %}
+      <li><a class="super" href="{{ s.url }}"><span class="code">{{ s.data.code }}</span><span class="super__name">{{ s.data.name }}</span><span class="super__count">{{ (collections.genres | genresOf(s.data.name)).length }}</span></a></li>
+      {%- endfor %}
+    </ul>
+  </section>
+
+  <section aria-labelledby="genres">
+    {{ ui.sect("GENRES", "TÜRLER", "", "genres") }}
+    {%- for s in collections.supergenres %}
+    {%- set gs = collections.genres | genresOf(s.data.name) %}
+    {%- if gs.length %}
+    <div class="genre-group">
+      <h3 class="genre-group__head" id="g-{{ s.page.fileSlug }}"><a href="{{ s.url }}"><span class="code">{{ s.data.code }}</span> {{ s.data.name }}</a></h3>
+      <ul class="genre-list genre-list--links">{% for g in gs %}<li><a href="{{ g.url }}">{{ g.data.name }}</a></li>{% endfor %}</ul>
+    </div>
+    {%- endif %}
+    {%- endfor %}
+    {%- if untagged.length %}
+    <div class="genre-group">
+      <h3 class="genre-group__head" id="g-other"><span class="code">·</span> {% t "Other", "Diğer" %}</h3>
+      <ul class="genre-list genre-list--links">{% for g in untagged %}<li><a href="{{ g.url }}">{{ g.data.name }}</a></li>{% endfor %}</ul>
+    </div>
+    {%- endif %}
+  </section>
+
+  <section aria-labelledby="descriptors">
+    {{ ui.sect("DESCRIPTORS", "TANIMLAYICILAR", "", "descriptors") }}
+    <div class="descriptors">
+      {%- for grp in descriptors.groups %}
+      <div class="descriptors__group">
+        <h3 class="genre-group__head">{{ grp.name }}</h3>
+        <dl>
+          {%- for w in grp.words %}
+          <dt{% if w.highlight %} class="hl"{% endif %}>{{ w.en }}</dt>{% if w.tr %}<dd lang="tr">{{ w.tr }}</dd>{% endif %}
+          {%- endfor %}
+        </dl>
+      </div>
+      {%- endfor %}
+    </div>
+  </section>
+</div>

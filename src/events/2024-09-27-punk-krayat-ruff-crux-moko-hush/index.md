@@ -2,7 +2,7 @@
 title: "Krayat | Ruff Crux | Moko | Hush"
 category: punk
 activities: []
-flavor: ["punk"]
+flavor: ["Punk"]
 music_genres: ["Hardcore Punk"]
 date: 2024-09-27
 venue:

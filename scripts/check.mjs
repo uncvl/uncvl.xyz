@@ -68,6 +68,35 @@ for await (const file of walk("src/events")) {
   }
 }
 
+// Genre fields (events, artists, releases) must name an existing genre (src/sound/genres) or,
+// for flavor, a supergenre (src/sound/supergenres). Names are compared case-insensitively.
+const namesIn = async (dir) => {
+  const out = new Set();
+  for await (const f of walk(dir)) {
+    if (!f.endsWith(".md")) continue;
+    const m = (await readFile(f, "utf8")).match(/^name:\s*["']?(.+?)["']?\s*$/m);
+    if (m) out.add(m[1].toLowerCase());
+  }
+  return out;
+};
+const GENRES = await namesIn("src/sound/genres");
+const SUPERS = await namesIn("src/sound/supergenres");
+const flowList = (fm, key) => {
+  const m = fm.match(new RegExp(`^${key}:\\s*(\\[.*\\])\\s*$`, "m"));
+  if (m) { try { return JSON.parse(m[1].replace(/'/g, '"')); } catch { return []; } }
+  const b = fm.match(new RegExp(`^${key}:\\s*\\n((?:\\s+-\\s+[^\\n]*\\n?)*)`, "m"));
+  return b ? [...b[1].matchAll(/-\s+["']?(.+?)["']?\s*$/gm)].map((x) => x[1]) : [];
+};
+for (const dir of ["src/events", "src/artists", "src/releases"]) {
+  for await (const file of walk(dir)) {
+    if (!file.endsWith(".md")) continue;
+    const fm = ((await readFile(file, "utf8")).match(/^---\r?\n([\s\S]*?)\r?\n---/) || [])[1] || "";
+    const rel = file.split(path.sep).join("/");
+    for (const g of flowList(fm, "music_genres")) if (!GENRES.has(String(g).toLowerCase())) errors.push(`${rel}: unknown music genre "${g}" (add it under Sound → Genres)`);
+    for (const g of flowList(fm, "flavor")) if (!SUPERS.has(String(g).toLowerCase())) errors.push(`${rel}: unknown supergenre "${g}" in flavor`);
+  }
+}
+
 if (errors.length) {
   console.error(errors.join("\n"));
   console.error(`\n[check] ${errors.length} problem(s) in ${pages} pages`);

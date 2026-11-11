@@ -18,7 +18,7 @@ ogType: music.album
         {%- endif %}
       </figure>
       <div class="hero__meta">
-        <p class="kline">rel {{ catalog or ("0x" + (idx + 1)) }} · {% t site.releaseTypes[type].en, site.releaseTypes[type].tr %}{% if genres %} · {{ ui.genres(genres) }}{% endif %}</p>
+        <p class="kline">rel {{ catalog or ("0x" + (idx + 1)) }} · {% t site.releaseTypes[type].en, site.releaseTypes[type].tr %}{% if flavor and flavor.length %} · {{ ui.flavor(flavor) }}{% endif %}</p>
         {%- if codename %}<p class="glitch" aria-hidden="true">{{ codename | codename | wbr | safe }}</p>{% endif %}
         <h1 class="hero__title">{{ title }}</h1>
         {%- if artist_line %}<p class="hero__by">{% t "by", "" %} {{ artist_line }}</p>{% endif %}
@@ -31,6 +31,7 @@ ogType: music.album
           <dt>status</dt><dd class="ok">{% if status == "open-call" %}{% t "open call", "açık çağrı" %}{% else %}{{ status }}{% endif %}</dd>
           {%- endif %}
           {%- if format %}<dt>format</dt><dd>{{ format }}</dd>{% endif %}
+          {%- if music_genres and music_genres.length %}<dt>{% t "genres", "türler" %}</dt><dd>{{ ui.genreLinks(music_genres) }}</dd>{% endif %}
         </dl>
         <p class="actions">
           {%- if links.bandcamp %}<a class="btn" href="{{ links.bandcamp }}" rel="noopener noreferrer">bandcamp ↗</a>{% endif %}

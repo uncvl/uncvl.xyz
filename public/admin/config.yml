@@ -82,8 +82,8 @@ collections:
       - { name: category, label: Event type / Etkinlik türü, widget: select, options: [bass, break, punk, art, synth], hint: "groups the event on the events page (art, break, bass, punk, synth)" }
       - { name: series, label: Series, widget: string, required: false, hint: "e.g. Thursday Breaks, Bass Night" }
       - { name: activities, label: Activity / Etkinlik, widget: relation, collection: settings, file: vocab, value_field: "activities.*.en", search_fields: ["activities.*.en", "activities.*.tr"], display_fields: ["activities.*.en"], multiple: true, required: false, hint: "dj set, live set, concert, art market… Add new ones under Site texts → Lists." }
-      - { name: flavor, label: Event flavor, widget: list, required: false, hint: "short words, shown as bass ⤬ breaks ⤬ core (e.g. bass, breaks, core, punk)" }
-      - { name: music_genres, label: Music genres / Müzik türleri, widget: relation, collection: settings, file: vocab, value_field: "music_genres.*", search_fields: ["music_genres.*"], display_fields: ["music_genres.*"], multiple: true, required: false, hint: "Pick from the genre list. Add new ones under Site texts → Lists." }
+      - { name: flavor, label: Event flavor (supergenres), widget: relation, collection: supergenres, value_field: name, search_fields: [name, code], display_fields: ["{{code}} {{name}}"], multiple: true, required: false, hint: "Pick supergenres, shown as bass ⤬ break ⤬ core. Type to search. Manage them under Sound → Supergenres." }
+      - { name: music_genres, label: Music genres / Müzik türleri, widget: relation, collection: genres, value_field: name, search_fields: [name], display_fields: [name], multiple: true, required: false, hint: "Type to search, pick one or more. Manage the list under Sound → Genres." }
       - { name: date, label: Date, widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
       - { name: doors, label: Doors open, widget: string, required: false, hint: "21:00" }
       - { name: stage, label: Stage time, widget: string, required: false, hint: "22:00 or 20:45 - 01:15" }
@@ -181,7 +181,8 @@ collections:
       - { name: format, label: Format, widget: string, required: false, default: Digital Album }
       - { name: artist_line, label: Artist line, widget: string, hint: "as written on Bandcamp" }
       - { name: artists, label: Artists, widget: relation, collection: artists, value_field: "{{slug}}", search_fields: [name, aka], display_fields: [name], multiple: true, required: false }
-      - { name: genres, label: Genres, widget: list, required: false }
+      - { name: flavor, label: Flavor (supergenres), widget: relation, collection: supergenres, value_field: name, search_fields: [name, code], display_fields: ["{{code}} {{name}}"], multiple: true, required: false, hint: "Pick supergenres, shown as punk ⤬ core next to the release type." }
+      - { name: music_genres, label: Music genres / Müzik türleri, widget: relation, collection: genres, value_field: name, search_fields: [name], display_fields: [name], multiple: true, required: false, hint: "Type to search, pick one or more." }
       - { name: cover, label: Cover art, widget: image, required: false }
       - name: tracklist
         label: Tracklist
@@ -234,6 +235,7 @@ collections:
           - { name: name, label: Name, widget: string, hint: "Bandcamp, SoundCloud, Instagram…" }
           - { name: url, label: URL, widget: string, hint: 'SoundCloud links get a player automatically' }
           - { name: bandcamp_id, label: 'Bandcamp id (optional: for a player)', widget: string, required: false }
+      - { name: music_genres, label: Music genres / Müzik türleri, widget: relation, collection: genres, value_field: name, search_fields: [name], display_fields: [name], multiple: true, required: false, hint: "What the artist plays. Type to search, pick one or more." }
       - { name: photo, label: Photo, widget: image, required: false }
       - { name: bio_en, label: Bio (EN), widget: markdown, required: false }
       - { name: bio_tr, label: Biyografi (TR), widget: markdown, required: false }
@@ -298,6 +300,49 @@ collections:
           - { name: href, label: Link, widget: string }
       - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
 
+  # ------------------------------------------------------------------- SOUND
+  - name: genres
+    label: "Sound: Genres / Ses: Türler"
+    label_singular: Genre
+    folder: src/sound/genres
+    create: true
+    identifier_field: name
+    slug: "{{name}}"
+    summary: "{{name}}"
+    sortable_fields: [order, name]
+    fields:
+      - { name: name, label: Name, widget: string, hint: "As it should appear on events, e.g. Drum & Bass" }
+      - { name: supergenres, label: Supergenres / Üst türler, widget: relation, collection: supergenres, value_field: name, search_fields: [name, code], display_fields: ["{{code}} {{name}}"], multiple: true, required: false }
+      - { name: order, label: Position in the list, widget: number, required: false, hint: "Genres are listed by this number (the sorted list of the team)." }
+      - { name: description_en, label: Description (EN), widget: markdown, required: false }
+      - { name: description_tr, label: Açıklama (TR), widget: markdown, required: false }
+      - name: links
+        label: See also (links)
+        widget: list
+        required: false
+        summary: "{{fields.name}}"
+        fields:
+          - { name: name, label: Name, widget: string, hint: "RateYourMusic, MusicBrainz…" }
+          - { name: url, label: URL, widget: string }
+      - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
+
+  - name: supergenres
+    label: "Sound: Supergenres / Ses: Üst türler"
+    label_singular: Supergenre
+    folder: src/sound/supergenres
+    create: true
+    identifier_field: name
+    slug: "{{name}}"
+    summary: "{{code}} · {{name}}"
+    sortable_fields: [order, name]
+    fields:
+      - { name: name, label: Name, widget: string }
+      - { name: code, label: Letter code, widget: string, hint: "One letter, e.g. B for Bass" }
+      - { name: order, label: Position in the list, widget: number, required: false }
+      - { name: description_en, label: Description (EN), widget: markdown, required: false }
+      - { name: description_tr, label: Açıklama (TR), widget: markdown, required: false }
+      - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
+
   # ---------------------------------------------------------- SITE-WIDE TEXT
   - name: settings
     label: Site texts / Site metinleri
@@ -328,8 +373,34 @@ collections:
           - { name: description, label: "Short description (search engines and link previews)", widget: text, required: false }
           - { name: text_en, label: Text (EN), widget: markdown }
           - { name: text_tr, label: Metin (TR), widget: markdown }
-          - { name: body, label: Notes above the genre list, widget: markdown, required: false, hint: "The genre list itself comes from Lists → Music genres." }
+          - { name: body, label: Notes above the genre list, widget: markdown, required: false, hint: "The genre list itself comes from Sound → Genres." }
           - { name: genre_list_label, label: Genre list intro, widget: string, required: false, hint: "Shown before the genre list. Empty = no genre list on the page." }
+      - name: sound
+        label: Sound page / Ses sayfası
+        file: src/_data/sound.json
+        format: json
+        fields:
+          - { name: intro_en, label: Intro (EN), widget: markdown, required: false }
+          - { name: intro_tr, label: Giriş (TR), widget: markdown, required: false }
+      - name: descriptors
+        label: Descriptors / Tanımlayıcılar
+        file: src/_data/descriptors.json
+        format: json
+        fields:
+          - name: groups
+            label: Groups
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { name: name, label: Group name, widget: string }
+              - name: words
+                label: Words
+                widget: list
+                summary: "{{fields.en}} – {{fields.tr}}"
+                fields:
+                  - { name: en, label: EN, widget: string }
+                  - { name: tr, label: TR, widget: string, required: false }
+                  - { name: highlight, label: Highlight, widget: boolean, required: false, default: false }
       - name: vocab
         label: Lists / Listeler
         file: src/_data/vocab.json
@@ -351,8 +422,3 @@ collections:
             fields:
               - { name: en, label: EN, widget: string }
               - { name: tr, label: TR, widget: string, required: false }
-          - name: music_genres
-            label: Music genres / Müzik türleri
-            widget: list
-            field: { name: genre, label: Genre, widget: string }
-            hint: "Choices for 'Music genres' on events. Also shown as the genre list on the About page."

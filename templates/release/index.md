@@ -9,7 +9,8 @@ date: 2026-12-01
 format: Digital Album
 artist_line: Artist Name
 artists: [artist-slug]               # file names in src/artists/
-genres: [breakcore]
+flavor: [Break, Core]                # supergenres
+music_genres: [Breakcore]            # genre names from src/sound/genres
 cover: cover.jpg
 tracklist:
   - title: Track One

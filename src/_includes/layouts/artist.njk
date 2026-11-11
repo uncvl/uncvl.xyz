@@ -16,6 +16,7 @@ bodyClass: page-artist signal
         <p class="glitch" aria-hidden="true">{{ name | codename | wbr | safe }}</p>
         <h1 class="hero__title">{{ name }}</h1>
         {%- if aka and aka.length %}<p class="hero__by">a.k.a. {{ aka | join(", ") }}</p>{% endif %}
+        {%- if music_genres and music_genres.length %}<p class="hero__genres"><span class="k">{% t "genres", "türler" %}</span> {{ ui.genreLinks(music_genres, " · ") }}</p>{% endif %}
         {%- if links and links.length %}<p class="actions">{% for l in links %}<a class="btn" href="{{ l.url }}" rel="noopener noreferrer">{{ l.name }} ↗</a>{% endfor %}</p>{% endif %}
       </div>
     </div>
