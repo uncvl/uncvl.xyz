@@ -37,9 +37,9 @@ const store = {
   set(k, v) { try { localStorage.setItem("uncvl-fx-" + k, v); } catch (e) {} },
 };
 const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-// on/off: the hazard toggle in the header (default on; off for people who ask for reduced motion)
-const saved = store.get("on", null);
-let on = saved === null ? !reduced.matches : saved === "1";
+// on/off: the hazard toggle in the header. Off by default (for now, until we have feedback): only
+// people who switched it on get it. While off, nothing is measured or listened to beyond the toggle.
+let on = store.get("on", null) === "1";
 const mode = "glitch";
 // power: 20% of the old slider range (0.4-2.5), halved so text stays readable; shatter: 20% of 0-1
 const strength = (0.4 + 0.2 * (2.5 - 0.4)) / 2; // half the movement: text stays readable
@@ -465,6 +465,7 @@ function settle() {
 // by (slowly) while it was idle.
 let evY = scrollY, evT = performance.now();
 function onScroll() {
+  if (!on) return;
   const now = performance.now();
   // (a flick starting from rest on a phone happened within about a frame: assume that, rather than
   // spreading its first movement over up to 100 ms, which made short flicks look slow)
@@ -483,6 +484,7 @@ const layoutSig = () => [document.documentElement.clientWidth, document.document
 function remeasure() {
   clearTimeout(measureTimer);
   measureTimer = setTimeout(() => {
+    if (!on) { lastSig = ""; return; } // off: skip the work, measure fresh when switched on
     if (moving) return remeasure(); // never measure while the real text is hidden
     const sig = layoutSig();
     if (sig === lastSig && blocks.length) return;
@@ -499,10 +501,10 @@ new ResizeObserver(remeasure).observe(document.body);
 new MutationObserver(remeasure).observe(document.documentElement, { attributes: true, attributeFilter: ["data-lang"] });
 sizeCanvas();
 // measure when the browser is idle; the resize/load/font events below re-measure (debounced)
-idle(() => { if (!blocks.length && !pumping) measureBlocks(); });
+idle(() => { if (on && !blocks.length && !pumping) measureBlocks(); });
 
 // ---------- on/off toggle next to the language switch ----------
-// An acid warning sign: lit when the glitch scroll is on, dim and struck through when it's off.
+// An acid warning sign: lit when the glitch scroll is on, gray when it's off.
 // The button is in the page HTML (base.njk), so its space is there from the first paint and the
 // header never shifts when this script arrives; here it's only shown and wired up.
 const toggle = document.querySelector(".fx-toggle") || document.createElement("button");
@@ -516,6 +518,7 @@ toggle.addEventListener("click", () => {
   on = !on;
   store.set("on", on ? "1" : "0");
   if (!on) { cancelAnimationFrame(raf); raf = 0; settle(); }
+  else remeasure(); // first time on (or the page changed while off): measure the text now
   lastY = scrollY;
   paintToggle();
 });

@@ -6,12 +6,10 @@
 /* list numbers / bullets are not redrawn on the canvas: keep them visible */
 .fx-moving .fx-t::marker { color: var(--text-dim) !important; }
 
-/* on/off toggle next to the language switch: an acid warning sign */
+/* on/off toggle next to the language switch: an acid warning sign when on, gray when off */
 .fx-toggle { display: inline-grid; place-items: center; width: 2rem; height: 2rem; padding: 0; margin-left: 0.15rem;
   background: none; border: 1px solid transparent; color: var(--text-dim); cursor: pointer; }
 .fx-toggle[aria-pressed="true"] { color: var(--acid); filter: drop-shadow(0 0 4px rgb(201 242 122 / 0.45)); }
 .fx-toggle:hover, .fx-toggle:focus-visible { border-color: var(--acid); color: var(--acid); }
 .fx-toggle[hidden] { display: inline-grid; visibility: hidden; } /* keep its space until the script shows it */
-.fx-toggle__off { display: none; }
-.fx-toggle[aria-pressed="false"] .fx-toggle__off { display: inline; }
 @media print { .fx-toggle { display: none; } }
