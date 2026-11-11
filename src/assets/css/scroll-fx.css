@@ -10,6 +10,8 @@
 .fx-toggle { display: inline-grid; place-items: center; width: 2rem; height: 2rem; padding: 0; margin-left: 0.15rem;
   background: none; border: 1px solid transparent; color: var(--text-dim); cursor: pointer; }
 .fx-toggle[aria-pressed="true"] { color: var(--acid); filter: drop-shadow(0 0 4px rgb(201 242 122 / 0.45)); }
-.fx-toggle:hover, .fx-toggle:focus-visible { border-color: var(--acid); color: var(--acid); }
+.fx-toggle:focus-visible { border-color: var(--acid); color: var(--acid); }
+/* hover only with a real mouse: phones keep a tapped button "hovered", which made it look still on after switching off */
+@media (hover: hover) { .fx-toggle:hover { border-color: var(--acid); color: var(--acid); } }
 .fx-toggle[hidden] { display: inline-grid; visibility: hidden; } /* keep its space until the script shows it */
 @media print { .fx-toggle { display: none; } }
