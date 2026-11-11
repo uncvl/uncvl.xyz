@@ -125,6 +125,13 @@ export default function (eleventyConfig) {
   const byOrder = (a, b) => (a.data.order ?? 999) - (b.data.order ?? 999) || a.data.name.localeCompare(b.data.name);
   eleventyConfig.addCollection("genres", (api) => published(api.getFilteredByGlob("src/sound/genres/*.md")).sort(byOrder));
   eleventyConfig.addCollection("supergenres", (api) => published(api.getFilteredByGlob("src/sound/supergenres/*.md")).sort(byOrder));
+  eleventyConfig.addCollection("workUnits", (api) => published(api.getFilteredByGlob("src/work-units/*.md")).sort(byOrder));
+  // how many entries have text only in the other language (for one "needs translation" note per list)
+  eleventyConfig.addFilter("untranslated", (items, lang) => {
+    const other = lang === "en" ? "tr" : "en";
+    const has = (d, l) => d[`note_${l}`] || d[`text_${l}`];
+    return (items || []).filter((i) => !has(i.data, lang) && has(i.data, other)).length;
+  });
   eleventyConfig.addCollection("posts", (api) =>
     api.getFilteredByGlob("src/posts/**/*.md").filter((p) => !p.data.draft).sort((a, b) => byDateAsc(b, a))
   );

@@ -343,6 +343,35 @@ collections:
       - { name: description_tr, label: Açıklama (TR), widget: markdown, required: false }
       - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
 
+  - name: work_units
+    label: Work units / Çalışma birimleri
+    label_singular: Work unit
+    folder: src/work-units
+    create: true
+    identifier_field: name
+    slug: "{{name}}"
+    summary: "{{name}} · {{department}} · {{status}}"
+    sortable_fields: [order, name]
+    description: "Groups people can join, shown as cards on the Organization page (/organization/)."
+    fields:
+      - { name: name, label: Name, widget: string, hint: "e.g. U Label" }
+      - { name: type, label: Type / Tür, widget: select, options: [PROJECT, WORK, ORG], default: WORK }
+      - { name: department, label: Department / Bölüm, widget: select, options: [ACTION, RESEARCH, PRODUCTION, TECH] }
+      - name: status
+        label: Joining / Katılım
+        widget: select
+        default: open
+        options:
+          - { label: "Open to join / Katılıma açık", value: open }
+          - { label: "Open to applications / Başvurulara açık", value: applications }
+          - { label: "Not looking for people right now / Şu an katılıma ihtiyaç yok", value: closed }
+      - { name: note_en, label: Who can join (EN), widget: markdown, required: false }
+      - { name: note_tr, label: Kimler katılabilir (TR), widget: markdown, required: false }
+      - { name: text_en, label: What we do / updates (EN), widget: markdown, required: false, hint: "A short list works best." }
+      - { name: text_tr, label: Ne yapıyoruz / gelişmeler (TR), widget: markdown, required: false }
+      - { name: order, label: Position in the list, widget: number, required: false }
+      - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
+
   # ---------------------------------------------------------- SITE-WIDE TEXT
   - name: settings
     label: Site texts / Site metinleri
@@ -406,6 +435,15 @@ collections:
           - { name: title_tr, label: Başlık (TR), widget: string, required: false }
           - { name: description, label: "Short description (search engines and link previews)", widget: text, required: false }
           - { name: text_en, label: Text (EN), widget: markdown, hint: "## for main sections, ### for sub-sections. The four jump links at the top point to the ## headings — keep their wording or ask for the links to be updated." }
+          - { name: text_tr, label: Metin (TR), widget: markdown, required: false }
+      - name: organization
+        label: Organization page / Organizasyon sayfası
+        file: src/pages/organization.md
+        fields:
+          - { name: title_en, label: Title (EN), widget: string }
+          - { name: title_tr, label: Başlık (TR), widget: string, required: false }
+          - { name: description, label: "Short description (search engines and link previews)", widget: text, required: false }
+          - { name: text_en, label: Text (EN), widget: markdown, hint: "The work units below the text come from Work units / Çalışma birimleri." }
           - { name: text_tr, label: Metin (TR), widget: markdown, required: false }
       - name: sound
         label: Sound page / Ses sayfası

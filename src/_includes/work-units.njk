@@ -1,0 +1,27 @@
+{#- WORK UNITS on /organization/: one card per unit (Work units / Çalışma birimleri in the CMS) -#}
+{%- set units = collections.workUnits %}
+{%- if units.length %}
+{%- set statusText = {
+  open: ["Open to join", "Katılıma açık"],
+  applications: ["Open to applications", "Başvurulara açık"],
+  closed: ["Not looking for people right now", "Şu an katılıma ihtiyaç yok"]
+} %}
+{%- set deptTr = { ACTION: "EYLEM", RESEARCH: "ARAŞTIRMA", PRODUCTION: "ÜRETİM", TECH: "TEKNOLOJİ" } %}
+<section class="units-wrap" aria-labelledby="work-units">
+  {{ ui.sect("WORK UNITS", "ÇALIŞMA BİRİMLERİ", units.length, "work-units") }}
+  {%- if units | untranslated("en") %}<p class="notice l-en">The work unit texts need translation from <em>Turkish to English</em>.</p>{% endif %}
+  {%- if units | untranslated("tr") %}<p class="notice l-tr">Çalışma birimi metinlerinin <em>İngilizceden Türkçeye</em> çevrilmesi gerekiyor.</p>{% endif %}
+  <ul class="units">
+    {%- for u in units %}
+    {%- set st = statusText[u.data.status] or statusText.open %}
+    <li class="unit unit--{{ u.data.status or 'open' }}" id="{{ u.page.fileSlug }}">
+      <h3 class="unit__name">{{ u.data.name }}</h3>
+      <p class="unit__tags">{% if u.data.type %}<span class="unit__tag">{{ u.data.type }}</span>{% endif %}{% if u.data.department %}<span class="unit__tag">{% t u.data.department, deptTr[u.data.department] or u.data.department %}</span>{% endif %}</p>
+      <p class="unit__status">{% t st[0], st[1] %}</p>
+      {%- if u.data.note_en or u.data.note_tr %}{{ ui.bitext(u.data.note_en, u.data.note_tr, "prose unit__note", false) }}{% endif %}
+      {%- if u.data.text_en or u.data.text_tr %}{{ ui.bitext(u.data.text_en, u.data.text_tr, "prose unit__text", false) }}{% endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif %}

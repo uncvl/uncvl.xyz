@@ -40,6 +40,10 @@
 - **Site texts → Sound page** has the texts of /sound/: the intro at the top and the Genre types text at the bottom.
 - Renaming a genre: events keep the old name, so change it there too (the site check lists any genre name that doesn't exist).
 
+### Organization and work units
+- **Site texts → Organization page** is the text of /organization/.
+- **Work units / Çalışma birimleri** holds the groups people can join, shown as cards under that text. Each one has a type (PROJECT, WORK, ORG), a department (ACTION, RESEARCH, PRODUCTION, TECH), a joining status (open to join, open to applications, not looking for people right now), who can join, and a short list of what the group is doing. Change the status when it changes; *Position in the list* sets the order.
+
 ### Concept
 - **Site texts → Concept page** is /concept/: an intro and a list of **blocks**, each with a heading, a short text and an optional link (e.g. `/sound/`). Add a block for a new theme, drag blocks to reorder.
 - **Site texts → World Building Project page** is /concept/world-building/. Use `##` for main sections and `###` for sub-sections. The jump links at the top point to the four `##` headings; if you rename one, ask for the links to be updated.
@@ -86,6 +90,10 @@
 - **Artists** ve **Releases** kayıtlarında da **Music genres** alanı var.
 - **Site texts → Sound page** /sound/ sayfasının metinlerini tutar: üstteki giriş ve en alttaki Tür tipleri metni.
 - Bir türün adını değiştirirsen etkinliklerde eski ad kalır, oralarda da değiştir (site kontrolü olmayan tür adlarını listeler).
+
+### Organizasyon ve çalışma birimleri
+- **Site texts → Organization page** /organization/ sayfasının metnidir.
+- **Work units / Çalışma birimleri** katılınabilecek grupları tutar; metnin altında kartlar olarak görünür. Her birinin türü (PROJECT, WORK, ORG), bölümü (ACTION, RESEARCH, PRODUCTION, TECH), katılım durumu (katılıma açık, başvurulara açık, şu an katılıma ihtiyaç yok), kimlerin katılabileceği ve grubun ne yaptığına dair kısa bir listesi olur. Durum değişince güncelle; *Position in the list* sırayı belirler.
 
 ### Konsept
 - **Site texts → Concept page** /concept/ sayfasıdır: bir giriş ve **bloklar** listesi; her blokta başlık, kısa bir metin ve isteğe bağlı bir link (örn. `/sound/`) olur. Yeni bir tema için blok ekle, sıralamak için sürükle.

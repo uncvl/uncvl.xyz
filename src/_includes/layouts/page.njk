@@ -27,6 +27,7 @@ bodyClass: page-text
     {%- endfor %}
   </div>
   {%- endif %}
+  {%- if showWorkUnits %}{% include "work-units.njk" %}{% endif %}
   {%- if content | trim %}<div class="prose">{{ content | safe }}</div>{% endif %}
   {%- if genre_list_label %}<p class="genre-list"><span class="k">{{ genre_list_label }}</span> {% for g in collections.genres %}<a href="{{ g.url }}">{{ g.data.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %} · <a href="/sound/">{% t "more on the Sound page", "Ses sayfasında daha fazlası" %} →</a></p>{% endif %}
   {{ ui.players({ listen: listen, links: links, bandcamp_id: bandcamp_id, title: title, name: name } | players) }}

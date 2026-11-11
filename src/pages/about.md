@@ -1,7 +1,7 @@
 ---
 title_en: UNCIVILIZATION - What is it? How does it function?
 text_en: |-
-  Uncivilization is a [conceptual](/concept/) and organizational entity.
+  Uncivilization is a [conceptual](/concept/) and [organizational](/organization/) entity.
 
   Uncivilization Project initially started as an event organization and now continue functioning also as a record label and a hub for creative research. 
 
@@ -73,7 +73,7 @@ text_en: |-
 
   Uncivil World manages the conceptual aspect. It aims to be the ground for collaborative creative processes. It is where we build and maintain the fictional world of Uncivilization.
 text_tr: |-
-  Uncivilization, [kavramsal](/concept/) ve örgütsel bir oluşumdur.
+  Uncivilization, [kavramsal](/concept/) ve [örgütsel](/organization/) bir oluşumdur.
 
   Uncivilization Projesi, başlangıçta bir etkinlik organizasyonu olarak harekete geçti ve şu anda bir müzik yayını ve yaratıcı araştırmalar için bir buluşma noktası olarak da faaliyetlerini sürdürmektedir.
 
