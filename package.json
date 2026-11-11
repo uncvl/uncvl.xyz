@@ -28,5 +28,8 @@
     "@sveltia/cms": "0.262.1",
     "markdown-it": "15.0.3",
     "svgo": "4.1.0"
+  },
+  "dependencies": {
+    "@chenglou/pretext": "1.0.0"
   }
 }

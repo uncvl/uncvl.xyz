@@ -37,6 +37,9 @@
   <link rel="stylesheet" href="{{ '/assets/css/site.css' | asset }}">
   <script src="{{ '/assets/js/lang.js' | asset }}"></script>
   <script src="{{ '/assets/js/site.js' | asset }}" defer></script>
+  {#- LAB (branch lab/scroll-momentum): scroll momentum letters -#}
+  <link rel="stylesheet" href="{{ '/assets/css/lab.css' | asset }}">
+  <script type="module" src="{{ '/assets/js/lab/scroll-fx.js' | asset }}"></script>
   {%- if jsonld %}
   <script type="application/ld+json">{{ jsonld | json | safe }}</script>
   {%- endif %}
