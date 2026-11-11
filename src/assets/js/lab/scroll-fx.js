@@ -133,17 +133,18 @@ function frame() {
   for (const b of blocks) {
     if (b.top + b.height < viewTop || b.top > viewBottom) { if (b.hot) reset(b); continue; }
     for (const c of b.chars) {
-      // spring per letter: softer around the line's "middle" (arrives later). Where that middle is,
-      // the shape of the dip, the stiffness and the start delay differ per line (variation slider).
+      // spring per letter: softer in the middle of the line, so the middle arrives last. Each line
+      // only nudges that a little (variation slider): the dip moves at most ~12% off-centre and the
+      // depth, stiffness and start (0-2 frames late) change slightly.
       const L = c.L;
-      const peak = 0.5 + (L.peak - 0.5) * 0.8 * v;
+      const peak = 0.5 + (L.peak - 0.5) * 0.25 * v;
       const centre = Math.max(0, 1 - Math.abs(c.m - peak) / Math.max(peak, 1 - peak));
-      const shape = Math.pow(centre, 2 + (L.sharp - 0.5) * 2.4 * v);
+      const shape = Math.pow(centre, 2 + (L.sharp - 0.5) * 0.8 * v);
       const k = p.random
         ? p.kEdge * (0.35 + c.r * 1.3)
-        : (p.kEdge + (p.kMid - p.kEdge) * shape) * (1 + (L.k - 0.5) * 0.9 * v) * (1 + (c.n - 0.5) * 0.35 * v);
-      const push = injects[Math.round(L.delay * 5 * v)] || 0;
-      if (push) c.off += push * (p.random ? 0.4 + c.r * p.random : (0.55 + 0.45 * shape) * (1 + (L.gain - 0.5) * 0.8 * v));
+        : (p.kEdge + (p.kMid - p.kEdge) * shape) * (1 + (L.k - 0.5) * 0.4 * v) * (1 + (c.n - 0.5) * 0.1 * v);
+      const push = injects[Math.round(L.delay * 2 * v)] || 0;
+      if (push) c.off += push * (p.random ? 0.4 + c.r * p.random : (0.55 + 0.45 * shape) * (1 + (L.gain - 0.5) * 0.35 * v));
       c.vel += -k * c.off - p.d * c.vel;
       c.off += c.vel;
       if (c.off > p.max) { c.off = p.max; c.vel = 0; } else if (c.off < -p.max) { c.off = -p.max; c.vel = 0; }
