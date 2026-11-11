@@ -35,6 +35,7 @@ const store = {
 const reduced = matchMedia("(prefers-reduced-motion: reduce)");
 let mode = store.get("mode", "elastic");
 let strength = Number(store.get("strength", "1"));
+let variation = Number(store.get("variation", "0.7")); // 0 = every line the same, 1 = every line its own shape
 
 // ---------- canvas ----------
 const canvas = document.createElement("canvas");
@@ -91,14 +92,16 @@ function measureBlocks() {
       catch (e) { lines = [{ text: hard, width }]; }
       for (const line of lines) {
         const lw = line.width;
+        // every line gets its own random character: where its "middle" is, how sharp the dip is,
+        // how stiff and how far it lags, and how many frames late it starts
+        const L = { peak: Math.random(), sharp: Math.random(), k: Math.random(), gain: Math.random(), delay: Math.random() };
         const dx = cs.textAlign === "center" ? (width - lw) / 2 : cs.textAlign === "right" || cs.textAlign === "end" ? width - lw : 0;
         let x = 0;
         for (const ch of line.text) {
           const w = charWidth(font, ch) + letterSpacing;
           if (ch.trim()) {
-            const mid = lw > 0 ? (x + w / 2) / lw : 0.5;
-            const centre = 1 - Math.abs(2 * mid - 1); // 0 at the edges, 1 in the middle
-            chars.push({ ch, x: dx + x, y: y + baseline, c: centre, r: Math.random(), off: 0, vel: 0, trail: [] });
+            const mid = lw > 0 ? (x + w / 2) / lw : 0.5; // 0 = start of the line, 1 = end
+            chars.push({ ch, x: dx + x, y: y + baseline, m: mid, L, n: Math.random(), r: Math.random(), off: 0, vel: 0, trail: [] });
           }
           x += w;
         }
@@ -112,6 +115,7 @@ function measureBlocks() {
 
 // ---------- animation ----------
 let lastY = scrollY, moving = false, raf = 0, time = 0;
+const injects = [];
 const accent = { a: "#ff3d7f", b: "#33e0ff" };
 
 function frame() {
@@ -122,14 +126,24 @@ function frame() {
   const dy = scrollY - lastY;
   lastY = scrollY;
   const inject = Math.sign(dy) * Math.max(0, Math.abs(dy) - p.threshold) * strength;
+  injects.unshift(inject); if (injects.length > 8) injects.pop(); // recent pushes, for lines that start late
+  const v = variation;
   const viewTop = scrollY - 200, viewBottom = scrollY + innerHeight + 200;
   let energy = 0;
   for (const b of blocks) {
     if (b.top + b.height < viewTop || b.top > viewBottom) { if (b.hot) reset(b); continue; }
     for (const c of b.chars) {
-      // spring per letter: softer in the middle of the line (arrives later)
-      const k = p.random ? p.kEdge * (0.35 + c.r * 1.3) : p.kEdge + (p.kMid - p.kEdge) * c.c * c.c;
-      if (inject) c.off += inject * (p.random ? 0.4 + c.r * p.random : 0.55 + 0.45 * c.c);
+      // spring per letter: softer around the line's "middle" (arrives later). Where that middle is,
+      // the shape of the dip, the stiffness and the start delay differ per line (variation slider).
+      const L = c.L;
+      const peak = 0.5 + (L.peak - 0.5) * 0.8 * v;
+      const centre = Math.max(0, 1 - Math.abs(c.m - peak) / Math.max(peak, 1 - peak));
+      const shape = Math.pow(centre, 2 + (L.sharp - 0.5) * 2.4 * v);
+      const k = p.random
+        ? p.kEdge * (0.35 + c.r * 1.3)
+        : (p.kEdge + (p.kMid - p.kEdge) * shape) * (1 + (L.k - 0.5) * 0.9 * v) * (1 + (c.n - 0.5) * 0.35 * v);
+      const push = injects[Math.round(L.delay * 5 * v)] || 0;
+      if (push) c.off += push * (p.random ? 0.4 + c.r * p.random : (0.55 + 0.45 * shape) * (1 + (L.gain - 0.5) * 0.8 * v));
       c.vel += -k * c.off - p.d * c.vel;
       c.off += c.vel;
       if (c.off > p.max) { c.off = p.max; c.vel = 0; } else if (c.off < -p.max) { c.off = -p.max; c.vel = 0; }
@@ -137,7 +151,7 @@ function frame() {
       if (p.trail) { c.trail.push(c.off); if (c.trail.length > p.trail) c.trail.shift(); }
     }
   }
-  if (!energy && !inject) return settle();
+  if (!energy && !injects.some(Boolean)) return settle();
   if (!moving) { moving = true; document.documentElement.classList.add("fx-moving"); }
   draw(p);
   raf = requestAnimationFrame(frame);
@@ -181,6 +195,7 @@ function draw(p) {
 function reset(b) { for (const c of b.chars) { c.off = 0; c.vel = 0; c.trail.length = 0; } b.hot = false; }
 function settle() {
   for (const b of blocks) if (b.hot) reset(b);
+  injects.length = 0;
   if (moving) { moving = false; document.documentElement.classList.remove("fx-moving"); }
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -210,7 +225,8 @@ ui.setAttribute("aria-label", "Scroll effect (lab)");
 ui.innerHTML =
   `<span class="fx-ui__k">fx</span>` +
   Object.keys(MODES).map((m) => `<button type="button" data-fx="${m}">${LABELS[m]}</button>`).join("") +
-  `<label class="fx-ui__k">power <input type="range" min="0.4" max="2.5" step="0.1" value="${strength}"></label>`;
+  `<label class="fx-ui__k">power <input type="range" data-k="strength" min="0.4" max="2.5" step="0.1" value="${strength}"></label>` +
+  `<label class="fx-ui__k">variation <input type="range" data-k="variation" min="0" max="1" step="0.05" value="${variation}"></label>`;
 document.body.appendChild(ui);
 function paintUi() { ui.querySelectorAll("[data-fx]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.fx === mode))); }
 ui.addEventListener("click", (e) => {
@@ -218,5 +234,10 @@ ui.addEventListener("click", (e) => {
   if (!b) return;
   mode = b.dataset.fx; store.set("mode", mode); settle(); paintUi();
 });
-ui.querySelector("input").addEventListener("input", (e) => { strength = Number(e.target.value); store.set("strength", strength); });
+ui.addEventListener("input", (e) => {
+  const k = e.target.dataset.k;
+  if (k === "strength") strength = Number(e.target.value);
+  if (k === "variation") variation = Number(e.target.value);
+  if (k) store.set(k, e.target.value);
+});
 paintUi();
