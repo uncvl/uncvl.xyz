@@ -42,8 +42,12 @@ text_tr: |
 lineup:
   - artist: krayat
     name: Krayat
+    act_type: ["Concert"]
     note_en: DIY hardcore punk, Berlin
   - name: Ruff Crux
+    act_type: ["Concert"]
   - name: Moko
+    act_type: ["Concert"]
   - name: Hush
+    act_type: ["Concert"]
 ---

@@ -38,6 +38,7 @@ tickets_en: "Entrance: 400TL (300TL until 22:00)"
 lineup:
   - artist: loremipsum
     name: Loremipsum & 0N1
+    act_type: ["Live Set"]
     note_en: live · pocket operator jam
   - artist: boneless
     name: Boneless
@@ -58,13 +59,17 @@ lineup:
     name: Balgum
     note_en: "?"
   - name: Algorizma
+    act_type: ["Visuals"]
     note_en: visuals
   - name: Buffer Overflow
+    act_type: ["Visuals"]
     note_en: visuals
   - artist: aziz-deliorman
     name: Deliorman
+    act_type: ["Visuals"]
     note_en: visuals
   - name: Gowno
+    act_type: ["Performance Art"]
     note_en: performance
   - name: Never Grow Up
     note_en: decor

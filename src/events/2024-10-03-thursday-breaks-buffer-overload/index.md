@@ -26,10 +26,13 @@ tickets_tr: Biletler kapıda // 150₺
 lineup:
   - artist: balgum
     name: Balgum
+    act_type: ["DJ Set"]
   - artist: oqlius
     name: Oqlius
+    act_type: ["DJ Set"]
     note_en: neurofunk
   - artist: corpocore
     name: Corpocore
+    act_type: ["DJ Set"]
     note_en: hardcore techno, sextrance
 ---

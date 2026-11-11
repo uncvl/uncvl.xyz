@@ -22,15 +22,19 @@ text_tr: |
 lineup:
   - artist: oqlius
     name: Oqlius
+    act_type: ["DJ Set"]
     note_en: DJ Set
   - artist: gouachi
     name: Gouachi
+    act_type: ["DJ Set"]
     note_en: DJ Set
   - artist: random-input
     name: Random Input
+    act_type: ["DJ Set"]
     note_en: DJ Set
   - artist: codex
     name: Codex
+    act_type: ["Visuals"]
     note_en: Visuals
     note_tr: Görsel
 ---

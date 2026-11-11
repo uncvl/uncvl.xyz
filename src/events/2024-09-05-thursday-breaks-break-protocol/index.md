@@ -26,8 +26,11 @@ tickets_tr: Biletler kapıda 150TL
 lineup:
   - artist: koi-failure
     name: Koi Failure
+    act_type: ["Live Set"]
   - artist: oqlius
     name: Oqlius
+    act_type: ["DJ Set"]
   - artist: random-input
     name: Random Input
+    act_type: ["DJ Set"]
 ---

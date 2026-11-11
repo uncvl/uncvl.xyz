@@ -42,22 +42,27 @@ tickets_tr: |
 lineup:
   - artist: lunar-funktion
     name: Lunar Funktion
+    act_type: ["DJ Set"]
     bio_en: Lunar Funktion is a *DnB/Jungle* DJ and Producer based in Istanbul. The journey starts in 2008, the moment he instantly fell in love with DnB and Jungle as soon as he listened to MSX:FM, the radio he found by chance while driving over a bridge with his Stinger in GTA 3. Having been producing *trip hop and jungle* tracks under his music project ‘*Viva La Luna*’ since 2013. His first visit to *PIXIE* in 2018 was the most important factor that prompted him to become a DJ. Lunar Funktion aimed to reflect the *old school tunes* of the 90s on his sets and immersed himself in the beauties of the past. He also hosted a weekly show in *Radyo Modyan*.
     bio_tr: Drum&Bass müziğine olan aşkı 2008 yılında GTA3'te Stinger'ıyla köprüde dolaşırken radyoda şans eseri karşılaştığı Moving Shadow parçaları ile filizlenen Lunar Funktion, 2013'ten itibaren *Viva La Luna* projesi altında *trip hop* ve *jungle* türünde prodüksiyonlar yaptı. 2018'de *PIXIE* ile tanışması ise onu DJ'lik yapmaya iten en önemli etken oldu. Lunar Funktion kendisini eskinin güzelliklerine kaptırarak setlerinde 90'ların *oldschool melodiler*ini gelecek nesillere yansıtmayı amaçlamış, belirli bir süre boyunca *Radyo Modyan*'da da kendi ismini taşıyan haftalık programı ile yer almıştır.
   - artist: consul
     name: Consul
+    act_type: ["DJ Set"]
     bio_en: Consul has been a *D&B/Jungle* DJ since 2016 and producing in those genres since 2019. He has released two EPs and a single. He is currently working on his debut album.
     bio_tr: Consul, 2016 yılından beri *D&B/Jungle* DJ’liği ve 2019 yılından beri bu türlerde prodüksiyon yapıyor. Şu ana kadar iki EP ve bir single yayınladı ve ilk albümü üzerinde çalışıyor.
   - artist: fosil
     name: Fosil
+    act_type: ["DJ Set"]
     bio_en: Fosil is an artist that eschews standard convention in favour of expanding his sonic palette - fusing elements of *Left-field bass music, Experimental and Breakbeat* into a sonic tapestry that is uniquely his own and he is also founder of *Badmash*. He is an artist that is helping to shape a key sound and cultivating the culture of the ever-evolving Turkish underground scene.
     bio_tr: Fosil, *Bass, Experimental ve Breakbeat* tarzlarındaki ses paletini genişletmek için standart konvansiyondan kaçınan bir sanatçıdır. Kendine has ses yelpazesini parçalarında kullanmaktadır. Aynı zamanda *Badmash*'in kurucularından olan Fosil, Amerikan *A / V Label Satellite Era*’dan ve kurucusu olduğu Badmash'den parçalarını yayımlamıştır.
   - artist: tech-tabanjah
     name: Tech Tabanjah
+    act_type: ["DJ Set"]
     bio_en: As a DJ, Mc and producer, Tech Tabanjah aka Da Frogg took an active role in the development of Reggae, *Dub and Jungle* genres in Turkey. He is the founder of the *Beton Orman* collective, which started as a program on Açık Radyo in 2004 and later grew as a record company and organization. *Da Frogg*, who has performed in many venues and festivals in Turkey and abroad, is about to complete its 30th year in the music world.
     bio_tr: Da Frogg adıyla bilinen Tech Tabanjah, Dj, Mc ve prodüktör olarak Türkiyede *reggae, dub ve jungle* türlerinin gelişiminde aktif rol aldı. 2004'te *Açık Radyo*'da program olarak başlayan sonrasında plak şirketi ve organizasyon olarak büyüyen *Beton Orman* kolektifinin kurucusu. Yurt içi ve yurt dışında pek çok mekan ve festivalde sahne alan *Da Frogg* müzik dünyasında 30. yılını doldurmak üzere.
   - artist: random-input
     name: Random Input
+    act_type: ["DJ Set","Visuals"]
     bio_en: Random Input produces, mixes, edits audio and visual materials.  As a VJ he has been mixing video live since 2002 mainly by itterating, reproducing, distorting, displacing and corrupting images. He started DJing in 2018 and since then played sets that blends *breakcore, hardcore, chiptune and glitch* genres.
     bio_tr: Random Input ses ve görsel miksleyen ve editleyen bir VJDJ’dir. 2002 yılından bu yana, bulduğu görüntüleri çoğaltır, saptırır, çarpıtıp bozarak yeniden üretir. 2018’de *Pixie* Underground’da *breakcore, hardcore, bass, chiptune, glitch* türlerini harmanladığı DJ setleri çalmaya başlamıştır.
 ---

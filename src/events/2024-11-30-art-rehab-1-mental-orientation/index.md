@@ -20,18 +20,24 @@ exhibitors: [Abyssal Area, Alya Wintour, Bedirhan Sezen, Böcek, Kuduruk, Never 
 lineup:
   - artist: nxnblu
     name: nxnblu
+    act_type: ["DJ Set"]
     note_en: dj set
   - artist: oqlius
     name: Oqlius
+    act_type: ["DJ Set"]
     note_en: dj set
   - artist: random-input
     name: Random Input
+    act_type: ["DJ Set"]
     note_en: dj set
   - artist: corpocore
     name: Corpocore
+    act_type: ["DJ Set"]
     note_en: dj set
   - name: Wave Art Tattoo
+    act_type: ["DJ Set"]
     note_en: dj set
   - name: Vortex Z
+    act_type: ["DJ Set"]
     note_en: dj set
 ---

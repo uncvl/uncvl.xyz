@@ -16,10 +16,14 @@ videos:
     title: "Event Promo: infüze-archonGrid"
 lineup:
   - name: Federico Fellini
+    act_type: ["Concert"]
   - name: Histeri
+    act_type: ["Concert"]
   - name: Urban Divine
+    act_type: ["Concert"]
     note_en: + binding of isaac, cruelty squad [epic live gameplay]
   - name: DJ Body Pistol
+    act_type: ["DJ Set"]
     note_en: after
   - artist: rasenv1rus
     name: Rasenv1rus

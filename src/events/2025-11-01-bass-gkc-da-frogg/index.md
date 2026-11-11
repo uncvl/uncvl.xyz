@@ -27,8 +27,10 @@ tickets_tr: "Giriş: 200 TL"
 lineup:
   - artist: gkc
     name: GKC
+    act_type: ["DJ Set"]
     note_en: old skool house
   - artist: tech-tabanjah
     name: Da Frogg
+    act_type: ["DJ Set"]
     note_en: dub, jungle
 ---

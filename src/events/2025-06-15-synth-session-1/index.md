@@ -24,16 +24,20 @@ text_tr: |
 lineup:
   - artist: vco2
     name: VCO2
+    act_type: ["Live Set"]
     note_en: live
     note_tr: canlı
   - artist: tetrax
     name: Tetrax
+    act_type: ["Live Set"]
     note_en: live
     note_tr: canlı
   - artist: lizrith
     name: Lizrith
+    act_type: ["DJ Set"]
     note_en: dj set
   - artist: corpocore
     name: Corpocore
+    act_type: ["DJ Set"]
     note_en: dj set
 ---

@@ -74,11 +74,13 @@ lineup:
     bio_tr: Balgum, Engin'in techno, drum and bass, hardcore, tekno, breakcore gibi underground elektronik müzik türlerini araştırdığı projesidir. Aksak vuruşlar, gürültü ve distorsiyonun verdiği kafa karışıklığından sonra gelen netlikte huzur buluyor.
   - artist: 500001k
     name: 500001K
+    act_type: ["Live Set"]
     note_en: live set, with H0P3
     bio_en: Niaz a.k.a “Ktown” short for “500001K” is a producer/composer from Iran, born 1997 in Dubai/Karama. Niaz took interest in learning how to make beats in 2015, As he kept creating instrumental music he would often collaborate with different Artists online, Allowing him to experiment with his own sound and all kinds of genres, He would then go on and start multiple projects in 2020 to expand his creativity and diverse taste in music.
     bio_tr: Niaz, diğer adıyla "Ktown" (500001k), İran asıllı bir producer/composer'dır. 1997 yılında Karama, Dubai'de doğan Niaz 2015'te beat üretmeyle ilgilenmeye başladı. Bir yandan enstrüman çalarak müzik yapmaya devam ederken farklı sanatçılarla çevirimiçi işbirlikleri yaparak kendi tarzıyla ve farklı türlerle deneyler yapabildi. Yaratacılığını ve müzik zevkini geliştirmek için 2020 yılında birden fazla proje başlattı.
   - artist: h0p3
     name: H0P3
+    act_type: ["Live Set"]
     note_en: live set, with 500001K
     bio_en: Umut a.k.a H0P3, born in 2001, started his music journey at a very young age playing drums and guitar. His passion with music especially the extreme music allowed him to explore various ways to express and make sounds from black metal to psycore, creating and collaborating in countless projects and genres.
     bio_tr: Umut (H0P3), müzik yolculuğuna çok küçük yaşta davul ve gitar çalarak başladı. Müzik üretmeye, özellikle de ekstrem müziğe duyduğu tutku, black metal'den psycore'a birçok tarzda ses çıkarmayı ve ifade etmeyi öğrenmesini sağladı. Farklı isimlerle çokça proje üretti ve üretmeye devam ediyor.
@@ -88,6 +90,7 @@ lineup:
     bio_en: OX is an alternative DJ project from Oxomo who is also experimental psycore DJ and producer. OX focused on collecting and mixing dark tekno, mental tribe tekno and breakcore styles. More slower rhythm than Oxomo selections but still deep and dark mysterious stories by mixing underground tekno styles around 160-190 BPMs. Part of Metacortex Records and underground tekno community from Turkey ; Future Industry. OX is performing from 2019 and last 2 years played in Nentoke sound and Amygdala sound stage at the Albania Teknival, several parties in Mexico 2022, Eudomonia Teaser Goa India 2023, parties in Thailand 2023 and some other events around Turkey and Europe.
     bio_tr: OX, aynı zamanda experimental psycore DJ/producer olan Oxomo'nun alternatif DJ projesidir. Dark tekno, mental tribe tekno ve breakcore tarzlarını toplamaya ve mikslemeye odaklanıyor. Oxomoxo seçkilerinden daha düşük tempoda olsalar da aynı derin ve karanlık gizemli hikayeleri ile 160-190 BPM aralığındaki tekno tarzlarını harmanlayarak anlatıyor. Metacortex Records ve Future Industry'nin parçası olarak 2019'dan bu yana OX ismiyle faaliyet gösteriyor, son 2 yıl içerisinde de Albania Teknival Nentoke sound ve Amygdala sound sahnelerinde, 2022 Mexico'da birden fazla partilerde, 2023 Eudomania Teaser Goa, Hindistan'da ve Türkiye ve Avrupa'da çeşitli etkinliklerde yer aldı.
   - name: Kage Bunshin
+    act_type: ["Visuals"]
     note_en: visuals
     note_tr: görseller
 ---

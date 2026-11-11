@@ -40,7 +40,10 @@ text_en: |
 lineup:
   - artist: krayat
     name: Krayat
+    act_type: ["Concert"]
     note_en: DIY hardcore punk, Berlin
   - name: Goblin Daycare
+    act_type: ["Concert"]
   - name: Potlatch
+    act_type: ["Concert"]
 ---

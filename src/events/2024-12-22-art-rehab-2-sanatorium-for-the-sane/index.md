@@ -23,20 +23,26 @@ exhibitors: [Abyssal Area, Melis, Ada, Bedirhan Sezen, Musbucc, Zeynep Destebaş
 lineup:
   - artist: ja11hhcc7216
     name: ja11hhcc7216
+    act_type: ["DJ Set"]
     note_en: dj set
   - artist: loremipsum
     name: Loremipsum
+    act_type: ["DJ Set"]
     note_en: dj set
   - artist: balgum
     name: Balgum
+    act_type: ["DJ Set"]
     note_en: dj set
   - artist: corpocore
     name: Corpocore
+    act_type: ["DJ Set"]
     note_en: dj set
   - artist: random-input
     name: Random Input
+    act_type: ["DJ Set"]
     note_en: dj set
   - artist: ox
     name: Ox
+    act_type: ["DJ Set"]
     note_en: dj set
 ---

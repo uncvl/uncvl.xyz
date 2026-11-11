@@ -26,16 +26,20 @@ tickets_tr: Biletler kapıda // 150₺
 lineup:
   - artist: loremipsum
     name: Loremipsum
+    act_type: ["Live Set"]
     note_en: live set
     note_tr: canlı set
   - artist: random-input
     name: Random Input
+    act_type: ["DJ Set"]
     note_en: drum'n bass, breakcore
   - artist: balgum
     name: Balgum
+    act_type: ["DJ Set"]
     note_en: drum'n bass, breakcore
   - artist: aziz-deliorman
     name: Aziz Deliorman
+    act_type: ["Visuals"]
     note_en: visuals
     note_tr: görseller
 ---

@@ -33,29 +33,35 @@ text_tr: |
 lineup:
   - artist: horspiel
     name: Hörspiel
+    act_type: ["Live Set"]
     note_en: live · Vienna
     bio_en: Hörspiel is the creative collaboration between Zeynep Sarıkartal (aka ZS ZS) and Lukas Öcker (aka Frida Kore). Together, they explore the boundaries of noise and IDM, creating soundscapes that are both complex and raw. Their music is an honest expression of their shared passion for experimental electronic music, in which they combine textures and rhythms in unconventional ways.
     bio_tr: Hörspiel, Zeynep Sarıkartal (namı diğer ZS ZS) ile Lukas Öcker (namı diğer Frida Kore) arasındaki yaratıcı iş birliğidir. Birlikte, gürültü ve IDM'in sınırlarını keşfederek hem karmaşık hem de ham ses manzaraları yaratıyorlar. Müzikleri, dokuları ve ritimleri alışılmadık şekillerde birleştirdikleri deneysel elektronik müziğe olan ortak tutkunun dürüst bir ifadesi.
   - artist: ubena
     name: Übena
+    act_type: ["Live Set"]
     note_en: live
     bio_en: Composed of punk clowns hungry for noise and chaos, Übena pushes the boundaries and turns the stage into a political cabaret.
     bio_tr: Übena, limitleri zorlayarak sahneyi politik bir kabereya dönüştüren, gürültü ve kaosa aç punk paylançolardan oluşuyor.
   - artist: vco2
     name: VCO2
+    act_type: ["Live Set"]
     note_en: live
     bio_en: VCO2 came to life as an entity where Uğur Burs and Umut Türk brought together their creative visions. They exhibit rhythmic pieces while discovering dark, dirty and experimental textures in their improvised sessions. The instruments they choose are a combination of both dirty, noisy analog and crystal-bright digital, like the band's sound character.
     bio_tr: VCO2, Uğur Burs ve Umut Türk'ün yaratıcı vizyonlarını bir araya getirdikleri bir varlık olarak hayata geçti. Karanlık, kirli ve deneysel ses örtülerinde keşfettikleri ritmik parçaları canlı ve doğaçlama olarak sergiliyor. Seçtikleri enstrümanlar, grubun ses karakteri gibi hem kirli, gürültülü analogun, hem de kristal parlaklığında dijitalin birleşimi.
   - artist: balgum
     name: Balgum
+    act_type: ["Live Set"]
     note_en: live
   - artist: loremipsum
     name: Loremipsum
+    act_type: ["Live Set"]
     note_en: live
     bio_en: Loremipsum treats auditory elements as a sound collage in his music. He uses a hybrid setup consisting of an analog synthesizer, digital sampler and MIDI devices; He bases his production on the concepts of the combination of textures, the association of sounds and randomness.
     bio_tr: Loremipsum, müziğinde işitsel ögeleri bir ses kolajı olarak ele alıyor. Analog sentezleyici, dijital sampler ve MIDI cihazlardan oluşan hibrit bir setup kullanıyor; üretimini dokuların birleşimi, seslerin ilişkilenmeleri ve rastgelelik kavramları üzerine kuruyor.
   - artist: ur0123456789
     name: ur0123456789
+    act_type: ["Live Set"]
     note_en: live · İstanbul
     bio_en: ur0123456789 is an experimental noise group. They blend instrumental and electronic sounds and create a new perspective with its on-stage improvization approach.
     bio_tr: ur0123456789 deneysel noise grubudur. Enstrumental ve elektronik sesleri harmanlayıp, sahne içi improvizasyon yaklaşımı ile yeni bir bakış açısı oluşturur.

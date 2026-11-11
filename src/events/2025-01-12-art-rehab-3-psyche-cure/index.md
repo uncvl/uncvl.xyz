@@ -19,8 +19,10 @@ gallery:
 lineup:
   - artist: balgum
     name: Balgum
+    act_type: ["DJ Set"]
     note_en: dj set
   - artist: ox
     name: Ox
+    act_type: ["DJ Set"]
     note_en: dj set
 ---

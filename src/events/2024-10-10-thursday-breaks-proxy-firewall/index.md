@@ -28,12 +28,15 @@ tickets_tr: Biletler kapıda // 150₺
 lineup:
   - artist: random-input
     name: Random Input
+    act_type: ["DJ Set"]
     note_en: chill breakcore
   - artist: mondual
     name: Mondual
+    act_type: ["Live Set"]
     note_en: live
     note_tr: canlı
   - artist: balgum
     name: Balgum
+    act_type: ["DJ Set"]
     note_en: drum'n bass (neurofunk)
 ---

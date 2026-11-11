@@ -29,11 +29,14 @@ tickets_tr: Biletler kapıda // 150₺
 lineup:
   - artist: zs-zs
     name: ZS ZS
+    act_type: ["Live Set"]
     note_en: live noise, IDM, flashcore
   - artist: horspiel
     name: Hörspiel
+    act_type: ["Live Set"]
     note_en: live breakcore
   - artist: random-input
     name: Random Input
+    act_type: ["DJ Set"]
     note_en: breakcore, hardcore
 ---

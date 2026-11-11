@@ -321,3 +321,99 @@ Still empty: 500001K, Aziz Deliorman, Codex, GKC, Gouachi, ja11hhcc7216, Koi Fai
 | 2026-05-08-punk-infuze-archongrid | performance | Music (added: concert), Performance Art |
 | 2026-09-04-synth-and-punk | – | Music (added: music event) |
 - **Event type, Event content and Act type are all multi-select.** Synth Sessions & Punk Concert now has both Synth and Punk, so it shows under both on the events page.
+
+### Lineup act types (filled in where the event data says it)
+88 lineup entries got an act type from their note, the event text or the poster. Zero-Day Exploit also got the durations its notes give (75 min, 40 min); its notes still say "75 min DJ set", so they could be shortened to "main act" / "training session".
+
+Left empty because nothing says how they played: Rejenere (Random Input, Balgum, Ox), Çöpüşüm (Çöpten Çıkan Böcek, Ox, Random Input, Balgum), Decentralized Consensus (Boneless, Rasenv1rus, Random Input, Mad Honey, Lizrith, Balgum; Never Grow Up and Abyssal Area did decor, which has no act type), Infüze × Archongrid after (Rasenv1rus, Random Input).
+
+| Event | Lineup | Act type | Based on |
+|---|---|---|---|
+| 2022-04-02-bass-night-ignishaan | Dyln | DJ Set | text: B2B sessions; DJ bios |
+| 2022-04-02-bass-night-ignishaan | Dubstract | DJ Set | text: B2B sessions; DJ bios |
+| 2022-04-02-bass-night-ignishaan | Da Frogg | DJ Set | text: B2B sessions; DJ bios |
+| 2022-04-02-bass-night-ignishaan | Random Input | Visuals | note: visuals |
+| 2022-05-03-bass-night-drumazan-speshaal | Jung | DJ Set | DJ bio, genre note |
+| 2022-05-03-bass-night-drumazan-speshaal | Da Frogg | DJ Set | DJ bio, genre note |
+| 2022-05-03-bass-night-drumazan-speshaal | Random Input | Visuals | note: visuals |
+| 2022-05-14-punk-zibidiler-tampon-bunu-sen-istedin | Bunu Sen İstedin | Concert | band at a punk concert |
+| 2022-05-14-punk-zibidiler-tampon-bunu-sen-istedin | Tampon | Concert | band at a punk concert |
+| 2022-05-14-punk-zibidiler-tampon-bunu-sen-istedin | Zibidiler | Concert | band at a punk concert |
+| 2022-05-28-bass-night-genereshaan | Lunar Funktion | DJ Set | text: four DJs, jungle and drum'n bass sets |
+| 2022-05-28-bass-night-genereshaan | Consul | DJ Set | text: four DJs |
+| 2022-05-28-bass-night-genereshaan | Fosil | DJ Set | text: four DJs |
+| 2022-05-28-bass-night-genereshaan | Tech Tabanjah | DJ Set | text: four DJs |
+| 2022-05-28-bass-night-genereshaan | Random Input | DJ Set, Visuals | text: started with his set, did the visuals |
+| 2022-11-17-decyphered-civilization | Oqlius | DJ Set | note: DJ Set |
+| 2022-11-17-decyphered-civilization | Gouachi | DJ Set | note: DJ Set |
+| 2022-11-17-decyphered-civilization | Random Input | DJ Set | note: DJ Set |
+| 2022-11-17-decyphered-civilization | Codex | Visuals | note: Visuals |
+| 2023-12-16-art-rejenere | 500001K | Live Set | note: live set |
+| 2023-12-16-art-rejenere | H0P3 | Live Set | note: live set |
+| 2023-12-16-art-rejenere | Kage Bunshin | Visuals | note: visuals |
+| 2024-09-05-thursday-breaks-break-protocol | Koi Failure | Live Set | text: their live set |
+| 2024-09-05-thursday-breaks-break-protocol | Oqlius | DJ Set | text: warmed up the floor with dubstep |
+| 2024-09-05-thursday-breaks-break-protocol | Random Input | DJ Set | text: played his breakcore set |
+| 2024-09-19-thursday-breaks-attack-vector | Loremipsum | Live Set | note: live set |
+| 2024-09-19-thursday-breaks-attack-vector | Random Input | DJ Set | text: drum'n bass and breakcore sets |
+| 2024-09-19-thursday-breaks-attack-vector | Balgum | DJ Set | text: drum'n bass and breakcore sets |
+| 2024-09-19-thursday-breaks-attack-vector | Aziz Deliorman | Visuals | note: visuals |
+| 2024-09-26-punk-krayat-goblin-daycare-potlatch | Krayat | Concert | text: punk bands |
+| 2024-09-26-punk-krayat-goblin-daycare-potlatch | Goblin Daycare | Concert | text: punk bands |
+| 2024-09-26-punk-krayat-goblin-daycare-potlatch | Potlatch | Concert | text: punk bands |
+| 2024-09-27-punk-krayat-ruff-crux-moko-hush | Krayat | Concert | punk concert |
+| 2024-09-27-punk-krayat-ruff-crux-moko-hush | Ruff Crux | Concert | punk concert |
+| 2024-09-27-punk-krayat-ruff-crux-moko-hush | Moko | Concert | punk concert |
+| 2024-09-27-punk-krayat-ruff-crux-moko-hush | Hush | Concert | punk concert |
+| 2024-10-03-thursday-breaks-buffer-overload | Balgum | DJ Set | text: opening set |
+| 2024-10-03-thursday-breaks-buffer-overload | Oqlius | DJ Set | text: his neurofunk set |
+| 2024-10-03-thursday-breaks-buffer-overload | Corpocore | DJ Set | text: his selection |
+| 2024-10-10-thursday-breaks-proxy-firewall | Random Input | DJ Set | text: chill breakcore set |
+| 2024-10-10-thursday-breaks-proxy-firewall | Mondual | Live Set | note: live |
+| 2024-10-10-thursday-breaks-proxy-firewall | Balgum | DJ Set | text: drum'n bass set |
+| 2024-10-17-thursday-breaks-signature-strike | ZS ZS | Live Set | note: live noise |
+| 2024-10-17-thursday-breaks-signature-strike | Hörspiel | Live Set | note: live breakcore |
+| 2024-10-17-thursday-breaks-signature-strike | Random Input | DJ Set | text: a breakcored hardcore dj set |
+| 2024-11-30-art-rehab-1-mental-orientation | nxnblu | DJ Set | note: dj set |
+| 2024-11-30-art-rehab-1-mental-orientation | Oqlius | DJ Set | note: dj set |
+| 2024-11-30-art-rehab-1-mental-orientation | Random Input | DJ Set | note: dj set |
+| 2024-11-30-art-rehab-1-mental-orientation | Corpocore | DJ Set | note: dj set |
+| 2024-11-30-art-rehab-1-mental-orientation | Wave Art Tattoo | DJ Set | note: dj set |
+| 2024-11-30-art-rehab-1-mental-orientation | Vortex Z | DJ Set | note: dj set |
+| 2024-12-22-art-rehab-2-sanatorium-for-the-sane | ja11hhcc7216 | DJ Set | note: dj set |
+| 2024-12-22-art-rehab-2-sanatorium-for-the-sane | Loremipsum | DJ Set | note: dj set |
+| 2024-12-22-art-rehab-2-sanatorium-for-the-sane | Balgum | DJ Set | note: dj set |
+| 2024-12-22-art-rehab-2-sanatorium-for-the-sane | Corpocore | DJ Set | note: dj set |
+| 2024-12-22-art-rehab-2-sanatorium-for-the-sane | Random Input | DJ Set | note: dj set |
+| 2024-12-22-art-rehab-2-sanatorium-for-the-sane | Ox | DJ Set | note: dj set |
+| 2025-01-12-art-rehab-3-psyche-cure | Balgum | DJ Set | note: dj set |
+| 2025-01-12-art-rehab-3-psyche-cure | Ox | DJ Set | note: dj set |
+| 2025-03-14-zero-day-exploit | Lizrith | DJ Set · 75 min | note: 75 min DJ set |
+| 2025-03-14-zero-day-exploit | Balgum | DJ Set · 75 min | note: 75 min DJ set |
+| 2025-03-14-zero-day-exploit | Ox | DJ Set · 75 min | note: 75 min DJ set |
+| 2025-03-14-zero-day-exploit | Corpocore | DJ Set · 75 min | note: 75 min DJ set |
+| 2025-03-14-zero-day-exploit | AA&RI | Visuals | note: video projection |
+| 2025-03-14-zero-day-exploit | HellReptile | DJ Set · 40 min | note: 40 min DJ set |
+| 2025-03-14-zero-day-exploit | ja11hhcc7216 | DJ Set · 40 min | note: 40 min DJ set |
+| 2025-03-14-zero-day-exploit | Urwal | DJ Set · 40 min | note: 40 min DJ set |
+| 2025-06-15-synth-session-1 | VCO2 | Live Set | note: live |
+| 2025-06-15-synth-session-1 | Tetrax | Live Set | note: live |
+| 2025-06-15-synth-session-1 | Lizrith | DJ Set | note: dj set |
+| 2025-06-15-synth-session-1 | Corpocore | DJ Set | note: dj set |
+| 2025-11-01-bass-gkc-da-frogg | GKC | DJ Set | text: Old Skool House sets, back to back |
+| 2025-11-01-bass-gkc-da-frogg | Da Frogg | DJ Set | text: back to back sets |
+| 2026-04-24-decentralized-consensus | Loremipsum & 0N1 | Live Set | note: live · pocket operator jam |
+| 2026-04-24-decentralized-consensus | Algorizma | Visuals | note: visuals |
+| 2026-04-24-decentralized-consensus | Buffer Overflow | Visuals | note: visuals |
+| 2026-04-24-decentralized-consensus | Deliorman | Visuals | note: visuals |
+| 2026-04-24-decentralized-consensus | Gowno | Performance Art | note: performance |
+| 2026-05-08-punk-infuze-archongrid | Federico Fellini | Concert | punk night, bands |
+| 2026-05-08-punk-infuze-archongrid | Histeri | Concert | punk night, bands |
+| 2026-05-08-punk-infuze-archongrid | Urban Divine | Concert | punk night, bands |
+| 2026-05-08-punk-infuze-archongrid | DJ Body Pistol | DJ Set | after, DJ |
+| 2026-09-04-synth-and-punk | Hörspiel | Live Set | note: live |
+| 2026-09-04-synth-and-punk | Übena | Live Set | note: live |
+| 2026-09-04-synth-and-punk | VCO2 | Live Set | note: live |
+| 2026-09-04-synth-and-punk | Balgum | Live Set | note: live |
+| 2026-09-04-synth-and-punk | Loremipsum | Live Set | note: live |
+| 2026-09-04-synth-and-punk | ur0123456789 | Live Set | note: live |
