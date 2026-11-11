@@ -122,15 +122,24 @@ function underlined(from, block, cs) {
 
 function runsOf(el) {
   const paras = [[]];
+  paras.plain = true; // stays true if Pretext alone can place this block's text exactly
   const styleOf = new Map();
   const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT, {
     acceptNode(n) {
       if (n.nodeType === 1) {
         if (n.tagName === "BR") return NodeFilter.FILTER_ACCEPT;
-        if (n.matches(SKIP)) return NodeFilter.FILTER_REJECT;
         const cs = getComputedStyle(n);
         if (cs.display === "none" || cs.visibility === "hidden") return NodeFilter.FILTER_REJECT;
-        return isInline(cs.display) ? NodeFilter.FILTER_SKIP : NodeFilter.FILTER_REJECT; // own block
+        const inFlow = cs.position !== "absolute" && cs.position !== "fixed" && cs.float === "none";
+        if (n.matches(SKIP) || !isInline(cs.display)) {
+          // an inline box, image, nested block… takes room in the lines: not plain text
+          if (inFlow) paras.plain = false;
+          return NodeFilter.FILTER_REJECT; // (a nested box with text is its own block)
+        }
+        // inline element with its own spacing or a shifted baseline: not plain text either
+        if (px(cs.marginLeft) || px(cs.marginRight) || px(cs.paddingLeft) || px(cs.paddingRight) ||
+            px(cs.borderLeftWidth) || px(cs.borderRightWidth) || cs.verticalAlign !== "baseline") paras.plain = false;
+        return NodeFilter.FILTER_SKIP;
       }
       return n.data.length ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
     },
@@ -157,7 +166,9 @@ function runsOf(el) {
     else if (st.transform === "lowercase") text = text.toLowerCase();
     paras[paras.length - 1].push({ node: n, text, st });
   }
-  return paras.filter((p) => p.some((r) => r.text.trim()));
+  const out = paras.filter((p) => p.some((r) => r.text.trim()));
+  out.plain = paras.plain;
+  return out;
 }
 
 // source index in a run for each character of a fragment (collapsed whitespace = one space)
@@ -225,8 +236,11 @@ function findBlocks() {
 
 // Where letters go. "dom": every styled run is pinned to the browser's own boxes (Range rects),
 // exact. "pretext": one box per block from the DOM, everything inside placed by Pretext's layout
-// (lines, line height, alignment, advances) without asking the DOM.
-let PLACE = store.get("place", "dom") === "pretext" ? "pretext" : "dom";
+// (lines, line height, alignment, advances) without asking the DOM. "auto" (default): "pretext"
+// for plain text blocks, "dom" for anything with layout Pretext can't see (padded inline bits,
+// flex/grid alignment, preformatted text, inline boxes).
+let PLACE = ["dom", "pretext", "auto"].includes(store.get("place", "auto")) ? store.get("place", "auto") : "auto";
+const autoStats = { pretext: 0, dom: 0 }; // how many blocks "auto" placed which way
 function measureOne(el) {
   const chars = layoutBlock(el, PLACE);
   if (!chars || !chars.length) return;
@@ -248,7 +262,15 @@ function layoutBlock(el, place) {
   const align = cs.textAlign;
   let lineIndex = 0;
   const chars = [];
-  for (const runs of runsOf(el)) {
+  const paras = runsOf(el);
+  if (place === "auto") {
+    // plain text block: normal box, normal whitespace/alignment/indent, nothing special inside
+    const plainBox = (cs.display === "block" || cs.display === "list-item") && cs.whiteSpace === "normal" &&
+      cs.textAlign !== "justify" && !px(cs.textIndent);
+    place = plainBox && paras.plain ? "pretext" : "dom";
+    autoStats[place]++;
+  }
+  for (const runs of paras) {
     let prepared;
     try { prepared = prepareRichInline(runs.map((r) => ({ text: r.text, font: r.st.font, letterSpacing: r.st.letterSpacing || undefined }))); }
     catch (e) { continue; }
@@ -404,16 +426,18 @@ function draw(p) {
       if (p.step) off = Math.round(off / p.step) * p.step; // hard pixel steps
       const split = Math.abs(off) > 2 ? Math.min(4.5, Math.round(Math.abs(off) * 0.12 / 1.5) * 1.5) : 0;
       const y = c.y - scrollY + off;
+      // letters far enough behind to shake are drawn one by one, each with its own random shake
+      // (that is the look); only letters that don't shake are grouped, which can't change the picture
+      const shakes = p.jitter && Math.abs(c.off) > 6;
       // continue the current group if this is the next letter of the same run at the same height
-      if (g && c.frag === g.frag && c.i === g.next && y === g.y && split === g.split && c.exact) {
+      if (!shakes && g && !g.solo && c.frag === g.frag && c.i === g.next && y === g.y && split === g.split && c.exact) {
         g.text += c.ch; g.next++; g.w += c.w;
         continue;
       }
       flush();
-      // shake: one random sideways nudge per group while far behind
-      const shake = p.jitter && Math.abs(c.off) > 6 ? (Math.random() - 0.5) * Math.abs(c.off) * p.jitter : 0;
-      g = { frag: c.frag, next: c.i + 1, text: c.ch, x: c.x - scrollX + shake, y, st: c.st, split, w: c.w };
-      if (!c.exact) flush(); // letters placed one by one (browser wrapped differently): no grouping
+      const shake = shakes ? (Math.random() - 0.5) * Math.abs(c.off) * p.jitter : 0;
+      g = { frag: c.frag, next: c.i + 1, text: c.ch, x: c.x - scrollX + shake, y, st: c.st, split, w: c.w, solo: shakes };
+      if (shakes || !c.exact) flush(); // drawn on its own
     }
     flush();
   }
@@ -522,11 +546,13 @@ document.addEventListener("fx-debug", (e) => {
     PLACE = e.detail.place; store.set("place", PLACE);
     settle(); blocks = []; for (const q of findBlocks()) measureOne(q.el); // synchronous, for testing
   }
-  if (e.detail === "compare") {
+  if (e.detail === "compare" || (e.detail && e.detail.compare)) {
+    const other = (e.detail && e.detail.compare) || "auto";
     const els = blocks.map((b) => b.el);
     const time = (place) => { const t0 = performance.now(); const out = els.map((el) => layoutBlock(el, place)); return { ms: performance.now() - t0, out }; };
-    time("dom"); time("pretext"); // warm both (caches, fonts)
-    const D = time("dom"), P = time("pretext");
+    time("dom"); time(other); // warm both (caches, fonts)
+    autoStats.pretext = autoStats.dom = 0;
+    const D = time("dom"), P = time(other);
     const errs = [], worst = [];
     let mismatched = 0;
     els.forEach((el, k) => {
@@ -546,7 +572,8 @@ document.addEventListener("fx-debug", (e) => {
       blocks: els.length, letters: errs.length, blocksWithDifferentBreaks: mismatched,
       within05px: pct(0.5), within1px: pct(1), within2px: pct(2),
       medianPx: +(errs[Math.floor(errs.length / 2)] || 0).toFixed(2), p95Px: +(errs[Math.floor(errs.length * 0.95)] || 0).toFixed(2), maxPx: +(errs[errs.length - 1] || 0).toFixed(1),
-      layoutMsDom: +D.ms.toFixed(1), layoutMsPretext: +P.ms.toFixed(1),
+      mode: other, layoutMsDom: +D.ms.toFixed(1), layoutMsOther: +P.ms.toFixed(1),
+      autoBlocks: other === "auto" ? { ...autoStats } : undefined,
       worst: worst.sort((x, y) => (typeof y.err === "number" ? y.err : 999) - (typeof x.err === "number" ? x.err : 999)).slice(0, 8),
     });
   }
