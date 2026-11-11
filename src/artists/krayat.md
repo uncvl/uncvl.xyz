@@ -1,5 +1,6 @@
 ---
 name: Krayat
+music_genres: ["Hardcore Punk"]
 links:
   - name: Bandcamp
     url: https://krayat.bandcamp.com/

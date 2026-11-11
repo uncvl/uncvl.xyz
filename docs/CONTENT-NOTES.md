@@ -252,3 +252,34 @@ Imported from reference_sources (Music Genre, Supergenre, Music Descriptors). Ch
 | Depressive Breakcore | Break, Core, Emo |
 | Neo-Grime | Bass, Garage |
 | Weightless | Bass, Ambient |
+
+### Artist genres (filled in from their bios and lineup notes)
+Only genres the artist's own bio or lineup note names were added. Event genres were not copied, because they describe the whole night. Change them in the CMS (Artists → Music genres).
+
+| Artist | Music genres |
+|---|---|
+| Random Input | Breakcore, Chiptune, Glitch, Hardcore, Glitchbreak, Drum & Bass, Chill Breakcore, Freeform Hardcore |
+| Balgum | Breakcore, Hardcore, Noise, Drum & Bass, Neurofunk |
+| Dyln | Breakbeat, Dub, Dubstep, Drum & Bass, UK Garage |
+| Dubstract | Breakbeat, Jungle, Techstep, Drum & Bass |
+| Tech Tabanjah | Dub, Jungle, Breakbeat, Drum & Bass |
+| Hörspiel | IDM, Noise, Breakcore |
+| Jung | Breakbeat, UK Garage, Trap |
+| Lunar Funktion | Jungle, Trip hop, Drum & Bass |
+| Ox | Breakcore, Psycore, Mental Tekno |
+| ZS ZS | Flashcore, IDM, Noise |
+| H0P3 | Black Metal, Psycore |
+| Boneless | Hardcore Punk, Skacore |
+| Consul | Jungle, Drum & Bass |
+| Corpocore | Hardcore Techno, Sextrance |
+| Fosil | Breakbeat |
+| Krayat | Hardcore Punk |
+| Lizrith | Hardcore |
+| Mad Honey | Hardstyle |
+| Oqlius | Neurofunk |
+| Rasenv1rus | Breakcore |
+| ur0123456789 | Noise |
+| Übena | Noise |
+| Bunu Sen İstedin | Acoustic Punk |
+
+Still empty: 500001K, Aziz Deliorman, Codex, GKC, Gouachi, ja11hhcc7216, Koi Failure, Loremipsum, Mondual, nxnblu, Tampon, Tetrax, VCO2, Zibidiler (Tampon and Zibidiler are described only as "punk", which is a supergenre).

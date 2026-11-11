@@ -1,5 +1,6 @@
 ---
 name: Bunu Sen İstedin
+music_genres: ["Acoustic Punk"]
 links:
   - name: Bandcamp
     url: https://bunusenistedin.bandcamp.com/

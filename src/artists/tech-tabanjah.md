@@ -1,5 +1,6 @@
 ---
 name: Tech Tabanjah
+music_genres: ["Dub","Jungle","Breakbeat","Drum & Bass"]
 aka:
   - Da Frogg
 links: []

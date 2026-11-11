@@ -1,5 +1,6 @@
 ---
 name: Random Input
+music_genres: ["Breakcore","Chiptune","Glitch","Hardcore","Glitchbreak","Drum & Bass","Chill Breakcore","Freeform Hardcore"]
 links:
   - name: SoundCloud
     url: https://soundcloud.com/randominput
