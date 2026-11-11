@@ -375,6 +375,38 @@ collections:
           - { name: text_tr, label: Metin (TR), widget: markdown }
           - { name: body, label: Notes above the genre list, widget: markdown, required: false, hint: "The genre list itself comes from Sound → Genres." }
           - { name: genre_list_label, label: Genre list intro, widget: string, required: false, hint: "Shown before the genre list. Empty = no genre list on the page." }
+      - name: concept
+        label: Concept page / Konsept sayfası
+        file: src/pages/concept.md
+        fields:
+          - { name: title_en, label: Title (EN), widget: string }
+          - { name: title_tr, label: Başlık (TR), widget: string, required: false }
+          - { name: description, label: "Short description (search engines and link previews)", widget: text, required: false }
+          - { name: text_en, label: Intro (EN), widget: markdown, required: false }
+          - { name: text_tr, label: Giriş (TR), widget: markdown, required: false }
+          - name: blocks
+            label: Blocks / Bloklar
+            label_singular: Block
+            widget: list
+            summary: "{{fields.title_en}}"
+            hint: "Boxes under the intro, each with a heading, a short text and an optional link (e.g. /sound/). Drag to reorder."
+            fields:
+              - { name: title_en, label: Heading (EN), widget: string }
+              - { name: title_tr, label: Başlık (TR), widget: string, required: false }
+              - { name: text_en, label: Text (EN), widget: markdown }
+              - { name: text_tr, label: Metin (TR), widget: markdown, required: false }
+              - { name: link, label: Link, widget: string, required: false, hint: "A page on this site like /sound/ or /concept/world-building/, or a full https:// address. Empty = no link." }
+              - { name: link_label_en, label: Link text (EN), widget: string, required: false }
+              - { name: link_label_tr, label: Link metni (TR), widget: string, required: false }
+      - name: world_building
+        label: World Building Project page / Dünya Oluşturma Projesi sayfası
+        file: src/pages/world-building.md
+        fields:
+          - { name: title_en, label: Title (EN), widget: string }
+          - { name: title_tr, label: Başlık (TR), widget: string, required: false }
+          - { name: description, label: "Short description (search engines and link previews)", widget: text, required: false }
+          - { name: text_en, label: Text (EN), widget: markdown, hint: "## for main sections, ### for sub-sections. The four jump links at the top point to the ## headings — keep their wording or ask for the links to be updated." }
+          - { name: text_tr, label: Metin (TR), widget: markdown, required: false }
       - name: sound
         label: Sound page / Ses sayfası
         file: src/_data/sound.json

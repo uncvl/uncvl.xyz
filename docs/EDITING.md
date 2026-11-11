@@ -40,6 +40,11 @@
 - **Site texts → Sound page** has the intro of /sound/, and **Site texts → Descriptors** the word list shown at the bottom of it.
 - Renaming a genre: events keep the old name, so change it there too (the site check lists any genre name that doesn't exist).
 
+### Concept
+- **Site texts → Concept page** is /concept/: an intro and a list of **blocks**, each with a heading, a short text and an optional link (e.g. `/sound/`). Add a block for a new theme, drag blocks to reorder.
+- **Site texts → World Building Project page** is /concept/world-building/. Use `##` for main sections and `###` for sub-sections. The jump links at the top point to the four `##` headings; if you rename one, ask for the links to be updated.
+- Both are in English for now; when a Turkish field is empty, the English text is shown with a small "needs translation" note.
+
 ### Calls
 **Calls / Çağrılar** holds open calls (like the compilation call). An open call shows as the orange box on the home page (fill in the *Home box* fields) and has its own page under /calls/. Set the status to **closed** when it's over: the box disappears from the home page and the page stays in the archive.
 
@@ -81,6 +86,11 @@
 - **Artists** ve **Releases** kayıtlarında da **Music genres** alanı var.
 - **Site texts → Sound page** /sound/ sayfasının girişini, **Site texts → Descriptors** sayfanın altındaki kelime listesini tutar.
 - Bir türün adını değiştirirsen etkinliklerde eski ad kalır, oralarda da değiştir (site kontrolü olmayan tür adlarını listeler).
+
+### Konsept
+- **Site texts → Concept page** /concept/ sayfasıdır: bir giriş ve **bloklar** listesi; her blokta başlık, kısa bir metin ve isteğe bağlı bir link (örn. `/sound/`) olur. Yeni bir tema için blok ekle, sıralamak için sürükle.
+- **Site texts → World Building Project page** /concept/world-building/ sayfasıdır. Ana bölümler için `##`, alt bölümler için `###` kullan. Üstteki atlama linkleri dört `##` başlığına gider; birinin adını değiştirirsen linklerin güncellenmesini iste.
+- İkisi de şimdilik İngilizce; Türkçe alan boşsa İngilizce metin küçük bir "çeviri gerekiyor" notuyla gösterilir.
 
 ### Çağrılar
 **Calls / Çağrılar** açık çağrıları tutar (derleme çağrısı gibi). Açık bir çağrı anasayfada turuncu kutu olarak görünür (*Home box / Anasayfa kutusu* alanlarını doldur) ve /calls/ altında kendi sayfası olur. Bitince durumu **closed** yap: kutu anasayfadan kalkar, sayfa arşivde kalır.

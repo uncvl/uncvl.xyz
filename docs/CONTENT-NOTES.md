@@ -417,3 +417,14 @@ Left empty because nothing says how they played: Rejenere (Random Input, Balgum,
 | 2026-09-04-synth-and-punk | Balgum | Live Set | note: live |
 | 2026-09-04-synth-and-punk | Loremipsum | Live Set | note: live |
 | 2026-09-04-synth-and-punk | ur0123456789 | Live Set | note: live |
+
+## Concept pages (notes 3, Nov 2026): please review
+- **New pages:** [/concept/](https://uncvl.xyz/concept/) and [/concept/world-building/](https://uncvl.xyz/concept/world-building/). English only for now, Turkish fields left empty for translation.
+- **Concept page intro** is "Concept and Themes.md" as sent ("It aims" → "They aim", since it refers to themes).
+- **Concept page blocks** were written by us from the slides and texts, please edit freely:
+  - *Existence / Extinction*: from "The Concept" and the Main Concept slides, with the William James line from the quote slide.
+  - *World Building Project*: from the project intro and the About page's World Building paragraph.
+  - *Sound*: from the Sound note on the About page.
+  - *Themes*: a placeholder until themes are announced.
+- **World Building Project page:** the four texts from the zip, split into the headings and sub-headings of the slides (Uncivilization and the World Building Project → Organizational and Conceptual Entity, Purpose of Uncivilization, World Building Project; The Main Concept → Notions, Beginning and End of Civilization, Extinction Events, Fields of Interest; Conceptual and Thematic Elements → five parts; Contexts, Limitations and Curation → five parts). Wording follows the slides where they differ from the texts (e.g. "The board and the people they recruit will be responsible for organizing, managing, and maintaining the project"). The slide images themselves are not used.
+- **Links:** "conceptual" in "Uncivilization is a conceptual and organizational entity" (home and About, EN and TR) goes to /concept/. The Sound page has a small "← Concept" link at the top. The menu is unchanged.

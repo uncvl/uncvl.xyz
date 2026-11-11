@@ -8,6 +8,7 @@ description: The sound of Uncivilization — supergenres, music genres and the w
 {%- import "macros.njk" as ui with context -%}
 <div class="wrap sound">
   <header class="list-head">
+    <p class="crumb"><a href="/concept/">← {% t "Concept", "Konsept" %}</a></p>
     <p class="kline">$ ls ./sound · {{ collections.supergenres.length }} {% t "supergenres", "üst tür" %} · {{ collections.genres.length }} {% t "genres", "tür" %}</p>
     <h1 class="list-head__title">{% t "Sound", "Ses" %}</h1>
     <p class="chips">{% if sound.types_en or sound.types_tr %}<a class="chip" href="#genre-types">{% t "Genre types", "Tür tipleri" %}</a>{% endif %}<a class="chip" href="#supergenres">{% t "Supergenres", "Üst türler" %}</a><a class="chip" href="#genres">{% t "Genres", "Türler" %}</a><a class="chip" href="#descriptors">{% t "Descriptors", "Tanımlayıcılar" %}</a></p>

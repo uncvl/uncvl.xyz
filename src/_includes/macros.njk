@@ -5,15 +5,15 @@
 {%- endmacro -%}
 
 {#- Bilingual prose block. If one language is missing, the other is shown in both modes with a notice. -#}
-{%- macro bitext(en, tr, cls="prose") -%}
+{%- macro bitext(en, tr, cls="prose", notice=true) -%}
 {%- if en and tr -%}
 <div class="{{ cls }} l-en" lang="en">{{ en | md | safe }}</div>
 <div class="{{ cls }} l-tr" lang="tr">{{ tr | md | safe }}</div>
 {%- elif tr -%}
-<p class="notice l-en">This page needs translation from <em>Turkish to English</em>.</p>
+{%- if notice %}<p class="notice l-en">This page needs translation from <em>Turkish to English</em>.</p>{% endif %}
 <div class="{{ cls }}" lang="tr">{{ tr | md | safe }}</div>
 {%- elif en -%}
-<p class="notice l-tr">Bu sayfanın <em>İngilizceden Türkçeye</em> çevrilmesi gerekiyor.</p>
+{%- if notice %}<p class="notice l-tr">Bu sayfanın <em>İngilizceden Türkçeye</em> çevrilmesi gerekiyor.</p>{% endif %}
 <div class="{{ cls }}" lang="en">{{ en | md | safe }}</div>
 {%- endif -%}
 {%- endmacro -%}

@@ -7,6 +7,7 @@ bodyClass: page-text
 {%- set tTr = title_tr or tEn -%}
 <article class="wrap text-page">
   <header class="text-page__head">
+    {%- if back %}<p class="crumb"><a href="{{ back.href }}">← {% t back.en, back.tr or back.en %}</a></p>{% endif %}
     {%- if kline %}<p class="kline">{{ kline }}</p>{% endif %}
     <h1 class="text-page__title">{% t tEn, tTr %}</h1>
     {%- if date and showDate %}<p class="k"><time datetime="{{ date | date('iso') }}">{{ date | date }}</time></p>{% endif %}
@@ -14,6 +15,18 @@ bodyClass: page-text
   </header>
   {%- if cover %}<figure class="text-page__cover">{% image cover | bundle(page.inputPath), "", "(min-width: 50rem) 46rem, 100vw", true %}</figure>{% endif %}
   {%- if text_en or text_tr %}{% if wrapClass %}<div class="{{ wrapClass }}">{% endif %}{{ ui.bitext(text_en, text_tr) }}{% if wrapClass %}</div>{% endif %}{% endif %}
+  {#- blocks: short texts with a heading and an optional link (the Concept page) -#}
+  {%- if blocks and blocks.length %}
+  <div class="blocks">
+    {%- for b in blocks %}
+    <section class="block" id="{{ b.title_en | slugify }}">
+      <h2 class="block__title">{% t b.title_en, b.title_tr or b.title_en %}</h2>
+      {{ ui.bitext(b.text_en, b.text_tr, "prose", not (text_en or text_tr)) }}
+      {%- if b.link %}<p class="block__more"><a href="{{ b.link }}">{% t b.link_label_en or "Read more", b.link_label_tr or b.link_label_en or "Devamı" %} →</a></p>{% endif %}
+    </section>
+    {%- endfor %}
+  </div>
+  {%- endif %}
   {%- if content | trim %}<div class="prose">{{ content | safe }}</div>{% endif %}
   {%- if genre_list_label %}<p class="genre-list"><span class="k">{{ genre_list_label }}</span> {% for g in collections.genres %}<a href="{{ g.url }}">{{ g.data.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %} · <a href="/sound/">{% t "more on the Sound page", "Ses sayfasında daha fazlası" %} →</a></p>{% endif %}
   {{ ui.players({ listen: listen, links: links, bandcamp_id: bandcamp_id, title: title, name: name } | players) }}

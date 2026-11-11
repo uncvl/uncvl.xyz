@@ -20,6 +20,7 @@ You don't need to know anything about code to add to it. There is a simple edito
 | **Artists** | One page per artist: bio, links, and every event and release they were part of |
 | **[Posts](https://uncvl.xyz/posts/)** | News and announcements, like open calls |
 | **[About](https://uncvl.xyz/about/)** | The Uncivilization story |
+| **[Concept](https://uncvl.xyz/concept/)** | The ideas behind it all: existence and extinction, the [World Building Project](https://uncvl.xyz/concept/world-building/), the [Sound](https://uncvl.xyz/sound/) and, later, the themes |
 
 Every page is in **English and Turkish**. Visitors switch with the **EN | TR** button at the top, and the site remembers their choice.
 
@@ -84,7 +85,7 @@ npm run strip-metadata   # remove EXIF/XMP/GPS from images in src/ (lossless); r
 | `src/releases/<yyyy-mm-dd-name>/index.md` | one release (label discography) |
 | `src/artists/<slug>.md` | artist bios, linked from events and releases |
 | `src/posts/` | news and announcements |
-| `src/pages/` | about page |
+| `src/pages/` | about, concept and world building pages (fixed settings like the URL are in the `.11tydata.js` files next to them) |
 | `src/calls/` | open calls (e.g. the compilation call), shown in the CALLS box on the home page |
 | `src/sound/genres/`, `src/sound/supergenres/` | music genres and supergenres → /sound/ pages; events, artists and releases link to them by name |
 | `src/_data/site.json`, `home.json`, `vocab.json`, `sound.json`, `descriptors.json` | socials, e-mails, navigation, home page texts; lists for activities and act types; Sound page intro and descriptor glossary |

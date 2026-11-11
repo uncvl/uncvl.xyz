@@ -289,6 +289,12 @@ a.peer__name:hover { color: var(--green-hi); }
 .text-page__cover { margin: 0 0 1.5rem; }
 .genre-list { font-size: var(--step--1); color: var(--text-dim); margin-top: 2rem; }
 .text-page .note { margin-top: 2rem; }
+.crumb { margin: 0 0 0.4rem; font-size: var(--step--1); }
+.blocks { display: grid; gap: 1rem; margin-top: 2rem; }
+.block { border: 1px solid var(--line-2); padding: 1rem 1.1rem 1.1rem; }
+.block__title { font-size: var(--step-1); margin: 0 0 0.6rem; }
+.block .prose > :last-child { margin-bottom: 0; }
+.block__more { margin: 0.8rem 0 0; }
 
 /* ---------- footer ---------- */
 .site-footer { border-top: 1px solid var(--line); margin-top: 3rem; padding-block: 2.5rem 2rem; }
