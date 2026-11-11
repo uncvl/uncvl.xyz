@@ -23,7 +23,7 @@
 ### Event fields
 - **Event type**: Bass, Breaks, Punk, Synth, Art. Pick one or more; the event shows under each of them on the events page.
 - **Event content**: what the event offers (Music, Performance Art, Exhibition, Art Market, Swap Market, Workshop, Forum…). Pick one or more.
-- **Event flavor**: pick supergenres (Bass, Break, Core, Punk…), shown as *bass ⤬ break ⤬ core* above the title.
+- **Event flavor**: free text, shown above the title, e.g. *bass ⤬ breaks ⤬ core* or *bass breaks core + punk*.
 - **Music genres**: type a few letters and pick one or more genres. Each one links to its page on the Sound page.
 - **Credit**: shown under the poster, e.g. *Artwork: …, Poster design: …*.
 - **Lineup**: for each artist, **Duration** (e.g. *75 min*), **Act type** (DJ Set, Live Set, Concert, Visuals, Lecture…; one or more) and an optional note. They show in the artist's box. Start times go in the **Schedule**.
@@ -35,7 +35,7 @@
 
 ### Sound (genres)
 - **Sound: Genres** has one entry per music genre: name, supergenres, description (EN/TR) and "see also" links. Each genre gets a page under /sound/genres/ that lists the events, artists and releases tagged with it. A new genre added here can be picked on events, artists and releases right away.
-- **Sound: Supergenres** holds the umbrella terms (Bass, Break, Core…), with a letter code and a definition. Event and release **Flavor** picks from these.
+- **Sound: Supergenres** holds the umbrella terms (Bass, Break, Core…), with a letter code and a definition. They aren't picked on events: a supergenre page lists the events, artists and releases that have one of its genres.
 - **Artists** and **Releases** have a **Music genres** field too.
 - **Site texts → Sound page** has the intro of /sound/, and **Site texts → Descriptors** the word list shown at the bottom of it.
 - Renaming a genre: events keep the old name, so change it there too (the site check lists any genre name that doesn't exist).
@@ -65,7 +65,7 @@
 ### Etkinlik alanları
 - **Event type / Etkinlik türü**: Bass, Breaks, Punk, Synth, Art. Bir ya da daha fazlasını seç; etkinlik, etkinlikler sayfasında her birinin altında görünür.
 - **Event content / Etkinlik içeriği**: etkinlikte neler var (Müzik, Performans Sanatı, Sergi, Sanat Pazarı, Takas Pazarı, Atölye, Forum…). Bir ya da daha fazlasını seç.
-- **Event flavor**: üst türlerden seç (Bass, Break, Core, Punk…), başlığın üstünde *bass ⤬ break ⤬ core* şeklinde görünür.
+- **Event flavor**: serbest metin, başlığın üstünde görünür, örn. *bass ⤬ breaks ⤬ core* ya da *bass breaks core + punk*.
 - **Music genres / Müzik türleri**: birkaç harf yaz ve bir ya da daha fazla tür seç. Her tür, Ses sayfasındaki kendi sayfasına bağlanır.
 - **Credit / Emeği geçenler**: afişin altında görünür, örn. *Artwork: …, Poster design: …*.
 - **Lineup / Kadro**: her sanatçı için **Duration / Süre** (örn. *75 min*), **Act type / Performans türü** (DJ Set, Live Set, Concert, Visuals, Lecture…; bir ya da daha fazla) ve isteğe bağlı not. Sanatçı kutusunda görünür. Başlangıç saatleri **Schedule / Akış** kısmına yazılır.
@@ -77,7 +77,7 @@
 
 ### Ses (türler)
 - **Sound: Genres / Ses: Türler** her müzik türü için bir kayıt tutar: ad, üst türler, açıklama (EN/TR) ve "ayrıca bak" linkleri. Her türün /sound/genres/ altında, o türle etiketlenmiş etkinlikleri, sanatçıları ve yayınları listeleyen bir sayfası olur. Buraya eklenen yeni bir tür etkinliklerde, sanatçılarda ve yayınlarda hemen seçilebilir.
-- **Sound: Supergenres / Ses: Üst türler** çatı terimleri (Bass, Break, Core…) harf kodu ve tanımıyla tutar. Etkinlik ve yayınlardaki **Flavor** bunlardan seçilir.
+- **Sound: Supergenres / Ses: Üst türler** çatı terimleri (Bass, Break, Core…) harf kodu ve tanımıyla tutar. Etkinliklerde seçilmezler: bir üst türün sayfası, onun türlerinden birine sahip etkinlikleri, sanatçıları ve yayınları listeler.
 - **Artists** ve **Releases** kayıtlarında da **Music genres** alanı var.
 - **Site texts → Sound page** /sound/ sayfasının girişini, **Site texts → Descriptors** sayfanın altındaki kelime listesini tutar.
 - Bir türün adını değiştirirsen etkinliklerde eski ad kalır, oralarda da değiştir (site kontrolü olmayan tür adlarını listeler).

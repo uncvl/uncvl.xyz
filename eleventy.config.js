@@ -277,9 +277,19 @@ export default function (eleventyConfig) {
   const has = (list, name) => (Array.isArray(list) ? list : []).some((x) => same(x, name));
   // the genre/supergenre page for a name (or undefined)
   eleventyConfig.addFilter("byName", (items, name) => (items || []).find((i) => same(i.data.name, name)));
-  // events / artists / releases tagged with a genre (music_genres) or a supergenre (flavor)
+  // events / artists / releases tagged with a genre (music_genres)
   eleventyConfig.addFilter("withGenre", (items, name) => (items || []).filter((i) => has(i.data.music_genres, name)));
-  eleventyConfig.addFilter("withFlavor", (items, name) => (items || []).filter((i) => has(i.data.flavor, name)));
+  // items tagged with any genre of a supergenre: supergenres connect to events only through genres
+  eleventyConfig.addFilter("withSupergenre", (items, genres, sup) => {
+    const names = (genres || []).filter((g) => has(g.data.supergenres, sup)).map((g) => g.data.name);
+    return (items || []).filter((i) => names.some((n) => has(i.data.music_genres, n)));
+  });
+  // free-text flavor ("bass ⤬ breaks ⤬ core", "bass breaks core + punk"): escaped, with ⤬ styled
+  eleventyConfig.addFilter("flavorText", (s) => {
+    const t = String(Array.isArray(s) ? s.join(" ⤬ ") : s || "").trim();
+    return t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/⤬/g, '<span class="x" aria-hidden="true">⤬</span><span class="sr-only">,</span>');
+  });
   // genres belonging to a supergenre; with no name: genres without any supergenre
   eleventyConfig.addFilter("genresOf", (genres, sup) =>
     (genres || []).filter((g) => (sup ? has(g.data.supergenres, sup) : !(g.data.supergenres || []).length))

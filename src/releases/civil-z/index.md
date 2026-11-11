@@ -5,7 +5,7 @@ type: compilation
 status: open-call
 order: 3
 artist_line: Various Artists
-flavor: ["Punk"]
+flavor: "punk"
 music_genres: []
 text_en: |
   Z) : PuNK

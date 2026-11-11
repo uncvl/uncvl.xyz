@@ -4,7 +4,7 @@ codename: mental orientation
 category: [art]
 series: Rehab
 activities: ["Art Market","Music"]
-flavor: []
+flavor: ""
 music_genres: []
 date: 2024-11-30
 stage: "15:00 - 22:00"

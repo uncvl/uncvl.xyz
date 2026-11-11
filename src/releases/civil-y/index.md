@@ -5,7 +5,7 @@ type: compilation
 status: open-call
 order: 2
 artist_line: Various Artists
-flavor: []
+flavor: ""
 music_genres: ["Breakcore","Hardcore"]
 text_en: |
   Y) : COREs

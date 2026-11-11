@@ -9,7 +9,7 @@ date: 2026-12-01
 format: Digital Album
 artist_line: Artist Name
 artists: [artist-slug]               # file names in src/artists/
-flavor: [Break, Core]                # supergenres
+flavor: "breaks ⤬ core"              # free text, shown next to the release type
 music_genres: [Breakcore]            # genre names from src/sound/genres
 cover: cover.jpg
 tracklist:

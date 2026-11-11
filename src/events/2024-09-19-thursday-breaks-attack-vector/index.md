@@ -4,7 +4,7 @@ codename: attack vector
 category: [break]
 series: Thursday Breaks
 activities: ["Music"]
-flavor: ["Bass","Break","Core"]
+flavor: "bass ⤬ breaks ⤬ core"
 music_genres: []
 date: 2024-09-19
 venue:

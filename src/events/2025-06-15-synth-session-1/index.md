@@ -4,7 +4,7 @@ codename: synth session
 category: [synth]
 series: Synth Sessions
 activities: ["Music"]
-flavor: []
+flavor: ""
 music_genres: ["Drone","IDM","Industrial","Breakcore","Hardcore Techno"]
 date: 2025-06-15
 stage: "20:00"

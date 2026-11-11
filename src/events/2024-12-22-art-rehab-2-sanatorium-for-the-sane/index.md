@@ -4,7 +4,7 @@ codename: sanatorium for the sane
 category: [art]
 series: Rehab
 activities: ["Art Market","Music"]
-flavor: []
+flavor: ""
 music_genres: []
 date: 2024-12-22
 stage: "15:00 - 23:00"

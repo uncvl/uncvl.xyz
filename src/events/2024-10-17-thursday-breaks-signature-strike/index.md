@@ -4,7 +4,7 @@ codename: signature strike
 category: [break]
 series: Thursday Breaks
 activities: ["Music"]
-flavor: []
+flavor: ""
 music_genres: ["Noise","Flashcore","IDM","Breakcore","Hardcore"]
 date: 2024-10-17
 venue:

@@ -4,7 +4,7 @@ codename: psyche cure
 category: [art]
 series: Rehab
 activities: ["Art Market","Exhibition","Music"]
-flavor: []
+flavor: ""
 music_genres: []
 date: 2025-01-12
 stage: "15:00 - 23:00"

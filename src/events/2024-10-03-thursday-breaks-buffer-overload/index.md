@@ -4,7 +4,7 @@ codename: buffer overload
 category: [break]
 series: Thursday Breaks
 activities: ["Music"]
-flavor: []
+flavor: ""
 music_genres: ["Neurofunk","Hardcore Techno","Sextrance"]
 date: 2024-10-03
 venue:

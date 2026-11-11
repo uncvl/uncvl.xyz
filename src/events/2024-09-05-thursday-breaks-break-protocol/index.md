@@ -4,7 +4,7 @@ codename: break protocol
 category: [break]
 series: Thursday Breaks
 activities: ["Music"]
-flavor: ["Bass","Break","Core"]
+flavor: "bass ⤬ breaks ⤬ core"
 music_genres: []
 date: 2024-09-05
 stage: "20:45 - 01:15"

@@ -4,7 +4,7 @@ codename: proxy firewall
 category: [break]
 series: Thursday Breaks
 activities: ["Music"]
-flavor: []
+flavor: ""
 music_genres: ["Chill Breakcore","Neurofunk"]
 date: 2024-10-10
 venue:

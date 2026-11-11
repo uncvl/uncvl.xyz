@@ -3,7 +3,7 @@ title: "Art: Rejenere"
 codename: rejenere
 category: [art]
 activities: ["Music"]
-flavor: []
+flavor: ""
 music_genres: ["Breakcore","Drum & Bass","Mental Tekno"]
 date: 2023-12-16
 venue:

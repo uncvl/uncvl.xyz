@@ -85,7 +85,7 @@ Imported from reference_sources (Music Genre, Supergenre, Music Descriptors). Ch
 - **Names kept as decided:** Sigilkore (note was "Sigilcore"), Trap (note was "Trap Hip Hop"), Hi-Tech (separate from Hi-Tech Psytrance), Hardcore and Hardcore Techno (separate genres).
 - **Genres without a description:** Experimental Bass, Hi-Tech, Hardcore Techno, Mental Tekno, Rave. The "Wave" supergenre has no definition yet.
 - **"Footwork"** appears twice in the Sorted List; it is listed once, at its first position.
-- **Event flavor** now picks from the supergenres: bass → Bass, breaks → Break, core → Core, punk → Punk; "music" (Çöpüşüm) was dropped.
+- **Event flavor** is free text again (the original words were restored, e.g. "bass ⤬ breaks ⤬ core", Çöpüşüm "music", CIVIL Z "punk"). Supergenres are not picked on events or releases; a supergenre page lists what has one of its genres.
 - **Releases:**
 
 | Release | Old genres | Music genres | Flavor | Dropped |

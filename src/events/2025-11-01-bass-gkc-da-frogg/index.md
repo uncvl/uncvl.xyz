@@ -4,7 +4,7 @@ codename: gkc & da frogg
 category: [bass]
 series: Uncivilization Bass
 activities: ["Music"]
-flavor: []
+flavor: ""
 music_genres: ["Dub","Hip Hop","Breakbeat","UK Garage","Drum & Bass","Jungle"]
 date: 2025-11-01
 stage: "17:00 - 21:30"

@@ -4,7 +4,7 @@ codename: ignishaan
 category: [bass]
 series: Bass Night
 activities: ["Music"]
-flavor: []
+flavor: ""
 music_genres: ["Dub","Breakbeat","Jungle"]
 date: 2022-04-02
 doors: "21:00"

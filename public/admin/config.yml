@@ -82,7 +82,7 @@ collections:
       - { name: category, label: Event type / Etkinlik türü, widget: select, options: [{ label: Bass, value: bass }, { label: Breaks, value: break }, { label: Punk, value: punk }, { label: Synth, value: synth }, { label: Art, value: art }], multiple: true, hint: "Pick one or more. Groups the event on the events page (an event with two types shows in both)." }
       - { name: series, label: Series, widget: string, required: false, hint: "e.g. Thursday Breaks, Bass Night" }
       - { name: activities, label: Event content / Etkinlik içeriği, widget: relation, collection: settings, file: vocab, value_field: "activities.*.en", search_fields: ["activities.*.en", "activities.*.tr"], display_fields: ["activities.*.en"], multiple: true, required: false, hint: "What the event offers: Music, Exhibition, Art Market, Workshop… Pick one or more. Add new ones under Site texts → Lists." }
-      - { name: flavor, label: Event flavor (supergenres), widget: relation, collection: supergenres, value_field: name, search_fields: [name, code], display_fields: ["{{code}} {{name}}"], multiple: true, required: false, hint: "Pick supergenres, shown as bass ⤬ break ⤬ core. Type to search. Manage them under Sound → Supergenres." }
+      - { name: flavor, label: Event flavor, widget: string, required: false, hint: "Free text, shown above the title, e.g. bass ⤬ breaks ⤬ core or bass breaks core + punk" }
       - { name: music_genres, label: Music genres / Müzik türleri, widget: relation, collection: genres, value_field: name, search_fields: [name], display_fields: [name], multiple: true, required: false, hint: "Type to search, pick one or more. Manage the list under Sound → Genres." }
       - { name: date, label: Date, widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
       - { name: doors, label: Doors open, widget: string, required: false, hint: "21:00" }
@@ -181,7 +181,7 @@ collections:
       - { name: format, label: Format, widget: string, required: false, default: Digital Album }
       - { name: artist_line, label: Artist line, widget: string, hint: "as written on Bandcamp" }
       - { name: artists, label: Artists, widget: relation, collection: artists, value_field: "{{slug}}", search_fields: [name, aka], display_fields: [name], multiple: true, required: false }
-      - { name: flavor, label: Flavor (supergenres), widget: relation, collection: supergenres, value_field: name, search_fields: [name, code], display_fields: ["{{code}} {{name}}"], multiple: true, required: false, hint: "Pick supergenres, shown as punk ⤬ core next to the release type." }
+      - { name: flavor, label: Flavor, widget: string, required: false, hint: "Free text, shown next to the release type, e.g. punk ⤬ core" }
       - { name: music_genres, label: Music genres / Müzik türleri, widget: relation, collection: genres, value_field: name, search_fields: [name], display_fields: [name], multiple: true, required: false, hint: "Type to search, pick one or more." }
       - { name: cover, label: Cover art, widget: image, required: false }
       - name: tracklist

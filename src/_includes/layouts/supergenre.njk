@@ -3,7 +3,9 @@ layout: base.njk
 ---
 {%- import "macros.njk" as ui with context -%}
 {%- set gs = collections.genres | genresOf(name) -%}
-{%- set evs = collections.events | withFlavor(name) | reverse -%}
+{%- set evs = collections.events | withSupergenre(collections.genres, name) | reverse -%}
+{%- set arts = collections.artists | withSupergenre(collections.genres, name) -%}
+{%- set rels = collections.releases | withSupergenre(collections.genres, name) -%}
 <article class="wrap text-page sound">
   <header class="text-page__head">
     <p class="kline"><a href="/sound/">{% t "sound", "ses" %}</a> · {% t "supergenre", "üst tür" %} · {{ code }}</p>
@@ -23,6 +25,20 @@ layout: base.njk
   <section aria-labelledby="s-events">
     {{ ui.sect("EVENTS", "ETKİNLİKLER", evs.length, "s-events") }}
     <ol class="log">{% for e in evs %}{{ ui.logrow(e) }}{% endfor %}</ol>
+  </section>
+  {%- endif %}
+
+  {%- if arts.length %}
+  <section aria-labelledby="s-artists">
+    {{ ui.sect("ARTISTS", "SANATÇILAR", arts.length, "s-artists") }}
+    <ul class="names">{% for a in arts %}<li><a href="{{ a.url }}">{{ a.data.name }}</a></li>{% endfor %}</ul>
+  </section>
+  {%- endif %}
+
+  {%- if rels.length %}
+  <section aria-labelledby="s-releases">
+    {{ ui.sect("RELEASES", "YAYINLAR", rels.length, "s-releases") }}
+    <ul class="tiles">{% for r in rels %}{{ ui.tile(r, "release") }}{% endfor %}</ul>
   </section>
   {%- endif %}
 

@@ -4,7 +4,7 @@ codename: genereshaan
 category: [bass]
 series: Bass Night
 activities: ["Music"]
-flavor: []
+flavor: ""
 music_genres: ["Jungle","Drum & Bass"]
 date: 2022-05-28
 doors: "21:00"

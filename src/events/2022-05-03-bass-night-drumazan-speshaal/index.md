@@ -4,7 +4,7 @@ codename: drumazan speshaal
 category: [bass]
 series: Bass Night
 activities: ["Music"]
-flavor: []
+flavor: ""
 music_genres: ["UK Garage","Breakbeat","Rave","Drum & Bass"]
 date: 2022-05-03
 doors: "21:00"

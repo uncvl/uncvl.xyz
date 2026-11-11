@@ -3,7 +3,7 @@ title: Decentralized Consensus
 codename: decentralized consensus
 category: [break]
 activities: ["Music"]
-flavor: ["Bass","Break","Core","Punk"]
+flavor: "bass ⤬ breaks ⤬ core ⤬ punk"
 music_genres: []
 date: 2026-04-24
 stage: "21:00 - 04:00"

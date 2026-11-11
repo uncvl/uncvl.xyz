@@ -27,9 +27,9 @@
 {%- for n in list or [] %}{% set g = collections.genres | byName(n) %}{% if g %}<a href="{{ g.url }}">{{ g.data.name }}</a>{% else %}{{ n }}{% endif %}{% if not loop.last %}{{ sep | safe }}{% endif %}{% endfor -%}
 {%- endmacro -%}
 
-{#- Flavor = supergenres, shown like "bass ⤬ breaks ⤬ core", each linked to /sound/supergenres/. -#}
-{%- macro flavor(list) -%}
-{%- if list and list.length -%}<span class="genres">{% for n in list %}{% set s = collections.supergenres | byName(n) %}{% if s %}<a href="{{ s.url }}">{{ n | lower }}</a>{% else %}{{ n | lower }}{% endif %}{% if not loop.last %} <span class="x" aria-hidden="true">⤬</span><span class="sr-only">,</span> {% endif %}{% endfor %}</span>{%- endif -%}
+{#- Flavor: free text written by the editors, e.g. "bass ⤬ breaks ⤬ core" or "bass breaks core + punk". -#}
+{%- macro flavor(text) -%}
+{%- if text and text.length -%}<span class="genres">{{ text | flavorText | safe }}</span>{%- endif -%}
 {%- endmacro -%}
 
 {#- Square tile for grids (events/releases). `item` is a collection item. -#}

@@ -8,7 +8,7 @@ date: 2024-06-01
 format: Digital Album
 artists: [tech-tabanjah, consul, lunar-funktion]
 artist_line: Tech Tabanjah, Consul, Lunar Funktion
-flavor: []
+flavor: ""
 music_genres: ["Jungle","Drum & Bass"]
 cover: https://media.uncvl.xyz/releases/2024-06-01-no-boundaries-jungle-remixes/cover.jpg   # cover art by Da Frogg
 tracklist:

@@ -5,7 +5,7 @@ type: compilation
 status: open-call
 order: 1
 artist_line: Various Artists
-flavor: []
+flavor: ""
 music_genres: ["Drum & Bass","Dark Ambient"]
 text_en: |
   X) : ambient & BASSs

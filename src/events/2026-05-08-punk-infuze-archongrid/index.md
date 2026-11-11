@@ -3,7 +3,7 @@ title: "Federico Fellini | Histeri | Urban Divine"
 codename: infuze archongrid
 category: [punk]
 activities: ["Music","Performance Art"]
-flavor: ["Punk"]
+flavor: "punk"
 music_genres: []
 date: 2026-05-08
 venue:
