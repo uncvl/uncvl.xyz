@@ -14,11 +14,11 @@
 //    screen readers); once everything has settled, the canvas clears and the real text is back.
 import { prepareRichInline, walkRichInlineLineRanges, materializeRichInlineLineRange } from "/assets/js/vendor/pretext/rich-inline.js";
 
-const TARGETS = [
-  "main h1", "main h2", "main h3", "main .glitch", "main .kline", "main .prose p", "main .prose li",
-  "main .tile__title", "main .log__row a", "main .peer__name", "main .facts dd", "main .facts dt",
-  "main .note__text", "main .sorted-genres a", "main .names a", "main .call__head",
-].join(", ");
+// Every visible text on the page takes part, except what doesn't scroll with the page (the sticky
+// header, the switcher) or isn't really shown (screen-reader-only text, the skip link, form fields).
+const SKIP = ".site-header, .fx-ui, .sr-only, .skip, script, style, noscript, template, textarea, input, select, svg, canvas, iframe, video";
+// a text belongs to its nearest ancestor that isn't an inline element: that box is one "block"
+const isInline = (d) => d === "inline" || d === "contents";
 
 // k = spring stiffness (line edges → middle; kRand for the random per-letter springs), d = damping,
 // max = largest offset (px), threshold = scroll speed (px/frame) below which nothing happens,
@@ -93,6 +93,16 @@ function charBox(node, i) {
 }
 
 // Visible text of an element as styled runs, split into paragraphs at <br>.
+// text-decoration isn't inherited but is drawn on the text of descendants: look up to the block
+function underlined(from, block, cs) {
+  for (let e = from; e; e = e.parentElement) {
+    const line = (e === from ? cs : getComputedStyle(e)).textDecorationLine;
+    if (line && line.includes("underline")) return true;
+    if (e === block) break;
+  }
+  return false;
+}
+
 function runsOf(el) {
   const paras = [[]];
   const styleOf = new Map();
@@ -100,8 +110,10 @@ function runsOf(el) {
     acceptNode(n) {
       if (n.nodeType === 1) {
         if (n.tagName === "BR") return NodeFilter.FILTER_ACCEPT;
+        if (n.matches(SKIP)) return NodeFilter.FILTER_REJECT;
         const cs = getComputedStyle(n);
-        return cs.display === "none" || cs.visibility === "hidden" ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_SKIP;
+        if (cs.display === "none" || cs.visibility === "hidden") return NodeFilter.FILTER_REJECT;
+        return isInline(cs.display) ? NodeFilter.FILTER_SKIP : NodeFilter.FILTER_REJECT; // own block
       }
       return n.data.length ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
     },
@@ -118,6 +130,8 @@ function runsOf(el) {
         letterSpacing: cs.letterSpacing === "normal" ? 0 : px(cs.letterSpacing),
         shadows: parseShadows(cs.textShadow),
         transform: cs.textTransform,
+        underline: underlined(parent, el, cs),
+        size: px(cs.fontSize),
       };
       styleOf.set(parent, st);
     }
@@ -143,8 +157,20 @@ function sourceIndices(text, from, fragText) {
 // ---------- layout of every text block (only on load / resize / language switch) ----------
 let blocks = [];
 function measureBlocks() {
-  const all = [...document.querySelectorAll(TARGETS)];
-  const els = all.filter((el) => el.offsetParent && !all.some((o) => o !== el && o.contains(el)));
+  const containers = new Set();
+  const display = new Map();
+  const disp = (el) => { let d = display.get(el); if (d === undefined) { d = getComputedStyle(el).display; display.set(el, d); } return d; };
+  const tw = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let t = tw.nextNode(); t; t = tw.nextNode()) {
+    if (!t.data.trim() || !t.parentElement || t.parentElement.closest(SKIP)) continue;
+    let box = t.parentElement;
+    while (box && box !== document.body && isInline(disp(box))) box = box.parentElement;
+    if (box) containers.add(box);
+  }
+  const els = [...containers].filter((el) => {
+    const r = el.getBoundingClientRect();
+    return r.width >= 2 && r.height >= 2 && disp(el) !== "none"; // skips collapsed boxes (e.g. hidden small print)
+  });
   blocks = [];
   for (const el of els) {
     const cs = getComputedStyle(el);
@@ -182,7 +208,8 @@ function measureBlocks() {
             const box = perLetter ? charBox(run.node, src[i]) : null;
             const gx = box ? box.left : first.left + adv[i] * scale;
             const top = box ? box.top : first.top;
-            if (ch.trim()) lineChars.push({ ch, x: gx, y: top + ascent(run.st.font), st: run.st });
+            // spaces only matter for underlines (the line runs under them too)
+            if (ch.trim() || run.st.underline) lineChars.push({ ch, x: gx, y: top + ascent(run.st.font), st: run.st });
           });
         }
         if (!lineChars.length) continue;
@@ -265,7 +292,8 @@ function draw(p) {
       if (p.step) off = Math.round(off / p.step) * p.step; // hard pixel steps
       if (p.jitter && Math.abs(c.off) > 6) x += (Math.random() - 0.5) * Math.abs(c.off) * p.jitter;
       const y = c.y - scrollY + off;
-      if (Math.abs(off) > 2) { // RGB split, wider the further the letter is behind
+      const blank = !c.ch.trim();
+      if (!blank && Math.abs(off) > 2) { // RGB split, wider the further the letter is behind
         const s = Math.min(5, Math.abs(off) * 0.12);
         ctx.globalAlpha = 0.75;
         ctx.fillStyle = accent.a; ctx.fillText(c.ch, x - s, y);
@@ -273,9 +301,13 @@ function draw(p) {
         ctx.globalAlpha = 1;
       }
       // the element's own text-shadow (e.g. the RGB-split codename titles), then the letter
-      for (const sh of st.shadows) { ctx.fillStyle = sh.color; ctx.fillText(c.ch, x + sh.x, y + sh.y); }
+      if (!blank) for (const sh of st.shadows) { ctx.fillStyle = sh.color; ctx.fillText(c.ch, x + sh.x, y + sh.y); }
       ctx.fillStyle = st.color;
-      ctx.fillText(c.ch, x, y);
+      if (!blank) ctx.fillText(c.ch, x, y);
+      if (st.underline) { // same place as the browser's: just under the baseline
+        const t = Math.max(1, Math.round(st.size / 16));
+        ctx.fillRect(x, y + Math.max(1, st.size * 0.12), charWidth(st.font, c.ch) + st.letterSpacing, t);
+      }
     }
   }
 }

@@ -3,6 +3,8 @@
 /* while letters are moving, the real text is invisible (still selectable / readable by screen readers) */
 .fx-moving .fx-t, .fx-moving .fx-t * { color: transparent !important; text-shadow: none !important; }
 .fx-moving .fx-t .x { color: transparent !important; }
+/* list numbers / bullets are not redrawn on the canvas: keep them visible */
+.fx-moving .fx-t::marker { color: var(--text-dim) !important; }
 
 .fx-ui { position: fixed; left: 0.75rem; bottom: 0.75rem; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem;
   max-width: calc(100vw - 1.5rem); padding: 0.4rem 0.5rem; background: rgb(17 17 17 / 0.92); border: 1px solid var(--acid); font-size: var(--step--1); }
