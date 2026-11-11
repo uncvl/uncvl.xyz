@@ -201,6 +201,7 @@ function pump(deadline) {
   stats.measureMs = +sliceMs.toFixed(1); stats.longestSliceMs = +longestSlice.toFixed(1);
 }
 let fragSeq = 0;
+const label = (el) => el.tagName.toLowerCase() + (el.className && typeof el.className === "string" ? "." + el.className.split(" ").filter((c) => c !== "fx-t")[0] : "") + ": " + el.textContent.trim().slice(0, 40);
 function findBlocks() {
   clipCache.clear();
   const containers = new Set();
@@ -222,64 +223,94 @@ function findBlocks() {
   return out;
 }
 
+// Where letters go. "dom": every styled run is pinned to the browser's own boxes (Range rects),
+// exact. "pretext": one box per block from the DOM, everything inside placed by Pretext's layout
+// (lines, line height, alignment, advances) without asking the DOM.
+let PLACE = store.get("place", "dom") === "pretext" ? "pretext" : "dom";
 function measureOne(el) {
-  {
-    const cs = getComputedStyle(el);
-    const rect = el.getBoundingClientRect();
-    const width = rect.width - px(cs.borderLeftWidth) - px(cs.borderRightWidth) - px(cs.paddingLeft) - px(cs.paddingRight);
-    if (width < 4) return;
-    const chars = [];
-    for (const runs of runsOf(el)) {
-      let prepared;
-      try { prepared = prepareRichInline(runs.map((r) => ({ text: r.text, font: r.st.font, letterSpacing: r.st.letterSpacing || undefined }))); }
-      catch (e) { continue; }
-      const lines = [];
-      walkRichInlineLineRanges(prepared, Math.max(1, width + 0.5), (range) => lines.push(materializeRichInlineLineRange(prepared, range)));
-      for (const line of lines) {
-        // every line gets its own small random character (see the spring below)
-        const L = { peak: Math.random(), sharp: Math.random(), k: Math.random(), gain: Math.random(), delay: Math.random() };
-        const lineChars = [];
-        for (const frag of line.fragments) {
-          const fragId = ++fragSeq;
-          const run = runs[frag.itemIndex];
-          if (!run || !frag.text) continue;
-          const src = sourceIndices(run.text, frag.sourceStart, frag.text);
-          const glyphs = [...frag.text];
-          // pin the fragment to where the browser drew it; if the browser wrapped it differently
-          // (first and last letter on different rows), pin every letter instead
-          const first = charBox(run.node, src[0]);
-          const last = charBox(run.node, src[glyphs.length - 1]);
-          const perLetter = Math.abs(first.top - last.top) > 1;
-          // advances from Pretext-style measuring, stretched so the first and last letter land
-          // exactly where the browser put them (no drift along long lines)
-          const adv = [0];
-          glyphs.forEach((ch) => adv.push(adv[adv.length - 1] + charWidth(run.st.font, ch) + run.st.letterSpacing));
-          const n = glyphs.length - 1;
-          const scale = !perLetter && n > 0 && adv[n] > 0 ? (last.left - first.left) / adv[n] : 1;
+  const chars = layoutBlock(el, PLACE);
+  if (!chars || !chars.length) return;
+  const top = Math.min(...chars.map((c) => c.y)) - 60, bottom = Math.max(...chars.map((c) => c.y)) + 20;
+  blocks.push({ el, top, height: bottom - top, chars });
+  el.classList.add("fx-t");
+}
+function layoutBlock(el, place) {
+  const cs = getComputedStyle(el);
+  const rect = el.getBoundingClientRect();
+  const width = rect.width - px(cs.borderLeftWidth) - px(cs.borderRightWidth) - px(cs.paddingLeft) - px(cs.paddingRight);
+  if (width < 4) return null;
+  // block metrics, used by the "pretext" placement
+  const left = rect.left + scrollX + px(cs.borderLeftWidth) + px(cs.paddingLeft);
+  const top = rect.top + scrollY + px(cs.borderTopWidth) + px(cs.paddingTop);
+  const blockFont = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+  const lh = cs.lineHeight === "normal" ? px(cs.fontSize) * 1.2 : px(cs.lineHeight);
+  const baseline = (lh - (ascent(blockFont) + descent(blockFont))) / 2 + ascent(blockFont);
+  const align = cs.textAlign;
+  let lineIndex = 0;
+  const chars = [];
+  for (const runs of runsOf(el)) {
+    let prepared;
+    try { prepared = prepareRichInline(runs.map((r) => ({ text: r.text, font: r.st.font, letterSpacing: r.st.letterSpacing || undefined }))); }
+    catch (e) { continue; }
+    const lines = [];
+    walkRichInlineLineRanges(prepared, Math.max(1, width + 0.5), (range) => lines.push(materializeRichInlineLineRange(prepared, range)));
+    for (const line of lines) {
+      // every line gets its own small random character (see the spring below)
+      const L = { peak: Math.random(), sharp: Math.random(), k: Math.random(), gain: Math.random(), delay: Math.random() };
+      const lineChars = [];
+      const lineY = top + lineIndex * lh + baseline;
+      let cx = align === "center" ? (width - line.width) / 2 : align === "right" || align === "end" ? width - line.width : 0;
+      for (const frag of line.fragments) {
+        const fragId = ++fragSeq;
+        const run = runs[frag.itemIndex];
+        if (!run || !frag.text) continue;
+        const glyphs = [...frag.text];
+        const adv = [0];
+        glyphs.forEach((ch) => adv.push(adv[adv.length - 1] + charWidth(run.st.font, ch) + run.st.letterSpacing));
+        if (place === "pretext") {
+          cx += frag.gapBefore;
           glyphs.forEach((ch, i) => {
-            const box = perLetter ? charBox(run.node, src[i]) : null;
-            const gx = box ? box.left : first.left + adv[i] * scale;
-            const top = box ? box.top : first.top;
-            // spaces are kept too: they join words into one draw call (and carry underlines)
-            lineChars.push({ ch, x: gx, y: top + ascent(run.st.font), st: run.st, frag: fragId, i, w: charWidth(run.st.font, ch) + run.st.letterSpacing, exact: !perLetter });
+            lineChars.push({ ch, x: left + cx + adv[i], y: lineY, st: run.st, frag: fragId, i, w: adv[i + 1] - adv[i], exact: true });
           });
+          cx += adv[glyphs.length];
+          continue;
         }
-        if (!lineChars.length) continue;
-        const x0 = Math.min(...lineChars.map((c) => c.x));
-        const x1 = Math.max(...lineChars.map((c) => c.x + charWidth(c.st.font, c.ch)));
-        const lw = Math.max(1, x1 - x0);
-        for (const c of lineChars) {
-          c.m = (c.x + charWidth(c.st.font, c.ch) / 2 - x0) / lw; // 0 = start of the line, 1 = end
-          c.L = L; c.n = Math.random(); c.r = Math.random(); c.off = 0; c.vel = 0;
-          chars.push(c);
-        }
+        // "dom": pin the fragment to where the browser drew it; if the browser wrapped it
+        // differently (first and last letter on different rows), pin every letter instead
+        const src = sourceIndices(run.text, frag.sourceStart, frag.text);
+        const first = charBox(run.node, src[0]);
+        const last = charBox(run.node, src[glyphs.length - 1]);
+        const perLetter = Math.abs(first.top - last.top) > 1;
+        const n = glyphs.length - 1;
+        const scale = !perLetter && n > 0 && adv[n] > 0 ? (last.left - first.left) / adv[n] : 1;
+        glyphs.forEach((ch, i) => {
+          const box = perLetter ? charBox(run.node, src[i]) : null;
+          const gx = box ? box.left : first.left + adv[i] * scale;
+          const gtop = box ? box.top : first.top;
+          // spaces are kept too: they join words into one draw call (and carry underlines)
+          lineChars.push({ ch, x: gx, y: gtop + ascent(run.st.font), st: run.st, frag: fragId, i, w: adv[i + 1] - adv[i], exact: !perLetter });
+        });
+      }
+      lineIndex++;
+      if (!lineChars.length) continue;
+      const x0 = Math.min(...lineChars.map((c) => c.x));
+      const x1 = Math.max(...lineChars.map((c) => c.x + c.w));
+      const lw = Math.max(1, x1 - x0);
+      for (const c of lineChars) {
+        c.m = (c.x + c.w / 2 - x0) / lw; // 0 = start of the line, 1 = end
+        c.L = L; c.n = Math.random(); c.r = Math.random(); c.off = 0; c.vel = 0;
+        chars.push(c);
       }
     }
-    if (!chars.length) return;
-    const top = Math.min(...chars.map((c) => c.y)) - 60, bottom = Math.max(...chars.map((c) => c.y)) + 20;
-    blocks.push({ el, top, height: bottom - top, chars });
-    el.classList.add("fx-t");
   }
+  return chars;
+}
+
+const descentCache = new Map();
+function descent(font) {
+  let d = descentCache.get(font);
+  if (d === undefined) { ctx.font = font; const m = ctx.measureText("Hg"); d = m.fontBoundingBoxDescent ?? m.actualBoundingBoxDescent; descentCache.set(font, d); }
+  return d;
 }
 
 // ---------- animation ----------
@@ -412,7 +443,7 @@ function remeasure() {
     const sig = layoutSig();
     if (sig === lastSig && blocks.length) return;
     lastSig = sig;
-    widthCache.clear(); ascentCache.clear(); // fonts may have finished loading since
+    widthCache.clear(); ascentCache.clear(); descentCache.clear(); // fonts may have finished loading since
     sizeCanvas(); measureBlocks(); lastY = scrollY;
   }, 150);
 }
@@ -485,6 +516,38 @@ document.addEventListener("fx-debug", (e) => {
       measureMs: stats.measureMs, longestSliceMs: stats.longestSliceMs, measures: stats.measures, frames: stats.frames,
       updateMsAvg: +(stats.updateMs / n).toFixed(2), drawMsAvg: +(stats.drawMs / n).toFixed(2),
       worstFrameMs: +stats.worstMs.toFixed(1), drawCallsPerFrame: Math.round(stats.drawn / n),
+    });
+  }
+  if (e.detail && e.detail.place) {
+    PLACE = e.detail.place; store.set("place", PLACE);
+    settle(); blocks = []; for (const q of findBlocks()) measureOne(q.el); // synchronous, for testing
+  }
+  if (e.detail === "compare") {
+    const els = blocks.map((b) => b.el);
+    const time = (place) => { const t0 = performance.now(); const out = els.map((el) => layoutBlock(el, place)); return { ms: performance.now() - t0, out }; };
+    time("dom"); time("pretext"); // warm both (caches, fonts)
+    const D = time("dom"), P = time("pretext");
+    const errs = [], worst = [];
+    let mismatched = 0;
+    els.forEach((el, k) => {
+      const a = D.out[k] || [], b = P.out[k] || [];
+      if (a.length !== b.length) { mismatched++; worst.push({ where: label(el), err: "different line breaks / letter count" }); return; }
+      let blockMax = 0;
+      a.forEach((c, i) => {
+        if (!c.ch.trim()) return;
+        const d = Math.hypot(c.x - b[i].x, c.y - b[i].y);
+        errs.push(d); blockMax = Math.max(blockMax, d);
+      });
+      if (blockMax > 1) worst.push({ where: label(el), err: +blockMax.toFixed(1) });
+    });
+    errs.sort((x, y) => x - y);
+    const pct = (lim) => +(100 * errs.filter((d) => d <= lim).length / Math.max(1, errs.length)).toFixed(1);
+    document.documentElement.dataset.fxCompare = JSON.stringify({
+      blocks: els.length, letters: errs.length, blocksWithDifferentBreaks: mismatched,
+      within05px: pct(0.5), within1px: pct(1), within2px: pct(2),
+      medianPx: +(errs[Math.floor(errs.length / 2)] || 0).toFixed(2), p95Px: +(errs[Math.floor(errs.length * 0.95)] || 0).toFixed(2), maxPx: +(errs[errs.length - 1] || 0).toFixed(1),
+      layoutMsDom: +D.ms.toFixed(1), layoutMsPretext: +P.ms.toFixed(1),
+      worst: worst.sort((x, y) => (typeof y.err === "number" ? y.err : 999) - (typeof x.err === "number" ? x.err : 999)).slice(0, 8),
     });
   }
   if (e.detail === "reset-stats") Object.assign(stats, { frames: 0, updateMs: 0, drawMs: 0, worstMs: 0, drawn: 0 });
