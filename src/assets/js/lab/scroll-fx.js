@@ -16,7 +16,7 @@ import { prepareRichInline, walkRichInlineLineRanges, materializeRichInlineLineR
 
 // Every visible text on the page takes part, except what doesn't scroll with the page (the sticky
 // header, the switcher) or isn't really shown (screen-reader-only text, the skip link, form fields).
-const SKIP = ".site-header, .fx-ui, .sr-only, .skip, script, style, noscript, template, textarea, input, select, svg, canvas, iframe, video";
+const SKIP = ".site-header, .sr-only, .skip, script, style, noscript, template, textarea, input, select, svg, canvas, iframe, video";
 // a text belongs to its nearest ancestor that isn't an inline element: that box is one "block"
 const isInline = (d) => d === "inline" || d === "contents";
 
@@ -27,17 +27,19 @@ const MODES = {
   off: null,
   glitch: { kEdge: 0.2, kMid: 0.05, kRand: 0.09, d: 0.26, max: 130, threshold: 11, step: 4, jitter: 0.06, random: 0.85 },
 };
-const LABELS = { off: "off", glitch: "glitch shatter" };
 
 const store = {
   get(k, d) { try { return localStorage.getItem("uncvl-fx-" + k) ?? d; } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem("uncvl-fx-" + k, v); } catch (e) {} },
 };
 const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-let mode = store.get("mode", "glitch");
-if (!(mode in MODES)) mode = "glitch";
-let strength = Number(store.get("strength", "1"));
-let shatter = Number(store.get("shatter", "0.5")); // 0 = clean middle-lag (glitch), 1 = random per letter (shatter)
+// on/off: the hazard toggle in the header (default on; off for people who ask for reduced motion)
+const saved = store.get("on", null);
+let on = saved === null ? !reduced.matches : saved === "1";
+const mode = "glitch";
+// both set at 20% of their old slider range: power 0.4-2.5, shatter 0-1
+const strength = 0.4 + 0.2 * (2.5 - 0.4);
+const shatter = 0.2; // 0 = clean middle-lag (glitch), 1 = random per letter (shatter)
 const variation = 0.7; // small per-line differences in the middle-lag
 
 // ---------- canvas ----------
@@ -344,7 +346,7 @@ function frame() {
   raf = 0;
   const tStart = performance.now();
   const p = MODES[mode];
-  if (!p || reduced.matches) return settle();
+  if (!on || !p) return settle();
   const dy = scrollY - lastY;
   lastY = scrollY;
   const inject = Math.sign(dy) * Math.max(0, Math.abs(dy) - p.threshold) * strength;
@@ -481,30 +483,34 @@ sizeCanvas();
 // measure when the browser is idle; the resize/load/font events below re-measure (debounced)
 idle(() => { if (!blocks.length && !pumping) measureBlocks(); });
 
-// ---------- little switcher (bottom left) ----------
-const ui = document.createElement("div");
-ui.className = "fx-ui";
-ui.setAttribute("role", "group");
-ui.setAttribute("aria-label", "Scroll effect (lab)");
-ui.innerHTML =
-  `<span class="fx-ui__k">fx</span>` +
-  Object.keys(MODES).map((m) => `<button type="button" data-fx="${m}">${LABELS[m]}</button>`).join("") +
-  `<label class="fx-ui__k">power <input type="range" data-k="strength" min="0.4" max="2.5" step="0.1" value="${strength}"></label>` +
-  `<label class="fx-ui__k">shatter <input type="range" data-k="shatter" min="0" max="1" step="0.05" value="${shatter}"></label>`;
-document.body.appendChild(ui);
-function paintUi() { ui.querySelectorAll("[data-fx]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.fx === mode))); }
-ui.addEventListener("click", (e) => {
-  const b = e.target.closest("[data-fx]");
-  if (!b) return;
-  mode = b.dataset.fx; store.set("mode", mode); settle(); paintUi();
+// ---------- on/off toggle next to the language switch ----------
+// An acid warning sign: lit when the glitch scroll is on, dim and struck through when it's off.
+const toggle = document.createElement("button");
+toggle.type = "button";
+toggle.className = "fx-toggle";
+toggle.innerHTML =
+  '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">' +
+  '<path d="M12 2.5 22.5 21h-21z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>' +
+  '<path d="M12 9v5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>' +
+  '<circle cx="12" cy="17.6" r="1.25" fill="currentColor"/>' +
+  '<path class="fx-toggle__off" d="M3 3 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+function paintToggle() {
+  toggle.setAttribute("aria-pressed", String(on));
+  const label = on ? "Glitch scroll effect: on" : "Glitch scroll effect: off";
+  toggle.setAttribute("aria-label", label);
+  toggle.title = label;
+}
+toggle.addEventListener("click", () => {
+  on = !on;
+  store.set("on", on ? "1" : "0");
+  if (!on) { cancelAnimationFrame(raf); raf = 0; settle(); }
+  lastY = scrollY;
+  paintToggle();
 });
-ui.addEventListener("input", (e) => {
-  const k = e.target.dataset.k;
-  if (k === "strength") strength = Number(e.target.value);
-  if (k === "shatter") shatter = Number(e.target.value);
-  if (k) store.set(k, e.target.value);
-});
-paintUi();
+paintToggle();
+const langSwitch = document.querySelector(".site-header .lang-switch");
+if (langSwitch) langSwitch.after(toggle);
+else (document.querySelector(".site-header__inner") || document.body).appendChild(toggle);
 
 // debug: document.dispatchEvent(new CustomEvent("fx-debug", { detail: "still" | "clear" })) draws the
 // canvas letters at rest over the hidden real text (or clears them), to compare the two
