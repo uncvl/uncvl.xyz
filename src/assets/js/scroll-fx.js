@@ -467,15 +467,9 @@ idle(() => { if (!blocks.length && !pumping) measureBlocks(); });
 
 // ---------- on/off toggle next to the language switch ----------
 // An acid warning sign: lit when the glitch scroll is on, dim and struck through when it's off.
-const toggle = document.createElement("button");
-toggle.type = "button";
-toggle.className = "fx-toggle";
-toggle.innerHTML =
-  '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">' +
-  '<path d="M12 2.5 22.5 21h-21z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>' +
-  '<path d="M12 9v5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>' +
-  '<circle cx="12" cy="17.6" r="1.25" fill="currentColor"/>' +
-  '<path class="fx-toggle__off" d="M3 3 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+// The button is in the page HTML (base.njk), so its space is there from the first paint and the
+// header never shifts when this script arrives; here it's only shown and wired up.
+const toggle = document.querySelector(".fx-toggle") || document.createElement("button");
 function paintToggle() {
   toggle.setAttribute("aria-pressed", String(on));
   const label = on ? "Glitch scroll effect: on" : "Glitch scroll effect: off";
@@ -490,6 +484,4 @@ toggle.addEventListener("click", () => {
   paintToggle();
 });
 paintToggle();
-const langSwitch = document.querySelector(".site-header .lang-switch");
-if (langSwitch) langSwitch.after(toggle);
-else (document.querySelector(".site-header__inner") || document.body).appendChild(toggle);
+toggle.hidden = false;

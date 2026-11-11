@@ -83,6 +83,7 @@ strong { color: var(--text-hi); }
 html[data-lang="en"] .l-tr, html[data-lang="tr"] .l-en { display: none !important; }
 html:not([data-lang]) .i18n .l-tr::before { content: " / "; color: var(--text-dim); }
 .lang-switch { display: flex; gap: 0.25rem; align-items: center; color: var(--text-dim); }
+.lang-switch[hidden] { visibility: hidden; } /* keeps its space until site.js shows it: no sideways jump of the menu */
 .lang-switch button { font: inherit; background: none; border: 0; color: var(--link); padding: 0.25rem; cursor: pointer; }
 .lang-switch button[aria-pressed="true"] { color: var(--amber); }
 .notice { color: var(--text-dim); border-left: 2px solid var(--amber); padding-left: 0.6rem; font-size: var(--step--1); }
