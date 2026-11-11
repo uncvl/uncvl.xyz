@@ -22,11 +22,14 @@ const SKIP = ".site-header, .sr-only, .skip, script, style, noscript, template, 
 const isInline = (d) => d === "inline" || d === "contents";
 
 // k = spring stiffness (line edges → middle; kRand for the random per-letter springs), d = damping,
-// max = largest offset (px), threshold = scroll speed (px/frame) below which nothing happens,
-// step = offsets snap to this many px, jitter = sideways shake, random = spread of the random lag.
+// max = largest offset (px), threshold = scroll speed (px per 60 Hz frame, x60 = px/s) below which
+// nothing happens (touchThreshold on phones/tablets, where a slow finger scroll is already faster),
+// kCalm = extra pull home once the page has stopped moving for calmAfter frames, with damping
+// matched to it (lands every letter quickly, no slow stragglers, no bounce) without weakening the
+// lag while scrolling, step = offsets snap to this many px, jitter = sideways shake, random = spread of the random lag.
 const MODES = {
   off: null,
-  glitch: { kEdge: 0.2, kMid: 0.05, kRand: 0.09, d: 0.26, max: 130, threshold: 11, step: 4, jitter: 0.06, random: 0.85 },
+  glitch: { kEdge: 0.32, kMid: 0.085, kRand: 0.14, d: 0.34, kCalm: 0.22, calmAfter: 3, max: 130, threshold: 11, touchThreshold: 22, step: 4, jitter: 0.06, random: 0.85 },
 };
 
 const store = {
@@ -326,7 +329,8 @@ function descent(font) {
 }
 
 // ---------- animation ----------
-let lastY = scrollY, moving = false, raf = 0;
+let lastY = scrollY, lastT = performance.now(), speed = 0, still = 0, moving = false, raf = 0;
+const touch = matchMedia("(pointer: coarse)");
 const injects = [];
 const accent = { a: "#ff3d7f", b: "#33e0ff" };
 
@@ -334,10 +338,25 @@ function frame() {
   raf = 0;
   const p = MODES[mode];
   if (!on || !p) return settle();
+  // Speed is measured against real time, not per frame: phones drop or bunch frames while
+  // scrolling, and 120 Hz screens draw twice as often, so "px per frame" isn't a speed.
+  const now = performance.now();
+  const dt = Math.min(100, Math.max(4, now - lastT)); // a long pause counts as 100 ms
+  const steps = dt / (1000 / 60); // how many 60 Hz frames this frame stands for
+  lastT = now;
   const dy = scrollY - lastY;
   lastY = scrollY;
-  const inject = Math.sign(dy) * Math.max(0, Math.abs(dy) - p.threshold) * strength;
+  // smoothed speed (px per 60 Hz frame): scroll events and frames don't line up, so one frame
+  // can get two events (looks twice as fast) and the next none; smoothing evens that out
+  speed = speed * 0.6 + (dy / steps) * 0.4;
+  const limit = touch.matches ? p.touchThreshold : p.threshold;
+  // push only in frames where the page really moved (and in that direction): the smoothed speed
+  // lingers for a few frames after the scroll stops, which would keep the letters going
+  const inject = dy && Math.sign(dy) === Math.sign(speed)
+    ? Math.sign(speed) * Math.max(0, Math.abs(speed) - limit) * steps * strength : 0;
   injects.unshift(inject); if (injects.length > 8) injects.pop(); // recent pushes, for lines that start late
+  still = dy ? 0 : still + 1;
+  const calm = still >= p.calmAfter; // scrolling stopped: bring every letter home quickly
   const v = variation;
   const viewTop = scrollY - 200, viewBottom = scrollY + innerHeight + 200;
   let energy = 0;
@@ -360,10 +379,13 @@ function frame() {
         const gShatter = 0.4 + c.r * p.random;
         c.off += push * (gGlitch + (gShatter - gGlitch) * shatter);
       }
-      c.vel += -k * c.off - p.d * c.vel;
-      c.off += c.vel;
+      const kk = calm ? k + p.kCalm : k, dd = calm ? 1.8 * Math.sqrt(kk) : p.d; // just under critical damping
+      for (let n = Math.ceil(steps), h = steps / n; n > 0; n--) {
+        c.vel += (-kk * c.off - dd * c.vel) * h;
+        c.off += c.vel * h;
+      }
       if (c.off > p.max) { c.off = p.max; c.vel = 0; } else if (c.off < -p.max) { c.off = -p.max; c.vel = 0; }
-      if (Math.abs(c.off) > 0.25 || Math.abs(c.vel) > 0.05) { energy++; b.hot = true; }
+      if (Math.abs(c.off) >= (p.step ? p.step / 2 : 0.25) || Math.abs(c.vel) > 0.25) { energy++; b.hot = true; }
     }
   }
   if (!energy && !injects.some(Boolean)) return settle();
@@ -435,7 +457,16 @@ function settle() {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
-function kick() { if (!raf) raf = requestAnimationFrame(frame); }
+// Position and time of the previous scroll event. When the effect starts after a pause, its
+// first frame measures from there: the real speed of this scroll, not everything that scrolled
+// by (slowly) while it was idle.
+let evY = scrollY, evT = performance.now();
+function onScroll() {
+  const now = performance.now();
+  if (!raf && !moving) { lastY = evY; lastT = Math.max(evT, now - 100); speed = 0; }
+  evY = scrollY; evT = now;
+  if (!raf) raf = requestAnimationFrame(frame);
+}
 
 // ---------- (re)measure when the layout can have changed ----------
 let measureTimer = 0;
@@ -455,7 +486,7 @@ function remeasure() {
     sizeCanvas(); measureBlocks(); lastY = scrollY;
   }, 150);
 }
-addEventListener("scroll", kick, { passive: true });
+addEventListener("scroll", onScroll, { passive: true });
 addEventListener("resize", remeasure);
 addEventListener("load", remeasure);
 document.fonts && document.fonts.ready.then(remeasure);
