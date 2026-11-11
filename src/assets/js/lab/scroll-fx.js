@@ -7,7 +7,9 @@
 //  - Every run is then pinned to where the browser really drew it (one Range rect per run), so the
 //    canvas letters sit exactly on top of the real ones: no jump when the effect starts or stops.
 //  - Each letter is a small spring. When the page jumps by dy, the letter is left behind by dy and
-//    springs back. Letters in the middle of a line have a softer spring, so they arrive later.
+//    springs back. "glitch shatter": the middle of each line lags most (glitch) mixed with a random
+//    spring per letter (shatter); offsets move in hard pixel steps with an RGB split and jitter.
+//    The "shatter" slider sets the mix: 0 = clean middle-lag, 1 = every letter on its own.
 //  - While letters are moving, the real text is made transparent (still there for selection and
 //    screen readers); once everything has settled, the canvas clears and the real text is back.
 import { prepareRichInline, walkRichInlineLineRanges, materializeRichInlineLineRange } from "/assets/js/vendor/pretext/rich-inline.js";
@@ -18,26 +20,25 @@ const TARGETS = [
   "main .note__text", "main .sorted-genres a", "main .names a", "main .call__head",
 ].join(", ");
 
-// Effect presets. k = spring stiffness (edges → middle), d = damping, max = largest offset (px),
-// threshold = scroll speed (px/frame) below which nothing happens.
+// k = spring stiffness (line edges → middle; kRand for the random per-letter springs), d = damping,
+// max = largest offset (px), threshold = scroll speed (px/frame) below which nothing happens,
+// step = offsets snap to this many px, jitter = sideways shake, random = spread of the random lag.
 const MODES = {
   off: null,
-  elastic: { kEdge: 0.16, kMid: 0.035, d: 0.24, max: 140, threshold: 14 },
-  glitch: { kEdge: 0.2, kMid: 0.05, d: 0.3, max: 120, threshold: 12, step: 4, rgb: true, jitter: 0.06 },
-  wave: { kEdge: 0.12, kMid: 0.03, d: 0.18, max: 160, threshold: 12, wave: 0.35, tilt: 0.004 },
-  smear: { kEdge: 0.14, kMid: 0.03, d: 0.22, max: 140, threshold: 12, trail: 5 },
-  shatter: { kEdge: 0.09, kMid: 0.09, d: 0.2, max: 120, threshold: 10, random: 0.85, rgb: true },
+  glitch: { kEdge: 0.2, kMid: 0.05, kRand: 0.09, d: 0.26, max: 130, threshold: 11, step: 4, jitter: 0.06, random: 0.85 },
 };
-const LABELS = { off: "off", elastic: "elastic", glitch: "glitch", wave: "wave", smear: "smear", shatter: "shatter" };
+const LABELS = { off: "off", glitch: "glitch shatter" };
 
 const store = {
   get(k, d) { try { return localStorage.getItem("uncvl-fx-" + k) ?? d; } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem("uncvl-fx-" + k, v); } catch (e) {} },
 };
 const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-let mode = store.get("mode", "elastic");
+let mode = store.get("mode", "glitch");
+if (!(mode in MODES)) mode = "glitch";
 let strength = Number(store.get("strength", "1"));
-let variation = Number(store.get("variation", "0.7")); // 0 = every line the same, 1 = every line its own shape
+let shatter = Number(store.get("shatter", "0.5")); // 0 = clean middle-lag (glitch), 1 = random per letter (shatter)
+const variation = 0.7; // small per-line differences in the middle-lag
 
 // ---------- canvas ----------
 const canvas = document.createElement("canvas");
@@ -190,7 +191,7 @@ function measureBlocks() {
         const lw = Math.max(1, x1 - x0);
         for (const c of lineChars) {
           c.m = (c.x + charWidth(c.st.font, c.ch) / 2 - x0) / lw; // 0 = start of the line, 1 = end
-          c.L = L; c.n = Math.random(); c.r = Math.random(); c.off = 0; c.vel = 0; c.trail = [];
+          c.L = L; c.n = Math.random(); c.r = Math.random(); c.off = 0; c.vel = 0;
           chars.push(c);
         }
       }
@@ -203,7 +204,7 @@ function measureBlocks() {
 }
 
 // ---------- animation ----------
-let lastY = scrollY, moving = false, raf = 0, time = 0;
+let lastY = scrollY, moving = false, raf = 0;
 const injects = [];
 const accent = { a: "#ff3d7f", b: "#33e0ff" };
 
@@ -211,7 +212,6 @@ function frame() {
   raf = 0;
   const p = MODES[mode];
   if (!p || reduced.matches) return settle();
-  time++;
   const dy = scrollY - lastY;
   lastY = scrollY;
   const inject = Math.sign(dy) * Math.max(0, Math.abs(dy) - p.threshold) * strength;
@@ -229,16 +229,19 @@ function frame() {
       const peak = 0.5 + (L.peak - 0.5) * 0.25 * v;
       const centre = Math.max(0, 1 - Math.abs(c.m - peak) / Math.max(peak, 1 - peak));
       const shape = Math.pow(centre, 2 + (L.sharp - 0.5) * 0.8 * v);
-      const k = p.random
-        ? p.kEdge * (0.35 + c.r * 1.3)
-        : (p.kEdge + (p.kMid - p.kEdge) * shape) * (1 + (L.k - 0.5) * 0.4 * v) * (1 + (c.n - 0.5) * 0.1 * v);
+      const kGlitch = (p.kEdge + (p.kMid - p.kEdge) * shape) * (1 + (L.k - 0.5) * 0.4 * v) * (1 + (c.n - 0.5) * 0.1 * v);
+      const kShatter = p.kRand * (0.35 + c.r * 1.3);
+      const k = kGlitch + (kShatter - kGlitch) * shatter;
       const push = injects[Math.round(L.delay * 2 * v)] || 0;
-      if (push) c.off += push * (p.random ? 0.4 + c.r * p.random : (0.55 + 0.45 * shape) * (1 + (L.gain - 0.5) * 0.35 * v));
+      if (push) {
+        const gGlitch = (0.55 + 0.45 * shape) * (1 + (L.gain - 0.5) * 0.35 * v);
+        const gShatter = 0.4 + c.r * p.random;
+        c.off += push * (gGlitch + (gShatter - gGlitch) * shatter);
+      }
       c.vel += -k * c.off - p.d * c.vel;
       c.off += c.vel;
       if (c.off > p.max) { c.off = p.max; c.vel = 0; } else if (c.off < -p.max) { c.off = -p.max; c.vel = 0; }
       if (Math.abs(c.off) > 0.25 || Math.abs(c.vel) > 0.05) { energy++; b.hot = true; }
-      if (p.trail) { c.trail.push(c.off); if (c.trail.length > p.trail) c.trail.shift(); }
     }
   }
   if (!energy && !injects.some(Boolean)) return settle();
@@ -259,35 +262,25 @@ function draw(p) {
       const st = c.st;
       if (st.font !== font) { ctx.font = font = st.font; }
       let off = c.off, x = c.x - scrollX;
-      if (p.step) off = Math.round(off / p.step) * p.step;
+      if (p.step) off = Math.round(off / p.step) * p.step; // hard pixel steps
       if (p.jitter && Math.abs(c.off) > 6) x += (Math.random() - 0.5) * Math.abs(c.off) * p.jitter;
-      if (p.wave) off += Math.sin(time * 0.25 + c.x * 0.045) * Math.abs(c.off) * p.wave;
       const y = c.y - scrollY + off;
-      if (p.trail && c.trail.length) {
-        ctx.fillStyle = st.color;
-        c.trail.forEach((t, i) => { ctx.globalAlpha = 0.07 + (i / c.trail.length) * 0.18; ctx.fillText(c.ch, x, c.y - scrollY + t); });
-        ctx.globalAlpha = 1;
-      }
-      if (p.rgb && Math.abs(off) > 2) {
+      if (Math.abs(off) > 2) { // RGB split, wider the further the letter is behind
         const s = Math.min(5, Math.abs(off) * 0.12);
         ctx.globalAlpha = 0.75;
         ctx.fillStyle = accent.a; ctx.fillText(c.ch, x - s, y);
         ctx.fillStyle = accent.b; ctx.fillText(c.ch, x + s, y);
         ctx.globalAlpha = 1;
       }
-      const tilt = p.tilt && Math.abs(off) > 1;
-      if (tilt) { ctx.save(); ctx.translate(x, y); ctx.rotate(off * p.tilt); }
-      const gx = tilt ? 0 : x, gy = tilt ? 0 : y;
       // the element's own text-shadow (e.g. the RGB-split codename titles), then the letter
-      for (const sh of st.shadows) { ctx.fillStyle = sh.color; ctx.fillText(c.ch, gx + sh.x, gy + sh.y); }
+      for (const sh of st.shadows) { ctx.fillStyle = sh.color; ctx.fillText(c.ch, x + sh.x, y + sh.y); }
       ctx.fillStyle = st.color;
-      ctx.fillText(c.ch, gx, gy);
-      if (tilt) ctx.restore();
+      ctx.fillText(c.ch, x, y);
     }
   }
 }
 
-function reset(b) { for (const c of b.chars) { c.off = 0; c.vel = 0; c.trail.length = 0; } b.hot = false; }
+function reset(b) { for (const c of b.chars) { c.off = 0; c.vel = 0; } b.hot = false; }
 function settle() {
   for (const b of blocks) if (b.hot) reset(b);
   injects.length = 0;
@@ -325,7 +318,7 @@ ui.innerHTML =
   `<span class="fx-ui__k">fx</span>` +
   Object.keys(MODES).map((m) => `<button type="button" data-fx="${m}">${LABELS[m]}</button>`).join("") +
   `<label class="fx-ui__k">power <input type="range" data-k="strength" min="0.4" max="2.5" step="0.1" value="${strength}"></label>` +
-  `<label class="fx-ui__k">variation <input type="range" data-k="variation" min="0" max="1" step="0.05" value="${variation}"></label>`;
+  `<label class="fx-ui__k">shatter <input type="range" data-k="shatter" min="0" max="1" step="0.05" value="${shatter}"></label>`;
 document.body.appendChild(ui);
 function paintUi() { ui.querySelectorAll("[data-fx]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.fx === mode))); }
 ui.addEventListener("click", (e) => {
@@ -336,7 +329,7 @@ ui.addEventListener("click", (e) => {
 ui.addEventListener("input", (e) => {
   const k = e.target.dataset.k;
   if (k === "strength") strength = Number(e.target.value);
-  if (k === "variation") variation = Number(e.target.value);
+  if (k === "shatter") shatter = Number(e.target.value);
   if (k) store.set(k, e.target.value);
 });
 paintUi();
@@ -347,7 +340,7 @@ document.addEventListener("fx-debug", (e) => {
   if (e.detail === "still") {
     cancelAnimationFrame(raf); raf = 0; settle(); lastY = scrollY;
     document.documentElement.classList.add("fx-moving");
-    draw({}); // all letters at rest, no effect styling
+    draw({}); // all letters at rest
   }
   else if (e.detail && e.detail.report) {
     // compare stored letter positions with fresh DOM boxes for the first block matching a selector
