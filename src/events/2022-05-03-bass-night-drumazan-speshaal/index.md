@@ -1,7 +1,7 @@
 ---
 title: "Drumazan Speshaal: Jung meets Da Frogg"
 codename: drumazan speshaal
-category: bass
+category: [bass]
 series: Bass Night
 activities: ["Music"]
 flavor: []

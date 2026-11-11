@@ -1,7 +1,7 @@
 ---
 title: "Uncivilization Bass: GKC & Da Frogg"
 codename: gkc & da frogg
-category: bass
+category: [bass]
 series: Uncivilization Bass
 activities: ["Music"]
 flavor: []

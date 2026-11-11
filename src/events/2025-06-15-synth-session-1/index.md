@@ -1,7 +1,7 @@
 ---
 title: "Synth Sessions #1"
 codename: synth session
-category: synth
+category: [synth]
 series: Synth Sessions
 activities: ["Music"]
 flavor: []

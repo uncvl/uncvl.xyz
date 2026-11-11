@@ -1,7 +1,7 @@
 ---
 title: "Rehab #3"
 codename: psyche cure
-category: art
+category: [art]
 series: Rehab
 activities: ["Art Market","Exhibition","Music"]
 flavor: []

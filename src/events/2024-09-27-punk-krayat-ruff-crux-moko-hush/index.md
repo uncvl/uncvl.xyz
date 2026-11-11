@@ -1,6 +1,6 @@
 ---
 title: "Krayat | Ruff Crux | Moko | Hush"
-category: punk
+category: [punk]
 activities: ["Music"]
 flavor: ["Punk"]
 music_genres: ["Hardcore Punk"]

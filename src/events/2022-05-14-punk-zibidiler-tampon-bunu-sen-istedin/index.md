@@ -1,6 +1,6 @@
 ---
 title: "Punk Concert: Zibidiler, Tampon, Bunu Sen İstedin"
-category: punk
+category: [punk]
 activities: ["Music"]
 flavor: ["Punk"]
 music_genres: []

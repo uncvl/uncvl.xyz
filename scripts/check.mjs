@@ -54,7 +54,8 @@ for await (const file of walk(ROOT)) {
 
 // Event sources: videos must be links to our PeerTube instance (the only video host the CSP allows);
 // YouTube fields are no longer supported.
-const PEERTUBE = JSON.parse(await readFile("src/_data/site.json", "utf8")).peertube.host;
+const SITE = JSON.parse(await readFile("src/_data/site.json", "utf8"));
+const PEERTUBE = SITE.peertube.host;
 for await (const file of walk("src/events")) {
   if (!file.endsWith("index.md")) continue;
   const fm = ((await readFile(file, "utf8")).match(/^---\r?\n([\s\S]*?)\r?\n---/) || [])[1] || "";
@@ -95,7 +96,19 @@ for await (const file of walk("src/events")) {
   const fm = ((await readFile(file, "utf8")).match(/^---\r?\n([\s\S]*?)\r?\n---/) || [])[1] || "";
   const rel = file.split(path.sep).join("/");
   for (const a of flowList(fm, "activities")) if (!inList(VOCAB.activities, a)) errors.push(`${rel}: event content "${a}" is not in Site texts → Lists`);
-  for (const m of fm.matchAll(/^\s+act_type:\s*["']?([^"'\n]*?)["']?\s*$/gm)) if (m[1] && !inList(VOCAB.act_types, m[1])) errors.push(`${rel}: act type "${m[1]}" is not in Site texts → Lists`);
+  // act_type is a list (or, in older files, a single value): inline [..], a block list below it, or one value
+  const lines = fm.split(/\r?\n/);
+  lines.forEach((line, i) => {
+    const m = line.match(/^(\s+)act_type:\s*(.*)$/);
+    if (!m) return;
+    let vals = [];
+    const v = m[2].trim();
+    if (v.startsWith("[")) vals = v.slice(1, -1).split(",").map((x) => x.trim().replace(/^["']|["']$/g, "")).filter(Boolean);
+    else if (v) vals = [v.replace(/^["']|["']$/g, "")];
+    else for (let j = i + 1; j < lines.length && /^\s+-\s/.test(lines[j]) && lines[j].search(/\S/) > m[1].length; j++) vals.push(lines[j].replace(/^\s+-\s+/, "").replace(/^["']|["']$/g, "").trim());
+    for (const a of vals) if (!inList(VOCAB.act_types, a)) errors.push(`${rel}: act type "${a}" is not in Site texts → Lists`);
+  });
+  for (const c of flowList(fm, "category")) if (!(c in SITE.categories)) errors.push(`${rel}: unknown event type "${c}"`);
 }
 for (const dir of ["src/events", "src/artists", "src/releases"]) {
   for await (const file of walk(dir)) {

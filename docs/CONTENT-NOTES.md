@@ -320,3 +320,4 @@ Still empty: 500001K, Aziz Deliorman, Codex, GKC, Gouachi, ja11hhcc7216, Koi Fai
 | 2026-04-24-decentralized-consensus | – | Music (added: music event) |
 | 2026-05-08-punk-infuze-archongrid | performance | Music (added: concert), Performance Art |
 | 2026-09-04-synth-and-punk | – | Music (added: music event) |
+- **Event type, Event content and Act type are all multi-select.** Synth Sessions & Punk Concert now has both Synth and Punk, so it shows under both on the events page.

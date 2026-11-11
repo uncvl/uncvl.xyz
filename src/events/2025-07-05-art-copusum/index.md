@@ -1,7 +1,7 @@
 ---
 title: Çöpüşüm
 codename: copusum
-category: art
+category: [art]
 activities: ["Art Market","Swap Market","Performance Art","Music"]
 flavor: []
 music_genres: []

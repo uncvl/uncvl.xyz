@@ -21,12 +21,12 @@
 - `codename` is the computer-science name of the night (e.g. *break protocol*, *zero day exploit*).
 
 ### Event fields
-- **Event type**: Bass, Breaks, Punk, Synth or Art. Groups the event on the events page.
+- **Event type**: Bass, Breaks, Punk, Synth, Art. Pick one or more; the event shows under each of them on the events page.
 - **Event content**: what the event offers (Music, Performance Art, Exhibition, Art Market, Swap Market, Workshop, Forum…). Pick one or more.
 - **Event flavor**: pick supergenres (Bass, Break, Core, Punk…), shown as *bass ⤬ break ⤬ core* above the title.
 - **Music genres**: type a few letters and pick one or more genres. Each one links to its page on the Sound page.
 - **Credit**: shown under the poster, e.g. *Artwork: …, Poster design: …*.
-- **Lineup**: for each artist, **Duration** (e.g. *75 min*), **Act type** (DJ Set, Live Set, Concert, Visuals, Lecture…) and an optional note. They show in the artist's box. Start times go in the **Schedule**.
+- **Lineup**: for each artist, **Duration** (e.g. *75 min*), **Act type** (DJ Set, Live Set, Concert, Visuals, Lecture…; one or more) and an optional note. They show in the artist's box. Start times go in the **Schedule**.
 - **Videos**: paste the link of the video on our PeerTube channel (https://v.basspistol.org/c/uncivilization_channel/videos). YouTube is no longer used.
 - **Sound recordings**: a SoundCloud playlist or track recorded at the event. Shown under SOUND RECORDINGS.
 
@@ -63,12 +63,12 @@
 - Editörden yüklediğin görseller ve videolar doğrudan medya depomuza (Cloudflare R2) gider. Anahtar girmen gerekmez, Codeberg girişin kontrol edilir. Görseller otomatik olarak WebP'ye küçültülür.
 
 ### Etkinlik alanları
-- **Event type / Etkinlik türü**: Bass, Breaks, Punk, Synth veya Art. Etkinliği etkinlikler sayfasında gruplar.
+- **Event type / Etkinlik türü**: Bass, Breaks, Punk, Synth, Art. Bir ya da daha fazlasını seç; etkinlik, etkinlikler sayfasında her birinin altında görünür.
 - **Event content / Etkinlik içeriği**: etkinlikte neler var (Müzik, Performans Sanatı, Sergi, Sanat Pazarı, Takas Pazarı, Atölye, Forum…). Bir ya da daha fazlasını seç.
 - **Event flavor**: üst türlerden seç (Bass, Break, Core, Punk…), başlığın üstünde *bass ⤬ break ⤬ core* şeklinde görünür.
 - **Music genres / Müzik türleri**: birkaç harf yaz ve bir ya da daha fazla tür seç. Her tür, Ses sayfasındaki kendi sayfasına bağlanır.
 - **Credit / Emeği geçenler**: afişin altında görünür, örn. *Artwork: …, Poster design: …*.
-- **Lineup / Kadro**: her sanatçı için **Duration / Süre** (örn. *75 min*), **Act type / Performans türü** (DJ Set, Live Set, Concert, Visuals, Lecture…) ve isteğe bağlı not. Sanatçı kutusunda görünür. Başlangıç saatleri **Schedule / Akış** kısmına yazılır.
+- **Lineup / Kadro**: her sanatçı için **Duration / Süre** (örn. *75 min*), **Act type / Performans türü** (DJ Set, Live Set, Concert, Visuals, Lecture…; bir ya da daha fazla) ve isteğe bağlı not. Sanatçı kutusunda görünür. Başlangıç saatleri **Schedule / Akış** kısmına yazılır.
 - **Videos**: PeerTube kanalımızdaki videonun linkini yapıştır (https://v.basspistol.org/c/uncivilization_channel/videos). YouTube artık kullanılmıyor.
 - **Sound recordings / Ses kayıtları**: etkinlikte kaydedilen SoundCloud listesi veya parçası. SES KAYITLARI başlığı altında görünür.
 

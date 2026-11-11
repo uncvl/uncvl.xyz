@@ -1,7 +1,7 @@
 ---
 title: "Art: Rejenere"
 codename: rejenere
-category: art
+category: [art]
 activities: ["Music"]
 flavor: []
 music_genres: ["Breakcore","Drum & Bass","Mental Tekno"]

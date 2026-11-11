@@ -1,7 +1,7 @@
 ---
 title: "Bass Night: Ignishaan"
 codename: ignishaan
-category: bass
+category: [bass]
 series: Bass Night
 activities: ["Music"]
 flavor: []

@@ -1,7 +1,7 @@
 ---
 title: "Thursday Breaks #3"
 codename: buffer overload
-category: break
+category: [break]
 series: Thursday Breaks
 activities: ["Music"]
 flavor: []

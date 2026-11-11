@@ -1,7 +1,7 @@
 ---
 title: "Rehab #1"
 codename: mental orientation
-category: art
+category: [art]
 series: Rehab
 activities: ["Art Market","Music"]
 flavor: []

@@ -304,7 +304,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("releasesWithArtist", (releases, slug) =>
     (releases || []).filter((r) => (r.data.artists || []).includes(slug))
   );
-  eleventyConfig.addFilter("byCategory", (items, cat) => (items || []).filter((i) => i.data.category === cat));
+  // a value that may be a single item or a list (e.g. event type, act type) → always a list
+  const asList = (v) => (v == null || v === "" ? [] : Array.isArray(v) ? v : [v]);
+  eleventyConfig.addFilter("asList", asList);
+  // events of an event type; an event can have several (e.g. synth + punk)
+  eleventyConfig.addFilter("byCategory", (items, cat) => (items || []).filter((i) => asList(i.data.category).includes(cat)));
   eleventyConfig.addFilter("byType", (items, t) => (items || []).filter((i) => i.data.type === t));
   eleventyConfig.addFilter("groupByYear", (items) => {
     const groups = new Map();

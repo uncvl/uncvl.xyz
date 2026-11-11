@@ -1,7 +1,7 @@
 ---
 title: "Bass Night: Genereshaan"
 codename: genereshaan
-category: bass
+category: [bass]
 series: Bass Night
 activities: ["Music"]
 flavor: []

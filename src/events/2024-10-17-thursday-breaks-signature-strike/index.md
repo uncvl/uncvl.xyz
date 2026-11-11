@@ -1,7 +1,7 @@
 ---
 title: "Thursday Breaks #5"
 codename: signature strike
-category: break
+category: [break]
 series: Thursday Breaks
 activities: ["Music"]
 flavor: []

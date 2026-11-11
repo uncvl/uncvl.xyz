@@ -1,7 +1,7 @@
 ---
 title: Decentralized Consensus
 codename: decentralized consensus
-category: break
+category: [break]
 activities: ["Music"]
 flavor: ["Bass","Break","Core","Punk"]
 music_genres: []

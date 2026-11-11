@@ -1,7 +1,7 @@
 ---
 title: "Synth Sessions & Punk Concert"
 codename: synth & punk
-category: synth
+category: [synth, punk]
 series: Synth Sessions
 activities: ["Music"]
 flavor: ["Punk"]

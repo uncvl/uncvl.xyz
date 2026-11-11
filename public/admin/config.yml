@@ -79,7 +79,7 @@ collections:
     fields:
       - { name: title, label: Title, widget: string, hint: "e.g. Thursday Breaks #3" }
       - { name: codename, label: Codename, widget: string, required: false, hint: "CS-flavoured handle shown as the glitch title, e.g. zero day exploit" }
-      - { name: category, label: Event type / Etkinlik türü, widget: select, options: [{ label: Bass, value: bass }, { label: Breaks, value: break }, { label: Punk, value: punk }, { label: Synth, value: synth }, { label: Art, value: art }], hint: "Groups the event on the events page." }
+      - { name: category, label: Event type / Etkinlik türü, widget: select, options: [{ label: Bass, value: bass }, { label: Breaks, value: break }, { label: Punk, value: punk }, { label: Synth, value: synth }, { label: Art, value: art }], multiple: true, hint: "Pick one or more. Groups the event on the events page (an event with two types shows in both)." }
       - { name: series, label: Series, widget: string, required: false, hint: "e.g. Thursday Breaks, Bass Night" }
       - { name: activities, label: Event content / Etkinlik içeriği, widget: relation, collection: settings, file: vocab, value_field: "activities.*.en", search_fields: ["activities.*.en", "activities.*.tr"], display_fields: ["activities.*.en"], multiple: true, required: false, hint: "What the event offers: Music, Exhibition, Art Market, Workshop… Pick one or more. Add new ones under Site texts → Lists." }
       - { name: flavor, label: Event flavor (supergenres), widget: relation, collection: supergenres, value_field: name, search_fields: [name, code], display_fields: ["{{code}} {{name}}"], multiple: true, required: false, hint: "Pick supergenres, shown as bass ⤬ break ⤬ core. Type to search. Manage them under Sound → Supergenres." }
@@ -111,7 +111,7 @@ collections:
           - { name: name, label: Name (as on the poster), widget: string }
           - { name: artist, label: Artist page, widget: relation, collection: artists, value_field: "{{slug}}", search_fields: [name, aka], display_fields: [name], required: false }
           - { name: duration, label: Duration / Süre, widget: string, required: false, hint: "e.g. 75 min. Start times go in the Schedule below." }
-          - { name: act_type, label: Act type / Performans türü, widget: relation, collection: settings, file: vocab, value_field: "act_types.*.en", search_fields: ["act_types.*.en", "act_types.*.tr"], display_fields: ["act_types.*.en"], required: false, hint: "DJ Set, Live Set, Concert, Visuals… Add new ones under Site texts → Lists." }
+          - { name: act_type, label: Act type / Performans türü, widget: relation, collection: settings, file: vocab, value_field: "act_types.*.en", search_fields: ["act_types.*.en", "act_types.*.tr"], display_fields: ["act_types.*.en"], multiple: true, required: false, hint: "Pick one or more: DJ Set, Live Set, Concert, Visuals… Add new ones under Site texts → Lists." }
           - { name: note_en, label: Note (EN), widget: string, required: false, hint: "anything extra, e.g. main act · dnb, jungle" }
           - { name: note_tr, label: Not (TR), widget: string, required: false }
           - { name: bio_en, label: Bio for this event (EN), widget: markdown, required: false, hint: "Leave empty to show nothing here; the artist page keeps the main bio." }

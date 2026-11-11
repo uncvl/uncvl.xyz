@@ -23,7 +23,7 @@ ogType: article
         {%- if poster_credit %}<figcaption class="hero__credit">{{ poster_credit | md | safe }}</figcaption>{% endif %}
       </figure>
       <div class="hero__meta">
-        <p class="kline">evt {{ seq | hex }} · {{ category }}{% if series %} · {{ series | lower }}{% endif %}{% if flavor and flavor.length %} · {{ ui.flavor(flavor) }}{% endif %}{% if upcoming %} · <span class="ok">{% t "upcoming", "yaklaşan" %}</span>{% endif %}</p>
+        <p class="kline">evt {{ seq | hex }} · {{ category | asList | join("/") }}{% if series %} · {{ series | lower }}{% endif %}{% if flavor and flavor.length %} · {{ ui.flavor(flavor) }}{% endif %}{% if upcoming %} · <span class="ok">{% t "upcoming", "yaklaşan" %}</span>{% endif %}</p>
         {%- if codename %}<p class="glitch" aria-hidden="true">{{ codename | codename | wbr | safe }}</p>{% endif %}
         <h1 class="hero__title">{{ title }}</h1>
         <dl class="facts">
@@ -49,7 +49,8 @@ ogType: article
         {%- set artistPage = collections.artists | findBySlug(l.artist) if l.artist else null %}
         <li class="peer">
           {%- if artistPage %}<a class="peer__name" lang="zxx" href="{{ artistPage.url }}">{{ l.name }}</a>{% else %}<span class="peer__name" lang="zxx">{{ l.name }}</span>{% endif %}
-          {%- if l.duration or l.act_type %}<span class="peer__meta">{{ l.duration }}{% if l.duration and l.act_type %} · {% endif %}{% if l.act_type %}{% t l.act_type, l.act_type | vocabTr(vocab.act_types) %}{% endif %}</span>{% endif %}
+          {%- set acts = l.act_type | asList %}
+          {%- if l.duration or acts.length %}<span class="peer__meta">{{ l.duration }}{% if l.duration and acts.length %} · {% endif %}{% for a in acts %}{% t a, a | vocabTr(vocab.act_types) %}{% if not loop.last %} · {% endif %}{% endfor %}</span>{% endif %}
           {%- if l.note_en or l.note_tr %}<span class="peer__note"><span class="l-en" lang="en">{{ l.note_en or l.note_tr }}</span><span class="l-tr" lang="tr">{{ l.note_tr or l.note_en }}</span></span>{% endif %}
         </li>
         {%- endfor %}

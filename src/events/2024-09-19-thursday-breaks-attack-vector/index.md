@@ -1,7 +1,7 @@
 ---
 title: "Thursday Breaks #2"
 codename: attack vector
-category: break
+category: [break]
 series: Thursday Breaks
 activities: ["Music"]
 flavor: ["Bass","Break","Core"]

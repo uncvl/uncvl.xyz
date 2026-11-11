@@ -1,7 +1,7 @@
 ---
 title: "Thursday Breaks #4"
 codename: proxy firewall
-category: break
+category: [break]
 series: Thursday Breaks
 activities: ["Music"]
 flavor: []

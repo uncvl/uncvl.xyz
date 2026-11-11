@@ -1,7 +1,7 @@
 ---
 title: "Thursday Breaks #1"
 codename: break protocol
-category: break
+category: [break]
 series: Thursday Breaks
 activities: ["Music"]
 flavor: ["Bass","Break","Core"]

@@ -1,7 +1,7 @@
 ---
 title: Decyphered Civilization
 codename: decyphered civilization
-category: break
+category: [break]
 activities: ["Music"]
 flavor: []
 music_genres: []

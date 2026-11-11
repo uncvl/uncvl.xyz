@@ -1,7 +1,7 @@
 ---
 title: "Rehab #2"
 codename: sanatorium for the sane
-category: art
+category: [art]
 series: Rehab
 activities: ["Art Market","Music"]
 flavor: []
