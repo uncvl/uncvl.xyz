@@ -43,7 +43,7 @@ blocks:
     text_en: |-
       Sound is part of the concept too. Uncivil Label is interested in a wide range of music genres, selected after extensive research to give a framework for the sound of Uncivilization.
 
-      The Sound page maps it out: the supergenres, the music genres within them, and the words we use to describe music.
+      The Sound page maps it out: the supergenres, the music genres within them, and how we sort them.
     text_tr: ""
     link: /sound/
     link_label_en: Sound page

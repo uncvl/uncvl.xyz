@@ -418,25 +418,6 @@ collections:
           - { name: types_tr, label: Tür tipleri (TR), widget: markdown, required: false }
           - { name: types_note_en, label: Genre types note (EN), widget: markdown, required: false, hint: "Shown in a box under the genre types." }
           - { name: types_note_tr, label: Tür tipleri notu (TR), widget: markdown, required: false }
-      - name: descriptors
-        label: Descriptors / Tanımlayıcılar
-        file: src/_data/descriptors.json
-        format: json
-        fields:
-          - name: groups
-            label: Groups
-            widget: list
-            summary: "{{fields.name}}"
-            fields:
-              - { name: name, label: Group name, widget: string }
-              - name: words
-                label: Words
-                widget: list
-                summary: "{{fields.en}} – {{fields.tr}}"
-                fields:
-                  - { name: en, label: EN, widget: string }
-                  - { name: tr, label: TR, widget: string, required: false }
-                  - { name: highlight, label: Highlight, widget: boolean, required: false, default: false }
       - name: vocab
         label: Lists / Listeler
         file: src/_data/vocab.json

@@ -37,7 +37,7 @@
 - **Sound: Genres** has one entry per music genre: name, supergenres, description (EN/TR) and "see also" links. Each genre gets a page under /sound/genres/ that lists the events, artists and releases tagged with it. A new genre added here can be picked on events, artists and releases right away.
 - **Sound: Supergenres** holds the umbrella terms (Bass, Break, Core…), with a letter code and a definition. They aren't picked on events: a supergenre page lists the events, artists and releases that have one of its genres.
 - **Artists** and **Releases** have a **Music genres** field too.
-- **Site texts → Sound page** has the intro of /sound/, and **Site texts → Descriptors** the word list shown at the bottom of it.
+- **Site texts → Sound page** has the texts of /sound/: the intro at the top and the Genre types text at the bottom.
 - Renaming a genre: events keep the old name, so change it there too (the site check lists any genre name that doesn't exist).
 
 ### Concept
@@ -84,7 +84,7 @@
 - **Sound: Genres / Ses: Türler** her müzik türü için bir kayıt tutar: ad, üst türler, açıklama (EN/TR) ve "ayrıca bak" linkleri. Her türün /sound/genres/ altında, o türle etiketlenmiş etkinlikleri, sanatçıları ve yayınları listeleyen bir sayfası olur. Buraya eklenen yeni bir tür etkinliklerde, sanatçılarda ve yayınlarda hemen seçilebilir.
 - **Sound: Supergenres / Ses: Üst türler** çatı terimleri (Bass, Break, Core…) harf kodu ve tanımıyla tutar. Etkinliklerde seçilmezler: bir üst türün sayfası, onun türlerinden birine sahip etkinlikleri, sanatçıları ve yayınları listeler.
 - **Artists** ve **Releases** kayıtlarında da **Music genres** alanı var.
-- **Site texts → Sound page** /sound/ sayfasının girişini, **Site texts → Descriptors** sayfanın altındaki kelime listesini tutar.
+- **Site texts → Sound page** /sound/ sayfasının metinlerini tutar: üstteki giriş ve en alttaki Tür tipleri metni.
 - Bir türün adını değiştirirsen etkinliklerde eski ad kalır, oralarda da değiştir (site kontrolü olmayan tür adlarını listeler).
 
 ### Konsept

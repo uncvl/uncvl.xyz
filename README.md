@@ -88,7 +88,7 @@ npm run strip-metadata   # remove EXIF/XMP/GPS from images in src/ (lossless); r
 | `src/pages/` | about, concept and world building pages (fixed settings like the URL are in the `.11tydata.js` files next to them) |
 | `src/calls/` | open calls (e.g. the compilation call), shown in the CALLS box on the home page |
 | `src/sound/genres/`, `src/sound/supergenres/` | music genres and supergenres → /sound/ pages; events, artists and releases link to them by name |
-| `src/_data/site.json`, `home.json`, `vocab.json`, `sound.json`, `descriptors.json` | socials, e-mails, navigation, home page texts; lists for activities and act types; Sound page intro and descriptor glossary |
+| `src/_data/site.json`, `home.json`, `vocab.json`, `sound.json` | socials, e-mails, navigation, home page texts; lists for activities and act types; Sound page texts |
 | `src/_data/media.json` | manifest of images on R2 (width, height, content version) |
 | `src/_includes/` | layouts, macros |
 | `src/assets/` | CSS, JS (language switch, click-to-load players), self-hosted fonts |
