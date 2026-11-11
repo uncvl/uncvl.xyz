@@ -93,6 +93,23 @@ function charBox(node, i) {
 }
 
 // Visible text of an element as styled runs, split into paragraphs at <br>.
+// true when a parent with overflow clipping hides the box completely (e.g. the hover-only small
+// print under the home notes: max-height 0 + overflow hidden)
+const clipCache = new Map(); // element → its rect if it clips its content, else null (per measurement)
+function clippedAway(el, r) {
+  for (let a = el.parentElement; a && a !== document.body; a = a.parentElement) {
+    let ar = clipCache.get(a);
+    if (ar === undefined) {
+      const cs = getComputedStyle(a);
+      ar = cs.overflowX === "visible" && cs.overflowY === "visible" ? null : a.getBoundingClientRect();
+      clipCache.set(a, ar);
+    }
+    if (!ar) continue;
+    if (r.bottom <= ar.top + 1 || r.top >= ar.bottom - 1 || r.right <= ar.left + 1 || r.left >= ar.right - 1) return true;
+  }
+  return false;
+}
+
 // text-decoration isn't inherited but is drawn on the text of descendants: look up to the block
 function underlined(from, block, cs) {
   for (let e = from; e; e = e.parentElement) {
@@ -156,7 +173,36 @@ function sourceIndices(text, from, fragText) {
 
 // ---------- layout of every text block (only on load / resize / language switch) ----------
 let blocks = [];
+const stats = { measureMs: 0, measures: 0, frames: 0, updateMs: 0, drawMs: 0, worstMs: 0, drawn: 0 };
+// Measuring every text block at once takes 50-80 ms (Pretext's first pass over the text, styles,
+// Range boxes). It's done in slices instead: find the blocks (cheap), then measure them a few at a
+// time while the browser is idle, the ones nearest the screen first. Blocks not measured yet just
+// keep their real text.
+const idle = window.requestIdleCallback || ((fn) => setTimeout(() => fn({ timeRemaining: () => 8 }), 16));
+let queue = [], pumping = false, sliceMs = 0, longestSlice = 0;
 function measureBlocks() {
+  const t0 = performance.now();
+  blocks = [];
+  queue = findBlocks();
+  const mid = scrollY + viewH / 2;
+  queue.sort((a, b) => Math.abs(a.top - mid) - Math.abs(b.top - mid));
+  lastSig = layoutSig(); // remember the layout this measurement belongs to
+  sliceMs = performance.now() - t0; longestSlice = sliceMs;
+  stats.measures++;
+  if (!pumping) { pumping = true; idle(pump); }
+}
+function pump(deadline) {
+  const t0 = performance.now();
+  while (queue.length && deadline.timeRemaining() > 2) measureOne(queue.shift().el);
+  const dt = performance.now() - t0;
+  sliceMs += dt; longestSlice = Math.max(longestSlice, dt);
+  if (queue.length) return idle(pump);
+  pumping = false;
+  stats.measureMs = +sliceMs.toFixed(1); stats.longestSliceMs = +longestSlice.toFixed(1);
+}
+let fragSeq = 0;
+function findBlocks() {
+  clipCache.clear();
   const containers = new Set();
   const display = new Map();
   const disp = (el) => { let d = display.get(el); if (d === undefined) { d = getComputedStyle(el).display; display.set(el, d); } return d; };
@@ -167,16 +213,21 @@ function measureBlocks() {
     while (box && box !== document.body && isInline(disp(box))) box = box.parentElement;
     if (box) containers.add(box);
   }
-  const els = [...containers].filter((el) => {
+  const out = [];
+  for (const el of containers) {
     const r = el.getBoundingClientRect();
-    return r.width >= 2 && r.height >= 2 && disp(el) !== "none"; // skips collapsed boxes (e.g. hidden small print)
-  });
-  blocks = [];
-  for (const el of els) {
+    // skips collapsed / clipped text
+    if (r.width >= 2 && r.height >= 2 && disp(el) !== "none" && !clippedAway(el, r)) out.push({ el, top: r.top + scrollY });
+  }
+  return out;
+}
+
+function measureOne(el) {
+  {
     const cs = getComputedStyle(el);
     const rect = el.getBoundingClientRect();
     const width = rect.width - px(cs.borderLeftWidth) - px(cs.borderRightWidth) - px(cs.paddingLeft) - px(cs.paddingRight);
-    if (width < 4) continue;
+    if (width < 4) return;
     const chars = [];
     for (const runs of runsOf(el)) {
       let prepared;
@@ -189,6 +240,7 @@ function measureBlocks() {
         const L = { peak: Math.random(), sharp: Math.random(), k: Math.random(), gain: Math.random(), delay: Math.random() };
         const lineChars = [];
         for (const frag of line.fragments) {
+          const fragId = ++fragSeq;
           const run = runs[frag.itemIndex];
           if (!run || !frag.text) continue;
           const src = sourceIndices(run.text, frag.sourceStart, frag.text);
@@ -208,8 +260,8 @@ function measureBlocks() {
             const box = perLetter ? charBox(run.node, src[i]) : null;
             const gx = box ? box.left : first.left + adv[i] * scale;
             const top = box ? box.top : first.top;
-            // spaces only matter for underlines (the line runs under them too)
-            if (ch.trim() || run.st.underline) lineChars.push({ ch, x: gx, y: top + ascent(run.st.font), st: run.st });
+            // spaces are kept too: they join words into one draw call (and carry underlines)
+            lineChars.push({ ch, x: gx, y: top + ascent(run.st.font), st: run.st, frag: fragId, i, w: charWidth(run.st.font, ch) + run.st.letterSpacing, exact: !perLetter });
           });
         }
         if (!lineChars.length) continue;
@@ -223,7 +275,7 @@ function measureBlocks() {
         }
       }
     }
-    if (!chars.length) continue;
+    if (!chars.length) return;
     const top = Math.min(...chars.map((c) => c.y)) - 60, bottom = Math.max(...chars.map((c) => c.y)) + 20;
     blocks.push({ el, top, height: bottom - top, chars });
     el.classList.add("fx-t");
@@ -237,6 +289,7 @@ const accent = { a: "#ff3d7f", b: "#33e0ff" };
 
 function frame() {
   raf = 0;
+  const tStart = performance.now();
   const p = MODES[mode];
   if (!p || reduced.matches) return settle();
   const dy = scrollY - lastY;
@@ -273,7 +326,11 @@ function frame() {
   }
   if (!energy && !injects.some(Boolean)) return settle();
   if (!moving) { moving = true; document.documentElement.classList.add("fx-moving"); }
+  const tDraw = performance.now();
   draw(p);
+  const tEnd = performance.now();
+  stats.frames++; stats.updateMs += tDraw - tStart; stats.drawMs += tEnd - tDraw;
+  stats.worstMs = Math.max(stats.worstMs, tEnd - tStart);
   raf = requestAnimationFrame(frame);
 }
 
@@ -282,33 +339,52 @@ function draw(p) {
   ctx.clearRect(0, 0, viewW, viewH);
   ctx.textBaseline = "alphabetic";
   const viewTop = scrollY - 200, viewBottom = scrollY + viewH + 200;
-  let font = "";
+  // Letters next to each other (same text run, same height after the pixel steps, same RGB split)
+  // are drawn with one fillText call: whole words at rest, chunks of words while moving. That cuts
+  // the number of canvas calls, which is what the time goes into.
+  let font = "", g = null;
+  const flush = () => {
+    if (!g) return;
+    const { text, x, y, st, split, w } = g;
+    g = null;
+    if (y < -80 || y > viewH + 80) return; // off-screen (the canvas would clip it anyway)
+    if (text.trim()) {
+      if (st.font !== font) { ctx.font = font = st.font; }
+      if (split) {
+        ctx.globalAlpha = 0.75;
+        ctx.fillStyle = accent.a; ctx.fillText(text, x - split, y);
+        ctx.fillStyle = accent.b; ctx.fillText(text, x + split, y);
+        ctx.globalAlpha = 1;
+      }
+      for (const sh of st.shadows) { ctx.fillStyle = sh.color; ctx.fillText(text, x + sh.x, y + sh.y); }
+      ctx.fillStyle = st.color;
+      ctx.fillText(text, x, y);
+      stats.drawn++;
+    }
+    if (st.underline) {
+      ctx.fillStyle = st.color;
+      ctx.fillRect(x, y + Math.max(1, st.size * 0.12), w, Math.max(1, Math.round(st.size / 16)));
+    }
+  };
   for (const b of blocks) {
     if (b.top + b.height < viewTop || b.top > viewBottom) continue;
     for (const c of b.chars) {
-      const st = c.st;
-      if (st.font !== font) { ctx.font = font = st.font; }
-      let off = c.off, x = c.x - scrollX;
+      let off = c.off;
       if (p.step) off = Math.round(off / p.step) * p.step; // hard pixel steps
-      if (p.jitter && Math.abs(c.off) > 6) x += (Math.random() - 0.5) * Math.abs(c.off) * p.jitter;
+      const split = Math.abs(off) > 2 ? Math.min(4.5, Math.round(Math.abs(off) * 0.12 / 1.5) * 1.5) : 0;
       const y = c.y - scrollY + off;
-      const blank = !c.ch.trim();
-      if (!blank && Math.abs(off) > 2) { // RGB split, wider the further the letter is behind
-        const s = Math.min(5, Math.abs(off) * 0.12);
-        ctx.globalAlpha = 0.75;
-        ctx.fillStyle = accent.a; ctx.fillText(c.ch, x - s, y);
-        ctx.fillStyle = accent.b; ctx.fillText(c.ch, x + s, y);
-        ctx.globalAlpha = 1;
+      // continue the current group if this is the next letter of the same run at the same height
+      if (g && c.frag === g.frag && c.i === g.next && y === g.y && split === g.split && c.exact) {
+        g.text += c.ch; g.next++; g.w += c.w;
+        continue;
       }
-      // the element's own text-shadow (e.g. the RGB-split codename titles), then the letter
-      if (!blank) for (const sh of st.shadows) { ctx.fillStyle = sh.color; ctx.fillText(c.ch, x + sh.x, y + sh.y); }
-      ctx.fillStyle = st.color;
-      if (!blank) ctx.fillText(c.ch, x, y);
-      if (st.underline) { // same place as the browser's: just under the baseline
-        const t = Math.max(1, Math.round(st.size / 16));
-        ctx.fillRect(x, y + Math.max(1, st.size * 0.12), charWidth(st.font, c.ch) + st.letterSpacing, t);
-      }
+      flush();
+      // shake: one random sideways nudge per group while far behind
+      const shake = p.jitter && Math.abs(c.off) > 6 ? (Math.random() - 0.5) * Math.abs(c.off) * p.jitter : 0;
+      g = { frag: c.frag, next: c.i + 1, text: c.ch, x: c.x - scrollX + shake, y, st: c.st, split, w: c.w };
+      if (!c.exact) flush(); // letters placed one by one (browser wrapped differently): no grouping
     }
+    flush();
   }
 }
 
@@ -324,10 +400,18 @@ function kick() { if (!raf) raf = requestAnimationFrame(frame); }
 
 // ---------- (re)measure when the layout can have changed ----------
 let measureTimer = 0;
+// what the layout depends on: skip re-measuring when none of it changed (the load, font and
+// resize events often fire for the same, unchanged layout)
+let lastSig = "";
+const layoutSig = () => [document.documentElement.clientWidth, document.documentElement.scrollHeight,
+  document.fonts ? document.fonts.status : "", document.documentElement.dataset.lang || "", devicePixelRatio].join("|");
 function remeasure() {
   clearTimeout(measureTimer);
   measureTimer = setTimeout(() => {
     if (moving) return remeasure(); // never measure while the real text is hidden
+    const sig = layoutSig();
+    if (sig === lastSig && blocks.length) return;
+    lastSig = sig;
     widthCache.clear(); ascentCache.clear(); // fonts may have finished loading since
     sizeCanvas(); measureBlocks(); lastY = scrollY;
   }, 150);
@@ -339,7 +423,8 @@ document.fonts && document.fonts.ready.then(remeasure);
 new ResizeObserver(remeasure).observe(document.body);
 new MutationObserver(remeasure).observe(document.documentElement, { attributes: true, attributeFilter: ["data-lang"] });
 sizeCanvas();
-measureBlocks();
+// measure when the browser is idle; the resize/load/font events below re-measure (debounced)
+idle(() => { if (!blocks.length && !pumping) measureBlocks(); });
 
 // ---------- little switcher (bottom left) ----------
 const ui = document.createElement("div");
@@ -391,6 +476,16 @@ document.addEventListener("fx-debug", (e) => {
     }
     document.documentElement.dataset.fxReport = JSON.stringify(out);
   }
-  else settle();
+  else if (e.detail === "clear") settle();
   document.documentElement.dataset.fxLetters = blocks.reduce((n, b) => n + b.chars.length, 0);
+  if (e.detail === "stats") {
+    const n = Math.max(1, stats.frames);
+    document.documentElement.dataset.fxStats = JSON.stringify({
+      letters: blocks.reduce((m, b) => m + b.chars.length, 0), blocks: blocks.length,
+      measureMs: stats.measureMs, longestSliceMs: stats.longestSliceMs, measures: stats.measures, frames: stats.frames,
+      updateMsAvg: +(stats.updateMs / n).toFixed(2), drawMsAvg: +(stats.drawMs / n).toFixed(2),
+      worstFrameMs: +stats.worstMs.toFixed(1), drawCallsPerFrame: Math.round(stats.drawn / n),
+    });
+  }
+  if (e.detail === "reset-stats") Object.assign(stats, { frames: 0, updateMs: 0, drawMs: 0, worstMs: 0, drawn: 0 });
 });
