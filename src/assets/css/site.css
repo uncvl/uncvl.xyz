@@ -60,6 +60,12 @@ picture { display: contents; }
 a { color: var(--link); text-decoration: none; text-underline-offset: 0.2em; }
 a:hover { color: var(--green-hi); text-decoration: underline; }
 a:active { color: #ff0; }
+/* Links inside text and lists get a quiet underline, so they read as links without hovering (the
+   colour difference alone is too small). Navigation, cards, rows, chips, buttons and the pager already
+   look clickable and stay as they are. */
+:where(.prose, .note, .facts, .hero__genres, .genre-list, .kline, .sect small, .sorted-genres, .names, .peer) a:not(.chip, .btn, .tile, .gallery a) {
+  text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: #5e5e5e; text-underline-offset: 0.22em; }
+:where(.prose, .note, .facts, .hero__genres, .genre-list, .kline, .sect small, .sorted-genres, .names, .peer) a:not(.chip, .btn, .tile, .gallery a):hover { text-decoration-color: currentColor; }
 :focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
 h1, h2, h3, h4 { color: var(--text-hi); line-height: 1.15; margin: 0; }
 p { margin: 0 0 0.75em; }
