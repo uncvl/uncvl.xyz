@@ -38,7 +38,10 @@ pageScript: /assets/js/chat.js
     <div class="chat-bar">
       <span class="chat-bar__room"># <span id="chat-room-name"></span><span class="chat-lock" id="chat-lock" hidden> · {% t "password", "şifreli" %}</span></span>
       <span class="chat-bar__count" id="chat-count"></span>
-      <button class="chat-leave" id="chat-leave" type="button">{% t "leave", "çık" %}</button>
+      <span class="chat-bar__actions">
+        <button class="chat-small" id="chat-share" type="button">{% t "share", "paylaş" %}</button>
+        <button class="chat-small" id="chat-leave" type="button">{% t "leave", "çık" %}</button>
+      </span>
     </div>
     <p class="chat-people" id="chat-people"></p>
     <ol class="chat-log" id="chat-log" aria-live="polite"></ol>

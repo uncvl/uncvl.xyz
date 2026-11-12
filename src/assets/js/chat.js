@@ -357,6 +357,28 @@ joinForm.addEventListener("submit", (e) => {
 });
 
 $("chat-leave").addEventListener("click", () => leave(true));
+
+// share: the room's link (never the password). Phones get their own share sheet; elsewhere the
+// link is copied. With a password, people are reminded to send it some other way.
+let roomLink = "", roomLocked = false;
+$("chat-share").addEventListener("click", async () => {
+  const btn = $("chat-share");
+  const note = roomLocked ? ["the password isn't in the link: send it to them some other way", "şifre linkte yok: ayrıca ilet"] : null;
+  try {
+    if (navigator.share && matchMedia("(pointer: coarse)").matches) {
+      await navigator.share({ title: "Uncivilization chat", url: roomLink });
+      if (note) system(...note);
+      return;
+    }
+    await navigator.clipboard.writeText(roomLink);
+    system("link copied: " + roomLink + (note ? " · " + note[0] : ""), "link kopyalandı: " + roomLink + (note ? " · " + note[1] : ""));
+    btn.classList.add("is-open");
+    setTimeout(() => btn.classList.remove("is-open"), 1200);
+  } catch (e) {
+    if (e && e.name === "AbortError") return; // share sheet closed
+    system("the room link: " + roomLink, "oda linki: " + roomLink); // couldn't copy: show it to copy by hand
+  }
+});
 addEventListener("pagehide", () => leave(false));
 
 // ---------- phones: the room fills the screen above the keyboard ----------
@@ -386,6 +408,8 @@ function enter(roomName, password) {
   known = new Map();
   $("chat-room-name").textContent = roomName;
   $("chat-lock").hidden = !password;
+  roomLink = location.origin + location.pathname + (roomName === DEFAULT_ROOM ? "" : "#room=" + encodeURIComponent(roomName));
+  roomLocked = Boolean(password);
 
   room = joinRoom({
     appId: APP_ID,

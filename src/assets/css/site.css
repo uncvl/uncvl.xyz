@@ -418,9 +418,7 @@ a.peer__name:hover { color: var(--green-hi); }
 .chat-bar__room { color: var(--acid); }
 .chat-lock { color: var(--amber); }
 .chat-bar__count { color: var(--text-dim); font-size: var(--step--1); }
-.chat-leave { margin-left: auto; border: 1px solid var(--line-2); color: var(--link); padding: 0.1rem 0.6rem; }
-.chat-leave:focus-visible { border-color: var(--acid); color: var(--acid); }
-@media (hover: hover) { .chat-leave:hover { border-color: var(--acid); color: var(--acid); } }
+.chat-bar__actions { margin-left: auto; display: flex; gap: 0.5rem; }
 .chat-people { margin: 0; padding: 0.4rem 0.8rem; color: var(--text-dim); font-size: var(--step--1); border-bottom: 1px solid var(--line); }
 .chat-people__me { color: var(--text-hi); }
 .chat-people__net { color: var(--amber); } /* people on the same network, in [brackets] */
