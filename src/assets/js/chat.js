@@ -77,39 +77,92 @@ function say(name, text, self) {
 const system = (en, tr) => addLine("sys", [i18n("-- " + en, "-- " + tr)]);
 
 // ---------- polls ----------
-// A poll lives in its creator's own (signed) user state, so people who join later still get it while
-// the creator is here; each vote lives in the voter's own user state. One vote per person, which they
-// can move or take back. When the creator leaves, the poll closes; nothing is kept afterwards.
-const MAX_Q = 140, MAX_OPT = 60, MAX_OPTS = 6, MAX_POLLS = 5, BAR = 10;
-const pollEls = new Map(); // "ownerId:pollId" → { poll, ownerId, li, buttons, meta, closed }
+// Polls stay as long as someone in the room still has them. Everyone keeps a copy of the polls and the
+// votes they've seen in their own (signed) user state and passes it on, so people who join later get
+// them from whoever is here, even after the creator left. One vote per person, which they can move or
+// take back. Every vote carries the time it was cast; the newest one counts. While a voter is in the
+// room, only their own state can say what their vote is; copies only stand in for people who left.
+// Nothing is kept once the last person who has a poll leaves.
+const MAX_Q = 140, MAX_OPT = 60, MAX_OPTS = 6, MAX_POLLS = 10, MAX_VOTERS = 100, BAR = 10;
+const pollEls = new Map(); // "creatorId:pollId" → { poll, li, buttons, meta }
+const knownPolls = new Map(); // same key → poll, every poll seen in this room
 const pollForm = $("chat-pollnew"), pollOpts = $("chat-pollnew-opts"), pollToggle = $("chat-poll-toggle");
 const lang = () => (document.documentElement.dataset.lang === "tr" ? "tr" : "en");
-const validPoll = (p) => p && typeof p.id === "string" && p.id.length <= 12 && typeof p.q === "string" && p.q.length <= MAX_Q &&
+const isId = (s) => typeof s === "string" && s.length > 0 && s.length <= 64;
+const validPoll = (p) => p && isId(p.id) && p.id.length <= 12 && isId(p.by) && typeof p.n === "string" && p.n.length <= MAX_NAME &&
+  typeof p.q === "string" && p.q.length <= MAX_Q && Number.isFinite(p.t) &&
   Array.isArray(p.o) && p.o.length >= 2 && p.o.length <= MAX_OPTS && p.o.every((o) => typeof o === "string" && o.length <= MAX_OPT);
+const pollKey = (p) => p.by + ":" + p.id;
+// a vote: [option index or null (taken back), time]
+const validVote = (v) => Array.isArray(v) && v.length === 2 && (v[0] === null || (Number.isInteger(v[0]) && v[0] >= 0 && v[0] < MAX_OPTS)) && Number.isFinite(v[1]);
+const validLedger = (l) => l && typeof l === "object" && !Array.isArray(l) && Object.keys(l).length <= MAX_POLLS &&
+  Object.entries(l).every(([k, voters]) => k.length <= 80 && voters && typeof voters === "object" && !Array.isArray(voters) &&
+    Object.keys(voters).length <= MAX_VOTERS && Object.entries(voters).every(([id, v]) => isId(id) && validVote(v)));
 
 function setupPolls() {
   selfId = "";
+  knownPolls.clear();
   room.getSelf().then((s) => { selfId = s.userId; tallyAll(); }).catch(() => {});
   polls = room.makeUserState("polls", [], {
     validate: (next) => Array.isArray(next) && next.length <= MAX_POLLS && next.every(validPoll),
   });
-  votes = room.makeUserState("votes", {}, {
-    validate: (next) => next && typeof next === "object" && !Array.isArray(next) && Object.keys(next).length <= 50 &&
-      Object.entries(next).every(([k, v]) => k.length <= 80 && Number.isInteger(v) && v >= 0 && v < MAX_OPTS),
+  votes = room.makeUserState("votes", {}, { validate: (next) => validLedger(next) });
+  polls.onChange((list) => {
+    let added = false;
+    for (const p of Array.isArray(list) ? list : []) {
+      if (!validPoll(p) || knownPolls.has(pollKey(p))) continue;
+      knownPolls.set(pollKey(p), p);
+      showPoll(p);
+      added = true;
+    }
+    if (added) passOn();
   });
-  polls.onChange((list, ctx) => {
-    if (ctx.removed) { closePolls(ctx.userId); return; }
-    for (const p of Array.isArray(list) ? list : []) if (validPoll(p)) showPoll(ctx.userId, p, ctx.self);
-  });
-  votes.onChange(() => tallyAll());
+  votes.onChange(() => { tallyAll(); passOn(); });
+}
+
+// everyone's votes, merged: the newest vote per person and poll
+function mergedVotes() {
+  const out = {};
+  if (!votes) return out;
+  const here = new Set(room ? Object.keys(room.getUsers()) : []);
+  if (selfId) here.add(selfId);
+  for (const [holder, ledger] of Object.entries(votes.getAll())) {
+    if (!validLedger(ledger)) continue;
+    for (const [key, voters] of Object.entries(ledger)) {
+      for (const [voter, v] of Object.entries(voters)) {
+        if (voter !== holder && here.has(voter)) continue; // they're here: only their own word counts
+        const slot = (out[key] ||= {});
+        if (!slot[voter] || v[1] > slot[voter][1]) slot[voter] = v;
+      }
+    }
+  }
+  return out;
+}
+
+// keep my copy up to date (newest polls, and the votes for them), so I can pass them on
+let passTimer = 0;
+function passOn() {
+  clearTimeout(passTimer);
+  passTimer = setTimeout(() => {
+    if (!polls || !votes) return;
+    const keep = [...knownPolls.values()].sort((a, b) => a.t - b.t).slice(-MAX_POLLS);
+    const keys = new Set(keep.map(pollKey));
+    const merged = mergedVotes(), ledger = {};
+    for (const key of keys) if (merged[key]) ledger[key] = Object.fromEntries(Object.entries(merged[key]).slice(-MAX_VOTERS));
+    const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+    if (!same(polls.get(), keep)) polls.set(keep).catch(() => {});
+    if (!same(votes.get(), ledger)) votes.set(ledger).catch(() => {});
+  }, 400);
 }
 
 function createPoll(q, opts) {
   q = clean(q, MAX_Q);
   opts = (opts || []).map((o) => clean(o, MAX_OPT)).filter(Boolean).slice(0, MAX_OPTS);
-  if (!polls || !q || opts.length < 2) return false;
-  const poll = { id: Math.random().toString(36).slice(2, 10), q, o: opts };
-  polls.set((prev) => [...(Array.isArray(prev) ? prev : []).slice(-(MAX_POLLS - 1)), poll]).catch(() => {});
+  if (!polls || !selfId || !q || opts.length < 2) return false;
+  const poll = { id: Math.random().toString(36).slice(2, 10), by: selfId, n: myName, q, o: opts, t: Date.now() };
+  knownPolls.set(pollKey(poll), poll);
+  showPoll(poll);
+  passOn();
   if (!known.size && !warnedAlone) {
     warnedAlone = true;
     system("nobody else is here yet: the poll will show up for people who join while you're here", "henüz kimse yok: anket, sen buradayken katılanlara görünecek");
@@ -117,12 +170,13 @@ function createPoll(q, opts) {
   return true;
 }
 
-function showPoll(ownerId, poll, self) {
-  const key = ownerId + ":" + poll.id;
+function showPoll(poll) {
+  const key = pollKey(poll);
   if (pollEls.has(key)) return;
+  const self = poll.by === selfId;
   const who = document.createElement("span");
   who.className = "chat-line__name";
-  who.textContent = "<" + (self ? myName : known.get(ownerId) || "anon-" + ownerId.slice(0, 4)) + ">";
+  who.textContent = "<" + (clean(poll.n, MAX_NAME) || "anon-" + poll.by.slice(0, 4)) + ">";
   const tag = document.createElement("span");
   tag.className = "chat-poll__tag";
   tag.textContent = "[:POLL:]";
@@ -152,41 +206,32 @@ function showPoll(ownerId, poll, self) {
   const meta = document.createElement("p");
   meta.className = "chat-poll__meta";
   const li = addLine(self ? "poll chat-line--self" : "poll", [who, " ", tag, " ", q, list, meta]);
-  pollEls.set(key, { poll, ownerId, li, buttons, meta, closed: false });
+  pollEls.set(key, { poll, li, buttons, meta });
   tally(key);
 }
 
 function vote(key, i) {
-  const el = pollEls.get(key);
-  if (!votes || !el || el.closed) return;
+  if (!votes || !selfId || !pollEls.has(key)) return;
+  const mine = mergedVotes()[key]?.[selfId];
+  const choice = mine && mine[0] === i ? null : i; // tapping your vote again takes it back
   votes.set((prev) => {
-    const next = {};
-    // keep only votes for polls that are still open here (at most 50)
-    for (const [k, v] of Object.entries(prev && typeof prev === "object" ? prev : {})) if (pollEls.has(k) && !pollEls.get(k).closed) next[k] = v;
-    if (next[key] === i) delete next[key]; // tapping your vote again takes it back
-    else next[key] = i;
+    const next = validLedger(prev) ? JSON.parse(JSON.stringify(prev)) : {};
+    (next[key] ||= {})[selfId] = [choice, Date.now()];
     return next;
   }).catch(() => {});
 }
 
 function tally(key) {
   const el = pollEls.get(key);
-  if (!el || !votes) return;
-  // an open poll counts the votes of the people in the room now; a closed one keeps its last result
-  if (!el.closed || !el.last) {
-    const all = votes.getAll(), here = room ? room.getUsers() : {};
-    const counts = el.poll.o.map(() => 0);
-    let total = 0, mine = -1;
-    for (const [userId, v] of Object.entries(all)) {
-      if (userId !== selfId && !here[userId]) continue;
-      const i = v && typeof v === "object" ? v[key] : undefined;
-      if (!Number.isInteger(i) || i < 0 || i >= counts.length) continue;
-      counts[i]++; total++;
-      if (userId === selfId) mine = i;
-    }
-    el.last = { counts, total, mine };
+  if (!el) return;
+  const voters = mergedVotes()[key] || {};
+  const counts = el.poll.o.map(() => 0);
+  let total = 0, mine = -1;
+  for (const [voter, [i]] of Object.entries(voters)) {
+    if (i === null || i >= counts.length) continue;
+    counts[i]++; total++;
+    if (voter === selfId) mine = i;
   }
-  const { counts, total, mine } = el.last;
   el.buttons.forEach((b, i) => {
     const fill = total ? Math.round((counts[i] / total) * BAR) : 0;
     b.querySelector(".chat-poll__box").textContent = i === mine ? "[x]" : "[ ]";
@@ -194,17 +239,12 @@ function tally(key) {
     b.querySelector(".chat-poll__n").textContent = String(counts[i]);
     b.setAttribute("aria-pressed", String(i === mine));
     b.classList.toggle("is-mine", i === mine);
-    b.disabled = el.closed;
   });
   el.meta.textContent = "";
   const votesEn = total === 1 ? "1 vote" : total + " votes";
-  if (el.closed) el.meta.append(i18n(votesEn + " · closed: its creator left", total + " oy · kapandı: anketi açan ayrıldı"));
-  else el.meta.append(i18n(votesEn + " · tap an option to vote, tap again to take it back", total + " oy · oy vermek için bir seçeneğe dokun, geri almak için tekrar dokun"));
+  el.meta.append(i18n(votesEn + " · tap an option to vote, tap again to take it back", total + " oy · oy vermek için bir seçeneğe dokun, geri almak için tekrar dokun"));
 }
 function tallyAll() { for (const key of pollEls.keys()) tally(key); }
-function closePolls(ownerId) {
-  for (const [key, el] of pollEls) if (el.ownerId === ownerId && !el.closed) { el.closed = true; tally(key); }
-}
 
 // the poll form: a question and 2-6 options
 function addOptionInput(value = "") {
@@ -341,7 +381,7 @@ function enter(roomName, password) {
       arrived(userId, clean(profile.get(userId)?.name, MAX_NAME) || "anon-" + userId.slice(0, 4));
     }, 4000);
   });
-  room.onUserLeave(({ userId }) => { gone(userId); closePolls(userId); tallyAll(); });
+  room.onUserLeave(({ userId }) => { gone(userId); tallyAll(); });
   setupPolls();
 
   // messages: plain text, a little flood protection per person
@@ -473,7 +513,9 @@ function leave(showForm) {
   room.leave().catch(() => {});
   room = null;
   polls = votes = null;
+  clearTimeout(passTimer);
   pollEls.clear();
+  knownPolls.clear();
   togglePollForm(false);
   if (!showForm) return;
   document.documentElement.classList.remove("chat-active");
