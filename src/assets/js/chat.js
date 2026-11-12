@@ -84,7 +84,7 @@ addEventListener("hashchange", () => { if (!room) joinForm.room.value = roomFrom
 joinForm.hidden = false;
 about.hidden = false;
 
-let room = null, known = new Map(), myName = "";
+let room = null, known = new Map(), myName = "", netTimer = 0;
 
 joinForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -133,6 +133,7 @@ function enter(roomName, password) {
     if (!before) system(`${name} joined`, `${name} katıldı`);
     else if (before !== name) system(`${before} is now ${name}`, `${before} artık ${name}`);
     paintPeople();
+    setTimeout(refreshNetworks, 1500); // their connection is up by now: check its network
   };
   profile.onChange((value, ctx) => {
     if (ctx.self) return;
@@ -182,6 +183,8 @@ function enter(roomName, password) {
   });
 
   paintPeople();
+  clearInterval(netTimer);
+  netTimer = setInterval(refreshNetworks, 4000);
   sendForm.msg.focus();
 }
 
@@ -193,19 +196,76 @@ function gone(userId) {
   paintPeople();
 }
 
+// ---------- who's here, with people on the same network in [brackets] ----------
+// Each person's connection goes to an address; people connecting from the same one (same home, same
+// phone in two tabs…) are bracketed together. Addresses are only compared, never shown. Someone on
+// your own local network connects straight over the LAN, so they're bracketed with you.
+let netOf = new Map(); // userId → network key ("me" = your network)
+async function networkKey(pc) {
+  const stats = await pc.getStats();
+  let pair = null;
+  stats.forEach((st) => { if (st.type === "transport" && st.selectedCandidatePairId) pair = stats.get(st.selectedCandidatePairId); });
+  if (!pair) stats.forEach((st) => { if (st.type === "candidate-pair" && (st.selected || (st.nominated && st.state === "succeeded"))) pair = st; });
+  if (!pair) return null;
+  const remote = stats.get(pair.remoteCandidateId), local = stats.get(pair.localCandidateId);
+  if (!remote) return null;
+  if (remote.candidateType === "host") return "me"; // over the local network
+  const addr = remote.address || remote.ip;
+  // my own public address, as the STUN servers saw it
+  const mine = new Set();
+  stats.forEach((st) => { if (st.type === "local-candidate" && st.candidateType === "srflx") mine.add(st.address || st.ip); });
+  if (local && local.candidateType === "srflx") mine.add(local.address || local.ip);
+  return addr ? (mine.has(addr) ? "me" : addr) : null;
+}
+async function refreshNetworks() {
+  if (!room) return;
+  const peers = room.getPeers(), next = new Map();
+  await Promise.all(Object.values(peers).map(async (p) => {
+    if (!p.connection || next.has(p.userId)) return;
+    try { const key = await networkKey(p.connection); if (key) next.set(p.userId, key); } catch (e) {}
+  }));
+  const sig = (m) => [...m].sort().join("|");
+  if (sig(next) !== sig(netOf)) { netOf = next; paintPeople(); }
+}
+
 function paintPeople() {
   people.textContent = "";
-  const me = document.createElement("span");
-  me.className = "chat-people__me";
-  me.append(myName + " ", i18n("(you)", "(sen)"));
-  people.append(me);
-  for (const name of known.values()) people.append(" · ", name);
+  // group names by network: yours first, then everyone else in the order they arrived
+  const groups = new Map([["me", [null]]]); // null = you
+  for (const [userId, name] of known) {
+    const key = netOf.get(userId) || "user:" + userId;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(name);
+  }
+  let first = true;
+  for (const names of groups.values()) {
+    if (!first) people.append(" · ");
+    first = false;
+    const box = names.length > 1 ? document.createElement("span") : people;
+    if (names.length > 1) {
+      box.className = "chat-people__net";
+      box.title = "same network / aynı ağ";
+      box.append("[");
+    }
+    names.forEach((name, i) => {
+      if (i) box.append(" · ");
+      if (name === null) {
+        const me = document.createElement("span");
+        me.className = "chat-people__me";
+        me.append(myName + " ", i18n("(you)", "(sen)"));
+        box.append(me);
+      } else box.append(name);
+    });
+    if (names.length > 1) { box.append("]"); people.append(box); }
+  }
   count.textContent = "";
   count.append(i18n(`${known.size + 1} here`, `${known.size + 1} kişi`));
 }
 
 function leave(showForm) {
   if (!room) return;
+  clearInterval(netTimer);
+  netOf = new Map();
   room.leave().catch(() => {});
   room = null;
   if (!showForm) return;
