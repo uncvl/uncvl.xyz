@@ -64,9 +64,6 @@ slug:
 
 collections:
   # ------------------------------------------------------------------ EVENTS
-  # Entry-list thumbnails: images are stored as full-size originals on R2, so lists would load every
-  # original. The first candidates ask Cloudflare for a 240 px copy instead (/cdn-cgi/image, the same
-  # resizer the website uses); if one can't be built, the CMS falls back to the plain field (the original).
   - name: events
     label: Events / Etkinlikler
     label_singular: Event
@@ -76,7 +73,6 @@ collections:
     extension: md
     format: frontmatter
     summary: "{{date | date('YYYY-MM-DD')}} · {{title}}"
-    thumbnail: ["/cdn-cgi/image/width=240,quality=70,format=auto,fit=scale-down/{{fields.cover}}", "/cdn-cgi/image/width=240,quality=70,format=auto,fit=scale-down/{{fields.poster}}", cover, poster]
     sortable_fields: [date, title]
     view_groups:
       - { label: Event type, field: category }
@@ -175,7 +171,6 @@ collections:
     path: "{{year}}-{{month}}-{{day}}-{{slug}}/index"
     create: true
     summary: "{{catalog}} · {{title}} ({{status}})"
-    thumbnail: ["/cdn-cgi/image/width=240,quality=70,format=auto,fit=scale-down/{{fields.cover}}", cover]
     fields:
       - { name: title, label: Title, widget: string }
       - { name: codename, label: Codename, widget: string, required: false }
@@ -229,7 +224,6 @@ collections:
     identifier_field: name
     slug: "{{name}}"
     summary: "{{name}}"
-    thumbnail: ["/cdn-cgi/image/width=240,quality=70,format=auto,fit=scale-down/{{fields.photo}}", photo]
     fields:
       - { name: name, label: Name, widget: string }
       - { name: aka, label: Also known as, widget: list, required: false }
@@ -254,7 +248,6 @@ collections:
     path: "{{year}}-{{month}}-{{day}}-{{slug}}"
     create: true
     summary: "{{date | date('YYYY-MM-DD')}} · {{title}}"
-    thumbnail: ["/cdn-cgi/image/width=240,quality=70,format=auto,fit=scale-down/{{fields.cover}}", cover]
     fields:
       - { name: title, label: Title, widget: string }
       - { name: date, label: Date, widget: datetime, time_format: false, date_format: "YYYY-MM-DD", format: "YYYY-MM-DD" }
