@@ -14,11 +14,14 @@ const RELAYS = [
   "wss://relay.primal.net",
   "wss://nostr.data.haus",
 ];
-// Address discovery (STUN) only, no relaying of messages. Not Google's or Cloudflare's defaults.
+// Address discovery (STUN) only, no relaying of messages. Not Google's or Cloudflare's: servers run by
+// open-source projects, checked to answer (Nov 2026). Keep it to four: browsers get slower with more, and a
+// dead server delays every connection (the browser waits for it before the handshake can go out).
 const ICE = [
+  { urls: "stun:stun.framasoft.org:3478" },
   { urls: "stun:stun.nextcloud.com:443" },
-  { urls: "stun:stun.sipgate.net:3478" },
-  { urls: "stun:stun.stunprotocol.org:3478" },
+  { urls: "stun:stun.linphone.org:3478" },
+  { urls: "stun:stun.freeswitch.org:3478" },
 ];
 const MAX_NAME = 24, MAX_MSG = 1000, MAX_LOG = 500;
 
@@ -175,7 +178,7 @@ function enter(roomName, password) {
     told.add(err.code);
     if (err.code === "relay-failed") system("can't reach the relays that introduce browsers to each other. check your connection.", "tarayıcıları tanıştıran sunuculara ulaşılamıyor. bağlantını kontrol et.");
     else if (err.code === "decrypt-failed") system("someone in this room is using a different password", "bu odada başka bir şifre kullanan biri var");
-    else if (err.code === "peer-connect-failed") system("couldn't connect to someone: one of your networks blocks direct connections", "biriyle bağlantı kurulamadı: ağlardan biri doğrudan bağlantıyı engelliyor");
+    else if (err.code === "peer-connect-failed") system("trouble connecting to someone, still trying… (if it never works, one of the networks blocks direct connections)", "biriyle bağlanmakta zorlanıyor, denemeye devam… (hiç olmazsa ağlardan biri doğrudan bağlantıyı engelliyordur)");
   });
 
   paintPeople();
