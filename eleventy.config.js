@@ -50,6 +50,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets/css": "assets/css" });
   eleventyConfig.addPassthroughCopy({ public: "/" });
   eleventyConfig.addPassthroughCopy({ ".brand": "/" });
+  eleventyConfig.addPassthroughCopy({ ".vendor": "/" }); // bundled libraries (scripts/vendor.mjs)
   // CMS: self-hosted Sveltia bundle + lazily loaded backend chunks (no source maps)
   const noMaps = { filter: ["**/*", "!**/*.map"] };
   eleventyConfig.addPassthroughCopy({ "node_modules/@sveltia/cms/dist/sveltia-cms.js": "admin/sveltia-cms.js" });
@@ -166,7 +167,7 @@ export default function (eleventyConfig) {
   // ---- cache-busting: /assets/... URLs carry a content hash, so browsers never run stale CSS/JS ----
   eleventyConfig.addFilter("asset", (url) => {
     // site files can come from src/, public/ or the generated brand assets (.brand/)
-    for (const dir of ["src", "public", ".brand"]) {
+    for (const dir of ["src", "public", ".brand", ".vendor"]) {
       try {
         const hash = createHash("md5").update(readFileSync(path.join(dir, url))).digest("hex").slice(0, 10);
         return `${url}?v=${hash}`;
