@@ -39,6 +39,14 @@
     {
       "en": "Forum",
       "tr": "Forum"
+    },
+    {
+      "en": "Visuals",
+      "tr": "Görsel"
+    },
+    {
+      "en": "Zines",
+      "tr": "Fanzin"
     }
   ],
   "act_types": [
@@ -55,16 +63,16 @@
       "tr": "Konser"
     },
     {
+      "en": "Visuals",
+      "tr": "Görsel"
+    },
+    {
       "en": "Performance Art",
       "tr": "Performans Sanatı"
     },
     {
       "en": "Live painting",
       "tr": "Canlı resim"
-    },
-    {
-      "en": "Visuals",
-      "tr": "Görsel"
     },
     {
       "en": "Exhibition",
@@ -81,6 +89,10 @@
     {
       "en": "Lecture",
       "tr": "Söyleşi"
+    },
+    {
+      "en": "Decor",
+      "tr": "Dekor"
     }
   ]
 }
