@@ -73,6 +73,12 @@ schedule:
   - time: '21:00'
     en: Tetrax
     tr: Tetrax
+  - time: '22:00'
+    en: Lizrith
+    tr: Lizrith
+  - time: '23:30'
+    en: Corpocore
+    tr: Corpocore
 videos: []
 gallery:
   - src: https://media.uncvl.xyz/events/2025-06-15-synth-session-1/synthsession-collage-vco2.jpg
