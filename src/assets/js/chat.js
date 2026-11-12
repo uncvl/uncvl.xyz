@@ -84,7 +84,7 @@ addEventListener("hashchange", () => { if (!room) joinForm.room.value = roomFrom
 joinForm.hidden = false;
 about.hidden = false;
 
-let room = null, known = new Map(), myName = "", netTimer = 0;
+let room = null, known = new Map(), myName = "", netTimer = 0, warnedAlone = false;
 
 joinForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -101,10 +101,29 @@ joinForm.addEventListener("submit", (e) => {
 $("chat-leave").addEventListener("click", () => leave(true));
 addEventListener("pagehide", () => leave(false));
 
+// ---------- phones: the room fills the screen above the keyboard ----------
+// While in a room, the page gets .chat-active; on small/touch screens the CSS then pins the room to
+// the visible area (--vv-top / --vv-height, kept up to date here as the keyboard opens and closes),
+// so nothing behind it scrolls and the message box stays right above the keyboard.
+const vv = window.visualViewport;
+function fitViewport() {
+  const h = vv ? vv.height : innerHeight, top = vv ? vv.offsetTop : 0;
+  const atBottom = log.scrollHeight - log.scrollTop - log.clientHeight < 40;
+  roomEl.style.setProperty("--vv-height", h + "px");
+  roomEl.style.setProperty("--vv-top", top + "px");
+  if (atBottom) log.scrollTop = log.scrollHeight; // keyboard opened: keep the latest messages in view
+}
+if (vv) { vv.addEventListener("resize", fitViewport); vv.addEventListener("scroll", fitViewport); }
+addEventListener("resize", fitViewport);
+// tapping "send" shouldn't take the focus away from the message box (that would close the keyboard)
+sendForm.querySelector("button").addEventListener("mousedown", (e) => e.preventDefault());
+
 function enter(roomName, password) {
   joinForm.hidden = true;
   about.hidden = true;
   roomEl.hidden = false;
+  document.documentElement.classList.add("chat-active");
+  fitViewport();
   log.textContent = "";
   known = new Map();
   $("chat-room-name").textContent = roomName;
@@ -128,6 +147,7 @@ function enter(roomName, password) {
   });
   profile.set({ name: myName }).catch(() => {});
   const arrived = (userId, name) => {
+    warnedAlone = false;
     const before = known.get(userId);
     known.set(userId, name);
     if (!before) system(`${name} joined`, `${name} katıldı`);
@@ -168,8 +188,12 @@ function enter(roomName, password) {
     if (!text) return;
     sendForm.msg.value = "";
     say(myName, text, true);
-    if (!known.size) system("nobody else is here yet: this message reached no one", "henüz kimse yok: bu mesaj kimseye ulaşmadı");
+    if (!known.size && !warnedAlone) { // said once, until someone shows up
+      warnedAlone = true;
+      system("nobody else is here yet: messages reach no one until someone joins", "henüz kimse yok: biri katılana kadar mesajlar kimseye ulaşmıyor");
+    }
     msg.send({ t: text }).catch(() => {});
+    sendForm.msg.focus(); // keep the keyboard open for the next message
   };
 
   // problems worth telling about, each kind once
@@ -185,7 +209,7 @@ function enter(roomName, password) {
   paintPeople();
   clearInterval(netTimer);
   netTimer = setInterval(refreshNetworks, 4000);
-  sendForm.msg.focus();
+  if (!matchMedia("(pointer: coarse)").matches) sendForm.msg.focus();
 }
 
 function gone(userId) {
@@ -269,6 +293,7 @@ function leave(showForm) {
   room.leave().catch(() => {});
   room = null;
   if (!showForm) return;
+  document.documentElement.classList.remove("chat-active");
   roomEl.hidden = true;
   joinForm.hidden = false;
   about.hidden = false;

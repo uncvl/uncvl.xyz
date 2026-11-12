@@ -436,3 +436,15 @@ a.peer__name:hover { color: var(--green-hi); }
 .chat-send { display: flex; align-items: center; gap: 0.5rem; padding: 0.55rem 0.8rem; border-top: 1px solid var(--line); }
 .chat-send__prompt { color: var(--acid); }
 .chat-send input { flex: 1; }
+.chat-send input { font-size: max(16px, 1em); } /* 16px or more: iPhones don't zoom in on focus */
+/* phones and tablets: while in a room, it fills the visible screen (above the keyboard) like a chat app */
+@media (max-width: 48rem), (pointer: coarse) {
+  html.chat-active, html.chat-active body { overflow: hidden; overscroll-behavior: none; }
+  .chat-active .chat-room { position: fixed; z-index: 20; left: 0; right: 0; top: var(--vv-top, 0);
+    height: var(--vv-height, 100dvh); border: 0; background: var(--bg); }
+  .chat-active .chat-log { flex: 1; height: auto; min-height: 0; }
+  .chat-active .chat-bar { padding-top: max(0.55rem, env(safe-area-inset-top)); }
+  .chat-active .chat-send { padding-bottom: max(0.55rem, env(safe-area-inset-bottom)); background: var(--bg-2); }
+  .chat-active .chat-people { white-space: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .chat-active .fx-canvas { display: none; }
+}
