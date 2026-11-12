@@ -333,11 +333,13 @@ pollForm.addEventListener("submit", (e) => {
 });
 
 // ---------- join form ----------
-const roomFromHash = () => cleanRoom(new URLSearchParams(location.hash.slice(1)).get("room") || "");
+// the room comes from ?room=… in the address (older links used #room=…, still understood)
+const roomFromUrl = () => cleanRoom(new URLSearchParams(location.search).get("room") || new URLSearchParams(location.hash.slice(1)).get("room") || "");
+const linkFor = (roomName) => location.origin + location.pathname + "?room=" + encodeURIComponent(roomName);
 joinForm.name.value = store.get("name") || randomName();
-joinForm.room.value = roomFromHash();
-// a shared link opened on a page that's already here (only the #room changes): follow it
-addEventListener("hashchange", () => { if (!room) joinForm.room.value = roomFromHash(); });
+joinForm.room.value = roomFromUrl();
+// an old #room link opened on a page that's already here (only the hash changes): follow it
+addEventListener("hashchange", () => { if (!room) joinForm.room.value = roomFromUrl(); });
 joinForm.hidden = false;
 about.hidden = false;
 
@@ -352,7 +354,7 @@ joinForm.addEventListener("submit", (e) => {
   joinForm.password.value = ""; // not kept in the page after joining
   store.set("name", myName);
   // the room (never the password) goes in the address, so it can be shared as a link
-  history.replaceState(null, "", roomName === DEFAULT_ROOM ? location.pathname : "#room=" + encodeURIComponent(roomName));
+  history.replaceState(null, "", linkFor(roomName));
   enter(roomName, password);
 });
 
@@ -408,7 +410,7 @@ function enter(roomName, password) {
   known = new Map();
   $("chat-room-name").textContent = roomName;
   $("chat-lock").hidden = !password;
-  roomLink = location.origin + location.pathname + (roomName === DEFAULT_ROOM ? "" : "#room=" + encodeURIComponent(roomName));
+  roomLink = linkFor(roomName); // always with the room, also the default one
   roomLocked = Boolean(password);
 
   room = joinRoom({
