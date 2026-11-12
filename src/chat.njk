@@ -42,9 +42,20 @@ pageScript: /assets/js/chat.js
     </div>
     <p class="chat-people" id="chat-people"></p>
     <ol class="chat-log" id="chat-log" aria-live="polite"></ol>
+    <form class="chat-pollnew" id="chat-pollnew" autocomplete="off" hidden>
+      <p class="chat-pollnew__head"><span class="chat-poll__tag">[:POLL:]</span> {% t "new poll: a question and 2-6 options", "yeni anket: bir soru ve 2-6 seçenek" %}</p>
+      <input name="q" maxlength="140" aria-label="Question" required>
+      <div class="chat-pollnew__opts" id="chat-pollnew-opts"></div>
+      <p class="chat-pollnew__actions">
+        <button class="chat-small" id="chat-pollnew-add" type="button">+ {% t "option", "seçenek" %}</button>
+        <button class="chat-small" id="chat-pollnew-cancel" type="button">{% t "cancel", "vazgeç" %}</button>
+        <button class="btn" type="submit">{% t "post poll", "anketi gönder" %} →</button>
+      </p>
+    </form>
     <form class="chat-send" id="chat-send" autocomplete="off">
       <span class="chat-send__prompt" aria-hidden="true">&gt;</span>
       <input name="msg" maxlength="1000" aria-label="Message" enterkeyhint="send" autocomplete="off">
+      <button class="chat-small" id="chat-poll-toggle" type="button" aria-expanded="false">{% t "poll", "anket" %}</button>
       <button class="btn" type="submit">{% t "send", "gönder" %}</button>
     </form>
   </section>

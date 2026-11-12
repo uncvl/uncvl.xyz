@@ -63,6 +63,7 @@ function addLine(kind, parts) {
   log.append(li);
   while (log.children.length > MAX_LOG) log.firstChild.remove();
   if (atBottom || kind === "self") log.scrollTop = log.scrollHeight;
+  return li;
 }
 function say(name, text, self) {
   const who = document.createElement("span");
@@ -75,6 +76,176 @@ function say(name, text, self) {
 }
 const system = (en, tr) => addLine("sys", [i18n("-- " + en, "-- " + tr)]);
 
+// ---------- polls ----------
+// A poll lives in its creator's own (signed) user state, so people who join later still get it while
+// the creator is here; each vote lives in the voter's own user state. One vote per person, which they
+// can move or take back. When the creator leaves, the poll closes; nothing is kept afterwards.
+const MAX_Q = 140, MAX_OPT = 60, MAX_OPTS = 6, MAX_POLLS = 5, BAR = 10;
+const pollEls = new Map(); // "ownerId:pollId" → { poll, ownerId, li, buttons, meta, closed }
+const pollForm = $("chat-pollnew"), pollOpts = $("chat-pollnew-opts"), pollToggle = $("chat-poll-toggle");
+const lang = () => (document.documentElement.dataset.lang === "tr" ? "tr" : "en");
+const validPoll = (p) => p && typeof p.id === "string" && p.id.length <= 12 && typeof p.q === "string" && p.q.length <= MAX_Q &&
+  Array.isArray(p.o) && p.o.length >= 2 && p.o.length <= MAX_OPTS && p.o.every((o) => typeof o === "string" && o.length <= MAX_OPT);
+
+function setupPolls() {
+  selfId = "";
+  room.getSelf().then((s) => { selfId = s.userId; tallyAll(); }).catch(() => {});
+  polls = room.makeUserState("polls", [], {
+    validate: (next) => Array.isArray(next) && next.length <= MAX_POLLS && next.every(validPoll),
+  });
+  votes = room.makeUserState("votes", {}, {
+    validate: (next) => next && typeof next === "object" && !Array.isArray(next) && Object.keys(next).length <= 50 &&
+      Object.entries(next).every(([k, v]) => k.length <= 80 && Number.isInteger(v) && v >= 0 && v < MAX_OPTS),
+  });
+  polls.onChange((list, ctx) => {
+    if (ctx.removed) { closePolls(ctx.userId); return; }
+    for (const p of Array.isArray(list) ? list : []) if (validPoll(p)) showPoll(ctx.userId, p, ctx.self);
+  });
+  votes.onChange(() => tallyAll());
+}
+
+function createPoll(q, opts) {
+  q = clean(q, MAX_Q);
+  opts = (opts || []).map((o) => clean(o, MAX_OPT)).filter(Boolean).slice(0, MAX_OPTS);
+  if (!polls || !q || opts.length < 2) return false;
+  const poll = { id: Math.random().toString(36).slice(2, 10), q, o: opts };
+  polls.set((prev) => [...(Array.isArray(prev) ? prev : []).slice(-(MAX_POLLS - 1)), poll]).catch(() => {});
+  if (!known.size && !warnedAlone) {
+    warnedAlone = true;
+    system("nobody else is here yet: the poll will show up for people who join while you're here", "henüz kimse yok: anket, sen buradayken katılanlara görünecek");
+  }
+  return true;
+}
+
+function showPoll(ownerId, poll, self) {
+  const key = ownerId + ":" + poll.id;
+  if (pollEls.has(key)) return;
+  const who = document.createElement("span");
+  who.className = "chat-line__name";
+  who.textContent = "<" + (self ? myName : known.get(ownerId) || "anon-" + ownerId.slice(0, 4)) + ">";
+  const tag = document.createElement("span");
+  tag.className = "chat-poll__tag";
+  tag.textContent = "[:POLL:]";
+  const q = document.createElement("span");
+  q.className = "chat-line__text chat-poll__q";
+  q.textContent = poll.q;
+  const list = document.createElement("ol");
+  list.className = "chat-poll__opts";
+  const buttons = poll.o.map((label, i) => {
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chat-poll__opt";
+    for (const part of ["box", "label", "bar", "n"]) {
+      const s = document.createElement("span");
+      s.className = "chat-poll__" + part;
+      if (part === "label") s.textContent = label; // text only
+      if (part === "bar") s.setAttribute("aria-hidden", "true");
+      b.append(s);
+    }
+    b.addEventListener("mousedown", (e) => e.preventDefault()); // don't steal the focus from the message box
+    b.addEventListener("click", () => vote(key, i));
+    li.append(b);
+    list.append(li);
+    return b;
+  });
+  const meta = document.createElement("p");
+  meta.className = "chat-poll__meta";
+  const li = addLine(self ? "poll chat-line--self" : "poll", [who, " ", tag, " ", q, list, meta]);
+  pollEls.set(key, { poll, ownerId, li, buttons, meta, closed: false });
+  tally(key);
+}
+
+function vote(key, i) {
+  const el = pollEls.get(key);
+  if (!votes || !el || el.closed) return;
+  votes.set((prev) => {
+    const next = {};
+    // keep only votes for polls that are still open here (at most 50)
+    for (const [k, v] of Object.entries(prev && typeof prev === "object" ? prev : {})) if (pollEls.has(k) && !pollEls.get(k).closed) next[k] = v;
+    if (next[key] === i) delete next[key]; // tapping your vote again takes it back
+    else next[key] = i;
+    return next;
+  }).catch(() => {});
+}
+
+function tally(key) {
+  const el = pollEls.get(key);
+  if (!el || !votes) return;
+  // an open poll counts the votes of the people in the room now; a closed one keeps its last result
+  if (!el.closed || !el.last) {
+    const all = votes.getAll(), here = room ? room.getUsers() : {};
+    const counts = el.poll.o.map(() => 0);
+    let total = 0, mine = -1;
+    for (const [userId, v] of Object.entries(all)) {
+      if (userId !== selfId && !here[userId]) continue;
+      const i = v && typeof v === "object" ? v[key] : undefined;
+      if (!Number.isInteger(i) || i < 0 || i >= counts.length) continue;
+      counts[i]++; total++;
+      if (userId === selfId) mine = i;
+    }
+    el.last = { counts, total, mine };
+  }
+  const { counts, total, mine } = el.last;
+  el.buttons.forEach((b, i) => {
+    const fill = total ? Math.round((counts[i] / total) * BAR) : 0;
+    b.querySelector(".chat-poll__box").textContent = i === mine ? "[x]" : "[ ]";
+    b.querySelector(".chat-poll__bar").textContent = "█".repeat(fill) + "░".repeat(BAR - fill);
+    b.querySelector(".chat-poll__n").textContent = String(counts[i]);
+    b.setAttribute("aria-pressed", String(i === mine));
+    b.classList.toggle("is-mine", i === mine);
+    b.disabled = el.closed;
+  });
+  el.meta.textContent = "";
+  const votesEn = total === 1 ? "1 vote" : total + " votes";
+  if (el.closed) el.meta.append(i18n(votesEn + " · closed: its creator left", total + " oy · kapandı: anketi açan ayrıldı"));
+  else el.meta.append(i18n(votesEn + " · tap an option to vote, tap again to take it back", total + " oy · oy vermek için bir seçeneğe dokun, geri almak için tekrar dokun"));
+}
+function tallyAll() { for (const key of pollEls.keys()) tally(key); }
+function closePolls(ownerId) {
+  for (const [key, el] of pollEls) if (el.ownerId === ownerId && !el.closed) { el.closed = true; tally(key); }
+}
+
+// the poll form: a question and 2-6 options
+function addOptionInput(value = "") {
+  if (pollOpts.children.length >= MAX_OPTS) return null;
+  const input = document.createElement("input");
+  input.name = "opt";
+  input.maxLength = MAX_OPT;
+  input.value = value;
+  input.placeholder = (lang() === "tr" ? "seçenek " : "option ") + (pollOpts.children.length + 1);
+  input.setAttribute("aria-label", input.placeholder);
+  pollOpts.append(input);
+  $("chat-pollnew-add").hidden = pollOpts.children.length >= MAX_OPTS;
+  return input;
+}
+function togglePollForm(open) {
+  pollForm.hidden = !open;
+  pollToggle.setAttribute("aria-expanded", String(open));
+  pollToggle.classList.toggle("is-open", open);
+  if (!open) return;
+  pollForm.reset();
+  pollOpts.textContent = "";
+  addOptionInput(); addOptionInput();
+  pollForm.q.placeholder = lang() === "tr" ? "soru" : "question";
+  pollForm.q.focus();
+  fitViewport();
+}
+pollToggle.addEventListener("click", () => togglePollForm(pollForm.hidden));
+$("chat-pollnew-cancel").addEventListener("click", () => { togglePollForm(false); sendForm.msg.focus(); });
+$("chat-pollnew-add").addEventListener("click", () => { const input = addOptionInput(); if (input) input.focus(); });
+pollForm.addEventListener("keydown", (e) => { if (e.key === "Escape") { togglePollForm(false); sendForm.msg.focus(); } });
+pollForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const opts = [...pollOpts.querySelectorAll("input")].map((i) => i.value);
+  if (!createPoll(pollForm.q.value, opts)) {
+    system("a poll needs a question and at least 2 options", "anket için bir soru ve en az 2 seçenek gerekiyor");
+    return;
+  }
+  togglePollForm(false);
+  sendForm.msg.focus();
+});
+
 // ---------- join form ----------
 const roomFromHash = () => cleanRoom(new URLSearchParams(location.hash.slice(1)).get("room") || "");
 joinForm.name.value = store.get("name") || randomName();
@@ -85,6 +256,7 @@ joinForm.hidden = false;
 about.hidden = false;
 
 let room = null, known = new Map(), myName = "", netTimer = 0, warnedAlone = false;
+let polls = null, votes = null, selfId = "";
 
 joinForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -169,7 +341,8 @@ function enter(roomName, password) {
       arrived(userId, clean(profile.get(userId)?.name, MAX_NAME) || "anon-" + userId.slice(0, 4));
     }, 4000);
   });
-  room.onUserLeave(({ userId }) => gone(userId));
+  room.onUserLeave(({ userId }) => { gone(userId); closePolls(userId); tallyAll(); });
+  setupPolls();
 
   // messages: plain text, a little flood protection per person
   const msg = room.makeAction("msg");
@@ -187,6 +360,13 @@ function enter(roomName, password) {
     const text = clean(sendForm.msg.value, MAX_MSG);
     if (!text) return;
     sendForm.msg.value = "";
+    // "/poll question | option | option": a poll without opening the poll form
+    if (/^\/poll\s/i.test(text)) {
+      const [q, ...opts] = text.slice(6).split("|").map((x) => x.trim()).filter(Boolean);
+      if (!createPoll(q, opts)) system("a poll needs a question and 2-6 options: /poll question | option | option", "anket için bir soru ve 2-6 seçenek gerekiyor: /poll soru | seçenek | seçenek");
+      sendForm.msg.focus();
+      return;
+    }
     say(myName, text, true);
     if (!known.size && !warnedAlone) { // said once, until someone shows up
       warnedAlone = true;
@@ -292,6 +472,9 @@ function leave(showForm) {
   netOf = new Map();
   room.leave().catch(() => {});
   room = null;
+  polls = votes = null;
+  pollEls.clear();
+  togglePollForm(false);
   if (!showForm) return;
   document.documentElement.classList.remove("chat-active");
   roomEl.hidden = true;
