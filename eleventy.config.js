@@ -352,7 +352,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(feedPlugin, {
     type: "atom",
     outputPath: "/feed.xml",
-    collection: { name: "feedItems", limit: 30 },
+    // feedItems is sorted newest first; "descending" keeps that, so the 30 newest are the ones in the feed
+    collection: { name: "feedItems", limit: 30, sort: "descending" },
     metadata: {
       language: "en",
       title: "Uncivilization",
