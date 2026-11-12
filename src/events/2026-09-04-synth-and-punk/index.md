@@ -138,7 +138,7 @@ recordings:
     title: Synth & Punk Recordings
 listen: []
 summary_en: An experimental event in İzmir where live electronic music projects and punk concerts will be staged. HÖRSPIEL from Vienna and VCO2, LOREMIPSUM, BALGUM from the local scene will perform their live electronic sets, followed by ÜBENA and UR0123456789 concerts. We will wander in the world of noise, IDM, breakcore and punk sound.
-summary_tr: İzmir'de canlı elektronik müzik projeleri ve punk konserlerinin sahneleneceği deneysel bir etkinlik gerçekleştiriyoruz. Viyana'dan HÖRSPIEL ve yerel sahneden VCO2, LOREMIPSUM, BALGUM canlı elektronik setleri sonrası ÜBENA ve UR0123456789 grupları sahne alacak. Noise, IDM, breakcore ve punk ses dünyasında gezineceğiz
+summary_tr: İzmir'de canlı elektronik müzik projeleri ve punk konserlerinin sahneleneceği deneysel bir etkinlik gerçekleştiriyoruz. Viyana'dan HÖRSPIEL ve yerel sahneden VCO2, LOREMIPSUM, BALGUM canlı elektronik setleri sonrası ÜBENA ve UR0123456789 grupları sahne alacak. Noise, IDM, breakcore ve punk ses dünyasında gezineceğiz.
 draft: false
 promo: https://media.uncvl.xyz/events/2026-09-04-synth-and-punk/synth-and-punk_promo.mp4
 ---
