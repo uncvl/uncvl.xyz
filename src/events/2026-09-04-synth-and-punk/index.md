@@ -23,7 +23,7 @@ price: 500TL (400TL until 21:00)
 poster: https://media.uncvl.xyz/events/2026-09-04-synth-and-punk/synth-and-punk_poster.jpg
 poster_alt: uncivilization synth sessions and punk concert poster - hörspiel, übena, vco2, balgum, loremipsum, ur0123456789
 cover: https://media.uncvl.xyz/uploads/260904-synth2_square_1280-890dec9ef7e6.webp
-poster_credit: Random Input
+poster_credit: Artwork and Poster by Random Input
 text_en: |-
   On Friday, September 4th, we are holding an experimental event at Nomads36. We will try to push some boundaries in this event, where live electronic music projects and punk concerts will be staged.
 
@@ -77,8 +77,8 @@ lineup:
       - Live Set
     note_en: ''
     note_tr: ''
-    bio_en: \-
-    bio_tr: \-
+    bio_en: Balgum is a project of Engin in which he explores underground electronic music genres ranging from techno, drum and bass, hardcore, tekno, breakcore. He finds peace in the clarity that comes after confusion with broken beats, noise and distortion.
+    bio_tr: Balgum, Engin'in techno, drum and bass, hardcore, tekno, breakcore gibi underground elektronik müzik türlerini araştırdığı projesidir. Aksak vuruşlar, gürültü ve distorsiyonun verdiği kafa karışıklığından sonra gelen netlikte huzur buluyor.
   - name: Loremipsum
     artist: loremipsum
     duration: 45 min
@@ -90,21 +90,49 @@ lineup:
     bio_tr: Loremipsum, müziğinde işitsel ögeleri bir ses kolajı olarak ele alıyor. Analog sentezleyici, dijital sampler ve MIDI cihazlardan oluşan hibrit bir setup kullanıyor; üretimini dokuların birleşimi, seslerin ilişkilenmeleri ve rastgelelik kavramları üzerine kuruyor.
   - name: ur0123456789
     artist: ur0123456789
-    duration: ''
+    duration: 50 min
     act_type:
       - Concert
     note_en: from İstanbul
     note_tr: İstanbul'dan
     bio_en: ur0123456789 is an experimental noise group. They blend instrumental and electronic sounds and create a new perspective with its on-stage improvization approach.
     bio_tr: ur0123456789 deneysel noise grubudur. Enstrumental ve elektronik sesleri harmanlayıp, sahne içi improvizasyon yaklaşımı ile yeni bir bakış açısı oluşturur.
+  - name: Ox
+    artist: ox
+    duration: 70 min
+    act_type:
+      - DJ Set
+    note_en: ''
+    note_tr: ''
+    bio_en: OX is an alternative DJ project from Oxomo who is also experimental psycore DJ and producer. OX focused on collecting and mixing dark tekno, mental tribe tekno and breakcore styles.
+    bio_tr: OX, aynı zamanda experimental psycore DJ/producer olan Oxomo'nun alternatif DJ projesidir. Dark tekno, mental tribe tekno ve breakcore tarzlarını toplamaya ve mikslemeye odaklanıyor.
 exhibitors: []
-schedule: []
+schedule:
+  - time: '21:00'
+    en: Balgum
+    tr: Balgum
+  - time: '22:00'
+    en: Loremipsum
+    tr: Loremipsum
+  - time: '23:00'
+    en: VCO2
+    tr: VCO2
+  - time: '00:00'
+    en: Hörspiel
+    tr: Hörspiel
+  - time: '01:00'
+    en: Übena
+    tr: Übena
+  - time: '02:00'
+    en: ur0123456789
+    tr: ur0123456789
+  - time: '03:00'
+    en: Ox
+    tr: Ox
 videos:
   - url: https://v.basspistol.org/w/eVuwsS8oCQgQCP1ac48dZm
     title: Synth Sessions & Punk Concert Promovideo
-gallery:
-  - src: https://media.uncvl.xyz/events/2026-09-04-synth-and-punk/synth-and-punk_ox.jpg
-    alt: Ox card for synth sessions and punk concert
+gallery: []
 recordings:
   - url: https://soundcloud.com/uncvl/sets/synth-punk
     title: Synth & Punk Recordings
