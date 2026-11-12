@@ -333,12 +333,13 @@ pollForm.addEventListener("submit", (e) => {
 });
 
 // ---------- join form ----------
-// the room comes from ?room=… in the address (older links used #room=…, still understood)
-const roomFromUrl = () => cleanRoom(new URLSearchParams(location.search).get("room") || new URLSearchParams(location.hash.slice(1)).get("room") || "");
-const linkFor = (roomName) => location.origin + location.pathname + "?room=" + encodeURIComponent(roomName);
+// the room is in the #room=… part of the address: browsers never send that part to the server, so
+// room names don't end up in request logs. (?room=… links are still understood.)
+const roomFromUrl = () => cleanRoom(new URLSearchParams(location.hash.slice(1)).get("room") || new URLSearchParams(location.search).get("room") || "");
+const linkFor = (roomName) => location.origin + location.pathname + "#room=" + encodeURIComponent(roomName);
 joinForm.name.value = store.get("name") || randomName();
 joinForm.room.value = roomFromUrl();
-// an old #room link opened on a page that's already here (only the hash changes): follow it
+// a room link opened on a page that's already here (only the #room part changes): follow it
 addEventListener("hashchange", () => { if (!room) joinForm.room.value = roomFromUrl(); });
 joinForm.hidden = false;
 about.hidden = false;
