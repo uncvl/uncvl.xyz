@@ -57,11 +57,15 @@ async function main() {
     await writeFile(`${INCLUDES}/${name}.svg`, inline(name, p));
   }
 
-  // favicon.svg follows the browser theme
+  // favicon.svg follows the browser theme. Its canvas is square (the logo centred, with a little air):
+  // Google only shows square favicons in search results.
   const mark = logos.logomark;
+  const [vx, vy, vw, vh] = mark.viewBox.split(/[\s,]+/).map(Number);
+  const side = Math.max(vw, vh) * 1.06;
+  const squareBox = [vx - (side - vw) / 2, vy - (side - vh) / 2, side, side].map((n) => +n.toFixed(2)).join(" ");
   await writeFile(
     `${OUT}/favicon.svg`,
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${mark.viewBox}"><style>path{fill:#000}@media (prefers-color-scheme:dark){path{fill:#fff}}</style>${mark.inner}</svg>`
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${squareBox}"><style>path{fill:#000}@media (prefers-color-scheme:dark){path{fill:#fff}}</style>${mark.inner}</svg>`
   );
 
   const icon = (size, pad) => {
@@ -72,6 +76,8 @@ async function main() {
   };
   const icons = [
     ["favicon-32.png", 32, 0.08],
+    ["favicon-48.png", 48, 0.1],
+    ["favicon-96.png", 96, 0.1],
     ["apple-touch-icon.png", 180, 0.14],
     ["icon-192.png", 192, 0.14],
     ["icon-512.png", 512, 0.14],
@@ -80,6 +86,15 @@ async function main() {
   for (const [file, size, pad] of icons) {
     await sharp(icon(size, pad)).png({ compressionLevel: 9 }).toFile(`${OUT}/${file}`);
   }
+  // /favicon.ico: the address some crawlers (Google among them) try first. An ICO file can simply hold
+  // a PNG: a 6-byte header, one 16-byte directory entry, then the 48x48 PNG.
+  const png48 = await readFile(`${OUT}/favicon-48.png`);
+  const ico = Buffer.alloc(22);
+  ico.writeUInt16LE(0, 0); ico.writeUInt16LE(1, 2); ico.writeUInt16LE(1, 4); // reserved, type icon, 1 image
+  ico.writeUInt8(48, 6); ico.writeUInt8(48, 7); ico.writeUInt8(0, 8); ico.writeUInt8(0, 9); // 48x48, no palette
+  ico.writeUInt16LE(1, 10); ico.writeUInt16LE(32, 12); // planes, bits per pixel
+  ico.writeUInt32LE(png48.length, 14); ico.writeUInt32LE(22, 18); // image size, offset
+  await writeFile(`${OUT}/favicon.ico`, Buffer.concat([ico, png48]));
 
   // Default social card 1200x630. Everything sits inside the centre 630x630 square, because WhatsApp
   // (and other chat apps) show link previews as a square thumbnail cropped from the middle.
