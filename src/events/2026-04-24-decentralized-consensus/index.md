@@ -7,6 +7,8 @@ series: ''
 activities:
   - Music
   - Performance Art
+  - Visuals
+  - Zines
 flavor: bass ⤬ breaks ⤬ core ⤬ punk
 music_genres:
   - Breakcore
@@ -171,17 +173,19 @@ lineup:
   - name: Never Grow Up
     artist: never-grow-up
     duration: ''
-    act_type: []
-    note_en: decor
-    note_tr: dekor
+    act_type:
+      - Decor
+    note_en: ''
+    note_tr: ''
     bio_en: ''
     bio_tr: ''
   - name: Abyssal Area
     artist: abyssal-area
     duration: ''
-    act_type: []
-    note_en: decor
-    note_tr: dekor
+    act_type:
+      - Decor
+    note_en: ''
+    note_tr: ''
     bio_en: ''
     bio_tr: ''
 exhibitors: []
