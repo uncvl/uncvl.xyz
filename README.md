@@ -23,7 +23,7 @@ You don't need to know anything about code to add to it. There is a simple edito
 | **[Organization](https://uncvl.xyz/organization/)** | How we work together, and the work units you can join |
 | **[Concept](https://uncvl.xyz/concept/)** | The ideas behind it all: existence and extinction, the [World Building Project](https://uncvl.xyz/concept/world-building/), the [Sound](https://uncvl.xyz/sound/) and, later, the themes |
 
-There's also a **[Chat](https://uncvl.xyz/chat/)** that isn't in the menus: share the link. It needs no account and keeps no history; messages go straight between the browsers of the people in the room at that moment. Add a room name and a password for a private room. You can also post a poll (the **/** button → /poll, or type `/poll question | option | option`); everyone in the room can vote, and change or take back their vote.
+There's also a **[Chat](https://uncvl.xyz/chat/)** that isn't in the menus: share the link. It needs no account and keeps no history; messages go straight between the browsers of the people in the room at that moment. Add a room name and a password for a private room. Type `/nick newname` to change your name (everyone in the room sees the change). You can also post a poll (the **/** button → /poll, or type `/poll question | option | option`); everyone in the room can vote, and change or take back their vote.
 
 Every page is in **English and Turkish**. Visitors switch with the **EN | TR** button at the top, and the site remembers their choice.
 

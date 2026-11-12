@@ -271,12 +271,15 @@ function togglePollForm(open) {
   fitViewport();
 }
 
-// ---------- the "/" menu: commands (only /poll for now) ----------
+// ---------- the "/" menu: commands (/nick, /poll) ----------
 // Opens from the "/" button, or by typing "/" at the start of an empty message box; while typing
 // it shows only the commands that match. A command typed out with its arguments (/poll q | a | b)
 // still runs straight away when sent.
 const cmdMenu = $("chat-cmds"), cmdToggle = $("chat-cmd-toggle");
-const COMMANDS = { poll: () => togglePollForm(true) };
+const COMMANDS = {
+  poll: () => togglePollForm(true),
+  nick: () => { sendForm.msg.value = "/nick "; sendForm.msg.focus(); },
+};
 function toggleCmds(open, filter = "") {
   cmdMenu.hidden = !open;
   cmdToggle.setAttribute("aria-expanded", String(open));
@@ -339,7 +342,7 @@ joinForm.hidden = false;
 about.hidden = false;
 
 let room = null, known = new Map(), myName = "", netTimer = 0, warnedAlone = false;
-let polls = null, votes = null, selfId = "";
+let polls = null, votes = null, selfId = "", profile = null;
 
 joinForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -397,7 +400,7 @@ function enter(roomName, password) {
 
   // who's here: each person's name is their own (signed) user state. The second argument is only
   // a default; set() is what publishes your name to the room.
-  const profile = room.makeUserState("profile", { name: "" }, {
+  profile = room.makeUserState("profile", { name: "" }, {
     validate: (next) => next && typeof next.name === "string" && next.name.length <= MAX_NAME,
   });
   profile.set({ name: myName }).catch(() => {});
@@ -443,6 +446,21 @@ function enter(roomName, password) {
     const text = clean(sendForm.msg.value, MAX_MSG);
     if (!text) return;
     sendForm.msg.value = "";
+    // "/nick newname": your new name goes to everyone through your profile (they see "old is now new")
+    if (/^\/nick(\s|$)/i.test(text)) {
+      const name = clean(text.slice(5), MAX_NAME);
+      if (!name) system("type a name after /nick, e.g. /nick balgum", "/nick'ten sonra bir ad yaz, örn. /nick balgum");
+      else if (name !== myName) {
+        const before = myName;
+        myName = name;
+        store.set("name", myName);
+        if (profile) profile.set({ name: myName }).catch(() => {});
+        system(`you are now ${myName} (was ${before})`, `artık ${myName} adını kullanıyorsun (önceden ${before})`);
+        paintPeople();
+      }
+      sendForm.msg.focus();
+      return;
+    }
     // "/poll question | option | option": a poll without opening the poll form
     if (/^\/poll\s/i.test(text)) {
       const [q, ...opts] = text.slice(6).split("|").map((x) => x.trim()).filter(Boolean);
@@ -555,7 +573,7 @@ function leave(showForm) {
   netOf = new Map();
   room.leave().catch(() => {});
   room = null;
-  polls = votes = null;
+  polls = votes = profile = null;
   clearTimeout(passTimer);
   pollEls.clear();
   knownPolls.clear();

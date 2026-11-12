@@ -53,6 +53,7 @@ pageScript: /assets/js/chat.js
       </p>
     </form>
     <ul class="chat-cmds" id="chat-cmds" role="menu" aria-label="Commands" hidden>
+      <li role="none"><button type="button" role="menuitem" data-cmd="nick"><span class="chat-cmds__name">/nick newname</span> <span class="chat-cmds__desc">{% t "change your name (everyone in the room sees it)", "adını değiştir (odadaki herkes görür)" %}</span></button></li>
       <li role="none"><button type="button" role="menuitem" data-cmd="poll"><span class="chat-cmds__name">/poll</span> <span class="chat-cmds__desc">{% t "a question with options, everyone votes", "seçenekli bir soru, herkes oy verir" %}</span></button></li>
     </ul>
     <form class="chat-send" id="chat-send" autocomplete="off">
