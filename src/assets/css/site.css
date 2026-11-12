@@ -455,6 +455,14 @@ a.peer__name:hover { color: var(--green-hi); }
 .chat-poll__opt.is-mine .chat-poll__bar { color: var(--acid); }
 .chat-poll__n { text-align: right; color: var(--text-hi); }
 .chat-poll__meta { margin: 0 0 0.3rem 1.6rem; color: var(--text-dim); font-size: var(--step--1); }
+/* the "/" command list: terminal rows above the message box */
+.chat-cmd-toggle { min-width: 2.2rem; font-weight: 700; }
+.chat-cmds { list-style: none; margin: 0; padding: 0.3rem 0.4rem; border-top: 1px solid var(--line); background: var(--bg-2); display: grid; gap: 0.1rem; }
+.chat-cmds button { display: flex; flex-wrap: wrap; gap: 0.2rem 0.8rem; align-items: baseline; width: 100%; text-align: left; padding: 0.35rem 0.5rem; border: 1px solid transparent; color: var(--link); }
+.chat-cmds button:focus-visible { border-color: var(--acid); outline: none; }
+@media (hover: hover) { .chat-cmds button:hover { border-color: var(--line-2); background: var(--bg-3); } }
+.chat-cmds__name { color: var(--acid); }
+.chat-cmds__desc { color: var(--text-dim); font-size: var(--step--1); }
 .chat-pollnew { display: grid; gap: 0.4rem; padding: 0.6rem 0.8rem; border-top: 1px solid var(--line); background: var(--bg-2); }
 .chat-pollnew__head { margin: 0; font-size: var(--step--1); color: var(--text-dim); }
 .chat-pollnew input { font-size: max(16px, 1em); }

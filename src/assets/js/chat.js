@@ -86,7 +86,7 @@ const system = (en, tr) => addLine("sys", [i18n("-- " + en, "-- " + tr)]);
 const MAX_Q = 140, MAX_OPT = 60, MAX_OPTS = 6, MAX_POLLS = 10, MAX_VOTERS = 100, BAR = 10;
 const pollEls = new Map(); // "creatorId:pollId" → { poll, li, buttons, meta }
 const knownPolls = new Map(); // same key → poll, every poll seen in this room
-const pollForm = $("chat-pollnew"), pollOpts = $("chat-pollnew-opts"), pollToggle = $("chat-poll-toggle");
+const pollForm = $("chat-pollnew"), pollOpts = $("chat-pollnew-opts");
 const lang = () => (document.documentElement.dataset.lang === "tr" ? "tr" : "en");
 const isId = (s) => typeof s === "string" && s.length > 0 && s.length <= 64;
 const validPoll = (p) => p && isId(p.id) && p.id.length <= 12 && isId(p.by) && typeof p.n === "string" && p.n.length <= MAX_NAME &&
@@ -261,9 +261,8 @@ function addOptionInput(value = "") {
 }
 function togglePollForm(open) {
   pollForm.hidden = !open;
-  pollToggle.setAttribute("aria-expanded", String(open));
-  pollToggle.classList.toggle("is-open", open);
   if (!open) return;
+  toggleCmds(false);
   pollForm.reset();
   pollOpts.textContent = "";
   addOptionInput(); addOptionInput();
@@ -271,7 +270,51 @@ function togglePollForm(open) {
   pollForm.q.focus();
   fitViewport();
 }
-pollToggle.addEventListener("click", () => togglePollForm(pollForm.hidden));
+
+// ---------- the "/" menu: commands (only /poll for now) ----------
+// Opens from the "/" button, or by typing "/" at the start of an empty message box; while typing
+// it shows only the commands that match. A command typed out with its arguments (/poll q | a | b)
+// still runs straight away when sent.
+const cmdMenu = $("chat-cmds"), cmdToggle = $("chat-cmd-toggle");
+const COMMANDS = { poll: () => togglePollForm(true) };
+function toggleCmds(open, filter = "") {
+  cmdMenu.hidden = !open;
+  cmdToggle.setAttribute("aria-expanded", String(open));
+  cmdToggle.classList.toggle("is-open", open);
+  if (!open) return;
+  let shown = 0;
+  for (const b of cmdMenu.querySelectorAll("button")) {
+    const match = !filter || b.dataset.cmd.startsWith(filter);
+    b.parentElement.hidden = !match;
+    shown += match;
+  }
+  if (!shown) { toggleCmds(false); return; }
+  fitViewport();
+}
+function runCmd(name) {
+  toggleCmds(false);
+  if (sendForm.msg.value.startsWith("/")) sendForm.msg.value = "";
+  COMMANDS[name]?.();
+}
+cmdToggle.addEventListener("mousedown", (e) => e.preventDefault()); // keep the keyboard where it is
+cmdToggle.addEventListener("click", () => toggleCmds(cmdMenu.hidden));
+for (const b of cmdMenu.querySelectorAll("button")) {
+  b.addEventListener("mousedown", (e) => e.preventDefault());
+  b.addEventListener("click", () => runCmd(b.dataset.cmd));
+}
+// typing "/" at the start opens the list and narrows it down; a space (arguments) closes it
+sendForm.msg.addEventListener("input", () => {
+  const m = /^\/(\w*)$/.exec(sendForm.msg.value);
+  if (m) toggleCmds(true, m[1].toLowerCase());
+  else if (!cmdMenu.hidden) toggleCmds(false);
+});
+sendForm.msg.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !cmdMenu.hidden) { toggleCmds(false); return; }
+  // Enter on a bare command name ("/poll") runs it, like picking it from the list
+  const m = /^\/(\w+)$/.exec(sendForm.msg.value.trim());
+  if (e.key === "Enter" && m && COMMANDS[m[1].toLowerCase()]) { e.preventDefault(); runCmd(m[1].toLowerCase()); }
+});
+document.addEventListener("click", (e) => { if (!cmdMenu.hidden && !cmdMenu.contains(e.target) && e.target !== cmdToggle) toggleCmds(false); });
 $("chat-pollnew-cancel").addEventListener("click", () => { togglePollForm(false); sendForm.msg.focus(); });
 $("chat-pollnew-add").addEventListener("click", () => { const input = addOptionInput(); if (input) input.focus(); });
 pollForm.addEventListener("keydown", (e) => { if (e.key === "Escape") { togglePollForm(false); sendForm.msg.focus(); } });
@@ -517,6 +560,7 @@ function leave(showForm) {
   pollEls.clear();
   knownPolls.clear();
   togglePollForm(false);
+  toggleCmds(false);
   if (!showForm) return;
   document.documentElement.classList.remove("chat-active");
   roomEl.hidden = true;
