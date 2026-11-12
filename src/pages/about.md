@@ -1,5 +1,7 @@
 ---
 title_en: UNCIVILIZATION - What is it? How does it function?
+title_tr: UNCIVILIZATION - Nedir? Nasıl işler?
+description: Uncivilization Project initially started as an event organization and now continue functioning also as a record label and a hub for creative research.
 text_en: |-
   Uncivilization is a [conceptual](/concept/) and [organizational](/organization/) entity.
 
@@ -144,10 +146,9 @@ text_tr: |-
   #### Dünya
 
   Uncivil Dünya, projenin kavramsal boyutunu yönetir. İşbirliğine dayalı yaratıcı süreçler için bir zemin oluşturmayı amaçlamaktadır. Burası, Uncivilization’ın kurgusal dünyasını inşa ettiğimiz ve sürdürdüğümüz yerdir.
-description: Uncivilization is a (trans)media project that initially started as event organization and now continue functioning also as a record label and a hub for creative research.
+genre_list_label: "Incomplete list of Uncivilization Label's music genres:"
 kline: '[:INFORMATION:]'
 permalink: /about/
-genre_list_label: "Incomplete list of Uncivilization Label's music genres:"
 ---
 
 ### Sound

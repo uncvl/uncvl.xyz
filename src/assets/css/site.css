@@ -399,3 +399,38 @@ a.peer__name:hover { color: var(--green-hi); }
 .sorted-genres__codes { color: var(--acid); font-size: 0.85em; letter-spacing: 0.08em; margin-left: 0.3rem; }
 .sound__note { margin-top: 1.4rem; max-width: 46rem; }
 
+
+/* ---------- chat (/chat/) ---------- */
+.chat { padding-block: clamp(1.5rem, 4vw, 3rem); max-width: 50rem; }
+.chat [hidden] { display: none !important; } /* the grid/flex rules below would otherwise show hidden parts */
+.chat-join { display: grid; gap: 0.8rem; max-width: 28rem; margin: 0 0 1.4rem; }
+.chat-field { display: grid; gap: 0.25rem; }
+.chat input { font: inherit; color: var(--text-hi); background: var(--bg-2); border: 1px solid var(--line-2); border-radius: 0; padding: 0.45rem 0.6rem; width: 100%; min-width: 0; }
+.chat input:focus { outline: none; border-color: var(--acid); }
+.chat input::placeholder { color: var(--text-dim); }
+.chat button { font: inherit; background: none; cursor: pointer; }
+.chat-join__go { margin: 0.2rem 0 0; }
+.chat-about { max-width: 46rem; }
+.chat-about p + p { margin-top: 0.5rem; }
+.chat-about__small { color: var(--text-dim); font-size: var(--step--1); }
+.chat-room { border: 1px solid var(--line-2); background: var(--bg-2); display: flex; flex-direction: column; }
+.chat-bar { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 1rem; padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--line); }
+.chat-bar__room { color: var(--acid); }
+.chat-lock { color: var(--amber); }
+.chat-bar__count { color: var(--text-dim); font-size: var(--step--1); }
+.chat-leave { margin-left: auto; border: 1px solid var(--line-2); color: var(--link); padding: 0.1rem 0.6rem; }
+.chat-leave:focus-visible { border-color: var(--acid); color: var(--acid); }
+@media (hover: hover) { .chat-leave:hover { border-color: var(--acid); color: var(--acid); } }
+.chat-people { margin: 0; padding: 0.4rem 0.8rem; color: var(--text-dim); font-size: var(--step--1); border-bottom: 1px solid var(--line); }
+.chat-people__me { color: var(--text-hi); }
+.chat-log { list-style: none; margin: 0; padding: 0.6rem 0.8rem; height: clamp(16rem, 55vh, 34rem); overflow-y: auto; overscroll-behavior: contain;
+  background-image: repeating-linear-gradient(0deg, rgb(255 255 255 / 0.025) 0 1px, transparent 1px 3px); }
+.chat-line { padding: 0.08rem 0; overflow-wrap: anywhere; line-height: 1.45; }
+.chat-line__time { color: var(--text-dim); font-size: var(--step--1); }
+.chat-line__name { color: var(--link); }
+.chat-line--self .chat-line__name { color: var(--acid); }
+.chat-line__text { color: var(--text-hi); white-space: pre-wrap; }
+.chat-line--sys { color: var(--text-dim); font-size: var(--step--1); }
+.chat-send { display: flex; align-items: center; gap: 0.5rem; padding: 0.55rem 0.8rem; border-top: 1px solid var(--line); }
+.chat-send__prompt { color: var(--acid); }
+.chat-send input { flex: 1; }

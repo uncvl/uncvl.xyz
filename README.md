@@ -23,6 +23,8 @@ You don't need to know anything about code to add to it. There is a simple edito
 | **[Organization](https://uncvl.xyz/organization/)** | How we work together, and the work units you can join |
 | **[Concept](https://uncvl.xyz/concept/)** | The ideas behind it all: existence and extinction, the [World Building Project](https://uncvl.xyz/concept/world-building/), the [Sound](https://uncvl.xyz/sound/) and, later, the themes |
 
+There's also a **[Chat](https://uncvl.xyz/chat/)** that isn't in the menus: share the link. It needs no account and keeps no history; messages go straight between the browsers of the people in the room at that moment. Add a room name and a password for a private room.
+
 Every page is in **English and Turkish**. Visitors switch with the **EN | TR** button at the top, and the site remembers their choice.
 
 ---
@@ -105,7 +107,9 @@ npm run strip-metadata   # remove EXIF/XMP/GPS from images in src/ (lossless); r
 - **Languages:** EN and TR live in the same file (`text_en` / `text_tr`). A small script shows one at a time and remembers the choice. Without JavaScript both are shown.
 - **Upcoming/past:** computed from `date` at build time. CI rebuilds daily (cron `17 3 * * *`).
 - **Privacy/security:** no third-party requests on page load. Fonts are self-hosted, and YouTube, Bandcamp and SoundCloud players load only after a click. A strict CSP is in `public/_headers`. `/admin/*` has its own CSP.
-- **Glitch scroll:** while you scroll fast, letters lag behind and catch up (the middle of each line last). `src/assets/js/scroll-fx.js` lays out the text with [Pretext](https://github.com/chenglou/pretext) and redraws it on one canvas; the real text is hidden only while letters move. The warning-sign button next to EN | TR turns it off (remembered; off by default with reduced motion).
+- **Glitch scroll:** while you scroll fast, letters lag behind and catch up (the middle of each line last). `src/assets/js/scroll-fx.js` lays out the text with [Pretext](https://github.com/chenglou/pretext) and redraws it on one canvas; the real text is hidden only while letters move. It's off by default; the warning-sign button next to EN | TR turns it on (remembered per browser).
+
+- **Chat (`/chat/`):** `src/chat.njk` + `src/assets/js/chat.js`, built on [Trystero](https://github.com/dmotz/trystero) (MIT). `scripts/vendor.mjs` bundles it with esbuild into `.vendor/` (git-ignored) on every build. Browsers find each other through a few public Nostr relays (`RELAYS` in chat.js; the same list is allowed in the `/chat/*` CSP in `public/_headers`), then talk directly over WebRTC. The handshake is encrypted, with the room password if one is set. STUN only (no Google or Cloudflare servers), no TURN relay, so people behind networks that block direct connections can't join. Nothing is stored; the page is `noindex` and not in the sitemap.
 
 ### CMS uploads to R2
 
