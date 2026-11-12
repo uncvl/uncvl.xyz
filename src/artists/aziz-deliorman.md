@@ -1,6 +1,9 @@
 ---
-name: Aziz Deliorman
+name: Deliorman
+aka: []
 links: []
-aka:
-  - Deliorman
+music_genres: []
+photo: ''
+bio_en: ''
+bio_tr: ''
 ---
