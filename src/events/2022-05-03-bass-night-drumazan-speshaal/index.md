@@ -1,5 +1,5 @@
 ---
-title: 'Drumazan Speshaal: Jung meets Da Frogg'
+title: Drumazan Speshaal
 codename: 'Bass Night #2'
 category:
   - bass
@@ -7,12 +7,12 @@ series: Bass Night
 activities:
   - Music
   - Visuals
-flavor: ''
+flavor: bass
 music_genres:
   - UK Garage
   - Breakbeat
-  - Rave
   - Drum & Bass
+  - Jungle
 date: 2022-05-03
 doors: '21:00'
 stage: '22:00'
@@ -23,7 +23,7 @@ price: 70TL
 poster: https://media.uncvl.xyz/events/2022-05-03-bass-night-drumazan-speshaal/uncivilization-bass-night-drumazan-poster-vertical.jpg
 poster_alt: Poster of Drumazan Speshaal event. A pencil drawing of a masked figure with long wild hair beating a large drum, in teal and yellow tones.
 cover: https://media.uncvl.xyz/events/2022-05-03-bass-night-drumazan-speshaal/uncivilization-bass-night-drumazan-poster.jpg
-poster_credit: ''
+poster_credit: Illustration and Poster Design by Random Input
 text_en: 'The second event of Uncivilization’s bass series will take place at Blind: DRUMAZAN SPESHAAL - JUNG meets DA FROGG. The night will start with UK Garage and breakbeat, continue with Rave and Drum’n Bass. Visuals by Random Input. We are waiting for all the bass heads!'
 text_tr: 'Uncivilization’ın sunduğu ve Blind’da gerçekleşecek etkinliklerin ikincisi: DRUMAZAN SPESHAAL – JUNG, DA FROGG ile buluşuyor!!! UK Garage ve Breakbeat ile başlayacak gece Rave ve Drum’n Bass ile devam edecek. Gecenin görsellerini Random Input yapacak. Bütün bass müzik severleri bekliyoruz!'
 tickets_en: |-
@@ -56,12 +56,26 @@ lineup:
     duration: ''
     act_type:
       - Visuals
-    note_en: visuals
-    note_tr: görsel
+    note_en: ''
+    note_tr: ''
     bio_en: Random Input produces, mixes, edits audio and visual materials.  As a VJ he has been mixing video live since 2002 mainly by itterating, reproducing, distorting, displacing and corrupting images. He started DJing in 2018 and since then played sets that blends breakcore, hardcore, chiptune and glitch genres.
     bio_tr: Random Input ses ve görsel miksleyen ve editleyen bir VJDJ’dir. 2002 yılından bu yana, bulduğu görüntüleri çoğaltır, saptırır, çarpıtıp bozarak yeniden üretir. 2018’de Pixie Underground’da breakcore, hardcore, bass, chiptune, glitch türlerini harmanladığı DJ setleri çalmaya başlamıştır.
+  - name: Miss Baas
+    artist: ''
+    duration: ''
+    act_type: []
+    note_en: MC
+    note_tr: ''
+    bio_en: Miss Baas joins us with her hurricane ragga verses and heart touching choruses.
+    bio_tr: Miss Baas, kasırga gibi ragga dizeleriyle ve kalbe dokunan nakaratlarıyla aramıza katılıyor.
 exhibitors: []
-schedule: []
+schedule:
+  - time: '22:00'
+    en: Jung
+    tr: ''
+  - time: '23:30'
+    en: Da Frogg
+    tr: ''
 videos: []
 gallery:
   - src: https://media.uncvl.xyz/events/2022-05-03-bass-night-drumazan-speshaal/artist-jung.jpg
