@@ -6,6 +6,7 @@ category:
 series: Thursday Breaks
 activities:
   - Music
+  - Art Market
 flavor: bass x breaks x core
 music_genres:
   - Dubstep
@@ -58,7 +59,18 @@ lineup:
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-exhibitors: []
+exhibitors:
+  - cyb3rv_
+  - Melis
+  - Mmanic Ink
+  - Zank
+  - Bixbite
+  - Ank
+  - Bedirhan Sezen
+  - Ada
+  - Zeynep Destebaş
+  - Messy Nobranding
+  - Strawberry Distopia
 schedule:
   - time: '20:45'
     en: Oqlius
