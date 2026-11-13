@@ -10,20 +10,20 @@ activities:
 flavor: bass x breaks x core
 music_genres:
   - IDM
-  - Breakcore
   - Neurofunk
   - Drum & Bass
+  - Breakcore
 date: 2024-10-10
-doors: ''
-stage: ''
+doors: '21:00'
+stage: 21:30 - 01:00
 venue:
   name: Dinozor Bar
   city: İzmir
 price: 150₺
 poster: https://media.uncvl.xyz/events/2024-10-10-thursday-breaks-proxy-firewall/proxy-firewall_mondual-randominput-balgum.jpg
-poster_alt: 'Poster of Thursday Breaks #4 Proxy Firewall event. Bold pixel lettering in cream over grey blocks, on a blue photo of a machine room full of cables.'
-cover: ''
-poster_credit: ''
+poster_alt: 'Poster of Thursday Breaks #4 Proxy Firewall event. Bold pixel lettering in cream over grey blocks, on a blue photo of a quantum computer room full of cables.'
+cover: https://media.uncvl.xyz/uploads/proxy-firewalll_mondual-randominput-balgum_square_1280-2e7ce73d9344.webp
+poster_credit: Poster by Random Input
 text_en: |-
   As both halves of the electronic music duo, Mondual, will meet in İzmir in the upcoming days, we took the opportunity and put an additional date to our calendar of Thursday Breaks event series that normally happen every two weeks. With their unique sound world and performances, Mondual has taken part in many different venues and festivals in Turkey and abroad. Random Input will open the night preparing the stage for Mondual with a chill breakcore set and after Mondual, Balgum will continue the night with his drum'n bass (neurofunk) set. Also we'll have an ART MARKET settled at the back yard.
 
@@ -39,16 +39,16 @@ tickets_tr: Biletler kapıda // 150₺
 lineup:
   - name: Random Input
     artist: random-input
-    duration: ''
+    duration: 90 min
     act_type:
       - DJ Set
-    note_en: chill breakcore
+    note_en: breakcore
     note_tr: ''
     bio_en: ''
     bio_tr: ''
   - name: Mondual
     artist: mondual
-    duration: ''
+    duration: 50 min
     act_type:
       - Live Set
     note_en: ''
@@ -57,20 +57,29 @@ lineup:
     bio_tr: ''
   - name: Balgum
     artist: balgum
-    duration: ''
+    duration: 90 min
     act_type:
       - DJ Set
-    note_en: drum'n bass, neurofunk
+    note_en: neurofunk
     note_tr: ''
     bio_en: ''
     bio_tr: ''
 exhibitors: []
-schedule: []
+schedule:
+  - time: '21:30'
+    en: Random Input
+    tr: ''
+  - time: '23:00'
+    en: Mondual
+    tr: ''
+  - time: '00:00'
+    en: Balgum
+    tr: ''
 videos: []
 gallery: []
 recordings: []
 listen: []
-summary_en: Electronic duo Mondual played live at an extra Thursday Breaks, between a chill breakcore set by Random Input and a neurofunk set by Balgum.
-summary_tr: Elektronik müzik ikilisi Mondual ek bir Thursday Breaks gecesinde canlı çaldı; öncesinde Random Input chill breakcore, sonrasında Balgum neurofunk çaldı.
+summary_en: Electronic duo Mondual will play live at an extra Thursday Breaks, between a atmospheric breakcore set by Random Input and a neurofunk set by Balgum.
+summary_tr: Elektronik müzik ikilisi Mondual ek bir Thursday Breaks gecesinde canlı çalacak; öncesinde Random Input atmosferik breakcore, sonrasında Balgum neurofunk çalacak.
 draft: false
 ---
