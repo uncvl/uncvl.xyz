@@ -9,6 +9,7 @@ activities:
   - Music
 flavor: ''
 music_genres:
+  - Drum & Bass
   - Breakcore
   - Hardcore
   - Psycore
