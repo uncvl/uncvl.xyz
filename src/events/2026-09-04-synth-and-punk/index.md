@@ -1,10 +1,10 @@
 ---
-title: Synth Sessions & Punk Concert
-codename: synth & punk
+title: Hörspiel, VCO2, Loremipsum, Balgum, Ubena, ur0123456789
+codename: 'Synth Sessions #2 & Punk Concert #5'
 category:
   - synth
   - punk
-series: Synth Sessions
+series: Synth Sessions, Punk Concerts
 activities:
   - Music
 flavor: breaks x noise x punk
