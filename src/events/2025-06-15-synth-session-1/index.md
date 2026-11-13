@@ -1,6 +1,6 @@
 ---
-title: 'Synth Sessions #1'
-codename: synth session
+title: VCO2, Tetrax
+codename: 'synth sessions #1'
 category:
   - synth
 series: Synth Sessions
