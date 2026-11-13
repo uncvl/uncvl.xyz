@@ -7,22 +7,24 @@ series: Thursday Breaks
 activities:
   - Music
   - Visuals
+  - Art Market
 flavor: bass x breaks x core
 music_genres:
   - Ambient
+  - IDM
   - Drum & Bass
   - Breakcore
 date: 2024-09-19
-doors: ''
-stage: ''
+doors: '20:00'
+stage: '21:00'
 venue:
   name: Dinozor Bar
   city: İzmir
 price: 150₺
-poster: ''
-poster_alt: ''
-cover: ''
-poster_credit: ''
+poster: https://media.uncvl.xyz/uploads/attack-vector_loremipsum_balgum_random-input_2160-5e33dd8dfc7d.webp
+poster_alt: 'Poster of Thursday Breaks #1 Attack Vector event. Bold yellow titles over grey blocks on red. A soldier with high tech glitchy suit and a rifle.'
+cover: https://media.uncvl.xyz/uploads/attack-vector_loremipsum_balgum_random-input_square_1280-f07075405c34.webp
+poster_credit: Poster by Random Input
 text_en: |-
   We'll start with LOREMIPSUM's live set in which he blends ambient and hypnotic sounds with groove by layered structure of analog and digital elements. After that RANDOM INPUT and BALGUM are going to play their drum'n bass and breakcore sets. AZİZ DELİORMAN will accompany us with his visuals.
 
@@ -41,7 +43,7 @@ lineup:
     duration: ''
     act_type:
       - Live Set
-    note_en: ambient, hypnotic
+    note_en: ambient, IDM
     note_tr: ''
     bio_en: ''
     bio_tr: ''
@@ -63,22 +65,31 @@ lineup:
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-  - name: Aziz Deliorman
+  - name: Deliorman
     artist: aziz-deliorman
     duration: ''
     act_type:
       - Visuals
-    note_en: visuals
-    note_tr: görsel
+    note_en: ''
+    note_tr: ''
     bio_en: ''
     bio_tr: ''
 exhibitors: []
-schedule: []
+schedule:
+  - time: '21:00'
+    en: Loremipsum
+    tr: ''
+  - time: '22:00'
+    en: Random Input
+    tr: ''
+  - time: '23:30'
+    en: Balgum
+    tr: ''
 videos: []
 gallery: []
 recordings: []
 listen: []
-summary_en: Loremipsum opened with an ambient live set, then Random Input and Balgum played drum'n bass and breakcore, with visuals by Aziz Deliorman.
-summary_tr: Loremipsum ambient canlı setiyle açtı, ardından Random Input ve Balgum drum'n bass ve breakcore çaldı; görseller Aziz Deliorman'dan.
+summary_en: A night of IDM, drum'n bass, breakcore. Loremipsum with his live set, then Random Input and Balgum with their DJ sets and Deliorman with his visuals.
+summary_tr: IDM, drum'n bass ve breakcore ile dolu bir gece. Loremipsum canlı performansıyla, ardından Random Input ve Balgum DJ setleriyle ve Deliorman görsel sunumuyla sahne alacak.
 draft: false
 ---
