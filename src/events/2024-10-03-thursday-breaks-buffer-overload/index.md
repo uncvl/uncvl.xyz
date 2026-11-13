@@ -9,20 +9,23 @@ activities:
   - Art Market
 flavor: bass x breaks x core
 music_genres:
+  - Power Noise
   - Neurofunk
-  - Hardcore Techno
   - Sextrance
+  - Hardcore
 date: 2024-10-03
-doors: ''
-stage: ''
+doors: '21:00'
+stage: '21:30'
 venue:
   name: Dinozor Bar
   city: İzmir
 price: 150₺
-poster: ''
-poster_alt: ''
-cover: ''
-poster_credit: ''
+poster: https://media.uncvl.xyz/uploads/buffer-overload_corpocore_oqlius_balgum_2160-3ca175ed9da1.webp
+poster_alt: 'Poster of Thursday Breaks #3 Buffer Overload event. Bold pink titles over cloudy grey blocks on yellow background. There is a floating white figure cables connected to her spine.'
+cover: https://media.uncvl.xyz/uploads/buffer-overload_corpocore_oqlius_balgum_square_1280-895097a0e1ad.webp
+poster_credit: |-
+  Artwork by Serval.
+  Poster Design by Random Input.
 text_en: |-
   Openning set is from BALGUM. After him OQLIUS will take over and  play his neurofunk (drum'n bass) set. The last set of the night is from CORPOCORE with his selections of hardcore techno  and sextrance. Also we'll have an ART MARKET settled at the back yard.
 
@@ -38,16 +41,16 @@ tickets_tr: Biletler kapıda // 150₺
 lineup:
   - name: Balgum
     artist: balgum
-    duration: ''
+    duration: 90 min
     act_type:
       - DJ Set
-    note_en: ''
+    note_en: power noise
     note_tr: ''
     bio_en: ''
     bio_tr: ''
   - name: Oqlius
     artist: oqlius
-    duration: ''
+    duration: 90 min
     act_type:
       - DJ Set
     note_en: neurofunk
@@ -56,20 +59,36 @@ lineup:
     bio_tr: ''
   - name: Corpocore
     artist: corpocore
-    duration: ''
+    duration: 90 min
     act_type:
       - DJ Set
-    note_en: hardcore techno, sextrance
+    note_en: hardcore, sextrance
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-exhibitors: []
-schedule: []
+exhibitors:
+  - Pierced Poser
+  - Ank
+  - cyb3rv_
+  - Mor.ic.erik
+  - Dark Blue Sky
+  - Strawberry Distopia
+  - Kuduruk
+schedule:
+  - time: '21:00'
+    en: Balgum
+    tr: ''
+  - time: '22:30'
+    en: Oqlius
+    tr: ''
+  - time: '00:00'
+    en: Corpocore
+    tr: ''
 videos: []
 gallery: []
 recordings: []
 listen: []
-summary_en: Balgum opened, Oqlius played neurofunk and Corpocore closed with hardcore techno and sextrance, with an art market in the back yard.
-summary_tr: Açılışı Balgum yaptı, Oqlius neurofunk çaldı, Corpocore hardcore techno ve sextrance ile kapattı; arka bahçede sanat pazarı vardı.
+summary_en: Balgum opens with power noise, Oqlius plays neurofunk and Corpocore closes with hardcore techno and sextrance, with an art market in the back yard.
+summary_tr: Açılışı power noise'la Balgum yapar, Oqlius neurofunk çalar, Corpocore hardcore techno ve sextrance ile kapatır; arka bahçede sanat pazarı var.
 draft: false
 ---
