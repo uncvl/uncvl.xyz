@@ -24,7 +24,9 @@ price: Free
 poster: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/uncivilization-rejenere-vertical.jpg
 poster_alt: Poster of Rejenere event. A dark, glossy, distorted sphere in green and red tones, with the lineup on the left and the exhibiting artists below.
 cover: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/uncivilization-art-rejenere-poster_800.jpg
-poster_credit: ''
+poster_credit: |-
+  Artwork by Abyssal Area
+  Poster Design by H0P3
 text_en: |-
   As we approach the end of 'nadas' (fallow), the theme set for Darağaç's October-November-December program, assuming the renewal had already taken place, we decided to put the title of the event 'rejenere' (regenerate). Living things survive by using their genetic memory which enables them to regenerate tissues they lost. Regeneration is a state of resistance to extinction. From this point of view, similarities can be established with cultural existence. While living things resist organic extinction with their genetic memories, communities resist cultural extinction with their collective memories. Memory brings with it the ability to regain what has been lost.
 
@@ -48,24 +50,6 @@ text_tr: |-
 tickets_en: No admission fee.
 tickets_tr: Etkinlik ücretsizdir.
 lineup:
-  - name: Random Input
-    artist: random-input
-    duration: 90 min
-    act_type:
-      - DJ Set
-    note_en: breakcore, glitchbreak
-    note_tr: ''
-    bio_en: Random Input is someone that has a keen interest in audio, visual and spatial design. As a VJ he has been mixing video live since 2002 mainly by itterating, reproducing, distorting, displacing and corrupting images. He started DJ'ing in 2018 and since then played sets that usually blends breakcore, hardcore, chiptune and glitch genres.
-    bio_tr: Random Input işitsel, görsel ve mekansal tasarımla ilgilenen biridir. 2002 yılından bu yana VJ setlerinde topladığı ya da ürettiği görüntüleri çoğaltır, saptırır, çarpıtıp bozarak yeniden üretmektedir. 2018’den beri genellikle breakcore, hardcore, bass, chiptune, glitch türlerini harmanladığı DJ setleri çalmaktadır.
-  - name: Balgum
-    artist: balgum
-    duration: 90 min
-    act_type:
-      - DJ Set
-    note_en: drum'n bass, halfstep
-    note_tr: ''
-    bio_en: Balgum is a project of Engin in which he explores underground electronic music genres ranging from techno, drum and bass, hardcore, tekno, breakcore. He finds peace in the clarity that comes after confusion with broken beats, noise and distortion.
-    bio_tr: Balgum, Engin'in techno, drum and bass, hardcore, tekno, breakcore gibi underground elektronik müzik türlerini araştırdığı projesidir. Aksak vuruşlar, gürültü ve distorsiyonun verdiği kafa karışıklığından sonra gelen netlikte huzur buluyor.
   - name: 500001K
     artist: 500001k
     duration: 60 min
@@ -84,6 +68,24 @@ lineup:
     note_tr: 500001K ile
     bio_en: Umut a.k.a H0P3, born in 2001, started his music journey at a very young age playing drums and guitar. His passion with music especially the extreme music allowed him to explore various ways to express and make sounds from black metal to psycore, creating and collaborating in countless projects and genres.
     bio_tr: Umut (H0P3), müzik yolculuğuna çok küçük yaşta davul ve gitar çalarak başladı. Müzik üretmeye, özellikle de ekstrem müziğe duyduğu tutku, black metal'den psycore'a birçok tarzda ses çıkarmayı ve ifade etmeyi öğrenmesini sağladı. Farklı isimlerle çokça proje üretti ve üretmeye devam ediyor.
+  - name: Random Input
+    artist: random-input
+    duration: 90 min
+    act_type:
+      - DJ Set
+    note_en: breakcore, glitchbreak
+    note_tr: ''
+    bio_en: Random Input is someone that has a keen interest in audio, visual and spatial design. As a VJ he has been mixing video live since 2002 mainly by itterating, reproducing, distorting, displacing and corrupting images. He started DJ'ing in 2018 and since then played sets that usually blends breakcore, hardcore, chiptune and glitch genres.
+    bio_tr: Random Input işitsel, görsel ve mekansal tasarımla ilgilenen biridir. 2002 yılından bu yana VJ setlerinde topladığı ya da ürettiği görüntüleri çoğaltır, saptırır, çarpıtıp bozarak yeniden üretmektedir. 2018’den beri genellikle breakcore, hardcore, bass, chiptune, glitch türlerini harmanladığı DJ setleri çalmaktadır.
+  - name: Balgum
+    artist: balgum
+    duration: 90 min
+    act_type:
+      - DJ Set
+    note_en: drum'n bass, halfstep
+    note_tr: ''
+    bio_en: Balgum is a project of Engin in which he explores underground electronic music genres ranging from techno, drum and bass, hardcore, tekno, breakcore. He finds peace in the clarity that comes after confusion with broken beats, noise and distortion.
+    bio_tr: Balgum, Engin'in techno, drum and bass, hardcore, tekno, breakcore gibi underground elektronik müzik türlerini araştırdığı projesidir. Aksak vuruşlar, gürültü ve distorsiyonun verdiği kafa karışıklığından sonra gelen netlikte huzur buluyor.
   - name: Ox
     artist: ox
     duration: 60 min
@@ -133,27 +135,37 @@ gallery:
     wide: true
   - src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-participants-cover-music.jpg
     alt: rejenere music and visuals
-  - src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-randominput.jpg
-    alt: Random Input card
-  - src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-balgum.jpg
-    alt: Balgum card
   - src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-500001k.jpg
     alt: 500001K card
   - src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-h0p3.jpg
     alt: H0P3 card
+  - src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-randominput.jpg
+    alt: Random Input card
+  - src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-balgum.jpg
+    alt: Balgum card
   - src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-ox.jpg
     alt: Ox card
   - src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/music-kagebunshin.jpg
     alt: Kage Bunshin card
-  - src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/exhibition-lvna.jpg
-    alt: LVNA exhibition card
+  - src: https://media.uncvl.xyz/uploads/participants-cover-exhibition-fae6de9ad892.webp
+    alt: rejenere exhibition
   - src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/exhibition-bocek.jpg
     alt: Böcek exhibition card
+  - src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/exhibition-lvna.jpg
+    alt: LVNA exhibition card
   - src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/exhibition-dcntrlzd.jpg
     alt: Dcntrlzd exhibition card
+  - src: https://media.uncvl.xyz/uploads/1av_hypn-2512566b0a97.webp
+    alt: Hypn exhibition card
+  - src: https://media.uncvl.xyz/uploads/3a_abyssalarea-d8f6d567216c.webp
+    alt: Abyssal Area exhibition card
+  - src: https://media.uncvl.xyz/uploads/3c_bixbite-599b4596e3e2.webp
+    alt: Bixbite exhibition card
+  - src: https://media.uncvl.xyz/uploads/5a_musbucc-f26e690240e3.webp
+    alt: Musbucc exhibition card
 recordings: []
 listen: []
-summary_en: 'Uncivilization''s return in İzmir: an exhibition, zines, and DJ and live sets at Karargah in Darağaç, under the title rejenere (regenerate).'
-summary_tr: 'Uncivilization''ın İzmir''de yeniden ortaya çıkışı: Darağaç''taki Karargah''ta sergi, fanzinler, DJ ve canlı setler, rejenere başlığıyla.'
+summary_en: "Uncivilization's return in İzmir: an exhibition, zines, and DJ and live sets at Karargah in Darağaç, under the title rejenere (regenerate)."
+summary_tr: "Uncivilization'ın İzmir'de yeniden ortaya çıkışı: Darağaç'taki Karargah'ta sergi, fanzinler, DJ ve canlı setler, rejenere başlığıyla."
 draft: false
 ---
