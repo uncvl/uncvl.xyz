@@ -1,9 +1,9 @@
 ---
-title: Federico Fellini | Histeri | Urban Divine
+title: Federico Fellini, Histeri, Urban Divine
 codename: infuze archongrid
 category:
   - punk
-series: ''
+series: Punk Concerts
 activities:
   - Music
 flavor: punk x breaks
