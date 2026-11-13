@@ -25,7 +25,7 @@ date: 2025-01-12
 doors: '15:00'
 stage: 15:00 - 23:00
 venue:
-  name: Dalga Bar (1485 sk. No:22, Alsancak)
+  name: Dalga Bar
   city: İzmir
 price: Free
 poster: https://media.uncvl.xyz/events/2025-01-12-art-rehab-3-psyche-cure/rehab3_psyche-cure_poster.jpg
@@ -51,7 +51,7 @@ text_tr: |-
   💎 Dalga (Alsancak, İzmir)
   🕒 15:00 - 23:00
 
-  Rehab serisinin üçüncüsü Wave ve Uncivilization işbirliğiyle @dalgaalsancak'ta gerçekleşecek. Sanat pazarı ve serginin yanı sıra gün boyu DJ setlerin çalınacağı bu etkinlikte farklı disiplinlerden insanların biraraya gelip iletişim kurmalarını ve iyi vakit geçirmelerini hedefliyoruz.
+  Rehab serisinin üçüncüsü Wave ve Uncivilization işbirliğiyle Dalga Alsancak'ta gerçekleşecek. Sanat pazarı ve serginin yanı sıra gün boyu DJ setlerin çalınacağı bu etkinlikte farklı disiplinlerden insanların biraraya gelip iletişim kurmalarını ve iyi vakit geçirmelerini hedefliyoruz.
 tickets_en: Free entrance.
 tickets_tr: Giriş ücretsiz.
 lineup:
