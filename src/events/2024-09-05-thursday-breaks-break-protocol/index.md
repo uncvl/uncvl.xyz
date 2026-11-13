@@ -6,6 +6,7 @@ category:
 series: Thursday Breaks
 activities:
   - Music
+  - Art Market
 flavor: bass x breaks x core
 music_genres:
   - Dubstep
