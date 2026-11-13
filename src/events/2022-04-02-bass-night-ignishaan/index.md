@@ -7,14 +7,15 @@ series: Bass Night
 activities:
   - Music
   - Visuals
-flavor: ''
+flavor: bass
 music_genres:
   - Dub
+  - Drum & Bass
   - Breakbeat
   - Jungle
 date: 2022-04-02
 doors: '21:00'
-stage: '22:00'
+stage: 22:00 - 01:00
 venue:
   name: Blind
   city: İstanbul
@@ -22,7 +23,7 @@ price: 70TL
 poster: https://media.uncvl.xyz/events/2022-04-02-bass-night-ignishaan/uncivilization-bass-night-ignishaan-poster-vertical.jpg
 poster_alt: Poster of Bass Night Ignishaan event. An illustration of a group of colourful hooded figures huddled in front of big flames; one in a white mask lights something on the ground.
 cover: https://media.uncvl.xyz/events/2022-04-02-bass-night-ignishaan/uncivilization-bass-night-ignishaan-poster.jpg
-poster_credit: ''
+poster_credit: Artwork and Poster Design by Random Input
 text_en: The first event of Uncivilization’s “bass night” series will take place at Blind with Dyln, Dubstract and Da Frogg. The night will start with dub and continue with drum'n bass, techstep breakbeat, jungle and B2B sessions. Visuals by Random Input. We are waiting for all the bass heads!
 text_tr: Uncivilization’ın sunduğu ve Blind’da gerçekleşecek “bass night” etkinliklerinin ilkinde Dyln, Dubstract ve Da Frogg sahne alacak. Dub’la başlayan gece drum'n bass, techstep, breakbeat, jungle ve B2B session ile devam edecek. Gecenin görsellerini Random Input yapacak. Bütün bass müzik severleri bekliyoruz!
 tickets_en: |-
@@ -55,7 +56,7 @@ lineup:
     duration: ''
     act_type:
       - DJ Set
-    note_en: breakbeat, jungle
+    note_en: MC, breakbeat, jungle
     note_tr: ''
     bio_en: As a DJ, Mc and producer, Da Frogg took an active role in the development of Reggae, Dub and Jungle genres in Turkey. He is the founder of the Beton Orman collective, which started as a program on Açık Radyo in 2004 and later grew as a record company and organization. Da Frogg, who has performed in many venues and festivals in Turkey and abroad, is about to complete its 30th year in the music world.
     bio_tr: Da Frogg Dj, Mc ve prodüktör olarak Türkiyede Reggae, Dub ve Jungle türlerinin gelişiminde aktif rol aldı. 2004'te Açık Radyo'da program olarak başlayan sonrasında plak şirketi ve organizasyon olarak büyüyen Beton Orman kolektifinin kurucusu. Yurt içi ve yurt dışında pek çok mekan ve festivalde sahne alan Da Frogg müzik dünyasında 30. yılını doldurmak üzere.
@@ -64,20 +65,29 @@ lineup:
     duration: ''
     act_type:
       - Visuals
-    note_en: visuals
-    note_tr: görsel
+    note_en: ''
+    note_tr: ''
     bio_en: Random Input produces, mixes, edits audio and visual materials.  As a VJ he has been mixing video live since 2002 mainly by itterating, reproducing, distorting, displacing and corrupting images. He started DJing in 2018 and since then played sets that blends breakcore, hardcore, chiptune and glitch genres.
     bio_tr: Random Input ses ve görsel miksleyen ve editleyen bir VJDJ’dir. 2002 yılından bu yana, bulduğu görüntüleri çoğaltır, saptırır, çarpıtıp bozarak yeniden üretir. 2018’de Pixie Underground’da breakcore, hardcore, bass, chiptune, glitch türlerini harmanladığı DJ setleri çalmaya başlamıştır.
 exhibitors: []
-schedule: []
+schedule:
+  - time: '22:00'
+    en: Dyln
+    tr: ''
+  - time: '23:00'
+    en: Dubstract
+    tr: ''
+  - time: '00:00'
+    en: Da Frogg
+    tr: ''
 videos: []
 gallery:
   - src: https://media.uncvl.xyz/events/2022-04-02-bass-night-ignishaan/crowd-collage-at-blind-in-uncivilization-bass-night-event-ignishaan_2400.jpg
-    alt: pixie crowd at blind in uncivilization bass night event ignishaan
+    alt: Crowd at blind in uncivilization bass night event ignishaan
     wide: true
 recordings: []
 listen: []
-summary_en: The first Bass Night took place at Blind with Dyln, Dubstract and Da Frogg, starting with dub and moving through breakbeat, jungle and B2B sessions.
-summary_tr: İlk Bass Night, Dyln, Dubstract ve Da Frogg ile Blind'da gerçekleşti; gece dub ile başlayıp breakbeat, jungle ve B2B setlerle devam etti.
+summary_en: The first Bass Night will take place at Blind with Dyln, Dubstract and Da Frogg, starting with dub and moving through breakbeat, jungle and B2B sessions.
+summary_tr: İlk Bass Night, Dyln, Dubstract ve Da Frogg ile Blind'da gerçekleşti; gece dub ile başlayıp breakbeat, jungle ve B2B setlerle devam edecek.
 draft: false
 ---
