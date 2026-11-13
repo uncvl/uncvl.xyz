@@ -1,23 +1,27 @@
 ---
-title: "Krayat | Ruff Crux | Moko | Hush"
-category: [punk]
-activities: ["Music"]
-flavor: "punk"
-music_genres: ["Hardcore Punk"]
+title: Krayat, Ruff Crux, Moko, Hush
+codename: 'Punk Concert #3'
+category:
+  - punk
+series: Punk Concerts
+activities:
+  - Music
+flavor: punk
+music_genres:
+  - Hardcore Punk
+  - Punk Rock
 date: 2024-09-27
+doors: '20:00'
+stage: ''
 venue:
   name: Dinozor Bar
   city: İzmir
+price: 200 TL
 poster: https://media.uncvl.xyz/events/2024-09-27-punk-krayat-ruff-crux-moko-hush/krayat-poster-izm.jpg
-poster_alt: uncivilization punk concert poster - krayat, ruff crux, moko, hush
-gallery:
-  - src: https://media.uncvl.xyz/events/2024-09-27-punk-krayat-ruff-crux-moko-hush/ruffcrux-collage.jpg
-    alt: ruff crux, moko and hush at dinozor
-    wide: true
-  - src: https://media.uncvl.xyz/events/2024-09-27-punk-krayat-ruff-crux-moko-hush/krayat-collage.jpg
-    alt: krayat live in istanbul and izmir
-    wide: true
-text_en: |
+poster_alt: Poster of the Krayat, Ruff Crux, Moko, Hush concert. A horned three-eyed demon head with a punk mohawk, impaled on a stake among broken chains.
+cover: ''
+poster_credit: ''
+text_en: |-
   KRAYAT, a migrant DIY punk/hardcore band, is coming from Berlin to İstanbul and İzmir. They're going to be on stage at Kadıköy Sahne and Dinozor on 26-27 September, Thursday and Friday). Krayat will share the stage with local punk bands GOBLIN DAYCARE and POTLATCH in İstanbul and RUFF CRUX, MOKO and HUSH in İzmir.
 
   We wish that two punk concerts, organized by Uncivilization, would provide a nice opportunity for the bands, crews, friends and individuals of diverse geography to come together, interact, stick to the punk-ethos and feel comfort in our distinctive underground culture.
@@ -37,17 +41,59 @@ text_en: |
 
   Check them out, They're in Bandcamp.
   [krayat.bandcamp.com](https://krayat.bandcamp.com/)
-text_tr: |
-  2019 yılında Berlin'de kurulan DIY hardcore punk grubu KRAYAT, Yunanistan ve Türkiye turu kapsamında İstanbul'da ve İzmir'de konser vermeye geliyor. Turun ikinci ayağı olan İzmir'de Dinozor'da Bulgarca şarkılarıyla boy gösterecek gruba yerel sahneden HUSH, MOKO ve RUFF CRUX eşlik edecek. Uncivilization'ın katkılarıyla 27 Eylül Cuma günü gerçekleşecek konserde herkesi tepinmeye ve pogoya davet ediyoruz.
+text_tr: 2019 yılında Berlin'de kurulan DIY hardcore punk grubu KRAYAT, Yunanistan ve Türkiye turu kapsamında İstanbul'da ve İzmir'de konser vermeye geliyor. Turun ikinci ayağı olan İzmir'de Dinozor'da Bulgarca şarkılarıyla boy gösterecek gruba yerel sahneden HUSH, MOKO ve RUFF CRUX eşlik edecek. Uncivilization'ın katkılarıyla 27 Eylül Cuma günü gerçekleşecek konserde herkesi tepinmeye ve pogoya davet ediyoruz.
+tickets_en: 'Entrance: 200 TL'
+tickets_tr: 'Giriş: 200 TL'
 lineup:
-  - artist: krayat
-    name: Krayat
-    act_type: ["Concert"]
-    note_en: DIY hardcore punk, Berlin
+  - name: Krayat
+    artist: krayat
+    duration: ''
+    act_type:
+      - Concert
+    note_en: hardcore punk, from Berlin
+    note_tr: hardcore punk, Berlin'den
+    bio_en: ''
+    bio_tr: ''
   - name: Ruff Crux
-    act_type: ["Concert"]
+    artist: ''
+    duration: ''
+    act_type:
+      - Concert
+    note_en: punk rock
+    note_tr: ''
+    bio_en: ''
+    bio_tr: ''
   - name: Moko
-    act_type: ["Concert"]
+    artist: ''
+    duration: ''
+    act_type:
+      - Concert
+    note_en: midwest emo, punk
+    note_tr: ''
+    bio_en: ''
+    bio_tr: ''
   - name: Hush
-    act_type: ["Concert"]
+    artist: ''
+    duration: ''
+    act_type:
+      - Concert
+    note_en: alternative rock, metal
+    note_tr: ''
+    bio_en: ''
+    bio_tr: ''
+exhibitors: []
+schedule: []
+videos: []
+gallery:
+  - src: https://media.uncvl.xyz/events/2024-09-27-punk-krayat-ruff-crux-moko-hush/ruffcrux-collage.jpg
+    alt: ruff crux, moko and hush at dinozor
+    wide: true
+  - src: https://media.uncvl.xyz/events/2024-09-27-punk-krayat-ruff-crux-moko-hush/krayat-collage.jpg
+    alt: krayat live in istanbul and izmir
+    wide: true
+recordings: []
+listen: []
+summary_en: Krayat brought Berlin hardcore punk to Dinozor Bar in İzmir, with local bands Ruff Crux, Moko and Hush.
+summary_tr: Krayat, Berlin'den getirdiği hardcore punk'ı yerel gruplar Ruff Crux, Moko ve Hush ile İzmir'de Dinozor Bar'a taşıdı.
+draft: false
 ---
