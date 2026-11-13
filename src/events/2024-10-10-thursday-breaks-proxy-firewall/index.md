@@ -6,6 +6,7 @@ category:
 series: Thursday Breaks
 activities:
   - Music
+  - Art Market
 flavor: bass x breaks x core
 music_genres:
   - IDM
@@ -20,7 +21,7 @@ venue:
   city: İzmir
 price: 150₺
 poster: https://media.uncvl.xyz/events/2024-10-10-thursday-breaks-proxy-firewall/proxy-firewall_mondual-randominput-balgum.jpg
-poster_alt: uncivilization thursday breaks 4 proxy firewall poster - mondual, random input, balgum
+poster_alt: 'Poster of Thursday Breaks #4 Proxy Firewall event. Bold pixel lettering in cream over grey blocks, on a blue photo of a machine room full of cables.'
 cover: ''
 poster_credit: ''
 text_en: |-
@@ -50,8 +51,8 @@ lineup:
     duration: ''
     act_type:
       - Live Set
-    note_en: live
-    note_tr: canlı
+    note_en: ''
+    note_tr: ''
     bio_en: ''
     bio_tr: ''
   - name: Balgum
@@ -59,7 +60,7 @@ lineup:
     duration: ''
     act_type:
       - DJ Set
-    note_en: drum'n bass (neurofunk)
+    note_en: drum'n bass, neurofunk
     note_tr: ''
     bio_en: ''
     bio_tr: ''
@@ -69,7 +70,7 @@ videos: []
 gallery: []
 recordings: []
 listen: []
-summary_en: ''
-summary_tr: ''
+summary_en: Electronic duo Mondual played live at an extra Thursday Breaks, between a chill breakcore set by Random Input and a neurofunk set by Balgum.
+summary_tr: Elektronik müzik ikilisi Mondual ek bir Thursday Breaks gecesinde canlı çaldı; öncesinde Random Input chill breakcore, sonrasında Balgum neurofunk çaldı.
 draft: false
 ---
