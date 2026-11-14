@@ -14,13 +14,13 @@ music_genres:
   - Breakcore
   - Drum & Bass
   - Dubstep
-  - Hi-Tech
   - Grindcore
   - IDM
   - Witch House
   - Glitch
   - Wave
   - Industrial Hardcore
+  - Hi-Tech Psytrance
 date: 2025-01-12
 doors: '15:00'
 stage: 15:00 - 23:00
