@@ -1,8 +1,11 @@
 ---
-name: "Mental Tekno"
-supergenres: ["Techno","Core"]
-order: 62
+name: Mental Tekno
+supergenres:
+  - Techno
+  - Core
+order: 61
+description_en: ''
+description_tr: ''
 links: []
-description_en: ""
-description_tr: ""
+draft: false
 ---
