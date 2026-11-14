@@ -12,7 +12,7 @@ music_genres:
   - IDM
   - Industrial
   - Breakcore
-  - Hardcore Techno
+  - Hardcore
 date: 2025-06-15
 doors: '19:30'
 stage: 20:00 - 01:00
