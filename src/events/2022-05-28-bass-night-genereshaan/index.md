@@ -11,7 +11,6 @@ flavor: bass
 music_genres:
   - Drum & Bass
   - Jungle
-  - Experimental Bass
   - Chiptune
 date: 2022-05-28
 doors: '21:00'
