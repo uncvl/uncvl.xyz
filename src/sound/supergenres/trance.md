@@ -1,6 +1,6 @@
 ---
 name: Trance
-code: 'N'
+code: Z
 order: 14
 description_en: |-
   Trance, used here as a supergenre term, refers to:
