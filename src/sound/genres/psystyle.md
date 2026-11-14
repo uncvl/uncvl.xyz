@@ -4,6 +4,7 @@ supergenres:
   - Core
   - Psy
   - Trance
+  - Techno
 order: 16
 description_en: |-
   Psystyle producers typically mix the screechy, distorted kicks and high-pitched leads of styles like rawstyle with mainstream psytrance basslines, along with other psytrance elements like acid-inspired synth leads and tribal, rave-suited atmospheres. It is usually produced in 140-150 BPM, around regular hardstyle tempos.
