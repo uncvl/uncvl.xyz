@@ -9,9 +9,9 @@ activities:
   - Visuals
 flavor: bass
 music_genres:
+  - Dubstep
   - Drum & Bass
   - Jungle
-  - Experimental Bass
   - Chiptune
 date: 2022-05-28
 doors: '21:00'
@@ -24,10 +24,10 @@ poster: https://media.uncvl.xyz/events/2022-05-28-bass-night-genereshaan/uncvl-g
 poster_alt: Poster of Bass Night Genereshaan event. Five colourful illustrated characters walk in a line across a grey stone background; the last one holds a flaming torch.
 cover: https://media.uncvl.xyz/events/2022-05-28-bass-night-genereshaan/uncvl-genereshaan_poster.jpg
 poster_credit: Illustration and Poster Design by Random Input. Additional Typography and Background Image by Haishiten and Sagremor.
-text_en: 'The third event of Uncivilization’s “bass night” series: GENERESHAAN!!! The event will take place at Blind and host four DJs from different generations. Random Input started the night with his experimental bass and chiptune set and Lunar Function, Consul, Fosil and Da Frogg set the place on fire with their _jungle_ and _drum’n bass_ sets and the fire was extinguished by force. Random Input did the visuals.'
+text_en: 'The third event of Uncivilization’s “bass night” series: GENERESHAAN!!! The event will take place at Blind and host four DJs from different generations. Random Input started the night with his chipbreak set and Lunar Function, Consul, Fosil and Da Frogg set the place on fire with their _jungle_ and _drum’n bass_ sets and the fire was extinguished by force. Random Input did the visuals.'
 text_tr: |-
   Uncivilization’ın “bass night” etkinliklerinin üçüncüsü: GENERESHAAN!!!
-  Blind’da gerçekleşen gecede farklı kuşaklardan DJ'ler sahne aldı' Random Input geceyi deneysel bass ve chiptune'la başlatırken Lunar Funktion, Consul, Fosil ve Da Frogg’un muhteşem *jungle* ve *drum’n bass* setleri ile ortalığı yaktı. Gecenin sonunda zor kullanılarak bu ateş söndürüldü. Gecenin görsellerini Random Input yaptı.
+  Blind’da gerçekleşen gecede farklı kuşaklardan DJ'ler sahne aldı' Random Input geceyi chipbreak'le başlatırken Lunar Funktion, Consul, Fosil ve Da Frogg’un muhteşem _jungle_ ve _drum’n bass_ setleri ile ortalığı yaktı. Gecenin sonunda zor kullanılarak bu ateş söndürüldü. Gecenin görsellerini Random Input yaptı.
 tickets_en: |-
   Ticket: 60TL
   Buy tickets from [Biletix](https://www.biletix.com/etkinlik/1SC85/TURKIYE/en), [Bugece](https://bugece.co/en/events/uncivilization-bass-night-genereshaa-05-28-22) or [Passo](https://www.passo.com.tr/en/event/genereshaan-blind-istanbul/3262325)
