@@ -3,6 +3,7 @@ name: Rawstyle
 supergenres:
   - Core
   - Trance
+  - Techno
 order: 15
 description_en: |-
   Rawstyle is a type of hardstyle with darker melodies, more dissonant elements and harder kick drums. It is characterized by its incorporation of earlier hardstyle and hardcore styles such as gabber and industrial hardcore, creating a distinctly harsh, simplistic, raw, and dark sound. With bpm's around 150-155, it is usually faster than previous hardstyle trends.
