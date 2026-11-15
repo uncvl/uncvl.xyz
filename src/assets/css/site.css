@@ -147,7 +147,7 @@ html:not([data-lang]) .site-nav .l-tr { display: none; }
 
 /* comet: logomark with a falling tail (replaces the old crown GIF) */
 .comet { display: inline-flex; flex-direction: column; align-items: center; color: var(--text-hi); }
-.comet:hover { color: var(--acid); text-decoration: none; }
+.comet:hover { text-decoration: none; }
 .comet .logo--logomark { width: 100%; }
 .comet__tail { width: 2px; height: 3rem; margin-bottom: 0.5rem; background: linear-gradient(to bottom, transparent, var(--text-hi)); transform-origin: top; }
 .comet--big { width: 100%; max-width: 12rem; }
