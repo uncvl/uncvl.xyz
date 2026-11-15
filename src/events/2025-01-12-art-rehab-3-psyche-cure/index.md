@@ -118,7 +118,8 @@ lineup:
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-exhibitors:
+exhibition: []
+art_market:
   - Ada
   - Bedirhan Sezen
   - Böcek
@@ -139,7 +140,7 @@ exhibitors:
   - Stupei
   - Yunus Çakırtaş
 schedule: []
-videos: []
+after_videos: []
 gallery: []
 recordings:
   - url: https://soundcloud.com/uncvl/sets/rehab3

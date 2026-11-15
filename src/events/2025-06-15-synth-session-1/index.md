@@ -65,7 +65,8 @@ lineup:
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-exhibitors: []
+exhibition: []
+art_market: []
 schedule:
   - time: '20:00'
     en: VCO2
@@ -79,7 +80,7 @@ schedule:
   - time: '23:30'
     en: Corpocore
     tr: Corpocore
-videos: []
+after_videos: []
 gallery:
   - src: https://media.uncvl.xyz/events/2025-06-15-synth-session-1/synthsession-collage-vco2.jpg
     alt: A collage from photos of VCO2 live at Uncivilization Synth Sessions

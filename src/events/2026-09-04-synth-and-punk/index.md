@@ -106,7 +106,8 @@ lineup:
     note_tr: ''
     bio_en: OX is an alternative DJ project from Oxomo who is also experimental psycore DJ and producer. OX focused on collecting and mixing dark tekno, mental tribe tekno and breakcore styles.
     bio_tr: OX, aynı zamanda experimental psycore DJ/producer olan Oxomo'nun alternatif DJ projesidir. Dark tekno, mental tribe tekno ve breakcore tarzlarını toplamaya ve mikslemeye odaklanıyor.
-exhibitors: []
+exhibition: []
+art_market: []
 schedule:
   - time: '21:00'
     en: Balgum
@@ -129,9 +130,7 @@ schedule:
   - time: '03:00'
     en: Ox
     tr: Ox
-videos:
-  - url: https://v.basspistol.org/w/eVuwsS8oCQgQCP1ac48dZm
-    title: Synth Sessions & Punk Concert Promovideo
+after_videos: []
 gallery: []
 recordings:
   - url: https://soundcloud.com/uncvl/sets/synth-punk

@@ -66,7 +66,8 @@ lineup:
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-exhibitors:
+exhibition: []
+art_market:
   - Pierced Poser
   - Ank
   - cyb3rv_
@@ -84,7 +85,7 @@ schedule:
   - time: '00:00'
     en: Corpocore
     tr: ''
-videos: []
+after_videos: []
 gallery: []
 recordings: []
 listen: []

@@ -68,7 +68,8 @@ lineup:
     note_tr: ''
     bio_en: Miss Baas joins us with her hurricane ragga verses and heart touching choruses.
     bio_tr: Miss Baas, kasırga gibi ragga dizeleriyle ve kalbe dokunan nakaratlarıyla aramıza katılıyor.
-exhibitors: []
+exhibition: []
+art_market: []
 schedule:
   - time: '22:00'
     en: Jung
@@ -76,7 +77,7 @@ schedule:
   - time: '23:30'
     en: Da Frogg
     tr: ''
-videos: []
+after_videos: []
 gallery:
   - src: https://media.uncvl.xyz/events/2022-05-03-bass-night-drumazan-speshaal/artist-jung.jpg
     alt: Jung artist card

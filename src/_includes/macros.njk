@@ -86,13 +86,27 @@
 {%- endif -%}
 {%- endmacro -%}
 
-{#- PeerTube videos (`videos: [{url, title}]`), click-to-load: nothing loads from PeerTube until a click. -#}
-{%- macro videos(list, cover, inputPath, title) -%}
+{#- Names of exhibiting artists (event art_market / exhibition), linked to their artist page when there is one. -#}
+{%- macro names(list, en, tr, id) -%}
+{%- if list and list.length %}
+<section aria-labelledby="{{ id }}">
+  {{ sect(en, tr, "", id) }}
+  <ul class="names">
+    {%- for n in list %}{% set ap = collections.artists | findBySlug(n | slugify) %}
+    <li>{% if ap %}<a href="{{ ap.url }}">{{ n }}</a>{% else %}{{ n }}{% endif %}</li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif %}
+{%- endmacro -%}
+
+{#- PeerTube videos (`[{url, title}]`), click-to-load: nothing loads from PeerTube until a click. -#}
+{%- macro videos(list, cover, inputPath, title, en="VIDEO", tr="VİDEO", id="videos") -%}
 {%- set vids = [] -%}
 {%- for v in list or [] %}{% set p = v.url | peertube(site.peertube.host) %}{% if p %}{% if vids.push({ p: p, title: v.title or title }) %}{% endif %}{% endif %}{% endfor -%}
 {%- if vids.length -%}
-<section aria-labelledby="videos">
-  {{ sect("VIDEO", "VİDEO", "", "videos") }}
+<section aria-labelledby="{{ id }}">
+  {{ sect(en, tr, "", id) }}
   {%- for v in vids %}
   <figure class="video">
     <a class="embed-facade video__facade" href="{{ v.p.watch }}" data-embed="{{ v.p.embed }}" data-title="{{ v.title }}" data-sandbox="allow-same-origin allow-scripts allow-popups allow-forms" rel="noopener noreferrer">

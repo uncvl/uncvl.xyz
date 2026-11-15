@@ -59,7 +59,8 @@ lineup:
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-exhibitors:
+exhibition: []
+art_market:
   - cyb3rv_
   - Melis
   - Mmanic Ink
@@ -81,7 +82,7 @@ schedule:
   - time: '00:00'
     en: Random Input
     tr: ''
-videos: []
+after_videos: []
 gallery: []
 recordings: []
 listen: []

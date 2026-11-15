@@ -121,9 +121,10 @@ lineup:
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-exhibitors: []
+exhibition: []
+art_market: []
 schedule: []
-videos: []
+after_videos: []
 gallery:
   - src: https://media.uncvl.xyz/events/2025-07-05-art-copusum/copusum_line-up.jpg
     alt: The flyer for the lineup of the event Çöpüşüm. Çöpteçıkan, Böcek, Ox, Random Input, Balgum.

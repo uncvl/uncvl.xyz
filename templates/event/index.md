@@ -37,9 +37,14 @@ lineup:
     act_type: [Live Set]
 # schedule:                          # start times go here
 #   - { time: "22:00", en: Random Input }
-# videos:                            # PeerTube links (v.basspistol.org)
+# promo: https://v.basspistol.org/w/VIDEO_ID   # promo video: PeerTube link or an uploaded mp4 → PROMO VIDEO
+# after_videos:                      # videos from the night (PeerTube links) → AFTER VIDEO
 #   - url: https://v.basspistol.org/w/VIDEO_ID
-#     title: Event promo
+#     title: Aftermovie
+# art_market: [Name, Name]           # → ART MARKET
+# exhibition: [Name, Name]           # → EXHIBITION
+# notes_en: Anything extra           # → NOTES, at the end of the page
+# notes_tr: Ek bilgi
 # recordings:                        # SoundCloud playlist/track of the night → SOUND RECORDINGS
 #   - url: https://soundcloud.com/uncvl/sets/…
 ---

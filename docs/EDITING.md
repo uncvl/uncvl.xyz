@@ -27,7 +27,10 @@
 - **Music genres**: type a few letters and pick one or more genres. Each one links to its page on the Sound page.
 - **Credit**: shown under the poster, e.g. *Artwork: …, Poster design: …*.
 - **Lineup**: for each artist, **Duration** (e.g. *75 min*), **Act type** (DJ Set, Live Set, Concert, Visuals, Lecture…; one or more) and an optional note. They show in the artist's box. Start times go in the **Schedule**.
-- **Videos**: paste the link of the video on our PeerTube channel (https://v.basspistol.org/c/uncivilization_channel/videos). YouTube is no longer used.
+- **Promo video**: upload the promo mp4, or choose *Enter URL* and paste its link on our PeerTube channel (https://v.basspistol.org/c/uncivilization_channel/videos). **After videos**: PeerTube links of videos from the night. YouTube is no longer used.
+- **Exhibition** and **Art market**: one artist name per line; each list gets its own heading on the page.
+- **Notes**: anything extra, shown at the very end of the event page.
+- **Genres** (Sound → Genres): *Visibility* decides whether a genre is listed on the Sound page, under its supergenres and gets its own page. *Hidden* keeps it in the CMS only; events still show its name as plain text.
 - **Sound recordings**: a SoundCloud playlist or track recorded at the event. Shown under SOUND RECORDINGS.
 
 ### Lists
@@ -78,7 +81,10 @@
 - **Music genres / Müzik türleri**: birkaç harf yaz ve bir ya da daha fazla tür seç. Her tür, Ses sayfasındaki kendi sayfasına bağlanır.
 - **Credit / Emeği geçenler**: afişin altında görünür, örn. *Artwork: …, Poster design: …*.
 - **Lineup / Kadro**: her sanatçı için **Duration / Süre** (örn. *75 min*), **Act type / Performans türü** (DJ Set, Live Set, Concert, Visuals, Lecture…; bir ya da daha fazla) ve isteğe bağlı not. Sanatçı kutusunda görünür. Başlangıç saatleri **Schedule / Akış** kısmına yazılır.
-- **Videos**: PeerTube kanalımızdaki videonun linkini yapıştır (https://v.basspistol.org/c/uncivilization_channel/videos). YouTube artık kullanılmıyor.
+- **Promo video**: tanıtım videosunun mp4 dosyasını yükle ya da *Enter URL* seçip PeerTube kanalımızdaki linkini yapıştır (https://v.basspistol.org/c/uncivilization_channel/videos). **After videos**: geceden videoların PeerTube linkleri. YouTube artık kullanılmıyor.
+- **Exhibition** ve **Art market**: her satıra bir sanatçı adı; iki liste sayfada ayrı başlıklarla görünür.
+- **Notes**: ek bilgi, etkinlik sayfasının en sonunda görünür.
+- **Genres** (Sound → Genres): *Visibility*, türün Sound sayfasında, üst türlerinin altında listelenip kendi sayfası olup olmayacağını belirler. *Hidden* türü sadece CMS’te tutar; etkinliklerde adı düz metin olarak görünür.
 - **Sound recordings / Ses kayıtları**: etkinlikte kaydedilen SoundCloud listesi veya parçası. SES KAYITLARI başlığı altında görünür.
 
 ### Listeler

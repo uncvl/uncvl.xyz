@@ -95,7 +95,8 @@ lineup:
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-exhibitors: []
+exhibition: []
+art_market: []
 schedule:
   - time: '21:00'
     en: Hush
@@ -109,7 +110,7 @@ schedule:
   - time: '00:00'
     en: Krayat
     tr: ''
-videos: []
+after_videos: []
 gallery:
   - src: https://media.uncvl.xyz/events/2024-09-27-punk-krayat-ruff-crux-moko-hush/krayat-collage.jpg
     alt: krayat live in istanbul and izmir

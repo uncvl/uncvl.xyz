@@ -66,7 +66,8 @@ lineup:
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-exhibitors: []
+exhibition: []
+art_market: []
 schedule:
   - time: '22:00'
     en: ZS ZS
@@ -77,7 +78,7 @@ schedule:
   - time: '00:00'
     en: Random Input
     tr: ''
-videos: []
+after_videos: []
 gallery: []
 recordings: []
 listen: []

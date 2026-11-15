@@ -27,13 +27,13 @@ ogType: article
         {%- if codename %}<p class="glitch" aria-hidden="true">{{ codename | codename | wbr | safe }}</p>{% endif %}
         <h1 class="hero__title">{{ title }}</h1>
         <dl class="facts">
+          {%- if activities and activities.length %}<dt>{% t "content", "içerik" %}</dt><dd>{% for a in activities %}{% t a, a | vocabTr(vocab.activities) %}{% if not loop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
           <dt>{% t "date", "tarih" %}</dt>
           <dd><time datetime="{{ date | date('iso') }}"><span class="l-en" lang="en">{{ date | date('long-en') }}</span><span class="l-tr" lang="tr">{{ date | date('long-tr') }}</span></time></dd>
           <dt>{% t "venue", "mekan" %}</dt><dd>{{ venue.name }}, {{ venue.city }}</dd>
           {%- if doors %}<dt>{% t "doors", "kapı" %}</dt><dd>{{ doors }}</dd>{% endif %}
           {%- if stage %}<dt>{% t "stage", "sahne" %}</dt><dd>{{ stage }}</dd>{% endif %}
           {%- if price %}<dt>{% t "ticket", "bilet" %}</dt><dd class="ok">{{ price }}</dd>{% endif %}
-          {%- if activities and activities.length %}<dt>{% t "content", "içerik" %}</dt><dd>{% for a in activities %}{% t a, a | vocabTr(vocab.activities) %}{% if not loop.last %}, {% endif %}{% endfor %}</dd>{% endif %}
           {%- if music_genres and music_genres.length %}<dt>{% t "genres", "türler" %}</dt><dd>{{ ui.genreLinks(music_genres) }}</dd>{% endif %}
         </dl>
       </div>
@@ -58,16 +58,8 @@ ogType: article
     </section>
     {%- endif %}
 
-    {%- if exhibitors and exhibitors.length %}
-    <section aria-labelledby="exhibitors">
-      {{ ui.sect("ART MARKET / EXHIBITION", "SANAT PAZARI / SERGİ", "", "exhibitors") }}
-      <ul class="names">
-        {%- for n in exhibitors %}{% set ap = collections.artists | findBySlug(n | slugify) %}
-        <li>{% if ap %}<a href="{{ ap.url }}">{{ n }}</a>{% else %}{{ n }}{% endif %}</li>
-        {%- endfor %}
-      </ul>
-    </section>
-    {%- endif %}
+    {{ ui.names(exhibition, "EXHIBITION", "SERGİ", "exhibition") }}
+    {{ ui.names(art_market, "ART MARKET", "SANAT PAZARI", "art-market") }}
 
     {%- if schedule and schedule.length %}
     <section aria-labelledby="schedule">
@@ -87,10 +79,13 @@ ogType: article
     </section>
     {%- endif %}
 
-    {%- set promoUrl = (promo | bundle(page.inputPath) | mediaVideo) if promo else null %}
-    {%- if promoUrl %}
+    {%- set promoTube = promo | peertube(site.peertube.host) if promo else null %}
+    {%- set promoUrl = (promo | bundle(page.inputPath) | mediaVideo) if (promo and not promoTube) else null %}
+    {%- if promoTube %}
+    {{ ui.videos([{ url: promo }], cover or poster, page.inputPath, title, "PROMO VIDEO", "TANITIM VİDEOSU", "promo") }}
+    {%- elif promoUrl %}
     <section aria-labelledby="promo">
-      {{ ui.sect("PROMO", "TANITIM", "", "promo") }}
+      {{ ui.sect("PROMO VIDEO", "TANITIM VİDEOSU", "", "promo") }}
       <video class="promo" controls preload="none" playsinline src="{{ promoUrl }}"{% if poster %} poster="{{ poster | bundle(page.inputPath) | mediaOg }}"{% endif %}></video>
     </section>
     {%- endif %}
@@ -106,7 +101,7 @@ ogType: article
     {%- set bios = [] %}{% for l in lineup %}{% if l.bio_en or l.bio_tr %}{% if bios.push(l) %}{% endif %}{% endif %}{% endfor %}
     {%- if bios.length %}
     <section aria-labelledby="bios">
-      {{ ui.sect("DJ AND VJ INFO", "DJ VE VJ BİLGİLERİ", "", "bios") }}
+      {{ ui.sect("PERFORMER INFO", "SANATÇI BİLGİLERİ", "", "bios") }}
       {%- for l in bios %}
       <div class="bio">
         <h3 class="bio__name">{{ l.name | upper }}</h3>
@@ -116,7 +111,7 @@ ogType: article
     </section>
     {%- endif %}
 
-    {{ ui.videos(videos, cover or poster, page.inputPath, title) }}
+    {{ ui.videos(after_videos, cover or poster, page.inputPath, title, "AFTER VIDEO", "AFTER VİDEO", "after-videos") }}
 
     {%- if gallery and gallery.length %}
     <section aria-labelledby="gallery">
@@ -126,6 +121,13 @@ ogType: article
         <a href="{{ g.src | bundle(page.inputPath) | mediaFull }}"{% if g.wide %} class="gallery__wide"{% endif %}>{% image g.src | bundle(page.inputPath), g.alt, ("(min-width: 60rem) 56rem, 100vw" if g.wide else "(min-width: 60rem) 18rem, 50vw") %}</a>
         {%- endfor %}
       </div>
+    </section>
+    {%- endif %}
+
+    {%- if notes_en or notes_tr %}
+    <section aria-labelledby="notes">
+      {{ ui.sect("NOTES", "NOTLAR", "", "notes") }}
+      {{ ui.bitext(notes_en, notes_tr) }}
     </section>
     {%- endif %}
 

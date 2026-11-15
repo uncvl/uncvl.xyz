@@ -65,7 +65,8 @@ lineup:
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-exhibitors: []
+exhibition: []
+art_market: []
 schedule:
   - time: '20:30'
     en: Oqlius
@@ -76,7 +77,7 @@ schedule:
   - time: '23:30'
     en: Gouachi
     tr: ''
-videos: []
+after_videos: []
 gallery: []
 recordings: []
 listen: []

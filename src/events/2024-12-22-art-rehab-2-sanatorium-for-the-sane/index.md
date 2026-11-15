@@ -98,7 +98,8 @@ lineup:
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-exhibitors:
+exhibition: []
+art_market:
   - Abyssal Area
   - Ada
   - Bedirhan Sezen
@@ -112,7 +113,7 @@ exhibitors:
   - Stupei
   - Zeynep Destebaş
 schedule: []
-videos: []
+after_videos: []
 gallery:
   - src: https://media.uncvl.xyz/events/2024-12-22-art-rehab-2-sanatorium-for-the-sane/rehab2_sanatorium-for-the-sane_artists.jpg
     alt: rehab 2 art market artists

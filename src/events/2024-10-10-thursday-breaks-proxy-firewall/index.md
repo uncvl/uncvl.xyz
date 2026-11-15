@@ -64,7 +64,8 @@ lineup:
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-exhibitors: []
+exhibition: []
+art_market: []
 schedule:
   - time: '21:30'
     en: Random Input
@@ -75,7 +76,7 @@ schedule:
   - time: '00:00'
     en: Balgum
     tr: ''
-videos: []
+after_videos: []
 gallery: []
 recordings: []
 listen: []

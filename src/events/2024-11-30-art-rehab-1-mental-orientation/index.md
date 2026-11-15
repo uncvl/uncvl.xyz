@@ -93,7 +93,8 @@ lineup:
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-exhibitors:
+exhibition: []
+art_market:
   - Abyssal Area
   - Alya Wintour
   - Bedirhan Sezen
@@ -101,7 +102,7 @@ exhibitors:
   - Kuduruk
   - Never Grow Up
 schedule: []
-videos: []
+after_videos: []
 gallery: []
 recordings: []
 listen: []

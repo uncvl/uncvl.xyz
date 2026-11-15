@@ -104,7 +104,7 @@ lineup:
     note_tr: görsel
     bio_en: ''
     bio_tr: ''
-exhibitors:
+exhibition:
   - LVNA
   - Böcek
   - Bixbite
@@ -112,6 +112,7 @@ exhibitors:
   - Dcntrlzd
   - Abyssal Area
   - Hypn
+art_market: []
 schedule:
   - time: '17:00'
     en: Exhibition opening
@@ -128,7 +129,7 @@ schedule:
   - time: '22:00'
     en: Ox
     tr: Ox
-videos: []
+after_videos: []
 gallery:
   - src: https://media.uncvl.xyz/events/2023-12-16-art-rejenere/rejenere-after_1200.jpg
     alt: izmir underground crowd at darağaç in uncivilization music and exhibition event rejenere

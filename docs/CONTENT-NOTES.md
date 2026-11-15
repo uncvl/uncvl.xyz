@@ -69,7 +69,7 @@ Choices made: "dj sets" → *dj set*; "live" and "live electronic" → *live set
 | 2026-09-04-synth-and-punk | noise, idm, breakcore, punk | – | punk | Noise, IDM, Breakcore |
 
 ### Other changes to check
-- **YouTube videos removed** (as decided): Bass Night Ignishaan, Drumazan Speshaal and the Zibidiler/Tampon/Bunu Sen İstedin concert had YouTube playlists; Genereshaan had a YouTube video. Add their PeerTube links once they are uploaded (event → Videos).
+- **YouTube videos removed** (as decided): Bass Night Ignishaan, Drumazan Speshaal and the Zibidiler/Tampon/Bunu Sen İstedin concert had YouTube playlists; Genereshaan had a YouTube video. Add their PeerTube links once they are uploaded (event → After videos).
 - **Zibidiler / Tampon / Bunu Sen İstedin**: the lineup had start times (21:15, 22:15, 23:30). They moved to the event's Schedule, since the lineup field is now Duration.
 - **Translations still needed** (an empty Turkish field falls back to English, or shows a "needs translation" note):
   - Home notes (both), and the home box of the compilation call.

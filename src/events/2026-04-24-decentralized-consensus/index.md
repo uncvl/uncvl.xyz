@@ -188,7 +188,8 @@ lineup:
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-exhibitors: []
+exhibition: []
+art_market: []
 schedule:
   - time: '21:15'
     en: Loremipsum & 0n1
@@ -211,7 +212,7 @@ schedule:
   - time: '03:00'
     en: Balgum
     tr: Balgum
-videos: []
+after_videos: []
 gallery: []
 recordings: []
 listen:

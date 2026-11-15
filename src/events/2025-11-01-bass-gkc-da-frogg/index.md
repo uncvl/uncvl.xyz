@@ -49,12 +49,13 @@ lineup:
     note_tr: GKC ile b2b
     bio_en: ''
     bio_tr: ''
-exhibitors: []
+exhibition: []
+art_market: []
 schedule:
   - time: '21:00'
     en: GKC & Da Frogg
     tr: GKC & Da Frogg
-videos: []
+after_videos: []
 gallery:
   - src: https://media.uncvl.xyz/events/2025-11-01-bass-gkc-da-frogg/gkc-dafrogg-collage.jpg
     alt: gkc and da frogg at audiodar, darağaç

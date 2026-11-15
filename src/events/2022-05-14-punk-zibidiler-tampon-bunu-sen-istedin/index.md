@@ -58,7 +58,8 @@ lineup:
     note_tr: ''
     bio_en: Zibidiler—who have an album titled _Ahırda Mı Büyüdün_ and an EP titled _Ben Bu şarkılara Kefilim_—describe themselves as “the last punk band from Ankara, formed just before the turn of the millennium.” The lineup consists of Aykan, Arda, and Kerem. Their first demo, released in 2000, was titled _Bu Ne Biçim Demo Be_. That period was hectic; in their own words, “our spleens swelled up as we ran from gig to gig.” In 2005, they disbanded after “realizing they’d never make it big.” And they reunited to put on a 20th-anniversary concert. They also brought Burak into the band—a musician “committed to the principles and revolution of Ankara punk, who honed his craft in bands like Kirli Çoraplar, At Hırsızları, and Sokak Köpekleri.”
     bio_tr: '*Ahırda Mı Büyüdün* adında bir albümleri, *Ben Bu şarkılara Kefilim* adında da bir EP’leri olan Zibidiler, kendilerini “Milenyumdan hemen önce kurulan Ankaralı son punk grubu” olarak tanımlıyor. Kadroda Aykan, Arda ve Kerem var. İlk demoları 2000 yılında ‘*Bu Ne Biçim Demo Be*’ adındaydı. O dönem yoğun geçti, kendi deyimleriyle “konser konser koşarken dalakları şişti”. 2005’te “ünlü olamayacaklarını anlayıp” dağıldılar. Ve bir 20. yıl konseri vermek için tekrar toplandılar. “*Ankara punk* ilke ve inkılaplarına bağlı, formasyonunu *Kirli Çoraplar, At Hırsızları ve Sokak Köpekleri*’nde tamamlamış” Burak’ı da gruba dahil ettiler.'
-exhibitors: []
+exhibition: []
+art_market: []
 schedule:
   - time: '21:15'
     en: Bunu Sen İstedin
@@ -69,7 +70,7 @@ schedule:
   - time: '23:30'
     en: Zibidiler
     tr: Zibidiler
-videos: []
+after_videos: []
 gallery: []
 recordings: []
 listen: []

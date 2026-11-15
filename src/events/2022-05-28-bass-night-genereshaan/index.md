@@ -81,7 +81,8 @@ lineup:
     note_tr: ''
     bio_en: Random Input produces, mixes, edits audio and visual materials.  As a VJ he has been mixing video live since 2002 mainly by itterating, reproducing, distorting, displacing and corrupting images. He started DJing in 2018 and since then played sets that blends *breakcore, hardcore, chiptune and glitch* genres.
     bio_tr: Random Input ses ve görsel miksleyen ve editleyen bir VJDJ’dir. 2002 yılından bu yana, bulduğu görüntüleri çoğaltır, saptırır, çarpıtıp bozarak yeniden üretir. 2018’de *Pixie* Underground’da *breakcore, hardcore, bass, chiptune, glitch* türlerini harmanladığı DJ setleri çalmaya başlamıştır.
-exhibitors: []
+exhibition: []
+art_market: []
 schedule:
   - time: '21:15'
     en: Random Input
@@ -95,7 +96,7 @@ schedule:
   - time: '00:00'
     en: Da Frogg
     tr: ''
-videos: []
+after_videos: []
 gallery:
   - src: https://media.uncvl.xyz/events/2022-05-28-bass-night-genereshaan/crowd-collage-at-blind-in-uncivilization-bass-night-event-genereshaan_2400.jpg
     alt: pixie crowd at blind in uncivilization bass night event genereshaan

@@ -102,7 +102,8 @@ lineup:
     note_tr: breakcore
     bio_en: ''
     bio_tr: ''
-exhibitors: []
+exhibition: []
+art_market: []
 schedule:
   - time: '21:00'
     en: Federico Fellini
@@ -122,13 +123,12 @@ schedule:
   - time: '02:00'
     en: Random Input
     tr: Random Input
-videos:
-  - url: https://v.basspistol.org/w/tSAy9STuRyrbDaHX8J7mAF
-    title: 'Event Promo: infüze-archonGrid'
+after_videos: []
 gallery: []
 recordings: []
 listen: []
 summary_en: We are meeting at nomads36 on Friday, May 8 to surrender our minds and souls to the grid with live music and gameplay!
 summary_tr: Zihinlerimizi ve ruhlarımızı live müzik ve gameplay eşliğinde grid’e teslim etmek üzere  8 Mayıs Cuma akşamı Nomads36’da buluşuyoruz!
 draft: false
+promo: https://v.basspistol.org/w/tSAy9STuRyrbDaHX8J7mAF
 ---

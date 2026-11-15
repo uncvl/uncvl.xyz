@@ -1,0 +1,10 @@
+/* Tweaks to the Sveltia CMS editor (loaded from /admin/index.html). */
+
+/* Music genres (events, artists, releases): no "Add Genre" / "Edit Genre" buttons next to the picker.
+   Genres are made and edited under Sound → Genres; Sveltia has no setting for these buttons
+   (they appear whenever the Genres collection allows new entries). The picker itself is a
+   listbox, so only the dialog/menu buttons are hidden. */
+.field[data-key-path="music_genres"] button[aria-haspopup="dialog"],
+.field[data-key-path="music_genres"] button[aria-haspopup="menu"] {
+  display: none !important;
+}

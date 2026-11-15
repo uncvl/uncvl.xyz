@@ -78,7 +78,8 @@ lineup:
     note_tr: ''
     bio_en: ''
     bio_tr: ''
-exhibitors: []
+exhibition: []
+art_market: []
 schedule:
   - time: '21:00'
     en: Goblin Daycare
@@ -89,7 +90,7 @@ schedule:
   - time: '23:00'
     en: Krayat
     tr: ''
-videos: []
+after_videos: []
 gallery:
   - src: https://media.uncvl.xyz/events/2024-09-26-punk-krayat-goblin-daycare-potlatch/potlatch-goblin-collage.jpg
     alt: goblin daycare and potlatch at kadıköy sahne

@@ -117,7 +117,8 @@ collections:
           - { name: note_tr, label: Not (TR), widget: string, required: false }
           - { name: bio_en, label: Bio for this event (EN), widget: markdown, required: false, hint: "Leave empty to show nothing here; the artist page keeps the main bio." }
           - { name: bio_tr, label: Bu etkinlik için biyografi (TR), widget: markdown, required: false }
-      - { name: exhibitors, label: Art market / exhibition, widget: list, required: false, hint: 'names of exhibiting artists' }
+      - { name: exhibition, label: Exhibition / Sergi, widget: list, required: false, hint: "Names of the exhibiting artists, one per line. Shown under EXHIBITION." }
+      - { name: art_market, label: Art market / Sanat pazarı, widget: list, required: false, hint: "Names of the artists at the art market, one per line. Shown under ART MARKET." }
       - name: schedule
         label: Schedule / Akış
         widget: list
@@ -126,11 +127,12 @@ collections:
           - { name: time, label: Time, widget: string }
           - { name: en, label: EN, widget: string }
           - { name: tr, label: TR, widget: string, required: false }
-      - name: videos
-        label: Videos (PeerTube)
+      - { name: promo, label: Promo video / Tanıtım videosu, widget: file, required: false, hint: "Upload the promo video (mp4), or choose “Enter URL” and paste its link on our PeerTube channel (v.basspistol.org). Shown under PROMO VIDEO." }
+      - name: after_videos
+        label: After videos (PeerTube)
         widget: list
         required: false
-        hint: "Paste the link of a video on our PeerTube channel (v.basspistol.org), e.g. https://v.basspistol.org/w/tSAy9STuRyrbDaHX8J7mAF"
+        hint: "Videos from the night itself. Paste the link of a video on our PeerTube channel (v.basspistol.org), e.g. https://v.basspistol.org/w/tSAy9STuRyrbDaHX8J7mAF. Shown under AFTER VIDEO."
         summary: "{{fields.title}}"
         fields:
           - { name: url, label: PeerTube link, widget: string }
@@ -160,6 +162,8 @@ collections:
           - { name: url, label: Link, widget: string }
           - { name: title, label: Title, widget: string, required: false }
           - { name: bandcamp_id, label: Bandcamp id (only for Bandcamp), widget: string, required: false }
+      - { name: notes_en, label: Notes (EN), widget: markdown, required: false, hint: "Anything extra. Shown at the very end of the page under NOTES." }
+      - { name: notes_tr, label: Notlar (TR), widget: markdown, required: false }
       - { name: summary_en, label: Short summary for social media (EN), widget: text, required: false }
       - { name: summary_tr, label: Kısa özet (TR), widget: text, required: false }
       - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
@@ -325,7 +329,13 @@ collections:
         fields:
           - { name: name, label: Name, widget: string, hint: "RateYourMusic, MusicBrainz…" }
           - { name: url, label: URL, widget: string }
-      - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
+      - name: visibility
+        label: Visibility / Görünürlük
+        widget: select
+        default: listed
+        options:
+          - { label: "Listed: on the Sound page, its supergenres and its own page", value: listed }
+          - { label: "Hidden: only here in the CMS (events still show the name as plain text)", value: hidden }
 
   - name: supergenres
     label: "Sound: Supergenres / Ses: Üst türler"
