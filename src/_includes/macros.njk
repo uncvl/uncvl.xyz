@@ -59,7 +59,7 @@
 <li class="log__row">
   <span class="log__id">{{ e.data.seq | hex }}</span>
   <time datetime="{{ e.data.date | date('iso') }}">{{ e.data.date | date('short') }}</time>
-  <a href="{{ e.url }}">{{ e.data.title }}{% if e.data.codename %} <span class="log__code">// {{ e.data.codename | codename | lower }}</span>{% endif %}</a>
+  <a href="{{ e.url }}">{{ e.data.title }}{% if e.data.codename %} <span class="log__code">// {{ e.data.codename | codename | lower | wbr | safe }}</span>{% endif %}</a>
   <span class="log__tag">{{ e.data.category | asList | join("/") }}</span>
 </li>
 {%- endmacro -%}
