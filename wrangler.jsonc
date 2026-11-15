@@ -1,8 +1,11 @@
-// Cloudflare Worker for uncvl.xyz. Deployed by CI with `wrangler deploy` (.forgejo/workflows/deploy.yml).
+// Cloudflare Worker for uncvl.xyz. Built and deployed by Cloudflare Workers Builds from the GitHub repo
+// uncvl/uncvl.xyz (Worker "uncvl" → Settings → Build). Dashboard settings, which this file can't hold:
+//   Build command:  npm run build && npm run check      Deploy command: npx wrangler deploy
+//   Production branch: main                              Node: Cloudflare's default (24; package.json needs >=20)
 //
 // - The built site (_site) is served as static assets. Asset requests never run the Worker code,
 //   so pages stay free and unlimited. _site/_headers and _site/_redirects are honoured.
-// - Only /api/* runs worker/index.js: the CMS media endpoint (uploads to R2, Codeberg login).
+// - Only /api/* runs worker/index.js: GitHub sign-in for the CMS and its media endpoint (uploads to R2).
 {
   "name": "uncvl",
   "main": "worker/index.js",
@@ -15,14 +18,17 @@
     "run_worker_first": ["/api/*"]
   },
   "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "uncvl-media" }],
+  // GitHub OAuth app used by the CMS sign-in (/api/auth). The Client ID is public; the client secret is a
+  // Worker secret, set once with: npx wrangler secret put GITHUB_CLIENT_SECRET
+  "vars": { "GITHUB_CLIENT_ID": "" },
   // The custom domain uncvl.xyz is attached in the Cloudflare dashboard. It is deliberately NOT listed here:
-  // without "routes", wrangler never touches routes/domains, so the deploy token needs no zone permissions.
+  // without "routes", wrangler never touches routes/domains.
   // No *.workers.dev address and no preview URLs: the site is only reachable on uncvl.xyz.
   "workers_dev": false,
   "preview_urls": false,
   // Logs only cover /api/* (page views never run Worker code). worker/index.js logs one line per
-  // upload/copy/delete with the Codeberg user. Invocation logs stay off: requests to /api/media carry the
-  // editor's Codeberg token (Authorization header / cookie), which must not end up in log storage.
+  // upload/copy/delete with the GitHub user. Invocation logs stay off: requests to /api/media and
+  // /api/auth carry the editor's GitHub token or sign-in code, which must not end up in log storage.
   "observability": {
     "logs": { "enabled": true, "invocation_logs": false },
     "traces": { "enabled": false }

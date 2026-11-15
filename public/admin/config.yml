@@ -1,20 +1,21 @@
 # Sveltia CMS configuration — editing UI at https://uncvl.xyz/admin/
 # Docs: https://sveltiacms.app/en/docs
 #
-# Login: "Sign in with Codeberg" (OAuth PKCE, no auth server needed).
-# One-time setup: create an OAuth2 application on Codeberg
-#   (Settings → Applications → OAuth2 applications, "Confidential client" UNCHECKED)
-#   Redirect URI: https://uncvl.xyz/admin/   (+ http://localhost:8080/admin/ for local testing)
-# and paste its Client ID into `app_id` below.
-# Without an app_id, editors can still sign in with a Codeberg personal access token.
+# Login: "Sign in with GitHub". GitHub needs a small server step for that, which the site's own
+# Worker does at /api/auth (worker/index.js). One-time setup: a GitHub OAuth app in the uncvl org
+#   (github.com/organizations/uncvl/settings/applications → New OAuth app)
+#   Homepage URL: https://uncvl.xyz   Authorization callback URL: https://uncvl.xyz/api/auth/callback
+# Its Client ID goes in wrangler.jsonc (GITHUB_CLIENT_ID), its secret in the Worker's GITHUB_CLIENT_SECRET.
+# Editors can also use "Sign In with Token" with a personal access token (public_repo scope).
+# On localhost, "Work with Local Repository" edits your checkout directly.
 
 backend:
-  name: forgejo
-  repo: Uncivilization/uncvl.xyz
-  api_root: https://codeberg.org/api/v1
-  base_url: https://codeberg.org
+  name: github
+  repo: uncvl/uncvl.xyz
   branch: main
-  app_id: "3502c07f-04f0-41bc-afb4-86018e68415f"   # Codeberg OAuth2 app "uncvl.xyz admin panel" (public client, PKCE)
+  base_url: https://uncvl.xyz
+  auth_endpoint: api/auth
+  auth_scope: public_repo     # the repository is public: editors don't grant access to private repos
   commit_messages:
     create: "content: add {{collection}} “{{slug}}”"
     update: "content: update {{collection}} “{{slug}}”"
@@ -32,7 +33,7 @@ logo:
   src: /favicon.svg
 
 # Images and videos go straight to Cloudflare R2 (bucket uncvl-media, served at media.uncvl.xyz)
-# through the site's own endpoint (/api/media, worker/index.js). It checks your Codeberg login,
+# through the site's own endpoint (/api/media, worker/index.js). It checks your GitHub login,
 # so there is no key to enter. Files are shrunk to WebP in the browser before uploading.
 media_libraries:
   default: false            # nothing is committed to git
@@ -42,7 +43,7 @@ media_libraries:
     endpoint: https://uncvl.xyz/api/media/s3
     bucket: uncvl-media
     region: auto
-    access_key_id: codeberg-login   # not a secret; the endpoint authenticates your Codeberg login
+    access_key_id: github-login     # not a secret; the endpoint authenticates your GitHub login
     public_url: https://media.uncvl.xyz
     prefix: uploads/
   all:

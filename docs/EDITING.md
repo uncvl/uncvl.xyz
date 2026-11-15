@@ -3,13 +3,13 @@
 ## EN
 
 ### The easy way: the web editor
-1. Open **https://uncvl.xyz/admin/** and choose **Sign in with Codeberg**. You need write access to `Uncivilization/uncvl.xyz`.
+1. Open **https://uncvl.xyz/admin/** and choose **Sign in with GitHub**. You need write access to `uncvl/uncvl.xyz`.
 2. Pick **Events**, **Releases**, **Artists** or **Posts**, then **New**. Fill in the form and upload the poster or cover.
 3. **Save**. Your change becomes a draft (a pull request). When it's ready, set it to **Ready** and **Publish**.
 4. About a minute later the site is rebuilt and live. Events move from *upcoming* to *past* automatically after their date.
 
-### Without the web editor (Codeberg website)
-1. Copy `templates/event/index.md` into a new folder `src/events/YYYY-MM-DD-short-name/` (on Codeberg: *Add file → New file*, type the path).
+### Without the web editor (GitHub website)
+1. Copy `templates/event/index.md` into a new folder `src/events/YYYY-MM-DD-short-name/` (on GitHub: *Add file → Create new file*, type the path).
 2. Upload the poster into the same folder (*Add file → Upload file*).
 3. Fill in the fields. Comments after `#` explain each one. Commit to a new branch and open a pull request.
 
@@ -17,7 +17,7 @@
 - Write each language in its own field (`text_en`, `text_tr`). If one is empty, the page shows the other language with a "needs translation" note.
 - `*word*` highlights a word, and a blank line starts a new paragraph.
 - Upload the **largest** version of an image. The site makes the small versions itself.
-- Images and videos you upload in the editor go straight to our media storage (Cloudflare R2). There is no key to enter: your Codeberg login is checked. They are shrunk to WebP automatically.
+- Images and videos you upload in the editor go straight to our media storage (Cloudflare R2). There is no key to enter: your GitHub login is checked. They are shrunk to WebP automatically.
 - `codename` is the computer-science name of the night (e.g. *break protocol*, *zero day exploit*).
 
 ### Event fields
@@ -55,12 +55,12 @@
 ## TR
 
 ### Kolay yol: web editörü
-1. **https://uncvl.xyz/admin/** adresine git ve **Sign in with Codeberg** ile giriş yap. `Uncivilization/uncvl.xyz` deposunda yazma yetkin olmalı.
+1. **https://uncvl.xyz/admin/** adresine git ve **Sign in with GitHub** ile giriş yap. `uncvl/uncvl.xyz` deposunda yazma yetkin olmalı.
 2. **Events / Releases / Artists / Posts** → **New**. Formu doldur, afişi/kapağı yükle.
 3. **Save** → değişiklik taslak olur (pull request). Hazır olunca **Ready** → **Publish**.
 4. Yaklaşık bir dakika sonra site yeniden oluşturulur. Etkinlikler tarihleri geçince otomatik olarak *geçmiş* listesine taşınır.
 
-### Web editörü olmadan (Codeberg sitesi)
+### Web editörü olmadan (GitHub sitesi)
 1. `templates/event/index.md` dosyasını `src/events/YYYY-AA-GG-kisa-ad/` klasörüne kopyala.
 2. Afişi aynı klasöre yükle.
 3. Alanları doldur (`#` sonrasındaki açıklamalar yardımcı olur), yeni bir dala commit'le ve pull request aç.
@@ -69,7 +69,7 @@
 - Her dili kendi alanına yaz (`text_en`, `text_tr`). Biri boşsa sayfa diğerini "çeviri gerekiyor" notuyla gösterir.
 - `*kelime*` vurgular, boş satır yeni paragraf başlatır.
 - Görselin **en büyük** halini yükle. Küçük boyutları site kendisi üretir.
-- Editörden yüklediğin görseller ve videolar doğrudan medya depomuza (Cloudflare R2) gider. Anahtar girmen gerekmez, Codeberg girişin kontrol edilir. Görseller otomatik olarak WebP'ye küçültülür.
+- Editörden yüklediğin görseller ve videolar doğrudan medya depomuza (Cloudflare R2) gider. Anahtar girmen gerekmez, GitHub girişin kontrol edilir. Görseller otomatik olarak WebP'ye küçültülür.
 
 ### Etkinlik alanları
 - **Event type / Etkinlik türü**: Bass, Breaks, Punk, Synth, Art. Bir ya da daha fazlasını seç; etkinlik, etkinlikler sayfasında her birinin altında görünür.

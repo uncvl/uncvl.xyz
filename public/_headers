@@ -1,4 +1,4 @@
-# Security + caching headers (Cloudflare Pages / Netlify-style; verify support on Codeberg git-pages)
+# Security + caching headers (Cloudflare Workers static assets, Netlify-style _headers syntax)
 # static.cloudflareinsights.com / cloudflareinsights.com: Cloudflare Web Analytics (cookieless) beacon.
 # Cloudflare's bot-detection inline snippet stays blocked on purpose (it would need unsafe-inline).
 /*
@@ -10,14 +10,14 @@
   Cross-Origin-Opener-Policy: same-origin
   X-Frame-Options: DENY
 
-# The CMS needs the Codeberg API, its lazily loaded helpers and inline styles.
+# The CMS needs the GitHub API, its lazily loaded helpers and inline styles.
 # COOP must not be same-origin here: the "Sign in with Codeberg" popup goes cross-origin, and
 # with same-origin the CMS loses its handle on the popup ("Authentication aborted").
 /admin/*
   ! Cross-Origin-Opener-Policy
   Cross-Origin-Opener-Policy: unsafe-none
   ! Content-Security-Policy
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://unpkg.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com; manifest-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' data: blob: https://codeberg.org https://unpkg.com https://cdn.jsdelivr.net https://media.uncvl.xyz https://cloudflareinsights.com; frame-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://unpkg.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com; manifest-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' data: blob: https://api.github.com https://unpkg.com https://cdn.jsdelivr.net https://media.uncvl.xyz https://cloudflareinsights.com; frame-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
   Cache-Control: no-cache
 
 # /chat/: browsers find each other through these Nostr relays (keep in sync with RELAYS in

@@ -1,0 +1,39 @@
+# Upcoming vs past events is decided when the site is built (Istanbul date, eleventy.config.js).
+# Cloudflare Workers Builds only builds on a push, so on the day after an event this pushes an empty
+# commit; Cloudflare then rebuilds and the event moves from "upcoming" to "past".
+# Days without an event yesterday do nothing, so this adds about one commit per event.
+name: rebuild after event
+
+on:
+  schedule:
+    - cron: "17 21 * * *"   # 00:17 in Istanbul (UTC+3)
+  workflow_dispatch:        # "Run workflow" on the Actions tab forces a rebuild
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Push an empty commit if an event took place yesterday
+        shell: bash
+        run: |
+          yesterday=$(TZ=Europe/Istanbul date -d yesterday +%F)
+          events=$(grep -l "^date: ${yesterday}" src/events/*/index.md 2>/dev/null || true)
+          if [ -z "$events" ] && [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
+            echo "No event on ${yesterday}; nothing to rebuild."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$events" ]; then
+            msg="chore: rebuild after ${yesterday} event"
+          else
+            msg="chore: rebuild"
+          fi
+          git commit --allow-empty -m "$msg"
+          git push

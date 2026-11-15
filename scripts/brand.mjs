@@ -109,7 +109,7 @@ async function main() {
   await sharp(og).png({ compressionLevel: 9 }).toFile(`${OUT}/og-default.png`);
 
   // README banner (committed, shown at the top of the repo page). Own dark background, so it reads
-  // the same in Codeberg's light and dark themes.
+  // the same in GitHub's light and dark themes.
   await mkdir("docs", { recursive: true });
   await writeFile(
     "docs/logo-banner.svg",
