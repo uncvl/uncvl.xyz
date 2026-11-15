@@ -18,7 +18,7 @@ ogType: music.album
         {%- endif %}
       </figure>
       <div class="hero__meta">
-        <p class="kline">rel {{ catalog or ("0x" + (idx + 1)) }} · {% t site.releaseTypes[type].en, site.releaseTypes[type].tr %}{% if flavor and flavor.length %} · {{ ui.flavor(flavor) }}{% endif %}</p>
+        <p class="kline"><a href="/releases/">{% t "releases", "yayın" %}</a> · rel {{ catalog or ("0x" + (idx + 1)) }} · {% t site.releaseTypes[type].en, site.releaseTypes[type].tr %}{% if flavor and flavor.length %} · {{ ui.flavor(flavor) }}{% endif %}</p>
         {%- if codename %}<p class="glitch" aria-hidden="true">{{ codename | codename | wbr | safe }}</p>{% endif %}
         <h1 class="hero__title">{{ title }}</h1>
         {%- if artist_line %}<p class="hero__by">{% t "by", "" %} {{ artist_line }}</p>{% endif %}

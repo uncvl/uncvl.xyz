@@ -23,7 +23,7 @@ ogType: article
         {%- if poster_credit %}<figcaption class="hero__credit">{{ poster_credit | md | safe }}</figcaption>{% endif %}
       </figure>
       <div class="hero__meta">
-        <p class="kline">evt {{ seq | hex }} · {{ category | asList | join("/") }}{% if series %} · {{ series | lower }}{% endif %}{% if flavor and flavor.length %} · {{ ui.flavor(flavor) }}{% endif %}{% if upcoming %} · <span class="ok">{% t "upcoming", "yaklaşan" %}</span>{% endif %}</p>
+        <p class="kline"><a href="/events/">{% t "events", "etkinlik" %}</a> · evt {{ seq | hex }} · {{ category | asList | join("/") }}{% if series %} · {{ series | lower }}{% endif %}{% if flavor and flavor.length %} · {{ ui.flavor(flavor) }}{% endif %}{% if upcoming %} · <span class="ok">{% t "upcoming", "yaklaşan" %}</span>{% endif %}</p>
         {%- if codename %}<p class="glitch" aria-hidden="true">{{ codename | codename | wbr | safe }}</p>{% endif %}
         <h1 class="hero__title">{{ title }}</h1>
         <dl class="facts">
