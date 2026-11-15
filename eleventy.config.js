@@ -85,34 +85,41 @@ export default function (eleventyConfig) {
   // ---- collections ----
   const byDateAsc = (a, b) => toDate(a.data.date) - toDate(b.data.date);
   const published = (items) => items.filter((i) => !i.data.draft); // draft: true hides an entry everywhere
-  eleventyConfig.addCollection("events", (api) =>
+  // visibility: unlisted keeps the page (anyone with the link can open it) but leaves it out of every list,
+  // the feed, the sitemap and search engines. The list collections below are listed-only; the all* ones
+  // keep unlisted entries for lookups (event numbers, linking a lineup name to its artist page).
+  const listed = (items) => items.filter((i) => i.data.visibility !== "unlisted");
+  const allEvents = (api) =>
     published(api.getFilteredByGlob("src/events/*/index.md"))
       .sort(byDateAsc)
       .map((item, i) => {
-        item.data.seq = i + 1;
+        item.data.seq = i + 1; // numbered among all events, so hiding one doesn't renumber the others
         return item;
-      })
-  );
+      });
+  eleventyConfig.addCollection("allEvents", allEvents);
+  eleventyConfig.addCollection("events", (api) => listed(allEvents(api)));
   eleventyConfig.addCollection("upcomingEvents", (api) =>
-    published(api.getFilteredByGlob("src/events/*/index.md")).filter((e) => toDate(e.data.date) >= startOfToday()).sort(byDateAsc)
+    listed(allEvents(api)).filter((e) => toDate(e.data.date) >= startOfToday())
   );
   eleventyConfig.addCollection("pastEvents", (api) =>
-    published(api.getFilteredByGlob("src/events/*/index.md"))
+    listed(allEvents(api))
       .filter((e) => toDate(e.data.date) < startOfToday())
-      .sort((a, b) => byDateAsc(b, a))
+      .reverse()
   );
-  eleventyConfig.addCollection("releases", (api) =>
+  eleventyConfig.addFilter("isUpcoming", (date) => toDate(date) >= startOfToday());
+  const allReleases = (api) =>
     published(api.getFilteredByGlob("src/releases/*/index.md"))
       .sort((a, b) => {
         // released first (newest first), then upcoming/open-call/planned in catalog order
         const ra = a.data.status === "released", rb = b.data.status === "released";
         if (ra !== rb) return ra ? -1 : 1;
         return ra ? toDate(b.data.date) - toDate(a.data.date) : (a.data.order || 0) - (b.data.order || 0);
-      })
-  );
-  eleventyConfig.addCollection("artists", (api) =>
-    api.getFilteredByGlob("src/artists/*.md").sort((a, b) => a.data.name.localeCompare(b.data.name, "tr"))
-  );
+      });
+  eleventyConfig.addCollection("allReleases", allReleases);
+  eleventyConfig.addCollection("releases", (api) => listed(allReleases(api)));
+  const allArtists = (api) => api.getFilteredByGlob("src/artists/*.md").sort((a, b) => a.data.name.localeCompare(b.data.name, "tr"));
+  eleventyConfig.addCollection("allArtists", allArtists);
+  eleventyConfig.addCollection("artists", (api) => listed(allArtists(api)));
   // Calls (open calls for music, art, text…): open ones first, then by date, newest first
   const callsSorted = (api) =>
     published(api.getFilteredByGlob("src/calls/*.md")).sort((a, b) => {
@@ -120,8 +127,8 @@ export default function (eleventyConfig) {
       if (oa !== ob) return oa ? -1 : 1;
       return toDate(b.data.date || 0) - toDate(a.data.date || 0);
     });
-  eleventyConfig.addCollection("calls", callsSorted);
-  eleventyConfig.addCollection("openCalls", (api) => callsSorted(api).filter((c) => c.data.status !== "closed"));
+  eleventyConfig.addCollection("calls", (api) => listed(callsSorted(api)));
+  eleventyConfig.addCollection("openCalls", (api) => listed(callsSorted(api)).filter((c) => c.data.status !== "closed"));
   // Sound: music genres and supergenres (src/sound/), in the order the team sorted them
   const byOrder = (a, b) => (a.data.order ?? 999) - (b.data.order ?? 999) || a.data.name.localeCompare(b.data.name);
   // visibility: hidden keeps a genre in the CMS only (no page, not on the Sound page or under a supergenre)
@@ -137,7 +144,7 @@ export default function (eleventyConfig) {
     return (items || []).filter((i) => !has(i.data, lang) && has(i.data, other)).length;
   });
   eleventyConfig.addCollection("posts", (api) =>
-    api.getFilteredByGlob("src/posts/**/*.md").filter((p) => !p.data.draft).sort((a, b) => byDateAsc(b, a))
+    listed(published(api.getFilteredByGlob("src/posts/**/*.md"))).sort((a, b) => byDateAsc(b, a))
   );
 
   // ---- filters ----
@@ -370,7 +377,9 @@ export default function (eleventyConfig) {
       ...published(api.getFilteredByGlob("src/events/*/index.md")),
       ...published(api.getFilteredByGlob("src/releases/*/index.md")).filter((r) => r.data.status === "released"),
       ...api.getFilteredByGlob("src/posts/**/*.md").filter((p) => !p.data.draft),
-    ].sort((a, b) => toDate(b.data.date) - toDate(a.data.date))
+    ]
+      .filter((i) => i.data.visibility !== "unlisted")
+      .sort((a, b) => toDate(b.data.date) - toDate(a.data.date))
   );
 
   return {

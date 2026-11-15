@@ -30,6 +30,7 @@
 - **Promo video**: upload the promo mp4, or choose *Enter URL* and paste its link on our PeerTube channel (https://v.basspistol.org/c/uncivilization_channel/videos). **After videos**: PeerTube links of videos from the night. YouTube is no longer used.
 - **Exhibition** and **Art market**: one artist name per line; each list gets its own heading on the page.
 - **Notes**: anything extra, shown at the very end of the event page.
+- **Visibility** (events, releases, artists, posts, calls): *Unlisted* keeps the page working for anyone who has its link, but leaves it out of every list on the site, the feed, the sitemap and search engines. Good for a private event. *Draft* is different: it hides the page completely.
 - **Genres** (Sound → Genres): *Visibility* decides whether a genre is listed on the Sound page, under its supergenres and gets its own page. *Hidden* keeps it in the CMS only; events still show its name as plain text.
 - **Sound recordings**: a SoundCloud playlist or track recorded at the event. Shown under SOUND RECORDINGS.
 
@@ -84,6 +85,7 @@
 - **Promo video**: tanıtım videosunun mp4 dosyasını yükle ya da *Enter URL* seçip PeerTube kanalımızdaki linkini yapıştır (https://v.basspistol.org/c/uncivilization_channel/videos). **After videos**: geceden videoların PeerTube linkleri. YouTube artık kullanılmıyor.
 - **Exhibition** ve **Art market**: her satıra bir sanatçı adı; iki liste sayfada ayrı başlıklarla görünür.
 - **Notes**: ek bilgi, etkinlik sayfasının en sonunda görünür.
+- **Visibility** (etkinlik, yayın, sanatçı, yazı, çağrı): *Unlisted* sayfayı linki olan herkese açık tutar, ama sitedeki hiçbir listede, feed’de, site haritasında ve arama motorlarında göstermez. Özel bir etkinlik için uygun. *Draft* farklıdır: sayfayı tamamen gizler.
 - **Genres** (Sound → Genres): *Visibility*, türün Sound sayfasında, üst türlerinin altında listelenip kendi sayfası olup olmayacağını belirler. *Hidden* türü sadece CMS’te tutar; etkinliklerde adı düz metin olarak görünür.
 - **Sound recordings / Ses kayıtları**: etkinlikte kaydedilen SoundCloud listesi veya parçası. SES KAYITLARI başlığı altında görünür.
 

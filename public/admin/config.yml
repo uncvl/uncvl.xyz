@@ -168,6 +168,14 @@ collections:
       - { name: summary_en, label: Short summary for social media (EN), widget: text, required: false }
       - { name: summary_tr, label: Kısa özet (TR), widget: text, required: false }
       - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
+      - name: visibility
+        label: Visibility / Görünürlük
+        widget: select
+        default: listed
+        required: false
+        options:
+          - { label: "Listed: shown in the lists on the site, the feed and search engines", value: listed }
+          - { label: "Unlisted: the page works for anyone with its link, but isn't shown in any list", value: unlisted }
 
   # ---------------------------------------------------------------- RELEASES
   - name: releases
@@ -220,6 +228,14 @@ collections:
       - { name: credits, label: Credits, widget: markdown, required: false }
       - { name: order, label: Order (unreleased only), widget: number, required: false }
       - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
+      - name: visibility
+        label: Visibility / Görünürlük
+        widget: select
+        default: listed
+        required: false
+        options:
+          - { label: "Listed: shown in the lists on the site, the feed and search engines", value: listed }
+          - { label: "Unlisted: the page works for anyone with its link, but isn't shown in any list", value: unlisted }
 
   # ----------------------------------------------------------------- ARTISTS
   - name: artists
@@ -245,6 +261,14 @@ collections:
       - { name: photo, label: Photo, widget: image, required: false }
       - { name: bio_en, label: Bio (EN), widget: markdown, required: false }
       - { name: bio_tr, label: Biyografi (TR), widget: markdown, required: false }
+      - name: visibility
+        label: Visibility / Görünürlük
+        widget: select
+        default: listed
+        required: false
+        options:
+          - { label: "Listed: shown in the lists on the site, the feed and search engines", value: listed }
+          - { label: "Unlisted: the page works for anyone with its link, but isn't shown in any list", value: unlisted }
 
   # ------------------------------------------------------------------- POSTS
   - name: posts
@@ -271,6 +295,14 @@ collections:
           - { name: title, label: Title, widget: string, required: false }
           - { name: bandcamp_id, label: Bandcamp id (only for Bandcamp), widget: string, required: false }
       - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
+      - name: visibility
+        label: Visibility / Görünürlük
+        widget: select
+        default: listed
+        required: false
+        options:
+          - { label: "Listed: shown in the lists on the site, the feed and search engines", value: listed }
+          - { label: "Unlisted: the page works for anyone with its link, but isn't shown in any list", value: unlisted }
 
   # ------------------------------------------------------------------- CALLS
   - name: calls
@@ -305,6 +337,14 @@ collections:
           - { name: tr, label: Etiket (TR), widget: string, required: false }
           - { name: href, label: Link, widget: string }
       - { name: draft, label: Draft (hidden), widget: boolean, default: false, required: false }
+      - name: visibility
+        label: Visibility / Görünürlük
+        widget: select
+        default: listed
+        required: false
+        options:
+          - { label: "Listed: shown in the lists on the site, the feed and search engines", value: listed }
+          - { label: "Unlisted: the page works for anyone with its link, but isn't shown in any list", value: unlisted }
 
   # ------------------------------------------------------------------- SOUND
   - name: genres

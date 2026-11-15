@@ -93,7 +93,7 @@
 <section aria-labelledby="{{ id }}">
   {{ sect(en, tr, "", id) }}
   <ul class="names">
-    {%- for n in list %}{% set ap = collections.artists | findBySlug(n | slugify) %}
+    {%- for n in list %}{% set ap = collections.allArtists | findBySlug(n | slugify) %}
     <li>{% if ap %}<a href="{{ ap.url }}">{{ n }}</a>{% else %}{{ n }}{% endif %}</li>
     {%- endfor %}
   </ul>

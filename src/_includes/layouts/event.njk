@@ -4,10 +4,11 @@ bodyClass: page-event signal
 ogType: article
 ---
 {%- import "macros.njk" as ui with context -%}
-{%- set all = collections.events -%}
-{%- set nb = all | neighbors(page.url) -%}
-{%- set idx = nb.index -%}{%- set seq = idx + 1 -%}{%- set prev = nb.prev -%}{%- set next = nb.next -%}
-{%- set upcoming = collections.upcomingEvents | findBySlug(slug) -%}
+{#- numbered among all events; prev/next only step through listed ones (an unlisted event shows neither) -#}
+{%- set seq = (collections.allEvents | neighbors(page.url)).index + 1 -%}
+{%- set nb = collections.events | neighbors(page.url) -%}
+{%- set prev = nb.prev -%}{%- set next = nb.next -%}
+{%- set upcoming = date | isUpcoming -%}
 
 <article class="event" itemscope>
   <header class="hero">
@@ -47,7 +48,7 @@ ogType: article
       {{ ui.sect("LINEUP", "KADRO", ("peers connected: " + lineup.length), "lineup") }}
       <ul class="peers">
         {%- for l in lineup %}
-        {%- set artistPage = collections.artists | findBySlug(l.artist) if l.artist else null %}
+        {%- set artistPage = collections.allArtists | findBySlug(l.artist) if l.artist else null %}
         <li class="peer">
           {%- if artistPage %}<a class="peer__name" lang="zxx" href="{{ artistPage.url }}">{{ l.name }}</a>{% else %}<span class="peer__name" lang="zxx">{{ l.name }}</span>{% endif %}
           {%- set acts = l.act_type | asList %}
@@ -133,9 +134,9 @@ ogType: article
     {%- endif %}
 
     <nav class="pager" aria-label="Events">
-      {%- if prev %}<a rel="prev" href="{{ prev.url }}"><span class="k">&lt; prev {{ (idx) | hex }}</span>{{ prev.data.title }}</a>{% else %}<span></span>{% endif %}
+      {%- if prev %}<a rel="prev" href="{{ prev.url }}"><span class="k">&lt; prev {{ prev.data.seq | hex }}</span>{{ prev.data.title }}</a>{% else %}<span></span>{% endif %}
       <a href="/events/" class="pager__all">{% t "all events", "tüm etkinlikler" %}</a>
-      {%- if next %}<a rel="next" href="{{ next.url }}"><span class="k">next {{ (idx + 2) | hex }} &gt;</span>{{ next.data.title }}</a>{% else %}<span></span>{% endif %}
+      {%- if next %}<a rel="next" href="{{ next.url }}"><span class="k">next {{ next.data.seq | hex }} &gt;</span>{{ next.data.title }}</a>{% else %}<span></span>{% endif %}
     </nav>
   </div>
 </article>

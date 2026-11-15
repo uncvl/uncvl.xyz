@@ -4,7 +4,7 @@ bodyClass: page-release signal signal--release
 ogType: music.album
 ---
 {%- import "macros.njk" as ui with context -%}
-{%- set idx = (collections.releases | neighbors(page.url)).index -%}
+{%- set idx = (collections.allReleases | neighbors(page.url)).index -%}
 <article class="release">
   <header class="hero">
     <div class="wrap hero__grid hero__grid--square">
@@ -78,7 +78,7 @@ ogType: music.album
     <section aria-labelledby="artists">
       {{ ui.sect("ARTISTS", "SANATÇILAR", "", "artists") }}
       <ul class="peers">
-        {%- for a in artists %}{% set ap = collections.artists | findBySlug(a) %}
+        {%- for a in artists %}{% set ap = collections.allArtists | findBySlug(a) %}
         <li class="peer">{% if ap %}<a class="peer__name" href="{{ ap.url }}">{{ ap.data.name }}</a>{% else %}<span class="peer__name">{{ a }}</span>{% endif %}</li>
         {%- endfor %}
       </ul>
