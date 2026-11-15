@@ -17,7 +17,7 @@ You don't need to know anything about code to add to it. There is a simple edito
 | **Home** | Who we are, upcoming events, latest releases and news |
 | **[Events](https://uncvl.xyz/events/)** | Every Uncivilization night, past and upcoming, grouped as Art, Break, Bass, Punk and Synth. Each event has its poster, lineup, times, venue, tickets and photos |
 | **[Releases](https://uncvl.xyz/releases/)** | Our label's records, with players for Bandcamp and SoundCloud |
-| **Artists** | One page per artist: bio, links, and every event and release they were part of |
+| **Artists** | One page per artist: bio, links, and every event and release they were part of. All of them, A to Z, at [uncvl.xyz/artists](https://uncvl.xyz/artists/) (not in the menu) |
 | **[Posts](https://uncvl.xyz/posts/)** | News and announcements, like open calls |
 | **[About](https://uncvl.xyz/about/)** | The Uncivilization story |
 | **[Organization](https://uncvl.xyz/organization/)** | How we work together, and the work units you can join |
@@ -86,7 +86,7 @@ npm run strip-metadata   # remove EXIF/XMP/GPS from images in src/ (lossless); r
 |---|---|
 | `src/events/<yyyy-mm-dd-name>/index.md` | one event: front matter, with any local images next to it |
 | `src/releases/<yyyy-mm-dd-name>/index.md` | one release (label discography) |
-| `src/artists/<slug>.md` | artist bios, linked from events and releases |
+| `src/artists/<slug>.md` | artist bios, linked from events and releases; `src/artists.njk` lists them all at /artists/ (not linked from the menu) |
 | `src/posts/` | news and announcements |
 | `src/work-units/` | work units → cards on /organization/ |
 | `src/pages/` | about, organization, concept and world building pages (fixed settings like the URL are in the `.11tydata.js` files next to them) |

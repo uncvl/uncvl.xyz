@@ -35,7 +35,7 @@
 {#- Square tile for grids (events/releases). `item` is a collection item. -#}
 {%- macro tile(item, kind="event") -%}
 {%- set d = item.data -%}
-{%- set img = d.cover or d.poster -%}
+{%- set img = d.photo if kind == "artist" else (d.cover or d.poster) -%}
 <li class="tile tile--{{ kind }}{% if d.status and d.status != 'released' %} tile--pending{% endif %}">
   <a href="{{ item.url }}">
     <span class="tile__img">
@@ -47,7 +47,8 @@
     </span>
     <span class="tile__title">{{ d.title }}</span>
     <span class="tile__meta">
-      {%- if kind == "event" %}{{ d.date | date }} · {{ d.venue.city }}
+      {%- if kind == "artist" %}{% set nEv = collections.events | eventsWithArtist(d.slug) | length %}{% set nRel = collections.releases | releasesWithArtist(d.slug) | length %}{% set evW = "event" if nEv == 1 else "events" %}{% set relW = "release" if nRel == 1 else "releases" %}{% if nEv %}{{ nEv }} {% t evW, "etkinlik" %}{% endif %}{% if nEv and nRel %} · {% endif %}{% if nRel %}{{ nRel }} {% t relW, "yayın" %}{% endif %}
+      {%- elif kind == "event" %}{{ d.date | date }} · {{ d.venue.city }}
       {%- else %}{% if d.catalog %}{{ d.catalog }} · {% endif %}{% t site.releaseTypes[d.type].en, site.releaseTypes[d.type].tr %}{% if d.status == "open-call" %} · <span class="ok">{% t "open call", "açık çağrı" %}</span>{% elif d.status != "released" %} · {{ d.status }}{% endif %}{% endif -%}
     </span>
   </a>

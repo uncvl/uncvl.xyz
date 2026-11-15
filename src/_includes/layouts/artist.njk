@@ -12,7 +12,7 @@ bodyClass: page-artist signal
       <figure class="hero__poster hero__poster--square">{% image photo | bundle(page.inputPath), name, "(min-width: 40rem) 16rem, 100vw", true %}</figure>
       {%- endif %}
       <div>
-        <p class="kline">peer · {{ played.length }} {% t "events", "etkinlik" %}{% if released.length %} · {{ released.length }} {% t "releases", "yayın" %}{% endif %}</p>
+        <p class="kline">{%- set evW = "event" if played.length == 1 else "events" %}{% set relW = "release" if released.length == 1 else "releases" %}peer · {{ played.length }} {% t evW, "etkinlik" %}{% if released.length %} · {{ released.length }} {% t relW, "yayın" %}{% endif %}</p>
         <p class="glitch" aria-hidden="true">{{ name | codename | wbr | safe }}</p>
         <h1 class="hero__title">{{ name }}</h1>
         {%- if aka and aka.length %}<p class="hero__by">a.k.a. {{ aka | join(", ") }}</p>{% endif %}

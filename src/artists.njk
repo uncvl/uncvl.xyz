@@ -1,0 +1,16 @@
+---
+layout: base.njk
+title: Artists
+bodyClass: page-list
+permalink: /artists/
+description: Artists who played at Uncivilization events or released on Uncivilization Records.
+---
+{#- All artists (src/artists/), A–Z. Not linked from the menu; each artist page is reached from events and releases. -#}
+{%- import "macros.njk" as ui with context -%}
+<div class="wrap">
+  <header class="list-head">
+    <p class="kline">$ ls ./artists · {{ collections.artists.length }} {% t "peers", "kişi" %}</p>
+    <h1 class="list-head__title">{% t "Artists", "Sanatçılar" %}</h1>
+  </header>
+  <ul class="tiles">{% for a in collections.artists %}{{ ui.tile(a, "artist") }}{% endfor %}</ul>
+</div>
