@@ -69,6 +69,8 @@ for await (const file of walk("src/events")) {
   for (const m of block.matchAll(/url:\s*["']?([^"'\s]+)/g)) {
     if (!isTube(m[1])) errors.push(`${rel}: after video link is not a ${PEERTUBE} video: ${m[1]}`);
   }
+  const ra = (fm.match(/^resident_advisor:\s*["']?([^"'\s]+)/m) || [])[1];
+  if (ra && !/^https:\/\/ra\.co\/events\/\d+$/.test(ra)) errors.push(`${rel}: resident_advisor is not an RA event link: ${ra}`);
   const promo = (fm.match(/^promo:\s*["']?([^"'\s]+)/m) || [])[1];
   if (promo && /^https?:/.test(promo) && !promo.startsWith("https://media.uncvl.xyz/") && !isTube(promo)) {
     errors.push(`${rel}: promo must be an uploaded video or a ${PEERTUBE} link: ${promo}`);

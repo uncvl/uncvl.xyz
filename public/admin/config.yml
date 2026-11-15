@@ -95,6 +95,7 @@ collections:
           - { name: name, label: Name, widget: string }
           - { name: city, label: City, widget: string, default: İzmir }
       - { name: price, label: Price, widget: string, required: false, hint: "150TL" }
+      - { name: resident_advisor, label: Resident Advisor link, widget: string, required: false, pattern: ["^https://ra\\.co/events/[0-9]+$", "An RA event link, e.g. https://ra.co/events/2424917"], hint: "The event's page on ra.co, e.g. https://ra.co/events/2424917" }
       - { name: poster, label: Poster, widget: image, required: false }
       - { name: poster_alt, label: Poster description (alt text), widget: string, required: false }
       - { name: cover, label: Square cover (optional), widget: image, required: false, hint: "Used in grids. Falls back to the poster." }
@@ -237,7 +238,7 @@ collections:
         widget: list
         required: false
         fields:
-          - { name: name, label: Name, widget: string, hint: "Bandcamp, SoundCloud, Instagram…" }
+          - { name: name, label: Name, widget: string, hint: "Bandcamp, SoundCloud, Resident Advisor, Instagram…" }
           - { name: url, label: URL, widget: string, hint: 'SoundCloud links get a player automatically' }
           - { name: bandcamp_id, label: 'Bandcamp id (optional: for a player)', widget: string, required: false }
       - { name: music_genres, label: Music genres / Müzik türleri, widget: relation, collection: genres, value_field: name, search_fields: [name], display_fields: [name], multiple: true, required: false, hint: "What the artist plays. Type to search, pick one or more." }

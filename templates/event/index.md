@@ -43,6 +43,7 @@ lineup:
 #     title: Aftermovie
 # art_market: [Name, Name]           # → ART MARKET
 # exhibition: [Name, Name]           # → EXHIBITION
+# resident_advisor: https://ra.co/events/1234567   # the event on RA → "ra" in the facts
 # notes_en: Anything extra           # → NOTES, at the end of the page
 # notes_tr: Ek bilgi
 # recordings:                        # SoundCloud playlist/track of the night → SOUND RECORDINGS

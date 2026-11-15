@@ -1,5 +1,7 @@
 ---
 name: Lizrith
 music_genres: ["Hardcore"]
-links: []
+links:
+  - name: Resident Advisor
+    url: https://ra.co/dj/lizrith-tk
 ---

@@ -26,6 +26,7 @@ venue:
   name: Nomads 36
   city: İzmir
 price: 400TL (300TL until 22:00)
+resident_advisor: https://ra.co/events/2424917
 poster: https://media.uncvl.xyz/events/2026-04-24-decentralized-consensus/decentralized-consensus_poster.jpg
 poster_alt: uncivilization decentralized consensus poster - music, visuals, performance, zine
 cover: ''

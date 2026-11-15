@@ -5,6 +5,8 @@ links:
   - name: SoundCloud
     url: https://soundcloud.com/randominput
     bandcamp_id: ''
+  - name: Resident Advisor
+    url: https://ra.co/dj/randominput
 music_genres:
   - Breakcore
   - Hardcore

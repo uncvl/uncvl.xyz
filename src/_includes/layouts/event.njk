@@ -34,6 +34,7 @@ ogType: article
           {%- if doors %}<dt>{% t "doors", "kapı" %}</dt><dd>{{ doors }}</dd>{% endif %}
           {%- if stage %}<dt>{% t "stage", "sahne" %}</dt><dd>{{ stage }}</dd>{% endif %}
           {%- if price %}<dt>{% t "ticket", "bilet" %}</dt><dd class="ok">{{ price }}</dd>{% endif %}
+          {%- if resident_advisor %}<dt>ra</dt><dd><a href="{{ resident_advisor }}" rel="noopener noreferrer">Resident Advisor ↗</a></dd>{% endif %}
           {%- if music_genres and music_genres.length %}<dt>{% t "genres", "türler" %}</dt><dd>{{ ui.genreLinks(music_genres) }}</dd>{% endif %}
         </dl>
       </div>
