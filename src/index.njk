@@ -61,9 +61,12 @@ permalink: /
     </ul>
   </section>
 
-  {%- if collections.openCalls.length %}
+  {%- if collections.calls.length %}
   <section aria-labelledby="calls">
-    {{ ui.sect("CALLS", "ÇAĞRILAR", '<a href="/calls/">all calls</a>', "calls") }}
+    {{ ui.sect("CALLS", "ÇAĞRILAR", '<a href="/calls/"><span class="l-en" lang="en">all calls</span><span class="l-tr" lang="tr">tüm çağrılar</span></a>', "calls") }}
+    {%- if not collections.openCalls.length %}
+    <p class="kline">{% t "No open calls right now.", "Şu an açık çağrı yok." %} <a href="/calls/">{% t "Past calls", "Geçmiş çağrılar" %}</a></p>
+    {%- endif %}
     {%- for c in collections.openCalls %}
     {%- set d = c.data %}
     {%- set hEn = d.box_head_en or d.box_head_tr or d.title_en %}{% set hTr = d.box_head_tr or hEn %}

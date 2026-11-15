@@ -35,22 +35,17 @@
     {
       "url": "/events/",
       "en": "events",
-      "tr": "etkinlikler"
+      "tr": "etkinlik"
     },
     {
       "url": "/releases/",
       "en": "releases",
-      "tr": "yayınlar"
+      "tr": "yayın"
     },
     {
       "url": "/posts/",
       "en": "posts",
-      "tr": "yazılar"
-    },
-    {
-      "url": "/calls/",
-      "en": "calls",
-      "tr": "çağrılar"
+      "tr": "yazı"
     },
     {
       "url": "/about/",
