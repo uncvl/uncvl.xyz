@@ -12,6 +12,10 @@ description_tr: |-
   Neurofunk, techstep’in bir devamı olarak ortaya çıkan, drum and bass’ın karanlık bir alt türüdür. Bu tür, funk’ın daha karanlık, daha ağır ve daha sert biçimlerinin unsurlarının, techno, house ve caz gibi çeşitli etkilerle bir araya getirilmesiyle daha da geliştirilmiştir. Bass hattı üzerinde arka arkaya gelen vuruşlar; çok keskin backbeat’ler; geleneksel melodilerin az olması ya da hiç olmaması; ve sub ses tasarımına aşırı odaklanma ile ayırt edilir.
 
   Neurofunk, techstep ile çok yakından bağlantılıdır, ancak bu iki türü birbirinden ayıran temel özellik, neurofunk’ın işlenmiş ve geliştirilmiş breakbeat/perküsyon örnekleri ile akıcı ve karmaşık ritimlere daha fazla vurgu yapması ve zengin katmanlı ses manzaraları ile perküsif vuruş seslerinin üzerine yerleştirilmiş, ifade gücü yüksek, distorsiyonlu, filtrelenmiş ve modüle edilmiş bas seslerine daha fazla önem vermesidir.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/neurofunk/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/9094f251-8379-4ced-9541-a1c91045c327
+visibility: listed
 ---

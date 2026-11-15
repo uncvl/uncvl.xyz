@@ -13,6 +13,10 @@ description_tr: |-
   Footwork müziği, coşkulu, senkoplu ritimler, genellikle yarı tempo ve tekrarlayan sample'ların, hızlı davul kesintilerinin, tom davullarının, el çırpmalarının ve trampet seslerinin yoğun kullanımıyla karakterizedir.
 
   Bu tür, esas olarak ghetto house ve juke müziğinden türemiştir, ancak aynı zamanda hip hop unsurlarını da bünyesinde barındırır. Juke'un aksine, footwork 4/4 kick kullanmaz ve bunun yerine düşük frekansları için esas olarak sub-bas'a güvenir. Ritim atlayan kick davulları, çıtırdayan snare'ler, el çırpmaları ve eski drum machine'leri anımsatan diğer seslerle senkoplu bir şekilde hızla (ve bazen çok seyrek olarak) vurur. Parçaların temposu genellikle 160 BPM civarındadır, ancak 180 BPM'ye kadar çıkabilir. Bu türün genel havasının hipnotik, karanlık ve soyut olduğu söylenir. Çağdaş R&B ve pop müziği gibi alakasız türlerden alınan vokal kesitleri yaygındır ve ses perdesi yükseltilebilir veya alçaltılabilir.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/footwork/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/405b97cf-e1d9-48aa-97cd-53212730589c
+visibility: listed
 ---

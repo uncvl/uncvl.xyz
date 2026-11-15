@@ -14,5 +14,5 @@ description_tr: |-
 
   Breakcore ve hardcore unsurlarını içeren, progresif ve sürükleyici bir ses manzarasına sahip, bitcrush efektli ve distorsiyonlu bir trance tarzıdır. Bitcrush efektli, sıkıştırılmış, sert synth sesleri ve yoğun işlenmiş, distorsiyonlu sesler, bas drop'tan önce enerjik ve duygusal bir atmosfer yaratmak için kullanılır. Tempo hızlıdır ve genellikle 160-200 BPM civarındadır.
 links: []
-draft: false
+visibility: listed
 ---

@@ -14,6 +14,10 @@ description_tr: |-
   Industrial metal, metal müziği ile endüstriyel müziğin unsurlarını birleştiren bir türdür. Industrial metal, geleneksel metal enstrümanlarına ek olarak synthesizer, sampler ve bazen de drum machine gibi elektronik enstrümanlar kullanır.
   Gitar riffleri genellikle düşük akortlu ve tekrar edicidir; bu da müziğe mekanik bir nitelik kazandırır. Diğer yaygın özellikleri arasında distorsiyonlu vokal ve sert bir ses yer alır.
   Industrial metalin belirgin etkisi, cyber metal ve neue deutsche Härte gibi popüler alt türlerin ortaya çıkmasına neden olmuştur.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/industrial-metal/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/d4df54b5-67b4-4fb7-8f73-79e71717a501
+visibility: listed
 ---

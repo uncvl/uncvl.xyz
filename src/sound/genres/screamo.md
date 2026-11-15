@@ -2,7 +2,11 @@
 name: "Screamo"
 supergenres: ["Emo","Punk"]
 order: 95
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/screamo/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/8fea0cb0-4205-49cb-95e8-bc1122857c7d
 description_en: |-
   Screamo (also referred to as skramz) is a style of hardcore punk influenced emo with screaming. It merges the emotional lyrics and melodicism of emo with the intensity, aggression and speed of hardcore punk. Lyrical themes usually include emotional pain, death, romance, and human rights.
 
@@ -12,4 +16,5 @@ description_en: |-
 
   Many bands have been introducing new stylistic elements from the genres like mathcore, sludge metal and post rock. Emoviolence, which took influence from powerviolence is a subgenre of screamo.
 description_tr: ""
+visibility: listed
 ---

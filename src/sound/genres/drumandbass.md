@@ -12,6 +12,10 @@ description_tr: |-
   Drum and bass müziği çeşitlilik gösterse de, adını da buradan alan hızlı, senkoplu breakbeat davul ritimleri ve ağır bassline'lara odaklanmasıyla tanımlanır. Bu özellikler, jungle müziğindeki köklerinden miras alınmıştır.
 
   Davul unsurları genellikle, drum and bass prodüksiyonunun başlangıcında yaygın olarak kullanılan Amen Break gibi sampler’larla üretilir. Günümüzde sanatçılar, parçalarını üretmek için daha geniş bir sampler yelpazesine sahiptir. Davul ritimleri kadar önemli olan bassline da müzikte önemli bir rol oynar. Bu nedenle çoğu zaman, daha ağır bir ses yaratmak için bassline'ın üzerine bir sub-bas pattern eklenir. Drum and bass'ın temposu hızlıdır ve genellikle 160 ile 180 BPM arasındadır.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/drum-and-bass/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/462f9321-6103-49c9-b6db-96219bce6f62
+visibility: listed
 ---

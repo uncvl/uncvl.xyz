@@ -13,6 +13,10 @@ description_tr: |-
   Extratone, 1000 BPM’den başlayan ve belirli bir BPM sınırı olmayan bir speedcore alt türüdür. Extratone genellikle, son derece hızlı blast beat’lerle harmanlanmış bol miktarda statik veya distorsiyon içerir. Melodi, davulların temposundan çok daha düşüktür.
 
   15.000 ile 1.200.000 BPM arasındaki extratone genellikle supertone, 1.200.000 BPM'nin üzerindeki ise hypertone olarak adlandırılır. Parçalara sert noise unsurlarının karıştırılması da nadir değildir. Hızlandığında, extratone gerçek blast beat'lerden ziyade daha çok bir vızıltı veya uğultu olarak duyulur.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/extratone/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/6d588e79-30b0-4f8c-9924-d4a951d60aef
+visibility: listed
 ---

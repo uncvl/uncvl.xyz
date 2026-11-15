@@ -17,6 +17,10 @@ description_tr: |-
   Hi-tech türünde kullanılan daha karmaşık bas hatlarına kıyasla genellikle tek perdeli bas hatları içerir ve çoğu zaman gürleyen bir ses yaratmak için olağanüstü hızlı nota bölünmeleri kullanır. Ayrıca çok geniş bir tempo aralığına sahiptir; 200 BPM’yi aşan parçalar oldukça yaygındır ve bazı parçalar 400 BPM’ye kadar çıkan hızlara ulaşır.
 
   Psycore, dark ambient, glitch, hardcore, flashcore ve speedcore gibi türlerden de beslenir.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/psycore/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/d1cbfa0d-b1b6-4692-bbec-457681dd111f
+visibility: listed
 ---

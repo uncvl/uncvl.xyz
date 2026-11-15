@@ -2,10 +2,15 @@
 name: "Emoviolence"
 supergenres: ["Emo","Punk","Core"]
 order: 96
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/emoviolence/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/6cf9c00f-f046-4b7a-8ffe-2932bb6cb064
 description_en: |-
   Emoviolence influenced by powerviolence, is an extremely aggressive and volatile approach to screamo. It borrows the extreme dissonance, speed, and chaos of powerviolence.
 
   Songs were shortened to the point that they rarely surpassed three minutes, unconventional methods of screaming were utilized, and blast-beats were often used. These changes marked a profound influence from powerviolence and grindcore.
 description_tr: ""
+visibility: listed
 ---

@@ -17,6 +17,10 @@ description_tr: |-
   Bu tür, yıkıcı unsurları ve geniş bir dinamik tempo aralığıyla karakterize edilir; genellikle jersey club kick kalıpları, grime el çırpmaları ve titrek footwork prodüksiyonlarından yararlanarak coşkulu, yüksek BPM’li parçalar sunar. Ayrıca, parçalar deneysel ses manzaralarına ve değişen atmosferik nefes alma anlarına da yer verir.
 
   Deconstructed club, İngilizce konuşmayan kültürlerin yeterince temsil edilmemesine bir tepki olarak bölgesel ses unsurlarını da kullanır. Genellikle ırk ilişkileri, feminizm, queer siyaset ve sömürgecilik gibi temaları ya da fütürizm ve teknoloji gibi kavramları ele alır.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/deconstructed-club/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/5a291744-e683-49bb-883e-bf978f235b6b
+visibility: listed
 ---

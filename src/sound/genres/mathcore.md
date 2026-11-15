@@ -2,7 +2,11 @@
 name: "Mathcore"
 supergenres: ["Metal","Core","Punk"]
 order: 83
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/mathcore/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/8df1241b-2ba1-40b8-bb8f-2dc15ce6dc1e
 description_en: |-
   Mathcore is a rhythmically complex subgenre of metalcore influenced by post-hardcore, extreme metal and math rock. Mathcore emphasizes complex and fluctuant rhythms through the use of irregular time signatures, polymeters, syncopations and tempo changes.
 
@@ -10,4 +14,5 @@ description_en: |-
 
   The name originated from combining the name of the also rhythmically-complex math rock with metalcore, but mathcore has much more in common with metalcore than math rock; although they share the trait of rhythmic complexity, mathcore is much more aggressive and heavy in sound, more often than not with shouted vocals.
 description_tr: ""
+visibility: listed
 ---

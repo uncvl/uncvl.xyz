@@ -2,7 +2,11 @@
 name: "Hyperpop"
 supergenres: ["Glitch"]
 order: 149
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/hyperpop/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/a8a72860-0bf8-44fd-90a1-b947a8ac2c56
 description_en: |-
   Hyperpop is a loosely-defined music movement and microgenre which is characterized by a maximalist or exaggerated take on popular music. Artists within the genre typically integrate pop and avant-garde sensibilities while drawing on themes commonly found in electronic, hip hop, and dance music.
 
@@ -14,4 +18,5 @@ description_en: |-
 
   The influence of cloud rap, emo and lo-fi trap, trance music, dubstep, and chiptune are evident in hyperpop, as well as more surreal and haphazard qualities that are pulled heavily from hip hop.
 description_tr: ""
+visibility: hidden
 ---

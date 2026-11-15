@@ -17,6 +17,10 @@ description_tr: |-
   Raggacore, ragga vokalleri, hardcore’dan gelen sert kick’ler ve bas sesleriyle 4/4 ritmi, jungle ve breakcore’dan gelen hızlı ve kaotik breakbeat’ler ile reggae’den alınan enstrümantal unsurlarla karakterize edilir. Tempo hızlıdır ve genellikle 180 ile 210 BPM arasında değişir.
 
   Raggacore bazen ragga jungle ile karşılaştırılır, ancak breakcore'dan türemiş olması nedeniyle raggacore sanatçıları, çoğu jungle prodüktöründen çok daha yoğun ve eklektik bir kompozisyon yaklaşımı kullanır ve gabber ve noise gibi diğer türlerin unsurlarını da eserlerine dahil edebilirler.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/raggacore/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/41603984-87fd-47e7-ad57-64839a277c55
+visibility: listed
 ---

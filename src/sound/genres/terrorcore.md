@@ -13,6 +13,10 @@ description_tr: |-
   Terrorcore, hardcore’un daha hızlı, daha karanlık ve daha sert bir türü olup, sık sık korku, aksiyon ve bilim kurgu filmlerinden ve metal müziğin gitar riffleri gibi sert müzik türlerinden alınan sample'lar içerir.
 
   Speedcore ile birlikte gelişen terrorcore, benzer şekilde yaklaşık 160 ila 300 BPM arasında değişen yüksek tempolarıyla tanımlanır. Bu tür, hardcore’un distorsiyonlu bas davullarını korurken, bunlara ek distorsiyon katmanları ve diğer sert sesler ekler.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/terrorcore/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/8a757534-0928-434c-accd-6be5517c1af3
+visibility: listed
 ---

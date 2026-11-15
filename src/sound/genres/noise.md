@@ -2,7 +2,11 @@
 name: "Noise"
 supergenres: ["Noise"]
 order: 101
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/noise/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/89c7c9b3-215e-482f-bce3-3219ffd0a222
 description_en: |-
   Noise is an experimental genre that strays away from conventional music structure, tonality, and composition and - as the name implies - consists predominantly of noise.
 
@@ -12,4 +16,5 @@ description_en: |-
 
   In common use, the word noise means unwanted sound or noise pollution. In electronics noise can refer to the electronic signal corresponding to acoustic noise (in an audio system) or the electronic signal corresponding to the (visual) noise commonly seen as 'snow' on a degraded television or video image. In signal processing or computing it can be considered data without meaning; that is, data that is not being used to transmit a signal, but is simply produced as an unwanted by-product of other activities.
 description_tr: ""
+visibility: listed
 ---

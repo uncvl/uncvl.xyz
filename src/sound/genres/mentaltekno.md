@@ -13,5 +13,5 @@ description_tr: |-
 
   Sanatçılar genellikle, kısa ve uzun samples'lardan oluşan, çeşitli efektler, uzun delay'ler ve reverb'lerle filtrelenmiş bir ses manzarası yaratarak, dinleyiciyi bir sarmalın içine çekmek ve bilinçaltını harekete geçiren bir ruh hali yaratmaya çalışırlar.
 links: []
-draft: false
+visibility: listed
 ---

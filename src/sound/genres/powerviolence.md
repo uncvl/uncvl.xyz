@@ -2,7 +2,11 @@
 name: "Powerviolence"
 supergenres: ["Punk","Core"]
 order: 97
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/powerviolence/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/4e6e388c-a9d2-45cb-80ad-bf64db4a0759
 description_en: |-
   Powerviolence is an extremely dissonant and fast subgenre of hardcore punk which is closely related to thrashcore and grindcore. It typically refers to bands who focus on speed, brevity, breakdowns, and constant tempo changes.
 
@@ -10,4 +14,5 @@ description_en: |-
 
   In contrast with grindcore, which is a crossover idiom containing musical aspects of heavy metal, powerviolence is just an augmentation of the most challenging qualities of hardcore punk. The blastbeats and short song lengths are similar to grindcore, yet the riffs and shouty vocals are more similar to hardcore punk. Like its predecessors, it is usually socio-politically charged and iconoclastic.
 description_tr: ""
+visibility: listed
 ---

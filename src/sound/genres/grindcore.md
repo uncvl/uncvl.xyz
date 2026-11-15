@@ -2,7 +2,11 @@
 name: "Grindcore"
 supergenres: ["Metal","Punk","Core"]
 order: 77
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/grindcore/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/093149ea-d1bc-4f93-bd5a-8fdcd055ea2f
 description_en: |-
   Grindcore draws inspiration from abrasive-sounding musical styles, such as thrashcore, crust punk, hardcore punk, extreme metal, and industrial and features a highly aggressive and chaotic sound. Grindcore is considered a more noise-filled style of hardcore punk while using hardcore's trademark characteristics such as heavily distorted, down-tuned guitars, grinding overdriven bass, high-speed tempo, blast beats, and vocals which consist of growls, shouts and high-pitched shrieks.
 
@@ -14,4 +18,5 @@ description_en: |-
 
   A variety of subgenres and microgenres have subsequently emerged, often labeling bands according to traits that deviate from regular grindcore such as cybergrind which incorporates electronic music elements such as sampling and programmed drums.
 description_tr: ""
+visibility: listed
 ---

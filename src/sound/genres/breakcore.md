@@ -13,6 +13,10 @@ description_tr: |-
   Breakcore, genellikle yüksek BPM’de Amen break’in ve diğer klasik jungle ile hip-hop break’lerinin işlenmesine dayanan, son derece karmaşık ve incelikli davul düzenlemeleriyle karakterize edilir. Breakbeat’ler, drum and bass’ta olduğu gibi şarkı boyunca aynı kalmaz; aksine farklı break’ler parçalanır, değiştirilir ve birbirine karıştırılır.
 
   Şarkı yapısı genellikle doğrusal değildir. Melodik açıdan breakcore’u tanımlayan belirli bir unsur yoktur. Breakcore, ritim bölümünün çılgın ve hızlı tempolu doğasına uyum sağlamak için müzik yelpazesinin tümünden alınmış sesleri sample'lamasıyla bilinir.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/breakcore/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/8aad8a03-be38-48e4-aa43-5ca0f826c569
+visibility: listed
 ---

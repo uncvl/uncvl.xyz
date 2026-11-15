@@ -12,6 +12,10 @@ description_tr: |-
   Speedcore, yüksek tempo ve agresif temalarla karakterize edilen bir hardcore türüdür. Bu müziğin temposu nadiren 300 BPM’nin altına düşer. Tempo aralığı 600 ile 1000 BPM arasında olduğunda “splittercore” olarak, 1000’den başlayıp belirli bir sınırı olmayan tempolarda ise “extratone” olarak alt türlere ayrılır. Bu tür, breakcore ile dikkate değer bir şekilde kesişir.
 
   Speedcore, genellikle hiperaktif bir trampet veya tom-tom dolgularıyla vurgulanan agresif ve baskın bir elektronik perküsyon parçasıyla diğer hardcore türlerinden ayırt edilebilir.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/speedcore/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/03544ca7-48ef-449b-abed-67aebdcd8120
+visibility: listed
 ---

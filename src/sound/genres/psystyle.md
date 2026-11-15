@@ -14,6 +14,10 @@ description_tr: |-
   Psystyle yapımcıları genellikle rawstyle gibi tarzların cırtlak, distorsiyonlu kick'lerini ve tiz lead'lerini, ana akım psytrance bassline'larıyla birleştirir; buna ek olarak, acid'den esinlenen synth lead'leri ve tribal, rave'e uygun atmosferler gibi diğer psytrance unsurlarını da kullanırlar. Genellikle 140-150 BPM hızında, standart hardstyle tempolarında üretilir.
 
   Psystyle, dark psytrance ve hardcore gibi diğer tarzlardan da etkilenir.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/psystyle/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/9a6666cb-9816-4ab4-acf6-0e91030339be
+visibility: listed
 ---

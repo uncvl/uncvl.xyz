@@ -13,6 +13,10 @@ description_tr: |-
   Endüstriyel hardcore, hardcore müziğin bir türüdür ve esas olarak çiğ üretim biçimiyle karakterize edilir; genellikle dark ambient, endüstriyel ve noise türleriyle ilişkili ses manzaralarının yanı sıra, mekanik ve bazen de distorsiyonlu ses tasarımına sahip, akortlanmış veya kırpılmış bas davul ritimleri içerir.
 
   Endüstriyel hardcore, büyük ölçüde techno, endüstriyel ve ilgili elektronik müzik türleri arasındaki gelişmelerden ortaya çıkmıştır. Bu tür, gabber, speedcore ve terrorcore prodüktörlerinden oluşan geniş bir kitle tarafından şekillenmiştir. Daha sonra bu tür, doomcore ve hardstyle gibi daha yavaş tempolu türlerle daha yakın bir etkileşime girmiştir. Ayrıca, bazı durumlarda deneysel bir nitelik de taşımıştır. Birçok sanatçı, IDM, glitch, power noise ve orijinal endüstriyel müziğin yeraltı akımlarından büyük ölçüde ilham almıştır. Bu akımla bağlantılı sanatçılar, soyut ses tasarımları ve alışılmışın dışında ritmik ve kompozisyonel yapılarıyla tanınmışlardır; bu özellikler, daha sonra flashcore ve splittercore türlerindeki gelişmeleri büyük ölçüde etkilemiştir.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/industrial-hardcore/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/e4ba3fa5-5256-4f87-981a-1239e05acab0
+visibility: listed
 ---

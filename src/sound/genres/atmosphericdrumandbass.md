@@ -18,5 +18,5 @@ links:
     url: https://rateyourmusic.com/genre/atmospheric-drum-and-bass/
   - name: MusicBrainz
     url: https://musicbrainz.org/genre/1e215463-ccf8-413a-b281-bd83ed2246bb
-draft: false
+visibility: listed
 ---

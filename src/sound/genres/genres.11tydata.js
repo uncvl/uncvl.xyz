@@ -7,6 +7,6 @@ export default {
     description: (data) =>
       String(data.description_en || data.description_tr || `${data.name}: a music genre in the Uncivilization sound.`)
         .replace(/[*_#>[\]]/g, "").replace(/\s+/g, " ").trim().slice(0, 280),
-    permalink: (data) => (data.draft ? false : `/sound/genres/${data.page.fileSlug}/`),
+    permalink: (data) => (data.draft || data.visibility === "hidden" ? false : `/sound/genres/${data.page.fileSlug}/`),
   },
 };

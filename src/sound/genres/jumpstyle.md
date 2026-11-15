@@ -18,5 +18,5 @@ links:
     url: https://rateyourmusic.com/genre/jumpstyle/
   - name: MusicBrainz
     url: https://musicbrainz.org/genre/22253c29-0e14-4463-915e-1e563de4efe1
-draft: false
+visibility: listed
 ---

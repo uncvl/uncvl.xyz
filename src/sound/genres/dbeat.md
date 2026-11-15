@@ -2,7 +2,11 @@
 name: "D-Beat"
 supergenres: ["Punk","Core"]
 order: 90
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/d-beat/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/ad41288f-0803-4e2e-859f-148e7f7b2eae
 description_en: |-
   D-beat (also known as Discore, k√§ngpunk, Discrust, and crust-beat) is a metal-influenced style of hardcore punk which is distinguished by a specific drum pattern and its derivatives.
 
@@ -10,4 +14,5 @@ description_en: |-
 
   D-beat is closely associated with crust punk, which is a heavier, more complex variation.
 description_tr: ""
+visibility: listed
 ---

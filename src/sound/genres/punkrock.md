@@ -2,7 +2,11 @@
 name: "Punk Rock"
 supergenres: ["Punk"]
 order: 88
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/punk-rock/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/bd7e1d40-43b1-4ba5-97b3-05b891466962
 description_en: |-
   Punk rock is characterized by fast tempos, loud and distorted riffs, simple songs, frequent use of power chords, and shouted vocals. Punk bands rejected the perceived excesses of mainstream rock music. They typically produced short, fast-paced songs with hard-edged melodies and singing styles, stripped-down instrumentation, and often shouted political, anti-establishment lyrics.
 
@@ -10,4 +14,5 @@ description_en: |-
 
   The vocals are sometimes nasal and the lyrics often shouted in an arrogant snarl, rather than conventionally sung. Punk rock lyrics are typically blunt and confrontational and deal with topics considered taboo in mainstream music. They often focus on social and political issues. Although many groups frequently include light-hearted or comedic lyrics, the anger experienced by many punks is the main focus.
 description_tr: ""
+visibility: listed
 ---

@@ -15,6 +15,10 @@ description_tr: |-
   Black metal şarkıları genellikle geleneksel şarkı yapısından sapar ve net nakarat-koro bölümlerinden yoksundur. Bunun yerine, birçok black metal şarkısı, diğer birçok müzik türünün hızını sıklıkla aşan, çok hızlı ritimli, uzun ve tekrarlayan enstrümantal bölümler içerir.
 
   Gitar genellikle hızlı, kısılmamış tremolo tekniği ve power akorlarla çalınır. Gitaristler, bir dehşet hissi yaratmak için belirli gamlar, aralıklar ve akor ilerlemeleriyle birlikte disonansı sıklıkla kullanır. Triton (düz beşli) sıklıkla kullanılır. Gitar soloları black metal’de nadirdir. Bas gitar, nadiren bağımsız melodiler çalmak için kullanılır. Basın gitar karşısında kısılması veya gitarın alçak perdeli rifflerini homofonik olarak takip etmesi yaygındır. Davul çalışı genellikle hızlıdır ve bazen dakikada 300 vuruşa yaklaşabilen tempoları korumak için çift bas ve blast beatlere dayanır. Teknikten çok özgünlüğe önem verilir. Vokal açısından, belirgin ve sert bir stil gereklidir; bu genellikle çok gırtlaktan bir hırıltı veya tiz bir çığlıktır. Vokallerin mağara gibi yankılı ve atmosferik ses vermesi için genellikle reverb efekti kullanılır.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/black-metal/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/12568698-97cc-49a9-80ab-9c5e3fe4dd33
+visibility: listed
 ---

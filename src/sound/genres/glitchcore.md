@@ -8,4 +8,5 @@ description_en: |-
 
   Glitchcore has also been associated with a specific visual aesthetic where videos are typically accompanied by glitchy, fast-paced, cluttered, colorful edits.
 description_tr: ""
+visibility: hidden
 ---

@@ -17,6 +17,10 @@ description_tr: |-
   Future garage, yumuşak lead'ler ile yavaş bir atak ya da akustik bir lead, subbas veya modüle edici filtreli kare dalga bas ve off-the-grid hi-hat'lere sahip dörtlü ya da 2-step garage davul ritmini kullanır. Future garage davul ritimlerinde belirgin olan swing, kick ve snare kalıpları arasındaki geç ya da insanımsı hi-hat'lere odaklanılmasıdır.
 
   Future garage, iki farklı dalga üzerinden gelişmiştir: Bunlardan biri, neşeli bir yapıya sahip olmayan melankolik, kasvetli ve hipnotik atmosferlere sahipken, diğeri ise parlak, sıcak atmosferler ve hafif synth kullanımıyla öne çıkmaktadır.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/future-garage/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/ad6d7f8d-2224-4708-8a00-0fdd838d4676
+visibility: listed
 ---

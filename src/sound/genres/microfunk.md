@@ -18,5 +18,5 @@ links:
     url: https://rateyourmusic.com/genre/microfunk/
   - name: MusicBrainz
     url: https://musicbrainz.org/genre/ba7ff630-3168-4b9e-9d05-094943af8d50
-draft: false
+visibility: listed
 ---

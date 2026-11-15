@@ -2,7 +2,11 @@
 name: "Drill"
 supergenres: ["Trap"]
 order: 140
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/drill/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/1e5e18e5-4e70-4a73-942a-c6c79c1aefe2
 description_en: |-
   Drill is a form of hip hop, broadly characterized by complex, energetic rhythms, coupled with street-conscious and often violent rapping.
 
@@ -14,4 +18,5 @@ description_en: |-
 
   Drill would also influence forms of electronic music, with certain wave artists for example incorporating drill-derived rhythms.
 description_tr: ""
+visibility: hidden
 ---

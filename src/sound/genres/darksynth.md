@@ -2,7 +2,11 @@
 name: "Darksynth"
 supergenres: ["Synth"]
 order: 120
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/darksynth/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/c3632505-be72-487c-8430-f85bd6b3f7c9
 description_en: |-
   Darksynth (also known as dreadwave) is a subgenre of synthwave. It puts an emphasis on creating intense dark atmospheres and uses elements such as distorted bass lines and complicated rhythms.
 
@@ -10,4 +14,5 @@ description_en: |-
 
   Darksynth artists included elements from genres like dubstep, trap, drum and bass, industrial and metal.
 description_tr: ""
+visibility: listed
 ---

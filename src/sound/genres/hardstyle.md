@@ -18,5 +18,5 @@ links:
     url: https://rateyourmusic.com/genre/hardstyle/
   - name: MusicBrainz
     url: https://musicbrainz.org/genre/4a74a604-f702-424c-984f-93c5b04360ea
-draft: false
+visibility: listed
 ---

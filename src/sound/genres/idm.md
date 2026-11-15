@@ -12,6 +12,10 @@ description_tr: |-
   IDM, belirli tür kısıtlamalarından ziyade kendine özgü deneysellikle tanımlanan bir elektronik müzik türüdür. Ambient techno, acid house, Detroit techno ve breakbeat gibi elektronik ve rave müzik türlerinin kültüründen ve ses paletinden ortaya çıkmıştır. IDM, sıra dışı, tuhaf, bozuk sesler ve çok kısa bip sesleri ile glitch’lerden oluşan davul ritimleriyle karakterize edilen bir türdür.
 
   “Intelligent dance music” terimi, çoğu sanatçı tarafından yaygın olarak eleştirilmiş ve reddedilmiştir; günümüzde ise gerçek anlamı, diğer dans müziği türlerinin zeki olmadığı imasını taşıdığı şeklinde yorumlanmaya başlandığından, neredeyse yalnızca kısaltma biçimiyle kullanılmaktadır. Terim yaygın olarak yerilse de hâlâ sıklıkla kullanılmaktadır. Bir alternatif terim olarak “braindance” da kullanılmaktadır.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/idm/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/8eb583f1-4fd7-460c-8246-dcdccc0e3ef9
+visibility: listed
 ---

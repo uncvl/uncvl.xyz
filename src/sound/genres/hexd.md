@@ -22,5 +22,5 @@ links:
     url: https://rateyourmusic.com/genre/hexd/
   - name: MusicBrainz
     url: https://musicbrainz.org/genre/72fc5ddb-2c22-4f87-9511-fd16a7813f5c
-draft: false
+visibility: listed
 ---

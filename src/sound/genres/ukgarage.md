@@ -16,6 +16,10 @@ description_tr: |-
   Bu tür, senkoplu hi-hat, zil ve trampetlerin yer aldığı perküsif, karışık ritimlerle tanımlanır ve 4/4 house kick kalıplarını ya da daha düzensiz 2-step ritimlerini içerebilir. Garage parçaları ayrıca genellikle, yaklaşık 130 BPM civarında bir tempoda altta yatan ritmik yapıyı tamamlayan, parçalanmış, süresi uzatılmış veya perdesi değiştirilmiş vokal örnekleri içerir.
 
   UK garage'ın müziğine dahil ettiği stil çeşitliliği nedeniyle, future garage, breakstep, 2-step ve UK bass gibi bir dizi alt tür ortaya çıkmıştır. UK garage, büyük ölçüde bassline, grime ve dubstep dahil olmak üzere diğer müzik ve prodüksiyon tarzlarının bir parçası haline gelmiştir.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/uk-garage/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/95c57cd7-7fb8-4405-ade1-775c2d27e54e
+visibility: listed
 ---

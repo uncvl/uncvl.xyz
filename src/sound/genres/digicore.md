@@ -2,7 +2,11 @@
 name: "Digicore"
 supergenres: ["Trap","Glitch"]
 order: 146
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/digicore/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/b48ff5e2-b1da-4938-ad94-8411171d5170
 description_en: |-
   Digicore is a is a form of hip hop. Digicore grew alongside the hyperpop wave, though the two are ultimately distinct styles with different origins; digicore typically relies much more on its hip hop origins in production and vocal inflections, in contrast with hyperpop's prominent EDM leanings, where the genre ultimately has its roots.
 
@@ -14,4 +18,5 @@ description_en: |-
 
   The name 'glitchcore' was used to describe the genre's vocal glitching and art style.
 description_tr: ""
+visibility: hidden
 ---

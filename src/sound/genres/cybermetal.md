@@ -12,6 +12,10 @@ description_tr: |-
   Cyber metal, endüstriyel metalin bir alt türüdür. Bu tür, ağırlıklı olarak EBM ve aggrotech’te görülen çok sayıda unsuru bünyesinde barındırır. Türün özellikleri arasında, endüstriyel metalin çoğunlukla metalik ve mekanik sesinin aksine, daha melodik ve daha az tekrarlayıcı rifflerin kullanılması yer alır. Genel olarak, thrash müziğin sert gitar sesini kullanır, ancak bunu sert endüstriyel tarzda elektronik seslerle tamamlar.
 
   Gitar melodileri, melodik death metal'e benzer bir şekilde çalınır ve senfonik black metal'e özgü klavye sesleri de sıklıkla kullanılır.  Riffler, thrash benzeri olanlardan groove benzeri olanlara kadar çeşitlilik gösterir ve genellikle “jackhammer” olarak adlandırılan teknik staccato rifflerle prog metal alanını yoklar. Vokaller serttir ve aggrotech’e özgü şarkı söyleme tekniklerinden black metal çığlıklarına ve death metal homurtularına kadar uzanır. Şarkı sözleri, ağırlıklı olarak politik konulardan bilim kurguya kadar uzanır.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/cyber-metal/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/d55fda19-1d73-4d55-9449-17ad0c18489f
+visibility: listed
 ---

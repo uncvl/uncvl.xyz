@@ -17,6 +17,10 @@ description_tr: |-
   Çoğu hardstep yapımında aşırı sıkıştırılmış davul sesleri bulunur; atmosfer, daha az melodik ve daha bas ağırlıklı bir yapıya sahip olacak şekilde çoğunlukla minimalisttir ve aynı zamanda bu türe özgü sert bir prodüksiyon stili kullanılır. Synth bas riffleri, basit, derin ve modüle edilmiş kalıplardan oluşur.
 
   Bu tür, daha karmaşık olan techstep ve daha sade bir sese sahip jump-up gibi diğer drum and bass alt türleri üzerinde güçlü bir etki bırakmıştır.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/hardstep/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/f4553b2c-ef41-4d1c-ae02-7145202465b8
+visibility: listed
 ---

@@ -13,6 +13,10 @@ description_tr: |-
   Ragga jungle, hızlı arka arkaya gelen breakbeat’ler, derin sub-bas ve Jamaika dancehall/ragga vokallerini bir araya getiren, yüksek enerjili bir jungle alt türüdür.
 
   Rewind'ler, dub sirenleri ve devasa hoparlör sistemleri için tasarlanmış bassline'lar ile beslenen bu tarzın havası, neşeli ve sokak ruhundan son derece yoğun bir atmosfere kadar uzanır. Reggae şarkılarından, silah seslerinden ve gangster filmlerinden alınan sample'lar öne çıkar. Genellikle 160–175 BPM hızında çalınan bu tarz, Dub ve Ragga'dan yoğun bir şekilde etkilenmiştir. Bu türdeki vokal parçalarının çoğu Jamaika Patois dilinde seslendirilir.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/ragga-jungle/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/7aae791f-dfff-4910-b133-ba1b9e9c1560
+visibility: listed
 ---

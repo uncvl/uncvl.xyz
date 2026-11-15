@@ -26,5 +26,5 @@ links:
     url: https://rateyourmusic.com/genre/drill-and-bass/
   - name: MusicBrainz
     url: https://musicbrainz.org/genre/6732427a-0d04-4a15-b9e5-b4b5b9532f8f
-draft: false
+visibility: listed
 ---

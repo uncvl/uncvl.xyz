@@ -12,6 +12,10 @@ description_tr: |-
   Techstep, jungle ve hardstep türlerinden gelişmiştir. Genellikle, müzikal yapı açısından drum and bass kurallarına bağlı kalır, özellikle de “drop” kısmına ağırlık verir.
 
   Karanlık, bilimkurgu havası, neredeyse tamamen sentezlenmiş veya sample'lanmış ses öğeleri, 2-step kick ve snare'ler ile endüstriyel ve tekno müziğinden alınan etkilerle karakterize edilir. Efektlerle işlenmemiş enstrümanlar nadiren kullanılır. Soyut, sentetik gürültüler, mekanik sesler ve gıcırtı sesleri yaygın olarak kullanılır. Doğal breakbeat’lere kıyasla, kuantize edilmiş drum machine kiti ve perküsyon sesleri tercih edilir. Techstep, jungle müziğinin bas sesine olan takıntısının, düşük ve derin bas seslerini hedeflemekten tınıyı keşfetmeye doğru değişmesine tanık oldu; sanatçılar, giderek daha fazla distorsiyonlu ve “çarpık” bas sesleriyle birbirlerini aşmaya çalıştı.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/techstep/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/de706214-32bb-4b52-9bb4-463aec11bcd3
+visibility: listed
 ---

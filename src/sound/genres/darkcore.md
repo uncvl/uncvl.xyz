@@ -13,6 +13,10 @@ description_tr: |-
   Darkcore, breakbeat hardcore’un bir alt türü olarak kabul edilir. Drum and bass’ın ilk öncülerinden biri olarak tanınır.
 
   Darkcore, yaklaşık 150 ila 160 bpm hızındaki katmanlı breakbeat'lerin çok düşük frekanslı bas hatlarıyla birleştirilmesiyle karakterize edilir. Bu temel özelliklerin yanı sıra, korku filmi tema müzikleri veya yardım çığlıkları gibi karanlık temalı örnekler de sıklıkla kullanılırdı. Tarzın gelişmesiyle birlikte, yapımcılar kaotik ve ürkütücü bir atmosfer yaratmak için reverb, delay, pitch shifting ve time stretching gibi basit efektlere daha fazla ağırlık vermeye başladıkça, korku unsurlarının kullanımı terk edildi.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/darkside/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/74e08062-3737-4744-9177-873d8c1eb6ac
+visibility: listed
 ---

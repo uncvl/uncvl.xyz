@@ -18,6 +18,8 @@ description_tr: |-
   Hi-tech psytrance, 200 BPM’yi aşabilen aşırı yüksek tempolara sahiptir. Bu tür, öncelikle glitchy ve titrek ses tasarımına yapılan abartılı vurgu ile, bir parçanın seyri boyunca sıklıkla önemli ölçüde değişen karmaşık, ilerleyen bassline kalıplarıyla tanımlanır. Bu unsurlar, Hi-Tech'e, etkilendiği türlerin de ötesinde yoğun ve kaotik bir ses kazandırır.
 
   Dark Psy ile Speedcore'u birleştiren bir başka tür olan Psycore'a yakındır. Ancak Psycore daha deneyseldir, atmosfere daha fazla ağırlık verir ve daha hızlıdır.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/hi-tech-psytrance/
+visibility: listed
 ---

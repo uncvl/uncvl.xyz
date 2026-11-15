@@ -17,6 +17,10 @@ description_tr: |-
   Bu tarz, kesik Amen/Think break'leri, sub-ağırlıklı 808 bas ve halftime/duple hissi veren senkoplamayı, Footwork tarzı vokal kesitleri, call-and-response sample'ları ve boşluklu, rave kökenli atmosferik unsurlarla birleştirir. Sonuçta ortaya çıkan müzik, dinleyiciyi hem derinlemesine dinlemeye hem de yüksek yoğunluklu dans hareketlerine yönlendirebilen, Jungle'ın akıcı momentumunu korurken Footwork'ün kalıpların dışındaki mikro ritmini ve negatif boşluklarını benimseyen bir müziktir. Çoğu footwork türü ve çeşitli drum and bass türleri gibi, footwork jungle de genellikle 160 BPM'de üretilir ve mikslenir.
 
   Türün adı, Jungle ile yakın bir bağlantı olduğunu ima etse de, tüm prodüktörler jungle unsurlarını kullanmaz; ancak yaygındır. Atmospheric Drum and Bass, Drumfunk veya hatta Jump-Up gibi diğer DnB türleri de bu türde yer bulabilir.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/footwork-jungle/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/a5b58e91-7764-4aa5-9609-4ce61cd0ddfd
+visibility: listed
 ---

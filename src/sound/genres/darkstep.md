@@ -12,6 +12,10 @@ description_tr: |-
   Darkstep, darkcore unsurlarını hızlı tempolu breakbeat’lerle ve ortam sesleriyle birleştiren bir drum and bass alt türüdür. Darkstep, hızlı davul ritimleri ve genel olarak karanlık bir atmosferle karakterize edilir; dark ambient, industrial ve hardcore müziklerinden etkilenir.
 
   Darkstep müziği genellikle kromatik gamda bestelenir. Amen break, firefight break ve diğer breakbeat örnekleri bu türde öne çıkan unsurlardır.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/darkstep/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/8a51f0fd-1c24-4938-8e6a-e70c6e95b629
+visibility: listed
 ---

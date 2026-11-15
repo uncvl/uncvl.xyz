@@ -13,6 +13,10 @@ description_tr: |-
   Rawstyle, daha karanlık melodiler, daha fazla disonans öğesi ve daha sert kick davulları içeren bir hardstyle türüdür. Gabber ve endüstriyel hardcore gibi daha eski hardstyle ve hardcore tarzlarını bünyesine katmasıyla karakterize edilir ve bu sayede belirgin bir şekilde sert, yalın, ham ve karanlık bir ses yaratır. 150-155 civarında bir bpm’ye sahip olan bu tarz, genellikle önceki hardstyle akımlarından daha hızlıdır.
 
   Rawstyle’ın distorsiyonlu, kompresyonlu, sert vuruşlu ve yoğun side-chain uygulanmış kick davulları ve ritimleri genellikle parçada ana rolü üstlenirken, melodiler ve karmaşık atmosferler yalnızca ikincil bir katman olarak işlev görür. “Screeches” olarak bilinen, işlenmiş, tiz synthesizer vuruşları da yaygın bir özelliktir ve bunların genel rolü, bir melodi çalmak yerine ritimlere eşlik etmektir. Ters baslar, kaotik ve güçlü drop'lar, yoğun vokal örnekleri (bazen doğrudan bilim kurgu/korku filmlerinden alınmış olanlar) ile kasvetli, uğursuz atmosferler ve melodiler de sıklıkla kullanılır.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/rawstyle/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/0b81f6b8-dfa3-41c8-9e3f-a21ad44e1011
+visibility: listed
 ---

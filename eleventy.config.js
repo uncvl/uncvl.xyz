@@ -124,7 +124,10 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("openCalls", (api) => callsSorted(api).filter((c) => c.data.status !== "closed"));
   // Sound: music genres and supergenres (src/sound/), in the order the team sorted them
   const byOrder = (a, b) => (a.data.order ?? 999) - (b.data.order ?? 999) || a.data.name.localeCompare(b.data.name);
-  eleventyConfig.addCollection("genres", (api) => published(api.getFilteredByGlob("src/sound/genres/*.md")).sort(byOrder));
+  // visibility: hidden keeps a genre in the CMS only (no page, not on the Sound page or under a supergenre)
+  eleventyConfig.addCollection("genres", (api) =>
+    published(api.getFilteredByGlob("src/sound/genres/*.md")).filter((g) => g.data.visibility !== "hidden").sort(byOrder)
+  );
   eleventyConfig.addCollection("supergenres", (api) => published(api.getFilteredByGlob("src/sound/supergenres/*.md")).sort(byOrder));
   eleventyConfig.addCollection("workUnits", (api) => published(api.getFilteredByGlob("src/work-units/*.md")).sort(byOrder));
   // how many entries have text only in the other language (for one "needs translation" note per list)

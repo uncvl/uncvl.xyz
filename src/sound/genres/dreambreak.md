@@ -18,5 +18,5 @@ description_tr: |-
 
   Klasik breakcore ile karşılaştırıldığında, tempo ve düzenlemeler genellikle daha az manik olup, ambient dokularla birlikte melankolik ve içe dönük bir havaya yönelir. Dreambreak genellikle daha atmosferik, melodik ve yavaştır; tempoları genellikle 200 BPM'nin altında kalır.
 links: []
-draft: false
+visibility: listed
 ---

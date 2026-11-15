@@ -8,4 +8,5 @@ description_en: |-
 
   In many cases, cybersynth artists preserve the strong melodic hooks of synthwave and early darksynth while incorporating increasingly gritty effects, prominent electric guitar, and energetic rhythms for an elaborate and exciting new sound. This music has a fluid songwriting approach that differs significantly from the extreme rhythmic approaches of darksynth music. It also leans toward detailed and complex song compositions more than most other synthwave creations.
 description_tr: ""
+visibility: listed
 ---

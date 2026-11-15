@@ -16,6 +16,10 @@ description_tr: |-
   Genellikle, belirgin sub-bas frekansları içeren bas hatlarıyla birlikte senkoplu davul ve perküsyon kalıpları öne çıkar. Karakteristik gıcırtılı bas tonunu elde etmek için bas, 100 hertz'in altında tutulur. Kick ve snare davulları, bu enerjik şarkıların temelini oluşturmak için her iki vuruşta bir dönüşümlü olarak kullanılır. Snare, üçüncü vuruşta çalar. Doğası gereği kaotik olan bu tür, karakteristik bir bas drop'ından sonra daha sakin tempo değişikliklerine yol açan dramatik build-up'lar yaratmaya odaklanır.
 
   Bu türün kökeni, enstrümantal 2-Step’ten türetilen karanlık, yankılı mikslerin öne çıktığı karanlık garaj sahnesine dayanır. Ayrıca köklerini drum and bass’ın bas düşüşlerine ve dub’ın geri sarma efektlerine ve geniş sesine kadar uzanır.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/dubstep/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/1b50083b-1afa-4778-82c8-548b309af783
+visibility: listed
 ---

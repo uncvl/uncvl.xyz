@@ -13,6 +13,10 @@ description_tr: |-
   Doomcore, hardcore tekno müziğin daha yavaş ve daha karanlık bir türüdür.
 
   Doomcore parçalarının temposu 130 ile 160 BPM arasında değişir. Bu türün simgesi olan TR-909 kick davulu, diğer hardcore türlerinden farklı bir şekilde kullanılır: genellikle daha az distorsiyon ve daha az sönümleme uygulanır. Bununla birlikte, bazen üzerine bir reverb efekti eklenir. Offbeat zil sesleri yaygındır. Parçaların atmosferi genellikle endüstriyel müzik, doom metal ve dark ambient türlerine benzer. Prodüktörler, ürkütücü ambient pad'ler, çeşitli ürkütücü ve çığlık gibi sample'lar ile endüstriyel sesler kullanarak bu atmosferi yaratırlar. Ana melodinin tekrarlanması yaygın bir uygulamadır.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/doomcore/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/4bd9ad1b-ed76-4c68-a1ca-bf6025d675fb
+visibility: listed
 ---

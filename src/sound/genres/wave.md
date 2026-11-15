@@ -2,7 +2,11 @@
 name: "Wave"
 supergenres: ["Wave"]
 order: 123
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/wave/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/dc935785-4fbf-4e18-b733-77917cde0c49
 description_en: |-
   Wave emerged as a style of electronic music heavily influenced by 2010s hip hop production. It is characterized by dark, icy, nocturnal and melancholic beats, melodic and heavy bass, atmospheric melodies and harmonies, modern trap drums, chopped vocal samples and arpeggiators.
 
@@ -14,4 +18,5 @@ description_en: |-
 
   Wave incorporates elements from many other genres such as hip hop, dubstep, UK garage, cloud rap, drill, vaporwave, chiptune, ambient, jungle, house, techno and sound design.
 description_tr: ""
+visibility: listed
 ---

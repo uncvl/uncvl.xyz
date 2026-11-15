@@ -13,6 +13,10 @@ description_tr: |-
   Neurohop, glitch hop’un salınımlı, orta tempolu breakbeat’lerini neurofunk’ın karmaşık ve enerjik bas hatlarıyla birleştirir. Bu tür, yaklaşık 80-120 BPM’lik rahat hip hop tempolarını korurken, büyük ölçüde coşkulu ritimler ve mekanik ses tasarımı üzerine kuruludur.
 
   Neurohop’un en önemli özelliklerinden biri, senkoplu davul kalıpları ve ses manipülasyonuyla birleşerek bu türe sert ve pürüzlü bir ses kazandıran reese basdır. Neurohop’un diğer dikkat çekici özellikleri arasında foley perküsyon, granüler sentez, glitch tarzı ses tasarımı, karmaşık davul programlaması ve yoğun işlenmiş orta aralıklı bas yer alır. Genellikle karanlık ve soğuk atmosferler kullanır; kesinlik ve tutarlılık hissi uyandırır ve bazen bilim kurgu temalarını kullanır.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/neurohop/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/669f7533-2739-48a7-a46c-d67bf3295dd5
+visibility: listed
 ---

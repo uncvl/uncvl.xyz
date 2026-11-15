@@ -6,4 +6,5 @@ links: []
 description_en: |-
   Punk rock played with acoustic guitar.
 description_tr: ""
+visibility: listed
 ---

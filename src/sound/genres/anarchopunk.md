@@ -2,7 +2,11 @@
 name: "Anarcho-Punk"
 supergenres: ["Punk"]
 order: 89
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/anarcho-punk/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/e12fe025-4c13-485e-a2fe-ad5bf2cd75eb
 description_en: |-
   Anarcho-punk is subgenre of punk rock that promotes anarchism. Anarcho-punk sought to distance itself from the bands that have become too glossy and commercial and seek to hold punk to its roots by largely disregarding the verse/chorus structures that mainstream punk had displayed, playing with a purposeful rough sloppiness, allowing the shouted vocals that railed against societal and governmental injustices to become the primary 'instrument' on display.
 
@@ -14,4 +18,5 @@ description_en: |-
 
   Anarcho-punk has been one of the main musical, aesthetic and ideological influences for many punk subgenres including crust punk and D-beat.
 description_tr: ""
+visibility: listed
 ---

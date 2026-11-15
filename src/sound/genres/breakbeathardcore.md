@@ -12,6 +12,10 @@ description_tr: |-
   Breakbeat hardcore (hardcore rave veya oldskool hardcore olarak da anılır), “four-on-the-floor” ritimlerini genellikle hip hop’tan örnek alınan breakbeat’lerle birleştirir. Breakbeat’lerin kullanılmasına ek olarak, bu türde ayrıca karışık drum machine kalıpları, hoover ve new beat’ten kaynaklanan diğer sesler, acid house ve bleep techno’dan gelen sesler ile sıklıkla neşeli house piyano riffleri ve vokaller yer alır.
 
   Prodüksiyon genellikle sample temellidir; kaynaklar arasında farklı plaklardan alınan vokal hook'lar, sentezlenmiş “stabs” ve “hoover”lar ile görsel-işitsel medyadan ve diğer konuşmalardan alınan alıntılar yer alır.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/breakbeat-hardcore/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/1c5db6d3-9ce6-48c0-9bff-e29f7d7cb1af
+visibility: listed
 ---

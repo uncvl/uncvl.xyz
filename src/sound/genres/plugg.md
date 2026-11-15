@@ -2,7 +2,11 @@
 name: "Plugg"
 supergenres: ["Trap"]
 order: 139
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/plugg/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/213ac446-424b-43d9-8131-1ff1a23d192c
 description_en: |-
   Plugg is a subgenre of trap. Unlike mainline trap, which is defined by bombastic production and rattling hi-hat drum patterns, plugg is dreamy, laidback, atmospheric, spacey, airy, minimal and catchy, having overall lush and jazzy atmosphere with sparse and minimalistic drum and hi hat patterns. The relaxed sound is defined by its common use of subby 808s and heavy low end, airy pads, icy synths, simple chords and repetitive melodies. Songs are commonly lower-tempo between 130 and 145 BPM.
 
@@ -14,4 +18,5 @@ description_en: |-
 
   Producers have also very frequently combined the production techniques of the genre with cloud rap.
 description_tr: ""
+visibility: hidden
 ---

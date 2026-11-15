@@ -21,5 +21,5 @@ links:
     url: https://rateyourmusic.com/genre/gabber/
   - name: MusicBrainz
     url: https://musicbrainz.org/genre/2f2118d7-315b-4241-bf40-d5d6ca11348d
-draft: false
+visibility: listed
 ---

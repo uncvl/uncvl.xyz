@@ -14,6 +14,10 @@ description_tr: |-
   Freeform hardcore, başlangıçta trancecore olarak da bilinen, trance müziğinden yoğun bir şekilde unsurlar alan bir hardcore müzik alt türüdür.
 
   Happy hardcore’un aksine, freeform yapımları daha çok enstrümantal odaklı olma eğilimindedir; aynı zamanda düz 4/4 vuruş kalıplar, 150-200 BPM civarında daha hızlı tempolar, acid tarzı bassline'lar ve genel olarak daha yoğun ve sentezlenmiş bir prodüksiyon içerir. Freeform, dans pisti için hardcore techno’nun durmak bilmeyen enerjisini korurken, trance, hard trance ve psytrance’ten yoğun bir şekilde esinlenerek daha karanlık, daha psikedelik ve baştan sona bestelenmiş bir yapıya sahiptir. Bu tarzın ayırt edici özellikleri arasında epik, değişken synth lead’leri (genellikle supersaw’lar), minör tonlu ve modal armoniler, acid hatları ve sürükleyici drop’lara dönüşen dramatik breakdown’lar yer alır.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/freeform-hardcore/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/0d7ed299-9a8b-4819-ba00-9a188a8f57e8
+visibility: listed
 ---

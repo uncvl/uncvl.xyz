@@ -17,6 +17,10 @@ description_tr: |-
   Death industrial, yoğun bir atmosfer, düşük perdeli drone sesleri, sert synth döngüleri, yavaş tempo ve çığlık atılan ve/veya distorsiyonlu vokallerle karakterize edilir. Power electronics'te olduğu gibi, vokaller bazen şarkı söylenmek yerine sert, bağırılan veya konuşulan performanslar şeklinde kullanılır.
 
   Dark ambient'i anımsatan daha yavaş, daha atmosferik bir ses ve daha az sert bir ses ile power electronics'ten ayırt edilebilir.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/death-industrial/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/1ff6cfb5-ff2b-415f-86b8-22951db5f72a
+visibility: listed
 ---

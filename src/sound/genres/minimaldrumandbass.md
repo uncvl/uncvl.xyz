@@ -20,5 +20,7 @@ description_tr: |-
 links:
   - name: RateYourMusic
     url: https://rateyourmusic.com/genre/minimal-drum-and-bass/
-draft: false
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/8f910197-1389-4924-8428-64d9b6e2905f
+visibility: listed
 ---

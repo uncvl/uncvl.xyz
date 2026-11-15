@@ -2,7 +2,11 @@
 name: "Hardcore Punk"
 supergenres: ["Punk","Core"]
 order: 91
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/hardcore-punk/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/055a6e4d-d929-42ac-ba7a-9d063b254ea5
 description_en: |-
   Hardcore punk is a derivation of punk rock and it is generally faster, harder, and more aggressive than other forms of punk rock, while retaining punk's anti-establishment image and DIY ethics. The impact of powerful volume is important in hardcore. Hardcore emphasized speed and rhythmic intensity using unpredictable song forms and abrupt tempo changes. The songwriting has more emphasis on rhythm rather than melody. Other common characteristics include an extensive use of yelling and screaming, a stripped-down style of production and the prevalence of short-length songs.
 
@@ -10,4 +14,5 @@ description_en: |-
 
   The genre would eventually splinter into other subgenres and derivative forms in a similar manner as punk rock did. The interest of several hardcore punk musicians in various metal genres played an important role in the creation of various new styles, exemplified by crust punk, grindcore, metalcore.
 description_tr: ""
+visibility: listed
 ---

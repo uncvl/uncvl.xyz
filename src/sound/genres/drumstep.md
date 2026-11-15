@@ -18,5 +18,5 @@ links:
     url: https://rateyourmusic.com/genre/drumstep/
   - name: MusicBrainz
     url: https://musicbrainz.org/genre/685717fe-3d0d-4d99-a4bf-1b9d89112de2
-draft: false
+visibility: listed
 ---

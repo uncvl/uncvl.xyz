@@ -17,6 +17,10 @@ description_tr: |-
   Başlangıçta erken dönem hip hop’un lo-fi estetiği ile glitch’in birleşimine dayansa da, zamanla dubstep’in maksimalist, bas odaklı sesinden ve drum and bass alt türü olan neurofunk’tan giderek daha fazla etkilenmiştir; neurohop varyantıyla birçok benzerlik paylaşmaktadır.
 
   Ses öğelerini taklit eden, parçalara ayrılmış ve dijital olarak işlenmiş sesler, glitch hop'un temelini oluşturur. Atlayan ve tekrarlanan sesler ve cümleler, bozulmuş vokaller ve efektler, bitcrushing yoluyla ses kalitesinin düşürülmesi ve hatta donanım ve yazılımın elektronik uğultusu, bu tarzın sesine dahil olmuştur.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/glitch-hop/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/aa3215ae-28e6-4993-908e-ed3807e1ce54
+visibility: listed
 ---

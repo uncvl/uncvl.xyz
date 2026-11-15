@@ -21,5 +21,5 @@ links:
     url: https://rateyourmusic.com/genre/drumfunk/
   - name: MusicBrainz
     url: https://musicbrainz.org/genre/4dbca7ea-9bea-4c14-a819-cefa071127fc
-draft: false
+visibility: listed
 ---

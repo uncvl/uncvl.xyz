@@ -2,7 +2,11 @@
 name: "Cloud Rap"
 supergenres: ["Hop","Ambient"]
 order: 134
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/cloud-rap/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/2346fb3e-8546-4119-a929-601db8e0a733
 description_en: |-
   Cloud rap is a form of hip hop characterized by a distinct form of relaxed, ethereal, dream-like, and reverb-heavy production. Cloud rap commonly involves heavier, more detailed electronic production in comparison to many earlier hip hop production styles. It has several sonic characteristics of lo-fi in its hazy, dreamlike and relaxed sound.
 
@@ -14,4 +18,5 @@ description_en: |-
 
   The term 'cloud rap' is related to its internet birth, its ethereal style and its ambiguity as a genre without clearly defined borders. Often, cloud rap is released independently of record labels. Sites like Bandcamp and SoundCloud are commonly used platforms for cloud rap artists.
 description_tr: ""
+visibility: hidden
 ---

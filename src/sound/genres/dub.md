@@ -12,6 +12,10 @@ description_tr: |-
   Dub, reggae’den gelişen bir elektronik müzik türüdür. Dub, bas odaklı yapısı ve ses efektlerinin kullanımıyla jungle ve drum and bass türlerinin temelini oluşturmuştur.
 
   Genel olarak dub, mevcut kayıtların önemli ölçüde işlenmesiyle oluşturulan remikslerden oluşur; bu işlemde genellikle vokal kısımları çıkarılır, echo ve reverb gibi stüdyo efektleri uygulanır, ritim bölümü vurgulanır ve zaman zaman orijinal versiyondan veya diğer eserlerden alınan vokal ya da enstrümantal parçalar eklenir.
-links: []
-draft: false
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/dub/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/c72a5d45-75a8-4b35-9f48-67e49eb4b5e5
+visibility: listed
 ---

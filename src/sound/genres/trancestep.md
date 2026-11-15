@@ -18,5 +18,5 @@ links:
     url: https://rateyourmusic.com/genre/trancestep/
   - name: MusicBrainz
     url: https://musicbrainz.org/genre/63d216d7-1a9a-4863-87f8-906541de801a
-draft: false
+visibility: listed
 ---

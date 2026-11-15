@@ -2,7 +2,11 @@
 name: "Trap Metal"
 supergenres: ["Trap","Metal"]
 order: 145
-links: []
+links:
+  - name: RateYourMusic
+    url: https://rateyourmusic.com/genre/trap-metal/
+  - name: MusicBrainz
+    url: https://musicbrainz.org/genre/260d1450-1055-4c5c-9c78-863253349a5a
 description_en: |-
   Trap metal (also known as ragecore, death rap, industrial trap and scream rap) is a fusion genre that combines elements of trap music and heavy metal, as well as elements of other genres, like industrial and nu metal. It is characterized by distorted beats, hip hop flows, harsh vocals, and down tuned heavy metal guitars.
 
@@ -10,4 +14,5 @@ description_en: |-
 
   The stylistic influences of trap metal vary widely, with some artists drawing influence from hardcore punk, while other artists with influences from genres including black metal, gothic rock, industrial metal, and emo.
 description_tr: ""
+visibility: hidden
 ---

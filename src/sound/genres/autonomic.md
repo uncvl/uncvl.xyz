@@ -17,5 +17,5 @@ links:
     url: https://rateyourmusic.com/genre/autonomic/
   - name: MusicBrainz
     url: https://musicbrainz.org/genre/a0dd9bdd-ee29-4b68-8a4d-f6f308074538
-draft: false
+visibility: listed
 ---
