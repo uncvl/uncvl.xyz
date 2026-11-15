@@ -20,7 +20,7 @@
   "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "uncvl-media" }],
   // GitHub OAuth app used by the CMS sign-in (/api/auth). The Client ID is public; the client secret is a
   // Worker secret, set once with: npx wrangler secret put GITHUB_CLIENT_SECRET
-  "vars": { "GITHUB_CLIENT_ID": "" },
+  "vars": { "GITHUB_CLIENT_ID": "Ov23lioMkBrVQW1STKly" },   // GitHub OAuth app in the uncvl org
   // The custom domain uncvl.xyz is attached in the Cloudflare dashboard. It is deliberately NOT listed here:
   // without "routes", wrangler never touches routes/domains.
   // No *.workers.dev address and no preview URLs: the site is only reachable on uncvl.xyz.
