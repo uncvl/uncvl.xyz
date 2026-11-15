@@ -18,7 +18,8 @@ You don't need to know anything about code to add to it. There is a simple edito
 | **[Events](https://uncvl.xyz/events/)** | Every Uncivilization night, past and upcoming, grouped as Art, Break, Bass, Punk and Synth. Each event has its poster, lineup, times, venue, tickets and photos |
 | **[Releases](https://uncvl.xyz/releases/)** | Our label's records, with players for Bandcamp and SoundCloud |
 | **Artists** | One page per artist: bio, links, and every event and release they were part of. All of them, A to Z, at [uncvl.xyz/artists](https://uncvl.xyz/artists/) (not in the menu) |
-| **[Posts](https://uncvl.xyz/posts/)** | News and announcements, like open calls |
+| **[Posts](https://uncvl.xyz/posts/)** | News and announcements |
+| **[Calls](https://uncvl.xyz/calls/)** | Open calls, e.g. for a compilation. Not in the menu: the CALLS section on the home page links to them |
 | **[About](https://uncvl.xyz/about/)** | The Uncivilization story |
 | **[Organization](https://uncvl.xyz/organization/)** | How we work together, and the work units you can join |
 | **[Concept](https://uncvl.xyz/concept/)** | The ideas behind it all: existence and extinction, the [World Building Project](https://uncvl.xyz/concept/world-building/), the [Sound](https://uncvl.xyz/sound/) and, later, the themes |
@@ -66,6 +67,7 @@ Ask in the crew group, or write to [info@uncvl.xyz](mailto:info@uncvl.xyz).
 - Edited with [Sveltia CMS](https://sveltiacms.app/) at `/admin/`. Login is GitHub OAuth, with the code-for-token step done by the site's own Worker (`/api/auth`). It uses the editorial workflow (drafts are pull requests).
 - Hosted on GitHub at [uncvl/uncvl.xyz](https://github.com/uncvl/uncvl.xyz). Cloudflare Workers Builds builds every push to `main` and deploys it to a Cloudflare Worker with static assets (`wrangler.jsonc`, Worker `uncvl`).
 - Media lives on Cloudflare R2 (`uncvl-media`, public at `https://media.uncvl.xyz`). Originals and private material are in `uncvl-archive` (private).
+- The GitHub organization page ([github.com/uncvl](https://github.com/uncvl)) shows `profile/README.md` from the [uncvl/.github](https://github.com/uncvl/.github) repository.
 - Open questions from the content migration: [docs/CONTENT-NOTES.md](docs/CONTENT-NOTES.md).
 
 ### Develop
@@ -94,19 +96,22 @@ npm run strip-metadata   # remove EXIF/XMP/GPS from images in src/ (lossless); r
 | `src/sound/genres/`, `src/sound/supergenres/` | music genres and supergenres → /sound/ pages; events, artists and releases link to them by name |
 | `src/_data/site.json`, `home.json`, `vocab.json`, `sound.json` | socials, e-mails, navigation, home page texts; lists for activities and act types; Sound page texts |
 | `src/_data/media.json` | manifest of images on R2 (width, height, content version) |
-| `src/_includes/` | layouts, macros |
+| `src/_includes/` | layouts, macros; `logo-puppet.njk` is the home page logo built so the guy in it can move (hand-written, unlike the generated `brand/` SVGs) |
 | `src/assets/` | CSS, JS (language switch, click-to-load players), self-hosted fonts |
 | `brand/` | vector logo masters. `scripts/brand.mjs` builds the inline SVGs, favicons, social card and this README's banner (`docs/logo-banner.svg`) from them |
 | `public/` | copied as-is: `_headers` (CSP, HSTS), `_redirects` (old `.html` URLs), `admin/` (CMS) |
-| `worker/index.js` | the only server code: the `/api/media` upload endpoint for the CMS |
+| `worker/index.js` | the only server code: GitHub sign-in for the CMS (`/api/auth`) and its `/api/media` upload endpoint |
+| `.github/workflows/` | `rebuild-after-event.yml`: an empty commit the day after an event, so Cloudflare rebuilds and it moves to past |
 | `templates/` | copy-paste starters for events and releases |
 
 ### How it works
 
 - **Images:** served from R2 and resized by Cloudflare Image Transformations (`/cdn-cgi/image/…`, 400/800/1400 px, AVIF/WebP per browser). Images not in `media.json` fall back to the local `@11ty/eleventy-img` pipeline.
 - **Languages:** EN and TR live in the same file (`text_en` / `text_tr`). A small script shows one at a time and remembers the choice. Without JavaScript both are shown.
-- **Upcoming/past:** computed from `date` at build time. CI rebuilds daily (cron `17 3 * * *`).
-- **Privacy/security:** no third-party requests on page load. Fonts are self-hosted, and YouTube, Bandcamp and SoundCloud players load only after a click. A strict CSP is in `public/_headers`. `/admin/*` has its own CSP.
+- **Upcoming/past:** computed from `date` at build time (Istanbul date). The day after an event, `.github/workflows/rebuild-after-event.yml` triggers a rebuild.
+- **Privacy/security:** no third-party requests on page load. Fonts are self-hosted, and PeerTube, Bandcamp and SoundCloud players load only after a click. A strict CSP is in `public/_headers`. `/admin/*` has its own CSP.
+- **Logo puppet:** on the home page the guy in the logomark hangs like a ragdoll marionette and swings when the pointer passes over him. `src/_includes/logo-puppet.njk` cuts him out of a solid shield with SVG masks, split into body, head and legs; the strings stay fixed. The motion is a small damped-spring loop at the end of `src/assets/js/site.js`; it only runs while he moves and is off with reduced motion. At rest it is identical to the plain mark. The footer uses the plain mark.
+- **Unlisted pages:** events, releases, artists, posts and calls with `visibility: unlisted` keep their page but are left out of every list, the feed and the sitemap, and get `noindex`. The list collections (`events`, `artists`, `releases`, `posts`, `calls`…) are listed-only; `allEvents`, `allReleases`, `allArtists` keep everything for lookups.
 - **Glitch scroll:** while you scroll fast, letters lag behind and catch up (the middle of each line last). `src/assets/js/scroll-fx.js` lays out the text with [Pretext](https://github.com/chenglou/pretext) and redraws it on one canvas; the real text is hidden only while letters move. It's off by default; the warning-sign button next to EN | TR turns it on (remembered per browser).
 
 - **Chat (`/chat/`):** `src/chat.njk` + `src/assets/js/chat.js`, built on [Trystero](https://github.com/dmotz/trystero) (MIT). `scripts/vendor.mjs` bundles it with esbuild into `.vendor/` (git-ignored) on every build. Browsers find each other through a few public Nostr relays (`RELAYS` in chat.js; the same list is allowed in the `/chat/*` CSP in `public/_headers`), then talk directly over WebRTC. The handshake is encrypted, with the room password if one is set. STUN only (no Google or Cloudflare servers), no TURN relay, so people behind networks that block direct connections can't join. Polls stay as long as anyone in the room has them: everyone keeps a copy of the polls and votes they have seen in their own signed Trystero user state and passes it on (newest vote per person wins; while a voter is present only their own state counts for them). The people list brackets those whose connections come from the same address (compared via WebRTC stats, never shown). Nothing is stored; the page is `noindex` and not in the sitemap.
