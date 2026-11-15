@@ -20,6 +20,7 @@ venue:
   name: Che (1453 Sk. (Gazi Kadınlar Sokak) No:7, Alsancak)
   city: İzmir
 price: ''
+resident_advisor: https://ra.co/events/2192411
 poster: https://media.uncvl.xyz/events/2025-06-15-synth-session-1/synth-session-1_poster.jpg
 poster_alt: Poster of Uncivilization Synth Sessions event. Tetrax and VCO2 titles are prominent in the center with big fonts and Corpocore and Lizrith titles are below with smaller fonts.
 cover: ''
