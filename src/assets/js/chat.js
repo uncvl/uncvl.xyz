@@ -14,14 +14,15 @@ const RELAYS = [
   "wss://relay.primal.net",
   "wss://nostr.data.haus",
 ];
-// Address discovery (STUN) only, no relaying of messages. Not Google's or Cloudflare's: servers run by
-// open-source projects, checked to answer (Nov 2026). Keep it to four: browsers get slower with more, and a
-// dead server delays every connection (the browser waits for it before the handshake can go out).
+// Address discovery (STUN) only, no relaying of messages. Not Google's or Cloudflare's, and four different
+// operators, so one going down doesn't stop anyone. Picked from ~270 public servers by reply time from
+// İstanbul (Nov 2026): netgsm ~25 ms, the others ~55-70 ms. Keep it to four: browsers get slower with more,
+// and a dead server delays every connection (the browser waits for it before the handshake can go out).
 const ICE = [
+  { urls: "stun:stun.netgsm.com.tr:3478" }, // Netgsm, a Turkish operator: closest to most people here
+  { urls: "stun:stun.nextcloud.com:443" }, // port 443 gets through networks that block the usual 3478
   { urls: "stun:stun.framasoft.org:3478" },
-  { urls: "stun:stun.nextcloud.com:443" },
   { urls: "stun:stun.linphone.org:3478" },
-  { urls: "stun:stun.freeswitch.org:3478" },
 ];
 const MAX_NAME = 24, MAX_MSG = 1000, MAX_LOG = 500;
 
