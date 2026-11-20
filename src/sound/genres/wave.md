@@ -1,7 +1,7 @@
 ---
 name: Wave
 supergenres:
-  - Synth
+  - Wave
   - Bass
   - Hop
 order: 123
