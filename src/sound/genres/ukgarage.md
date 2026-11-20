@@ -21,5 +21,5 @@ links:
     url: https://rateyourmusic.com/genre/uk-garage/
   - name: MusicBrainz
     url: https://musicbrainz.org/genre/95c57cd7-7fb8-4405-ade1-775c2d27e54e
-visibility: listed
+visibility: hidden
 ---
